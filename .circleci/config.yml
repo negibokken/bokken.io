@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: ls
-      - run: scp index.html bokken@bokken.io:~/
+      - run: scp -o "StrictHostKeyChecking no" index.html bokken@bokken.io:~/
 
 workflows:
   version: 2
