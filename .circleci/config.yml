@@ -2,11 +2,11 @@ version: 2
 jobs:
   publish:
     docker:
-      - image: ubuntu:16.04
+      - image: circleci/node:9
     steps:
       - checkout
       - run: ls
-      - run: scp index.html bokken.io:~/
+      - run: scp index.html bokken@bokken.io:~/
 
 workflows:
   version: 2
