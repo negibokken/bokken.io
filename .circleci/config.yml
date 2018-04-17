@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  publish:
+    docker:
+      - image: circleci/debian:stretch
+    steps:
+      - checkout
+      - run: ls
+      - run: scp index.html bokken.io:~/
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - publish:
+          filters:
+            branches:
+              only: master
