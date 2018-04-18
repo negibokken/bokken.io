@@ -5,8 +5,7 @@ jobs:
       - image: circleci/node:9
     steps:
       - checkout
-      - run: ssh -o "StrictHostKeyChecking no" \
-              bokken@bokken.io \
+      - run: ssh bokken@bokken.io \
               "rm bokken.io
                git clone https://github.com/negibokken/bokken.io.git; \
                cd bokken.io
