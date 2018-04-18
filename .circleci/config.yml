@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: ssh bokken@bokken.io -o "StrictHostKeyChecking no" \
-              "rm bokken.io
+              "rm -rf bokken.io \
                git clone https://github.com/negibokken/bokken.io.git; \
                cd bokken.io
                ./scripts/update
