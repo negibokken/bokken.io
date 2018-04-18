@@ -1,6 +1,6 @@
 #!/bin/sh
 docker run -p 80:80 -p 443:443 -d --name nginx smebberson/alpine-nginx
-sleep 5
+sleep 3
 docker exec -i nginx tail -f /var/log/nginx/access.log >> access.log &
 docker exec -i nginx tail -f /var/log/nginx/error.log >> error.log &
-./update
+./scripts/update
