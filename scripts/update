@@ -1,2 +1,3 @@
 #!/bin/sh
 docker cp www/. nginx:/usr/html
+docker cp nginx/. nginx:/etc/nginx
