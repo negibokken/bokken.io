@@ -1,3 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+if [ -e "bokken.io" ]; then
+  rm -rf bokken.io
+fi
 docker build -t bokken.io .
 docker-compose up -d bokken.io
