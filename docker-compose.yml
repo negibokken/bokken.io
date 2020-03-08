@@ -1,0 +1,15 @@
+https-portal:
+  image: steveltn/https-portal:1
+  ports:
+    - '80:80'
+    - '443:443'
+  links:
+    - bokken.io
+  restart: always
+  environment:
+    DOMAINS: 'bokken.io -> http://bokken.io:80'
+    STAGE: production
+
+bokken.io:
+  image: bokken.io
+
