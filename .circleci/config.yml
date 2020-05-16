@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ssh bokken@bokken.io -o "StrictHostKeyChecking no" "git clone https://github.com/negibokken/bokken.io.git -b for_build && cd for_build && ./scripts/build && cd ../bokken.io && docker-compose up -d bokken.io && cd .. && rm -rf for_build"
+          command: ssh bokken@bokken.io -o "StrictHostKeyChecking no" "git clone https://github.com/negibokken/bokken.io.git for_build && cd for_build && ./scripts/build && cd ../bokken.io && docker-compose up -d bokken.io && cd .. && rm -rf for_build"
 
 workflows:
   version: 2
