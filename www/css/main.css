@@ -34,6 +34,11 @@ header > nav > li {
   padding: 0px 10px;
 }
 
+header > nav > li > a {
+  color: #fff;
+  text-decoration: none;
+}
+
 dd > ul {
   margin: 0;
   padding: 0;
