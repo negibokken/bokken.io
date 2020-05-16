@@ -111,7 +111,7 @@ h6::before {
 }
 
 main {
-  padding: 0 1.5em;
+  padding: 0 1.5em 3em 1.5em;
 }
 
 dt::after {
@@ -134,6 +134,16 @@ img {
 
 a {
   text-decoration-line: none;
+}
+
+div#background > img {
+  width: 100%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  z-index: -1;
 }
 
 footer {
