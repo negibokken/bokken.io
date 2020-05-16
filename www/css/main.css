@@ -1,5 +1,12 @@
+html {
+  font-family: Helvetica, 'Helvetica neue';
+  height: 100%;
+  color: #333;
+}
+
 body {
   background: #efefef;
+  height: 100%;
   margin: 0 auto;
 }
 
@@ -7,6 +14,77 @@ header {
   background: #00a4ac;
   color: white;
   padding: 1em 1em;
+  height: 15px;
+}
+
+header > a {
+  color: #fff;
+  text-decoration: none;
+}
+header > a > h1 {
+  display: inline-block;
+}
+
+header > nav {
+  display: inline-block;
+}
+
+header > nav > li {
+  display: inline-block;
+  padding: 0px 10px;
+}
+
+dd > ul {
+  margin: 0;
+  padding: 0;
+  width: 500px;
+  max-width: 80vw;
+}
+
+dd > ul > li {
+  background: #888;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 1px 0px;
+  border-radius: 25px;
+  display: inline-block;
+  word-wrap: break-word;
+}
+
+header > a > h1 {
+  font-size: 17px;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0px;
+}
+
+h1::before {
+  content: '#';
+  padding-right: 5px;
+}
+h2::before {
+  content: '##';
+  padding-right: 5px;
+}
+h3::before {
+  content: '###';
+  padding-right: 5px;
+}
+h4::before {
+  content: '####';
+  padding-right: 5px;
+}
+h5::before {
+  content: '#####';
+  padding-right: 5px;
+}
+h6::before {
+  content: '######';
+  padding-right: 5px;
+}
+
+main {
+  padding: 1em 1.5em;
 }
 
 dt::after {
@@ -27,19 +105,16 @@ img {
   margin: 0 0.25em;
 }
 
-main {
-  padding: 1.5em 2em;
-}
-
 a {
   text-decoration-line: none;
 }
 
 footer {
   width: 100%;
+  position: fixed;
   bottom: 0;
   font-size: 80%;
   background: #575757;
   color: white;
-  padding: 0.3em 0.5em;
+  padding: 0.5em 1em;
 }
