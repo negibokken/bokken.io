@@ -1,7 +1,9 @@
 html {
-  font-family: Helvetica, 'Helvetica neue';
+  font-family: 'Helvetica Neue', 'Helvetica', 'Hiragino Sans',
+    'Hiragino Kaku Gothic ProN', 'Arial', 'Yu Gothic', 'Meiryo', sans-serif;
   height: 100%;
   color: #333;
+  line-height: 1.7;
 }
 
 body {
@@ -13,14 +15,16 @@ body {
 header {
   background: #00a4ac;
   color: white;
-  padding: 1em 1em;
-  height: 15px;
+  padding-top: 10px;
+  padding-left: 10px;
+  height: 40px;
 }
 
 header > a {
   color: #fff;
   text-decoration: none;
 }
+
 header > a > h1 {
   display: inline-block;
 }
@@ -85,27 +89,27 @@ header > a > h1 {
   margin: 0px;
 }
 
-h1::before {
+h1 > a::before {
   content: '#';
   padding-right: 5px;
 }
-h2::before {
+h2 > a::before {
   content: '##';
   padding-right: 5px;
 }
-h3::before {
+h3 > a::before {
   content: '###';
   padding-right: 5px;
 }
-h4::before {
+h4 > a::before {
   content: '####';
   padding-right: 5px;
 }
-h5::before {
+h5 > a::before {
   content: '#####';
   padding-right: 5px;
 }
-h6::before {
+h6 > a::before {
   content: '######';
   padding-right: 5px;
 }
@@ -144,6 +148,19 @@ div#background > img {
   margin: 0;
   padding: 0;
   z-index: -1;
+}
+
+pre {
+  padding: 25px;
+  font-size: 110%;
+  background: #f5f5f5;
+}
+
+article {
+  width: 70vw;
+  margin: 0 auto;
+  padding: 75px;
+  padding-top: 25px;
 }
 
 footer {
