@@ -140,7 +140,7 @@ a {
   text-decoration-line: none;
 }
 
-img #background {
+div#background img {
   height: 100%;
   width: 100vw;
   position: fixed;
