@@ -140,8 +140,9 @@ a {
   text-decoration-line: none;
 }
 
-div#background > img {
+img #background {
   height: 100%;
+  width: 100vw;
   position: fixed;
   right: 0;
   bottom: 0;

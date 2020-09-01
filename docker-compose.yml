@@ -11,10 +11,8 @@ services:
     depends_on:
       - bokken.io
     environment:
-      DOMAINS: 'bokken.io -> http://bokken.io:80'
-      # STAGE: production
-      DOMAINS: 'example.com -> http://bokken.io:80'
-      STAGE: local
+      DOMAINS: 'bokken.io -> http://bokken.io:80, www.bokken.io -> http://bokken.io:80, blog.bokken.io -> http://bokken.io:80, career.bokken.io -> http://bokken.io:80, x.bokken.io -> http://bokken.io:80'
+      STAGE: production
 
   bokken.io:
     image: bokken.io
