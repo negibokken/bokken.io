@@ -19,13 +19,8 @@ services:
       # OK
       # DOMAINS: 'localhost -> http://bokken.io, career.localhost -> http://bokken.io, blog.localhost -> http://bokken.io, x.localhost -> http://bokken.io'
       DOMAINS: 'bokken.io -> http://bokken.io, career.bokken.io -> http://bokken.io, blog.bokken.io -> http://bokken.io, x.bokken.io -> http://bokken.io'
-<<<<<<< HEAD
-      # STAGE: production
-      STAGE: local
-=======
       STAGE: production
       # STAGE: local
->>>>>>> e13f6f8... Fix docker-compose.yml
 
   bokken.io:
     image: bokken.io
