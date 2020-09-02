@@ -42,7 +42,7 @@ const header = `<header>
     <ul>
       <li><a href=https://negi-works.hatenablog.com/>Blog</a></li>
       <li><a href=career.html>Career</a></li>
-      <li><a href=lab.html>Lab</a></li>
+      <li><a href=experiment.html>exp</a></li>
     </ul>
   </nav>
 </header>
