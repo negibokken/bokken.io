@@ -11,8 +11,16 @@ services:
     depends_on:
       - bokken.io
     environment:
-      DOMAINS: 'bokken.io -> http://bokken.io:80, www.bokken.io -> http://bokken.io:80, blog.bokken.io -> http://bokken.io:80, career.bokken.io -> http://bokken.io:80, x.bokken.io -> http://bokken.io:80'
-      STAGE: production
+      # NG
+      # DOMAINS: 'localhost -> http://bokken.io:80, www.localhost -> http://www.bokken.io:80, blog.localhost -> http://blog.bokken.io:80, career.localhost -> http://career.bokken.io:80, x.localhost -> http://x.bokken.io:80'
+      # DOMAINS: 'localhost -> http://bokken.io, www.localhost -> http://bokken.io, blog.localhost -> http://blog.bokken.io, career.localhost -> http://bokken.io, x.localhost -> http://bokken.io'
+      # DOMAINS: 'localhost -> http://bokken.io, blog.localhost -> http://bokken.io, career.localhot -> http://bokken.io, x.localhost -> http://x.localhost'
+      # DOMAINS: 'localhost -> http://localhost:80, www.localhost -> http://www.localhost:80, blog.localhost -> http://blog.localhost:80, career.localhost -> http://career.localhost:80, x.localhost -> http://x.localhost:80'
+      # OK
+      # DOMAINS: 'localhost -> http://bokken.io, career.localhost -> http://bokken.io, blog.localhost -> http://bokken.io, x.localhost -> http://bokken.io'
+      DOMAINS: 'bokken.io -> http://bokken.io, career.bokken.io -> http://bokken.io, blog.bokken.io -> http://bokken.io, x.bokken.io -> http://bokken.io'
+      # STAGE: production
+      STAGE: local
 
   bokken.io:
     image: bokken.io
