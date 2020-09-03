@@ -18,8 +18,7 @@ const renderer = {
   },
 };
 
-const metadata = (title) => `<!DOCTYPE html>
-<head>
+const metadata = (title) => `<head>
   <meta charset=utf-8>
   <title>${title}</title>
   <meta name=viewport content="width=device-width,initial-scale=1">
@@ -74,10 +73,15 @@ class BMarkdown2HTML {
   }
   toString() {
     const mainText = article(marked(this.data));
-    let text = metadata(articleTitle + this.title);
+    let text = '<!DOCTYPE html>';
+    text += '<html lang="ja">';
+    text += metadata(articleTitle + this.title);
+    text += '<body>';
     text += header;
     text += mainText;
     text += footer;
+    text += '</body>';
+    text += '</html>';
     return text;
   }
 }
