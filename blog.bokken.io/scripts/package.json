@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "highlightjs": "^9.16.2",
-    "marked": "^1.1.1"
+    "marked": "^1.1.1",
+    "prettier": "^2.1.1"
   },
   "scripts": {
     "start": "node gen.ts"
