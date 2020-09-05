@@ -45,25 +45,25 @@
     <main>
       <section>
         <h2>Articles</h2>
-        
-        
-        
-        
-        <h3>2020</h3>
+        <% articles = articles.sort((a,b) => a.date > b.date); %>
+        <% let years = articles.map(a=>a.date.substring(0,4)); %>
+        <% years = [... new Set(years)].sort() %>
+        <% years.forEach((year) => { %>
+        <h3><%= year %></h3>
         <ul>
-          
+          <% articles.filter((article)=> article.date.includes(year)).forEach((article) => { %>
             <li>
-              2020-09-06
-              <a href="articles/2020-09-06/hello-world.html">
+              <%= article.date %>
+              <a href="<%= article.filepath %>">
                 <span class="article-title">
-                  Weblog をはじめる
+                  <%=article.title%>
                 </span>
               </a>
-              <span class="tags">[web, blog]</span>
+              <span class="tags">[<%= article.tags.join(", "); %>]</span>
             </li>
-          
+          <% }); %>
         </ul>
-        
+        <% }); %>
       </section>
 
       <div id="background"><img src="assets/img/web.svg" /></div>
@@ -72,5 +72,4 @@
     <footer>Copyright &copy; 2018 bokken. All Rights Reserved.</footer>
   </body>
 </html>
-
 

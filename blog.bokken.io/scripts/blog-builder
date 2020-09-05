@@ -1,0 +1,25 @@
+#!/bin/bash
+
+base="articles"
+for dir in `ls $base`; do
+  path=`find $base/$dir -name "*.md"`
+  filename=`basename $path`
+  name=`echo $filename | sed 's/\.[^.]*$//'`
+  
+  outpath=$base/$dir/$name.html
+
+  node scripts/blog-gen.js $path templates/blog-article.ejs > $outpath
+
+  if [ "$?" == 0 ]; then
+    echo -e "\033[32m✓ \033[m $outpath" > /dev/stderr
+  else
+    echo -e "\033[31m✗ \033[m $outpath" > /dev/stderr
+  fi
+done
+ 
+node scripts/blog-index-gen.js $base > index.html
+if [ "$?" == 0 ]; then
+  echo -e "\033[32m✓ \033[m index.html" > /dev/stderr
+else
+  echo -e "\033[31m✗ \033[m index.html" > /dev/stderr
+fi
