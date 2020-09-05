@@ -115,7 +115,7 @@ h6 > a::before {
 }
 
 main {
-  padding: 0 1.5em 3em 1.5em;
+  padding: 0 3.5em 3.5em 2.5em;
 }
 
 dt::after {
@@ -161,6 +161,19 @@ article {
   margin: 0 auto;
   padding: 75px;
   padding-top: 25px;
+}
+
+section > ul > li {
+  font-size: 120%;
+}
+
+span.article-title {
+  margin-left: 0.5em;
+  font-weight: bold;
+}
+
+span.tags {
+  margin-left: 1em;
 }
 
 footer {

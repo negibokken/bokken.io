@@ -2,8 +2,28 @@ const marked = require('marked');
 const hljs = require('highlightjs');
 
 let articleTitle = '';
+let tags = '';
+let summary = '';
+const extractTags = (text) => {
+  const i = text.indexOf('[');
+  const j = text.indexOf(']');
+  console.error(i, j);
+  return text.substring(i + 1, j);
+};
 // Custom Renderer
 const renderer = {
+  paragraph: (text) => {
+    if (text.includes('@tags:')) {
+      let tagsText = extractTags(text);
+      const localTags = tagsText.split(',');
+      tags = localTags.map((t) => t.trim());
+      return '';
+    }
+    if (summary.length <= 90) {
+      summary += text;
+    }
+    return `<p>${text}</p>`;
+  },
   heading: (text, level) => {
     const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
     if (level == 1) {
@@ -70,9 +90,14 @@ class BMarkdown2HTML {
     });
     this.data = data;
     this.title = ' | blog.bokken.io';
+    this.h1 = '';
+    this.summary = '';
   }
   toString() {
     const mainText = article(marked(this.data));
+    this.h1 = articleTitle;
+    this.tags = tags;
+    this.summary = summary;
     let text = '<!DOCTYPE html>';
     text += '<html lang="ja">';
     text += metadata(articleTitle + this.title);

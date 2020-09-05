@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"></head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="blog.bokken.io" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-83287008-4');
+    </script>
+    <title>blog | bokken.io</title>
+
+    <link rel=stylesheet type=text/css href=assets/css/main.css> <link
+    rel="shortcut icon" href=assets/img/favicon.ico>
+    <link rel="preload" href="assets/img/web.svg" as="image" />
+  </head>
+
+  <body>
+    <header>
+      <a href="https://bokken.io"><h1>bokken.io</h1></a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://career.bokken.io">Career</a></li>
+          <li><a href="https://x.bokken.io">Experiment</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+    </ul>
+
+    <main>
+      <section>
+        <h2>Articles</h2>
+        <% articles = articles.sort((a,b) => a.date > b.date); %>
+        <% let years = articles.map(a=>a.date.substring(0,4)); %>
+        <% years = [... new Set(years)].sort() %>
+        <% years.forEach((year) => { %>
+        <h3><%= year %></h3>
+        <ul>
+          <% articles.filter((article)=> article.date.includes(year)).forEach((article) => { %>
+            <li>
+              <%= article.date %>
+              <a href="<%= article.filepath %>"><span class="article-title"><%=article.title%></span></a>
+              <span class="tags">[<%= article.tags.join(", "); %>]</span>
+            </li>
+          <% }); %>
+        </ul>
+        <% }); %>
+      </section>
+
+      <div id="background"><img src="assets/img/web.svg" /></div>
+    </main>
+
+    <footer>Copyright &copy; 2018 bokken. All Rights Reserved.</footer>
+  </body>
+</html>
+
