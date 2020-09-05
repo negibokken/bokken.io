@@ -8,7 +8,9 @@ const { format } = require('prettier');
     const templatePath = process.argv[3];
     const data = fs.readFileSync(filepath).toString();
     const template = fs.readFileSync(templatePath).toString();
-    const m2h = new BMarkdown2HTML(data, template, { url: filepath });
+    const m2h = new BMarkdown2HTML(data, template, {
+      url: filepath.replace('.md', '.html'),
+    });
     const text = m2h.toString();
     console.log(format(text, { parser: 'html' }));
     return 0;
