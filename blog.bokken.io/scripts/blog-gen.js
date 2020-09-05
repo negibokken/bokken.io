@@ -5,11 +5,11 @@ const { format } = require('prettier');
 (async () => {
   try {
     const filepath = process.argv[2];
+    const templatePath = process.argv[3];
     const data = fs.readFileSync(filepath).toString();
-    const m2h = new BMarkdown2HTML(data);
+    const template = fs.readFileSync(templatePath).toString();
+    const m2h = new BMarkdown2HTML(data, template, { url: filepath });
     const text = m2h.toString();
-    console.error(m2h.tags);
-    console.error(m2h.summary);
     console.log(format(text, { parser: 'html' }));
     return 0;
   } catch (e) {

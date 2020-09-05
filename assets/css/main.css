@@ -3,7 +3,7 @@ html {
     'Hiragino Kaku Gothic ProN', 'Arial', 'Yu Gothic', 'Meiryo', sans-serif;
   height: 100%;
   color: #333;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 body {
@@ -92,6 +92,7 @@ header > a > h1 {
 h1 > a::before {
   content: '#';
   padding-right: 5px;
+  text-decoration: none;
 }
 h2 > a::before {
   content: '##';
@@ -115,7 +116,8 @@ h6 > a::before {
 }
 
 main {
-  padding: 0 3.5em 3.5em 2.5em;
+  font-size: 17px;
+  padding: 0 3.5em 8.5em 3.5em;
 }
 
 dt::after {
@@ -137,7 +139,16 @@ img {
 }
 
 a {
+  color: RoyalBlue;
   text-decoration-line: none;
+}
+h1 > a,
+h2 > a,
+h3 > a,
+h4 > a,
+h5 > a,
+h6 > a {
+  color: #333;
 }
 
 div#background img {
@@ -147,29 +158,47 @@ div#background img {
   bottom: 0;
   margin: 0;
   padding: 0;
+  opacity: 0.3;
   z-index: -1;
 }
 
 pre {
   padding: 25px;
-  font-size: 110%;
+  /* font-size: 120%; */
   background: #f5f5f5;
 }
 
 article {
   width: 70vw;
-  margin: 0 auto;
-  padding: 75px;
   padding-top: 25px;
+  padding-bottom: 25px;
 }
 
-section > ul > li {
-  font-size: 120%;
+article > p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+article > blockquote {
+  color: #777;
+  background-color: #f7f7f7;
+  padding: 15px 25px;
+  border-left: thick solid #888;
+}
+
+div#blog-info > dt {
+  display: inline;
+}
+
+div#blog-info > dd {
+  display: inline;
+  margin-left: 0.5em;
+  margin-right: 1em;
 }
 
 span.article-title {
   margin-left: 0.5em;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 span.tags {

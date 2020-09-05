@@ -1,0 +1,13 @@
+#!/bin/bash
+
+outdir="articles/current"
+
+if [ -e $outdir ]; then
+  echo -e "\033[31mThe $outdir already exists \033[m"
+  exit 1
+fi
+
+mkdir -p $outdir
+cp templates/blog-md-template.md $outdir
+
+ln -s ../../../assets $outdir/

@@ -1,41 +1,41 @@
 const fs = require('fs');
 const ejs = require('ejs');
+const bm2h = require('./bmarkdown2html');
+const { BMarkdown2HTML } = require('./bmarkdown2html');
+
+const mdFiles = [];
+function scanFiles(path, ext) {
+  const files = fs.readdirSync(path);
+  for (const file of files) {
+    const curPath = `${path}/${file}`;
+    if (fs.lstatSync(curPath).isDirectory()) {
+      scanFiles(curPath, ext);
+    } else {
+      if (curPath.includes(ext)) mdFiles.push(curPath);
+    }
+  }
+}
 
 (async () => {
   try {
-    // 走査
-    // タイトル、タグ取得
-    // テンプレートに下記を流し込み
-    // 1. タイトル
-    // 2. タグ
-    // 3. 作成日
-    const dirname = process.argv[2];
-    const arr = ['hey', 'hey', 'ho'];
-    // console.log('heyhey: ', dirname);
-    const template = fs.readFileSync('./templates/blog-index.ejs').toString();
-    const html = ejs.render(template, {
-      articles: [
-        {
-          filepath: 'articles/2020-09-05/test-page.html',
-          date: '2020-09-05',
-          title: 'テストのやつ3',
-          tags: ['test', 'html', 'ejs'],
-        },
-        {
-          filepath: 'articles/2020-09-04/test-page.html',
-          date: '2020-09-04',
-          title: 'テスト2',
-          tags: ['test', 'html', 'ejs'],
-        },
+    scanFiles('articles', '.md');
+    let articles = [];
+    for (const mdFile of mdFiles) {
+      const data = fs.readFileSync(mdFile).toString();
+      const url = mdFile.replace('.md', '.html');
+      const m = new BMarkdown2HTML(data, null, { url });
+      const article = {
+        filepath: url,
+        date: m.dates[0],
+        title: m.title,
+        tags: m.tags,
+      };
+      articles.push(article);
+    }
 
-        {
-          filepath: 'articles/2019-08-07/test-page.html',
-          date: '2019-08-07',
-          title: 'テストのやつ1',
-          tags: ['test', 'html', 'ejs'],
-        },
-      ],
-    });
+    articles = articles.sort((a, b) => a > b);
+    const template = fs.readFileSync('./templates/blog-index.ejs').toString();
+    const html = ejs.render(template, { articles });
     console.log(html);
     process.exit(0);
   } catch (e) {

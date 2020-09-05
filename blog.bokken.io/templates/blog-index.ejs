@@ -18,6 +18,8 @@
     </script>
     <title>blog | bokken.io</title>
 
+    <link rel="shortcut icon" href=assets/img/favicon.ico />
+
     <link rel=stylesheet type=text/css href=assets/css/main.css> <link
     rel="shortcut icon" href=assets/img/favicon.ico>
     <link rel="preload" href="assets/img/web.svg" as="image" />
@@ -52,7 +54,11 @@
           <% articles.filter((article)=> article.date.includes(year)).forEach((article) => { %>
             <li>
               <%= article.date %>
-              <a href="<%= article.filepath %>"><span class="article-title"><%=article.title%></span></a>
+              <a href="<%= article.filepath %>">
+                <span class="article-title">
+                  <%=article.title%>
+                </span>
+              </a>
               <span class="tags">[<%= article.tags.join(", "); %>]</span>
             </li>
           <% }); %>
