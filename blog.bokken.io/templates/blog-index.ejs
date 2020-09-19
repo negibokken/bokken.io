@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"></head>
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="blog.bokken.io" />
@@ -18,26 +20,25 @@
     </script>
     <title>blog | bokken.io</title>
 
-    <link rel="shortcut icon" href=assets/img/favicon.ico />
+    <link rel="shortcut icon" href="assets/img/favicon.ico" />
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@bokken_" />
     <meta name="twitter:creator" content="@bokken_" />
-    <meta name="twitter:image" content="https://bokken.io/assets/img/icon.png" />
-    <!-- ogp -->
     <meta
-      property="og:url"
-      content="https://blog.bokken.io"
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
     />
+    <!-- ogp -->
+    <meta property="og:url" content="https://blog.bokken.io" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="blog.bokken.io" />
     <meta property="og:description" content="bokken tech weblog" />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
 
-
-    <link rel=stylesheet type=text/css href=assets/css/main.css> <link
-    rel="shortcut icon" href=assets/img/favicon.ico>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <link rel="shortcut icon" href="assets/img/favicon.ico" />
     <link rel="preload" href="assets/img/web.svg" as="image" />
   </head>
 
@@ -60,22 +61,20 @@
     <main>
       <section>
         <h2>Articles</h2>
-        <% articles = articles.sort((a,b) => a.date > b.date); %>
-        <% let years = articles.map(a=>a.date.substring(0,4)); %>
-        <% years = [... new Set(years)].sort() %>
-        <% years.forEach((year) => { %>
+        <% articles = articles.sort((a,b) => a.date > b.date); %> <% let years =
+        articles.map(a=>a.date.substring(0,4)); %> <% years = [... new
+        Set(years)].sort() %> <% years.forEach((year) => { %>
         <h3><%= year %></h3>
         <ul>
-          <% articles.filter((article)=> article.date.includes(year)).forEach((article) => { %>
-            <li>
-              <%= article.date %>
-              <a href="<%= article.filepath %>">
-                <span class="article-title">
-                  <%=article.title%>
-                </span>
-              </a>
-              <span class="tags">[<%= article.tags.join(", "); %>]</span>
-            </li>
+          <% articles.filter((article)=>
+          article.date.includes(year)).forEach((article) => { %>
+          <li>
+            <%= article.date %>
+            <a href="<%= article.filepath %>">
+              <span class="article-title"> <%=article.title%> </span>
+            </a>
+            <span class="tags">[<%= article.tags.join(", "); %>]</span>
+          </li>
           <% }); %>
         </ul>
         <% }); %>
@@ -87,4 +86,3 @@
     <footer>Copyright &copy; 2018 bokken. All Rights Reserved.</footer>
   </body>
 </html>
-
