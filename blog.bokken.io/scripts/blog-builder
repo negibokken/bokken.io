@@ -1,8 +1,12 @@
 #!/bin/bash
 
 base="articles"
-for dir in `ls $base`; do
+for dir in `ls $base | grep -e "\d*-\d*-\d*"`; do
   path=`find $base/$dir -name "*.md"`
+  # Skip if empty directory
+  if [ "$path" = "" ]; then
+    continue
+  fi
   filename=`basename $path`
   name=`echo $filename | sed 's/\.[^.]*$//'`
   
@@ -18,6 +22,7 @@ for dir in `ls $base`; do
 done
  
 node scripts/blog-index-gen.js $base > index.html
+node scripts/sitemap-gen.js > sitemap.xml
 if [ "$?" == 0 ]; then
   echo -e "\033[32m✓ \033[m index.html" > /dev/stderr
 else
