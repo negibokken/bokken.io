@@ -19,7 +19,7 @@
     <link href="<%= article.uri %>" />
     <id><%= article.uri %></id>
     <updated><%= article.updatedAt %></updated>
-    <summary><%= article.summary %></summary>
+    <summary type="html"><%= article.summary %></summary>
   </entry>
   <% }) %>
 </feed>
