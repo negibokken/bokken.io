@@ -7,29 +7,25 @@
   <author>
     <name>bokken</name>
   </author>
-  <id>articles://2b743fd8-f4e8-4b94-8866-269347b3fbab</id>
+  <id>https://blog.bokken.io</id>
 
   <entry>
     <title>生産性アップのための一工夫</title>
     <link
       href="https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html"
     />
-    <id>articles://3c2afef8-c4cf-4f22-aaa8-5659b350b5a8</id>
+    <id>https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html</id>
     <updated>2020-09-20T07:03:20.594Z</updated>
     <summary>最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。要点は下記である。プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。例えば DB の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。</summary>
-    <icon>https://blog.bokken.io/assets/img/icon.png</icon>
-    <logo>https://blog.bokken.io/assets/img/icon.png</logo>
   </entry>
   
   <entry>
     <title>Weblog をはじめる</title>
     <link href="https://blog.bokken.io/articles/2020-09-06/hello-world.html" />
-    <id>articles://39811f44-ae51-4066-8e3c-8e18252bbb2f</id>
+    <id>https://blog.bokken.io/articles/2020-09-06/hello-world.html</id>
     <updated>2020-09-19T17:54:07.280Z</updated>
     <summary>もともと&lt;a href=&#34;https://negi-works.hatenablog.com/&#34;&gt;昔にブログ&lt;/a&gt;を書いていたが、
 ブログとしてアウトプットをする時間を取らず更新が滞ってしまっていた。</summary>
-    <icon>https://blog.bokken.io/assets/img/icon.png</icon>
-    <logo>https://blog.bokken.io/assets/img/icon.png</logo>
   </entry>
 
 </feed>
