@@ -28,4 +28,14 @@ else
   echo -e "\033[31m✗ \033[m index.html" > /dev/stderr
 fi
 node scripts/sitemap-gen.js > sitemap.xml
+if [ "$?" == 0 ]; then
+  echo -e "\033[32m✓ \033[m sitemap.xml" > /dev/stderr
+else
+  echo -e "\033[31m✗ \033[m sitemap.xml" > /dev/stderr
+fi
 node scripts/atom-gen.js
+if [ "$?" == 0 ]; then
+  echo -e "\033[32m✓ \033[m atom.xml" > /dev/stderr
+else
+  echo -e "\033[31m✗ \033[m atom.xml" > /dev/stderr
+fi
