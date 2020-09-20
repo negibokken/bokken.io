@@ -22,9 +22,10 @@ for dir in `ls $base | grep -e "\d*-\d*-\d*"`; do
 done
  
 node scripts/blog-index-gen.js $base > index.html
-node scripts/sitemap-gen.js > sitemap.xml
 if [ "$?" == 0 ]; then
   echo -e "\033[32m✓ \033[m index.html" > /dev/stderr
 else
   echo -e "\033[31m✗ \033[m index.html" > /dev/stderr
 fi
+node scripts/sitemap-gen.js > sitemap.xml
+node scripts/atom-gen.js
