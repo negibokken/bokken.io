@@ -17,8 +17,8 @@
     <summary
     >もともと&lt;a href=&#34;https://negi-works.hatenablog.com/&#34;&gt;昔にブログ&lt;/a&gt;を書いていたが、
 ブログとしてアウトプットをする時間を取らず更新が滞ってしまっていた。</summary>
-    <icon>https://bokken.io/assets/img/icon.png</icon>
-    <logo>https://bokken.io/assets/img/icon.png</logo>
+    <icon>https://blog.bokken.io/assets/img/icon.png</icon>
+    <logo>https://blog.bokken.io/assets/img/icon.png</logo>
   </entry>
   
   <entry>
@@ -30,8 +30,8 @@
     <updated>2020-09-20T07:03:20.594Z</updated>
     <summary
     >最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。要点は下記である。プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。例えば DB の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。</summary>
-    <icon>https://bokken.io/assets/img/icon.png</icon>
-    <logo>https://bokken.io/assets/img/icon.png</logo>
+    <icon>https://blog.bokken.io/assets/img/icon.png</icon>
+    <logo>https://blog.bokken.io/assets/img/icon.png</logo>
   </entry>
   
 </feed>
