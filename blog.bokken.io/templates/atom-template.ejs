@@ -11,7 +11,7 @@
   <% articles.forEach((article) => { %>
   <entry>
     <title><%= article.title %></title>
-    <link href="<%= article.url %>" />
+    <link href="<%= article.uri %>" />
     <id><%= article.uuid %></id>
     <updated><%= article.updatedAt %></updated>
     <summary><%= article.summary %></summary>
