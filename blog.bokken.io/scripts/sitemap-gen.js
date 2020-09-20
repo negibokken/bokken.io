@@ -13,7 +13,7 @@ const templatePath = 'templates/sitemap-template.ejs';
   const path = 'articles';
   let articles = fs.readdirSync(path);
   articles = articles.filter((a) => a.match(/\d{4}-\d{2}-\d{2}/));
-  articles = articles.sort((a, b) => a > b);
+  articles = articles.sort((a, b) => a < b);
   const lastModified = articles[articles.length];
   const sitemaps = [];
   articles.forEach((date) => {

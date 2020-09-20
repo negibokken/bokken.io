@@ -21,7 +21,7 @@ for dir in `ls $base | grep -e "\d*-\d*-\d*"`; do
   fi
 done
  
-node scripts/blog-index-gen.js $base > index.html
+node scripts/blog-index-gen.js > index.html
 if [ "$?" == 0 ]; then
   echo -e "\033[32m✓ \033[m index.html" > /dev/stderr
 else

@@ -35,10 +35,9 @@ function scanFiles(path, ext, ignore = '') {
       articles.push(article);
     }
 
-    articles = articles.sort((a, b) => a > b);
+    articles = articles.sort((a, b) => a.date < b.date);
     const template = fs.readFileSync('./templates/blog-index.ejs').toString();
     const html = ejs.render(template, {articles});
-    // console.log(html);
     console.log(format(html, {parser: 'html'}));
     process.exit(0);
   } catch (e) {
