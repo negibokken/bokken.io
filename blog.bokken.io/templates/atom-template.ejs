@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><%= title %></title>
+  <link href="<%= uri %>" />
+  <updated><%= updatedAt %> </updated>
+  <author>
+    <name>bokken</name>
+  </author>
+  <id><%= id %></id>
+
+  <% articles.forEach((article) => { %>
+  <entry>
+    <title><%= article.title %></title>
+    <link href="<%= article.url %>" />
+    <id><%= article.uuid %></id>
+    <updated><%= article.updatedAt %></updated>
+    <summary><%= article.summary %></summary>
+  </entry>
+  <% }) %>
+</feed>

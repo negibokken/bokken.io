@@ -3,7 +3,8 @@
     "ejs": "^3.1.5",
     "highlightjs": "^9.16.2",
     "marked": "^1.1.1",
-    "prettier": "^2.1.1"
+    "prettier": "^2.1.1",
+    "uuid": "^8.3.0"
   },
   "scripts": {
     "start": "node blog-gen.js"

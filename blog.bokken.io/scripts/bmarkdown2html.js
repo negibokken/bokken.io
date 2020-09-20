@@ -50,8 +50,8 @@ const renderer = {
 };
 
 class BMarkdown2HTML {
-  constructor(markdown, template, option) {
-    marked.use({ renderer });
+  constructor(markdown, template, option = {}) {
+    marked.use({renderer});
     marked.setOptions({
       highlight: function (code, lang) {
         return hljs.highlightAuto(code, [lang]).value;
@@ -88,4 +88,4 @@ class BMarkdown2HTML {
   }
 }
 
-module.exports = { BMarkdown2HTML };
+module.exports = {BMarkdown2HTML};
