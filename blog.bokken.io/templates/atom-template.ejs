@@ -11,13 +11,13 @@
   <author>
     <name>bokken</name>
   </author>
-  <id>articles://<%= id %></id>
+  <id><%= uri %></id>
 
   <% articles.forEach((article) => { %>
   <entry>
     <title><%= article.title %></title>
     <link href="<%= article.uri %>" />
-    <id>articles://<%= article.uuid %></id>
+    <id><%= article.uri %></id>
     <updated><%= article.updatedAt %></updated>
     <summary><%= article.summary %></summary>
   </entry>
