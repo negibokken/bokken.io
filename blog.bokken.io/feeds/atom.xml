@@ -8,19 +8,6 @@
   </author>
   <id>2b743fd8-f4e8-4b94-8866-269347b3fbab</id>
 
-  
-  <entry>
-    <title>Weblog をはじめる</title>
-    <link href="https://blog.bokken.io/articles/2020-09-06/hello-world.html" />
-    <id>39811f44-ae51-4066-8e3c-8e18252bbb2f</id>
-    <updated>2020-09-19T17:54:07.280Z</updated>
-    <summary
-    >もともと&lt;a href=&#34;https://negi-works.hatenablog.com/&#34;&gt;昔にブログ&lt;/a&gt;を書いていたが、
-ブログとしてアウトプットをする時間を取らず更新が滞ってしまっていた。</summary>
-    <icon>https://blog.bokken.io/assets/img/icon.png</icon>
-    <logo>https://blog.bokken.io/assets/img/icon.png</logo>
-  </entry>
-  
   <entry>
     <title>生産性アップのための一工夫</title>
     <link
@@ -34,4 +21,16 @@
     <logo>https://blog.bokken.io/assets/img/icon.png</logo>
   </entry>
   
+  <entry>
+    <title>Weblog をはじめる</title>
+    <link href="https://blog.bokken.io/articles/2020-09-06/hello-world.html" />
+    <id>39811f44-ae51-4066-8e3c-8e18252bbb2f</id>
+    <updated>2020-09-19T17:54:07.280Z</updated>
+    <summary
+    >もともと&lt;a href=&#34;https://negi-works.hatenablog.com/&#34;&gt;昔にブログ&lt;/a&gt;を書いていたが、
+ブログとしてアウトプットをする時間を取らず更新が滞ってしまっていた。</summary>
+    <icon>https://blog.bokken.io/assets/img/icon.png</icon>
+    <logo>https://blog.bokken.io/assets/img/icon.png</logo>
+  </entry>
+
 </feed>
