@@ -61,9 +61,8 @@
     <main>
       <section>
         <h2>Articles</h2>
-        <% articles = articles.sort((a,b) => a.date > b.date); %> <% let years =
-        articles.map(a=>a.date.substring(0,4)); %> <% years = [... new
-        Set(years)].sort() %> <% years.forEach((year) => { %>
+        <% let years = articles.map(a=>a.date.substring(0,4)); %> <% years =
+        [... new Set(years)].sort() %> <% years.forEach((year) => { %>
         <h3><%= year %></h3>
         <ul>
           <% articles.filter((article)=>

@@ -60,6 +60,7 @@ function scanFiles(path, ext, ignore = '') {
 
   // json を更新する
   atoms.articles = atoms.articles.concat(newArticles);
+  atoms.articles = atoms.articles.sort((a, b) => a.updatedAt < b.updatedAt);
   atoms.updatedAt = newArticles[0].updatedAt;
   fs.writeFileSync(atomFile, format(JSON.stringify(atoms), {parser: 'json'}));
 
