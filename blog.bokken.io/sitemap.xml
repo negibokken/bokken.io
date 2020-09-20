@@ -4,6 +4,7 @@
     <loc>https://blog.bokken.io</loc>
     <lastmod />
     <changefreq>weekly</changefreq>
+    <id />
     <priority>1.0</priority>
   </url>
 
@@ -11,6 +12,11 @@
   <url>
     <loc>https://blog.bokken.io/articles/2020-09-06/hello-world.html</loc>
     <lastmod>2020-09-06</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html</loc>
+    <lastmod>2020-09-20</lastmod>
   </url>
   
 </urlset>

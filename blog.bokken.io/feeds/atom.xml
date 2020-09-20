@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2020-09-19T17:54:07.280Z </updated>
+  <updated>2020-09-20T07:03:20.594Z </updated>
   <author>
     <name>bokken</name>
   </author>
@@ -17,6 +17,19 @@
     <summary
     >もともと&lt;a href=&#34;https://negi-works.hatenablog.com/&#34;&gt;昔にブログ&lt;/a&gt;を書いていたが、
 ブログとしてアウトプットをする時間を取らず更新が滞ってしまっていた。</summary>
+    <icon>https://bokken.io/assets/img/icon.png</icon>
+    <logo>https://bokken.io/assets/img/icon.png</logo>
+  </entry>
+  
+  <entry>
+    <title>生産性アップのための一工夫</title>
+    <link
+      href="https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html"
+    />
+    <id>3c2afef8-c4cf-4f22-aaa8-5659b350b5a8</id>
+    <updated>2020-09-20T07:03:20.594Z</updated>
+    <summary
+    >最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。要点は下記である。プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。例えば DB の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。</summary>
     <icon>https://bokken.io/assets/img/icon.png</icon>
     <logo>https://bokken.io/assets/img/icon.png</logo>
   </entry>
