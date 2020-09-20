@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>blog.bokken.io</title>
+  <link href="https://blog.bokken.io" />
+  <updated>2020-09-19T17:54:07.280Z </updated>
+  <author>
+    <name>bokken</name>
+  </author>
+  <id>2b743fd8-f4e8-4b94-8866-269347b3fbab</id>
+
+  
+  <entry>
+    <title>Weblog をはじめる</title>
+    <link href="" />
+    <id>32a16202-7ead-4889-9f77-0c6d292c53d6</id>
+    <updated>2020-09-19T17:54:07.280Z</updated>
+    <summary
+    >もともと&lt;a href=&#34;https://negi-works.hatenablog.com/&#34;&gt;昔にブログ&lt;/a&gt;を書いていたが、
+ブログとしてアウトプットをする時間を取らず更新が滞ってしまっていた。</summary>
+  </entry>
+  
+</feed>
