@@ -73,6 +73,8 @@ class BMarkdown2HTML {
         content: this.content,
         createdAt: dates[0],
         updatedAt: dates[1],
+        prev: option ? option.prev : undefined,
+        next: option ? option.next : undefined,
       },
     };
     try {

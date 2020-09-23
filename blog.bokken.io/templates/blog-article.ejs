@@ -43,7 +43,10 @@
       !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
     </script>
 
-    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <!-- <link rel=stylesheet type=text/css -->
+    <!-- href=https://blog.bokken.io/assets/css/main.css> -->
+    <link rel=stylesheet type=text/css
+    href=/Users/bokken/.ghq/github.com/negibokken/bokken.io/assets/css/main.css>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
@@ -94,6 +97,22 @@
       <!-- prettier-ignore -->
       <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
       <div id="background"><img src="/assets/img/web.svg" /></div>
+
+      <div class="article-pager">
+        <% if (article.prev && article.prev != "") { %>
+        <div class="prev-article">
+          <a href="https://blog.bokken.io/<%= article.prev %>"> 前の記事へ </a>
+        </div>
+        <% } %>
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+        <% if (article.next && article.next != "") { %>
+        <div class="next-article">
+          <a href="https://blog.bokken.io/<%= article.next%>"> 次の記事へ </a>
+        </div>
+        <% } %>
+      </div>
     </main>
 
     <footer>Copyright &copy; 2018 bokken. All Rights Reserved.</footer>

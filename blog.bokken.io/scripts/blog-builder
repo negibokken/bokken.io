@@ -1,7 +1,23 @@
 #!/bin/bash
 
+DOMAIN='https://blog.bokken.io'
+
+function findIndex() {
+  target=$1;
+  shift
+  arr=($@);
+  for i in `seq 0 $(expr ${#arr[@]} - 1)`; do
+    if [ "$target" = "${arr[i]}" ]; then
+      return $i;
+    fi
+  done
+  return -1;
+}
+
 base="articles"
-for dir in `ls $base | grep -e "\d*-\d*-\d*"`; do
+directories=($(ls $base | grep -e "\d*-\d*-\d*"))
+for i in `seq 0 $(expr ${#directories[@]} - 1)`; do
+  dir=${directories[i]}
   path=`find $base/$dir -name "*.md"`
   # Skip if empty directory
   if [ "$path" = "" ]; then
@@ -12,7 +28,21 @@ for dir in `ls $base | grep -e "\d*-\d*-\d*"`; do
   
   outpath=$base/$dir/$name.html
 
-  node scripts/blog-gen.js $path templates/blog-article.ejs > $outpath
+  findIndex $dir ${directories[@]}
+  idx=$?
+
+  prevPath=""
+  nextPath=""
+  if ! [ "$idx" = "0" ]; then
+    prev=`expr $idx - 1`
+    prevPath=`find $base/"${directories[prev]}" -name "*.md" | sed -e 's/\.[^.]*$/.html/'`
+  fi
+  if ! [ "$idx" = "$(expr ${#directories[@]} - 1)" ]; then
+    next=`expr $idx + 1`
+    nextPath=`find $base/"${directories[next]}" -name "*.md" | sed -e 's/\.[^.]*$/.html/'`
+  fi
+
+  node scripts/blog-gen.js $path templates/blog-article.ejs "$prevPath" "$nextPath" > $outpath
 
   if [ "$?" == 0 ]; then
     echo -e "\033[32m✓ \033[m $outpath" > /dev/stderr
