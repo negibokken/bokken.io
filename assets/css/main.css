@@ -116,6 +116,7 @@ h6 > a::before {
 }
 
 main {
+  width: 60vw;
   font-size: 17px;
   padding: 0 3.5em 8.5em 3.5em;
 }
@@ -169,7 +170,7 @@ pre {
 }
 
 article {
-  width: 70vw;
+  width: 60vw;
   padding-top: 25px;
   padding-bottom: 25px;
 }
@@ -208,6 +209,35 @@ span.article-title {
 
 span.tags {
   margin-left: 1em;
+}
+
+div.article-pager {
+  margin: 0 auto;
+  width: 300px;
+  padding: 15px;
+}
+
+div.prev-article {
+  display: inline-block;
+  text-align: left;
+}
+
+div.blog-top {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+div.next-article {
+  display: inline-block;
+  text-align: right;
+}
+
+div.prev-article > a::before {
+  content: '<<';
+}
+
+div.next-article > a::after {
+  content: '>>';
 }
 
 footer {
