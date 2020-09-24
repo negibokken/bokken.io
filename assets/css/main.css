@@ -140,7 +140,7 @@ img {
 
 img#article-tag {
   margin: 0;
-  text-align: 'text-bottom';
+  vertical-align: text-bottom;
 }
 
 a {
