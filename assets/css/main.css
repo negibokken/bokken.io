@@ -138,6 +138,11 @@ img {
   margin: 0 0.25em;
 }
 
+img#article-tag {
+  margin: 0;
+  text-align: 'text-bottom';
+}
+
 a {
   color: RoyalBlue;
   text-decoration-line: none;
