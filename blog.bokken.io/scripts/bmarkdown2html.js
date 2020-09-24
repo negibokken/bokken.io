@@ -69,6 +69,7 @@ class BMarkdown2HTML {
       article: {
         url: this.url,
         title: this.title,
+        tags: this.tags,
         summary: this.summary,
         content: this.content,
         createdAt: dates[0],
