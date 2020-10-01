@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>
+      HTML parser を書いてるときに出会った Web 標準仕様の話 | blog.bokken.io
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="ブラウザをスクラッチで書いている。そのときに HTML の標準を読みながらブラウザを書
+いているそのときに仕様の不備のように疑われる挙動に出会った。内容について調査しているうちにということを再認識できたので、その内容について紹介したい。"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2020-09-30/html-parser-good-story.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="HTML parser を書いてるときに出会った Web 標準仕様の話"
+    />
+    <meta property="og:description" content="bokken tech weblog" />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css
+    href=https://blog.bokken.io/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io"><h1>bokken.io</h1></a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2020-09-30/html-parser-good-story.html"
+          >HTML parser を書いてるときに出会った Web 標準仕様の話</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2020-10-02</dd>
+          <dt>更新日</dt>
+          <dd>2020-10-02</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            html, tag, parser, Web 仕様
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="HTML parser を書いてるときに出会った Web 標準仕様の話"
+            href="#HTML parser を書いてるときに出会った Web 標準仕様の話"
+            id="HTML parser を書いてるときに出会った Web 標準仕様の話"
+          >
+            HTML parser を書いてるときに出会った Web 標準仕様の話
+          </a>
+        </h1>
+        <h2>
+          <a name="TL;DR" href="#TL;DR" id="TL;DR"> TL;DR </a>
+        </h2>
+        <p>
+          ブラウザをスクラッチで書いている。そのときに HTML
+          の標準を読みながらブラウザを書 いている
+        </p>
+        <p>そのときに仕様の不備のように疑われる挙動に出会った。</p>
+        <p>内容について調査しているうちに</p>
+        <ul>
+          <li>Web は標準を壊さないようにしている</li>
+          <li>動いているものが Web</li>
+        </ul>
+        <p>ということを再認識できたので、その内容について紹介したい。</p>
+        <h2>
+          <a name="出会った背景" href="#出会った背景" id="出会った背景">
+            出会った背景
+          </a>
+        </h2>
+        <p>
+          まず、筆者がどういう背景でどのような挙動に出会ったかを簡単に紹介する。
+        </p>
+        <p>
+          筆者はブラウザに興味があり、ブラウザをフルスクラッチで作っている。
+        </p>
+        <p>
+          その中で HTML の parser を
+          <a href="https://html.spec.whatwg.org/multipage/parsing.html"
+            >WHATWG の仕様</a
+          >
+          を読み解き ながら実装している。
+        </p>
+        <p>
+          そのときに、attribute (<code
+            >&lt;a href=&quot;https://example.com&quot;&gt;&lt;/a&gt;</code
+          >の <code>href</code> などの部分) の parse
+          処理を実装しているときに出会った。
+        </p>
+        <h3>
+          <a
+            name="HTML タグの attribute の書き方"
+            href="#HTML タグの attribute の書き方"
+            id="HTML タグの attribute の書き方"
+          >
+            HTML タグの attribute の書き方
+          </a>
+        </h3>
+        <p>
+          HTML タグの attribute value は
+          <code>double-quoted</code>,<code>single-quoted</code>,<code
+            >unquoted</code
+          >
+          が許さ れている。
+        </p>
+        <p>つまり、下記の三種類の書き方ができる。</p>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">https://example.com</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
+        <p>
+          この仕様に沿って parser を書いてると、どうも anchor
+          タグのテストが通らないという 事象に出会った。
+        </p>
+        <p>そのときのテスト入力には下記のように書いていた。</p>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">https://example.com/</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
+        <p>
+          URL の末尾に <code>/</code> を書き、さらに属性値の
+          <code>&#39;</code> や <code>&quot;</code> を省略している状態だ。
+        </p>
+        <p>
+          このときに実装していた HTML parser
+          ではどのように解釈されていたかをかいつまんで 説明すると下記である。
+        </p>
+        <ol>
+          <li>a タグの開始</li>
+          <li>href という attribute name がある</li>
+          <li>
+            attribute の value は <code>https://example.com</code> (<code
+              >/</code
+            >
+            は次で使われる)
+          </li>
+          <li>a タグは self closing <code>/&gt;</code></li>
+          <li>a タグの閉じタグが余っている (<code>&lt;/a&gt;</code>)</li>
+        </ol>
+        <p>
+          という具合に処理されて、<code>&lt;/a&gt;</code>
+          が浮いてしまい、テストが落ちていたのだっ た
+        </p>
+        <p>
+          WHATWG の仕様には沿っているし、URL としては
+          <code>https://example.com/</code> と書いていて も問題なさそうだ。
+        </p>
+        <p>
+          これの挙動については、なにか議論ができるかもしれないと思い、issue
+          を立ててみるか と思い立ったのだった。
+        </p>
+        <p>このあと分かったことだがこの挙動は Web として正しい。</p>
+        <h2>
+          <a name="issue の調査" href="#issue の調査" id="issue の調査">
+            issue の調査
+          </a>
+        </h2>
+        <p>
+          WHATWG/html の issue
+          を調査をしてみると、すでに似たようなことについては
+          <a href="https://github.com/whatwg/html/issues/2665"
+            >[Parser] Make `/` in unquoted attribute value a parse error. ·
+            Issue #2665 · whatwg/html</a
+          >
+          で議論がなされていた。
+        </p>
+        <p>
+          この issue では、この挙動への変更について @hsivonen
+          氏は下記のように述べて、変更 をしない方が良いということを述べている。
+        </p>
+        <blockquote>
+          <p>
+            If we now recanted on this, we&#39;d undermine the WHATWG&#39;s
+            credibility as source of reliable requirements than don&#39;t change
+            on whim and that don&#39;t need &quot;defensive coding&quot; in case
+            they change. If we now changed this, we&#39;d vindicate the story
+            that you should always do something extra (quotes, end tags), just
+            in case, because you never know how things work out if you do
+            something easy and convenient and you can&#39;t trust things to
+            actually work the way specs say.
+          </p>
+        </blockquote>
+        <p>簡単に要約すると、下記のようだった。</p>
+        <ul>
+          <li>WHATWG の信頼性を損なってしまう</li>
+          <li>
+            WHATWG
+            の仕様が変更されるとなると、仕様の変更を常に念頭においてコーディングし
+            なければいけない
+          </li>
+          <li>
+            WHATWG の仕様に記載されている通り動いているものも信用ができなくなる
+          </li>
+        </ul>
+        <p>
+          確かにこの仕様を変更するだけで、いくつのソフトウェアが書き直されるかわからないし
+          、この挙動を前提として書かれたウェブページもあるかもしれない。
+        </p>
+        <p>そういう状況では仕様を変更することにはかなりの危険が伴うのだ。</p>
+        <h2>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
+        </h2>
+        <p>
+          WHATWG の<a href="https://whatwg.org/faq#change-at-any-time"
+            >標準の変更に対する考え</a
+          >にも 変更はとても慎重になることが書かれている。
+        </p>
+        <p>
+          また、団体が少し変わるが W3C の<a
+            href="https://www.w3.org/People/Bos/DesignGuide/compatibility.html"
+            >後方互換性に関する説明書き</a
+          >
+          にも下記のように述べられている。
+        </p>
+        <blockquote>
+          <p>The Web itself is designed to be backwards compatible.</p>
+        </blockquote>
+        <p>
+          Web
+          というのはとても互換性を大切に作られてきている。また、実際に動くものを重視し
+          ているのも間違いない。
+        </p>
+        <p>
+          少なくとも標準化までに、仕様の提案、各ベンダによる実装、仕様の改善がなされてはじ
+          めて標準として成立して、今 Web は動いている。
+        </p>
+        <p>よほどのことがない限り、今動いているものが正義なのだ。</p>
+        <p>それをより身近に感じられた出来事だった。</p>
+        <p>
+          この Web
+          、あるいはインターネットを壊さないように、改善するためにどうするかをコ
+          ミュニティのメンバー全体で作られている感覚が筆者にはとても心地よく感じられる。
+        </p>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+      <div id="background"><img src="/assets/img/web.svg" /></div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a
+            href="https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html"
+          >
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>Copyright &copy; 2018 bokken. All Rights Reserved.</footer>
+  </body>
+</html>
+

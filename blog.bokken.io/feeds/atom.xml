@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <link
+    rel="self"
+    type="application/atom+xml"
+    href="https://blog.bokken.io/feeds/atom.xml"
+  />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <link rel="self" type="application/atom+xml" href="https://blog.bokken.io/feeds/atom.xml"/>
-  <updated>2020-09-20T07:03:20.594Z</updated>
+  <updated>2020-10-01T21:55:44.591Z</updated>
   <author>
     <name>bokken</name>
   </author>
-  <id>https://blog.bokken.io/</id>
+  <id>https://blog.bokken.io</id>
 
+  
+  <entry>
+    <title>HTML parser を書いてるときに出会った Web 標準仕様の話</title>
+    <link
+      href="https://blog.bokken.io/articles/2020-09-30/html-parser-good-story.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2020-09-30/html-parser-good-story.html</id>
+    <updated>2020-10-01T21:55:44.591Z</updated>
+    <summary
+      type="html"
+    >ブラウザをスクラッチで書いている。そのときに HTML の標準を読みながらブラウザを書
+いているそのときに仕様の不備のように疑われる挙動に出会った。内容について調査しているうちにということを再認識できたので、その内容について紹介したい。</summary>
+  </entry>
+  
   <entry>
     <title>生産性アップのための一工夫</title>
     <link
@@ -16,7 +35,9 @@
     />
     <id>https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html</id>
     <updated>2020-09-20T07:03:20.594Z</updated>
-    <summary type="html">最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。要点は下記である。プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。例えば DB の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。</summary>
+    <summary
+      type="html"
+    >最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。要点は下記である。プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。例えば DB の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。</summary>
   </entry>
   
   <entry>
@@ -24,8 +45,10 @@
     <link href="https://blog.bokken.io/articles/2020-09-06/hello-world.html" />
     <id>https://blog.bokken.io/articles/2020-09-06/hello-world.html</id>
     <updated>2020-09-19T17:54:07.280Z</updated>
-    <summary type="html">もともと&lt;a href=&#34;https://negi-works.hatenablog.com/&#34;&gt;昔にブログ&lt;/a&gt;を書いていたが、
+    <summary
+      type="html"
+    >もともと&lt;a href=&#34;https://negi-works.hatenablog.com/&#34;&gt;昔にブログ&lt;/a&gt;を書いていたが、
 ブログとしてアウトプットをする時間を取らず更新が滞ってしまっていた。</summary>
   </entry>
-
+  
 </feed>
