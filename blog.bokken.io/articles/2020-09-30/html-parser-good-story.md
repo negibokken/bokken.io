@@ -37,8 +37,9 @@ HTML タグの attribute value は `double-quoted`,`single-quoted`,`unquoted` �
 <a href="https://example.com"></a>
 ```
 
+<!-- prettier-ignore -->
 ```html
-<a href="https://example.com"></a>
+<a href='https://example.com'></a>
 ```
 
 ```html
