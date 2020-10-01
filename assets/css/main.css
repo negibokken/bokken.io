@@ -235,10 +235,10 @@ article > blockquote {
   margin-bottom: 2em;
 }
 
-article ol,
+main ol,
 ul {
-  margin-top: 2.2em;
-  margin-bottom: 2.2em;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 article li {
