@@ -10,8 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="筆者はブラウザをスクラッチで書いている。そのときに HTML の標準を読みながらブラウ
-ザを書いているそのときに仕様の不備のように疑われる挙動に出会った。内容について調査しているうちに"
+      content="筆者はブラウザをスクラッチで書いている。そのときに HTML の標準を読みながらブラウザを書いているそのときに仕様の不備のように疑われる挙動に出会った。内容について調査しているうちに"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -116,7 +115,7 @@
         </h2>
         <p>
           筆者はブラウザをスクラッチで書いている。そのときに HTML
-          の標準を読みながらブラウ ザを書いている
+          の標準を読みながらブラウザを書いている
         </p>
         <p>そのときに仕様の不備のように疑われる挙動に出会った。</p>
         <p>内容について調査しているうちに</p>
@@ -141,7 +140,7 @@
           <a href="https://html.spec.whatwg.org/multipage/parsing.html"
             >WHATWG の仕様</a
           >
-          を読み解き ながら実装している。
+          を読み解きながら実装している。
         </p>
         <p>
           そのときに、attribute (<code
@@ -163,7 +162,7 @@
           <code>double-quoted</code>,<code>single-quoted</code>,<code
             >unquoted</code
           >
-          が許さ れている。
+          が許されている。
         </p>
         <p>つまり、下記の三種類の書き方ができる。</p>
         <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
@@ -171,7 +170,7 @@
         <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">https://example.com</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
         <p>
           この仕様に沿って parser を書いてると、どうも anchor
-          タグのテストが通らないという 事象に出会った。
+          タグのテストが通らないという事象に出会った。
         </p>
         <p>そのときのテスト入力には下記のように書いていた。</p>
         <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">https://example.com/</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
@@ -181,7 +180,7 @@
         </p>
         <p>
           このときに実装していた HTML parser
-          ではどのように解釈されていたかをかいつまんで 説明すると下記である。
+          ではどのように解釈されていたかをかいつまんで説明すると下記である。
         </p>
         <ol>
           <li>a タグの開始</li>
@@ -201,11 +200,11 @@
         </p>
         <p>
           WHATWG の仕様には沿っているし、URL としては
-          <code>https://example.com/</code> と書いていて も問題なさそうだ。
+          <code>https://example.com/</code> と書いていても問題なさそうだ。
         </p>
         <p>
           これの挙動については、なにか議論ができるかもしれないと思い、issue
-          を立ててみるか と思い立ったのだった。
+          を立ててみるかと思い立ったのだった。
         </p>
         <p>このあと分かったことだがこの挙動は Web として正しい。</p>
         <h2>
@@ -224,7 +223,7 @@
         </p>
         <p>
           この issue では、この挙動への変更について @hsivonen
-          氏は下記のように述べて、変更 をしない方が良いということを述べている。
+          氏は下記のように述べて、変更をしない方が良いということを述べている。
         </p>
         <blockquote>
           <p>
@@ -243,16 +242,14 @@
           <li>WHATWG の信頼性を損なってしまう</li>
           <li>
             WHATWG
-            の仕様が変更されるとなると、仕様の変更を常に念頭においてコーディングし
-            なければいけない
+            の仕様が変更されるとなると、仕様の変更を常に念頭においてコーディングしなければいけない
           </li>
           <li>
             WHATWG の仕様に記載されている通り動いているものも信用ができなくなる
           </li>
         </ul>
         <p>
-          確かにこの仕様を変更するだけで、いくつのソフトウェアが書き直されるかわからないし
-          、この挙動を前提として書かれたウェブページもあるかもしれない。
+          確かにこの仕様を変更するだけで、いくつのソフトウェアが書き直されるかわからないし、この挙動を前提として書かれたウェブページもあるかもしれない。
         </p>
         <p>そういう状況では仕様を変更することにはかなりの危険が伴うのだ。</p>
         <h2>
@@ -261,7 +258,7 @@
         <p>
           WHATWG の<a href="https://whatwg.org/faq#change-at-any-time"
             >標準の変更に対する考え</a
-          >にも 変更はとても慎重になることが書かれている。
+          >にも変更はとても慎重になることが書かれている。
         </p>
         <p>
           また、団体が少し変わるが W3C の<a
@@ -275,19 +272,17 @@
         </blockquote>
         <p>
           Web
-          というのはとても互換性を大切に作られてきている。また、実際に動くものを重視し
-          ているのも間違いない。
+          というのはとても互換性を大切に作られてきている。また、実際に動くものを重視しているのも間違いない。
         </p>
         <p>
-          少なくとも標準化までに、仕様の提案、各ベンダによる実装、仕様の改善がなされてはじ
-          めて標準として成立して、今 Web は動いている。
+          少なくとも標準化までに、仕様の提案、各ベンダによる実装、仕様の改善がなされてはじめて標準として成立して、今
+          Web は動いている。
         </p>
         <p>よほどのことがない限り、今動いているものが正義なのだ。</p>
         <p>それをより身近に感じられた出来事だった。</p>
         <p>
           この Web
-          、あるいはインターネットを壊さないように、改善するためにどうするかをコ
-          ミュニティのメンバー全体で作られている感覚が筆者にはとても心地よく感じられる。
+          、あるいはインターネットを壊さないように、改善するためにどうするかをコミュニティのメンバー全体で作られている感覚が筆者にはとても心地よく感じられる。
         </p>
       </article>
 
