@@ -300,6 +300,8 @@ div.next-article > a::after {
 
 footer {
   width: 100%;
+  position: fixed;
+  bottom: 0;
   font-size: 80%;
   background: #575757;
   color: white;
