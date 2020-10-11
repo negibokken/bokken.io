@@ -204,7 +204,7 @@ Cookie に関しては Google Analytics を利用しているのでその点を�
 
 ### プライバシーポリシーと性善説
 
-プライバシーポリシーと、内部の情報収集の実態がかけ離れている可能性についてだが、この問題に対しては、実際には、個人情報保護委員会が設置されており、個人情報取り扱い事業者の事務者に立ち入り、事業者に質問に答えさせることもできるようである([第四十条](https://elaws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0500/detail?lawId=415AC0000000057#227)))。
+プライバシーポリシーと、内部の情報収集の実態がかけ離れている可能性についてだが、この問題に対しては、実際には、個人情報保護委員会が設置されており、個人情報取り扱い事業者の事務者に立ち入り、事業者に質問に答えさせることもできるようである([第四十条](https://elaws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0500/detail?lawId=415AC0000000057#227))。
 
 また、[令和元年度個人情報保護委員会年次報告)](https://www.ppc.go.jp/aboutus/report/) の[令和元年の資料](https://www.ppc.go.jp/files/pdf/020612gaiyou.pdf)を見ると下記のように監査を受けることもあるようである。
 
