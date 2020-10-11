@@ -3,7 +3,7 @@ html {
     'Hiragino Kaku Gothic ProN', 'Arial', 'Yu Gothic', 'Meiryo', sans-serif;
   height: 100%;
   color: #333;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 body {
@@ -193,7 +193,7 @@ div#background img {
   bottom: 0;
   margin: 0;
   padding: 0;
-  opacity: 0.3;
+  opacity: 0.2;
   z-index: -1;
 }
 
@@ -228,15 +228,14 @@ article > blockquote {
   background-color: #eee;
   padding: 15px 25px;
   border-left: thick solid #888;
-  max-width: 800px;
   font-size: 90%;
   line-height: 1.5;
   margin-top: 2em;
   margin-bottom: 2em;
 }
 
-main ol,
-main ul {
+main > article > ol,
+main > article > ul {
   margin-top: 2em;
   margin-bottom: 2em;
 }
@@ -306,4 +305,17 @@ footer {
   background: #575757;
   color: white;
   padding: 0.5em 1em;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  padding: 5px;
+}
+th {
+  border-bottom: 2px solid #000;
+}
+td,
+th {
+  padding: 5px;
 }
