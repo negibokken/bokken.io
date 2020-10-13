@@ -307,6 +307,11 @@ footer {
   padding: 0.5em 1em;
 }
 
+footer > a {
+  color: white;
+  text-decoration: underline;
+}
+
 table {
   border-collapse: collapse;
   margin: 0 auto;
