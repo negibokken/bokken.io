@@ -3,7 +3,7 @@ const ejs = require('ejs');
 const {format} = require('prettier');
 
 const domain = 'https://blog.bokken.io';
-const templatePath = 'templates/sitemap-template.ejs';
+const templatePath = '../templates/sitemap-template.ejs';
 
 (async () => {
   const template = fs.readFileSync(templatePath).toString();

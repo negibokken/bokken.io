@@ -8,6 +8,6 @@ if [ -e $outdir ]; then
 fi
 
 mkdir -p $outdir
-cp templates/blog-md-template.md $outdir
+cp ../templates/blog-md-template.md $outdir
 
 ln -s ../../../assets $outdir/

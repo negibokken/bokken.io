@@ -15,8 +15,8 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
-      gtag("config", "UA-83287008-4");
+      gtag('js', new Date());
+      gtag('config', 'UA-83287008-4');
     </script>
     <title>bokken.io</title>
     <meta name="twitter:card" content="summary" />
@@ -80,9 +80,6 @@
       <div id="background"><img src="assets/img/web.svg" /></div>
     </main>
 
-    <footer>
-      Copyright &copy; 2018 bokken. All Rights Reserved.
-      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
-    </footer>
+    <%- include('footer'); %>
   </body>
 </html>
