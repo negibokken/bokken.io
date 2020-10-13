@@ -65,7 +65,7 @@ function scanFiles(path, ext, ignore = '') {
   fs.writeFileSync(atomFile, format(JSON.stringify(atoms), {parser: 'json'}));
 
   // template を読む
-  const template = fs.readFileSync('./templates/atom-template.ejs').toString();
+  const template = fs.readFileSync('../templates/atom-template.ejs').toString();
   const atomXml = ejs.render(template, atoms);
   // atom feeds を更新する
   fs.writeFileSync('./feeds/atom.xml', format(atomXml, {parser: 'xml'}));

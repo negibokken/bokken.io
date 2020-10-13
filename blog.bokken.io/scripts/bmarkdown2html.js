@@ -57,6 +57,7 @@ class BMarkdown2HTML {
         return hljs.highlightAuto(code, [lang]).value;
       },
     });
+    this.self = this;
     this.markdown = markdown;
     this.template = template;
     this.content = marked(this.markdown);
@@ -65,7 +66,7 @@ class BMarkdown2HTML {
     this.tags = tags;
     this.dates = dates;
     this.url = option.url;
-    const data = {
+    this.data = {
       article: {
         url: this.url,
         title: this.title,
@@ -78,13 +79,17 @@ class BMarkdown2HTML {
         next: option ? option.next : undefined,
       },
     };
+    
+  }
+  async init(){
     try {
-      if (!template) return;
-      this.content = ejs.render(template, data);
+      if (!this.template) return;
+      this.content = await ejs.renderFile(this.template, this.data);
     } catch (e) {
       console.error(e);
       process.exit(1);
     }
+    return this.self;
   }
   toString() {
     return this.content;

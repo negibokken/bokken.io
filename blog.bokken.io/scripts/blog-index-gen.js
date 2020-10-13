@@ -36,8 +36,7 @@ function scanFiles(path, ext, ignore = '') {
     }
 
     articles = articles.sort((a, b) => a.date < b.date);
-    const template = fs.readFileSync('./templates/blog-index.ejs').toString();
-    const html = ejs.render(template, {articles});
+    const html = await ejs.renderFile('../templates/blog-index.ejs', {articles});
     console.log(format(html, {parser: 'html'}));
     process.exit(0);
   } catch (e) {
