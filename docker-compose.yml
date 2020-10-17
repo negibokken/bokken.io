@@ -21,6 +21,10 @@ services:
       DOMAINS: 'bokken.io -> http://bokken.io, www.bokken.io -> http://bokken.io, blog.bokken.io -> http://bokken.io, x.bokken.io -> http://bokken.io'
       STAGE: production
       # STAGE: local
+      ERROR_LOG: default
+      ACCESS_LOG: default
+    volumes:
+      - /var/log/nginx:/var/log/nginx/
 
   bokken.io:
     image: bokken.io
