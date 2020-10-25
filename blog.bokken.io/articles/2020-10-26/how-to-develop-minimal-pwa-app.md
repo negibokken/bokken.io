@@ -8,7 +8,7 @@
 
 Progressive Web App (PWA) の勉強がてら `https://blog.bokken.io` を PWA 化した。
 
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ブログの PWA 化できたのでインストールできるようになった <a href="https://t.co/O36JnpcPjc">pic.twitter.com/O36JnpcPjc</a></p>&mdash; bokken✏ (@bokken_) <a href="https://twitter.com/bokken_/status/1320280517451804673?ref_src=twsrc%5Etfw">October 25, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ブログの PWA 化できたのでインストールできるようになった <a href="https://t.co/O36JnpcPjc">pic.twitter.com/O36JnpcPjc</a></p>&mdash; bokken✏ (@bokken_) <a href="https://twitter.com/bokken_/status/1320280517451804673?ref_src=twsrc%5Etfw">October 25, 2020</a></blockquote>
 
 本記事では、その内容をまとめておきたい。
 
@@ -231,6 +231,8 @@ if ('serviceWorker' in navigator) {
      console.info('fetch event occurred');
    });
    ```
+
+これらのファイルを配信するだけで、PWA 化することができる。
 
 ### scope について
 
