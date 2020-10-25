@@ -7,12 +7,25 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2020-10-11T14:10:01.421Z</updated>
+  <updated>2020-10-25T15:20:12.449Z</updated>
   <author>
     <name>bokken</name>
   </author>
   <id>https://blog.bokken.io</id>
 
+  
+  <entry>
+    <title>Progressive Web App 化する最低限の設定</title>
+    <link
+      href="https://blog.bokken.io/articles/2020-10-26/how-to-develop-minimal-pwa-app.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2020-10-26/how-to-develop-minimal-pwa-app.html</id>
+    <updated>2020-10-25T15:20:12.449Z</updated>
+    <summary
+      type="html"
+    >Progressive Web App (PWA) の勉強がてら &lt;code&gt;https://blog.bokken.io&lt;/code&gt; を PWA 化した。本記事では、その内容をまとめておきたい。</summary>
+  </entry>
   
   <entry>
     <title>Web サイトとして記載しておくべきプライバシーポリシーは何か</title>
