@@ -2,7 +2,7 @@ version: 2
 jobs:
   publish:
     docker:
-      - image: circleci/node:9
+      - image: circleci/node:12
     steps:
       - checkout
       - run:
@@ -15,4 +15,4 @@ workflows:
       - publish:
           filters:
             branches:
-              only: master
+              only: main
