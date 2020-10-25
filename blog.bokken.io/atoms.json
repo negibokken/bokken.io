@@ -1,9 +1,16 @@
 {
   "title": "blog.bokken.io",
   "uri": "https://blog.bokken.io",
-  "updatedAt": "2020-10-11T14:10:01.421Z",
+  "updatedAt": "2020-10-25T15:20:12.449Z",
   "id": "2b743fd8-f4e8-4b94-8866-269347b3fbab",
   "articles": [
+    {
+      "title": "Progressive Web App 化する最低限の設定",
+      "uri": "https://blog.bokken.io/articles/2020-10-26/how-to-develop-minimal-pwa-app.html",
+      "uuid": "d3ae27f8-5776-4485-be08-77a9830426f5",
+      "updatedAt": "2020-10-25T15:20:12.449Z",
+      "summary": "Progressive Web App (PWA) の勉強がてら <code>https://blog.bokken.io</code> を PWA 化した。本記事では、その内容をまとめておきたい。"
+    },
     {
       "title": "Web サイトとして記載しておくべきプライバシーポリシーは何か",
       "uri": "https://blog.bokken.io/articles/2020-10-05/privacy-policy-note.html",
