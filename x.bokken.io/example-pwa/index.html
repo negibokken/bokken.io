@@ -15,18 +15,19 @@
     rel="shortcut icon" href=assets/img/favicon.ico />
 
     <!-- PWA related section from here-->
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <script src="/assets/js/register-service-worker.js"></script>
+    <link rel="manifest" href="./manifest.json" />
+    <script src="./register-service-worker.js"></script>
     <!-- PWA related section from here-->
   </head>
   <body>
-    <article>
-      <p>This is a sample site of PWA.</p>
-      <p>You can install this web site as an Application.</p>
+    <main>
+      <article>
+        <p>This is a sample site of PWA.</p>
+        <p>You can install this web site as an Application.</p>
 
-      <code>/assets/js/register-service-worker.js</code>
+        <code>/assets/js/register-service-worker.js</code>
 
-      <pre>
+        <pre>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
@@ -43,11 +44,11 @@ if ('serviceWorker' in navigator) {
   });
 }
 </pre
-      >
+        >
 
-      <code>/assets/js/sw.js</code>
+        <code>/assets/js/sw.js</code>
 
-      <pre>
+        <pre>
 self.addEventListener('install', (event) => {
   console.info('installed');
 });
@@ -59,7 +60,8 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   console.info('fetch event occurred');
 });</pre
-      >
-    </article>
+        >
+      </article>
+    </main>
   </body>
 </html>
