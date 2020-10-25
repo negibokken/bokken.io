@@ -9,3 +9,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   console.info('service worker activated');
 });
+
+self.addEventListener('fetch', (event) => {
+  console.info('fetch event occurred');
+});
