@@ -1,12 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" baseProfile="full" width="100px" height="100px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" id="svg_document" macsvgid="B9C09490-BAD6-4A19-9349-31105C99383A-54714-0004535231B7636E" style="zoom: 4;">
-    <!-- Created with macSVG - https://macsvg.org/ - https://github.com/dsward2/macsvg/ -->
-    <title id="svg_document_title" macsvgid="6FAEBC19-B0A0-4951-9DFB-DEAA79A0B946-54714-0004535231B799C5">Untitled.svg</title>
-    <defs id="svg_document_defs" macsvgid="C5BB8E9A-4B06-4852-9279-9D424C6BE980-54714-0004535231B7B972"></defs>
-    <g id="main_group" macsvgid="3C242798-AFC5-42C8-92A1-FFD876EE6133-54714-0004535231B7CF9F">
-        <rect height="100px" x="0px" y="0px" id="background_rect" width="100px" fill="#ffffff" macsvgid="A7382FA6-09E7-410A-B745-AA5BFDBE1876-54714-0004535231B7E641"></rect>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" baseProfile="full" width="144px" height="144px" viewBox="0 0 144 144" preserveAspectRatio="xMidYMid meet" id="svg_document" style="zoom: 4;" macsvgid="D120AEF5-C5C7-4C8B-AE4B-5A6C9EB88DA6-92903-00049F8C2FA699DC">
+    <title id="svg_document_title" macsvgid="58B64ED5-BE77-4368-898C-622FB8FF1718-92903-00049F8C2FA6D09C">Untitled.svg</title>
+    <defs id="svg_document_defs" macsvgid="0E88994A-D1D1-4AE7-A2B0-4611CEF5F5C6-92903-00049F8C2FA6EE9F"></defs>
+    <g id="main_group" macsvgid="FBA16744-037B-4530-9396-BFF61FDF36C0-92903-00049F8C2FA7011C">
+        <rect x="0px" height="144px" y="-0.5px" id="background_rect" width="144px" fill="#ffffff" macsvgid="457D19F2-E287-4F0A-9870-BF9F53D0C8E1-92903-00049F8C2FA71887"></rect>
     </g>
-    <circle stroke="#6c6c6c" cx="50px" id="circle1" stroke-width="3px" cy="50px" fill="#6c6c6c" r="38px" transform="" macsvgid="193A3203-2861-45AB-B33C-03030F21AFF1-54714-000453559442A855"></circle>
-    <circle stroke="#ffffff" transform="" id="circle2" stroke-width="3px" cy="35px" fill="#ffffff" r="3px" macsvgid="CBB6F927-0BB6-482F-BB4D-FB60DB5F2508-54714-00045371D0874479" cx="35px"></circle>
-    <circle stroke="#ffffff" cx="65px" stroke-width="3px" id="circle3" cy="35px" fill="#ffffff" r="3px" macsvgid="DC262F3D-D51F-4FFB-ADC2-BB765A77E1E9-54714-0004537C40C88ED1" transform=""></circle>
-    <circle stroke="#ffffff" macsvgid="F6E39DBA-6942-48EA-96F5-0040E74ED329-54714-00045389CDA56C0E" stroke-width="3px" cy="47.25px" id="circle4" fill="#ffffff" r="2px" transform="" cx="50px"></circle>
+    <circle stroke="#6c6c6c" transform="" id="circle1" stroke-width="3px" cy="72px" fill="#6c6c6c" r="60px" macsvgid="65881076-B4F0-46C2-8B90-B6C4F3812F78-92903-00049F8C2FA73210" cx="72px"></circle>
+    <circle stroke="#ffffff" cx="48px" id="circle2" stroke-width="3px" cy="53.5px" fill="#ffffff" r="5px" transform="" macsvgid="CD6C07AA-EF7F-435F-A8C9-D8D370CC18BB-92903-00049F8C2FA74C79"></circle>
+    <circle stroke="#ffffff" macsvgid="670EB85D-59D6-4A25-BB7D-26342130BE08-92903-00049F8C2FA764E7" stroke-width="3px" id="circle3" cy="53.5px" fill="#ffffff" r="5px" cx="96px" transform=""></circle>
+    <circle stroke="#ffffff" cx="72px" stroke-width="3px" id="circle4" cy="66.5px" fill="#ffffff" r="2px" macsvgid="DD094786-76BF-4BCD-A144-0B13EF915CEB-92903-00049F8C2FA77C95" transform=""></circle>
 </svg>

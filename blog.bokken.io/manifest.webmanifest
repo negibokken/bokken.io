@@ -6,7 +6,7 @@
     {
       "src": "/assets/img/icon.svg",
       "type": "image/svg",
-      "sizes": "144x144"
+      "size": "144x144"
     }
   ],
   "start_url": "/?source=pwa",
