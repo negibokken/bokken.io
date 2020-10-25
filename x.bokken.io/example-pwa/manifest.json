@@ -12,6 +12,6 @@
   "start_url": "/?source=pwa",
   "background_color": "#6c6c6c",
   "display": "standalone",
-  "scope": "/",
+  "scope": "/example-pwa/",
   "theme_color": "#00a3af"
 }
