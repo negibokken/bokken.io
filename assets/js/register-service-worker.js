@@ -1,7 +1,7 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register('./assets/js/sw.js', {scope: '/'})
+      .register('/assets/js/sw.js', {scope: '/'})
       .then((registration) => {
         console.log(
           'Successfully registered service worker with scope: ',
