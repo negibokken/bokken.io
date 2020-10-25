@@ -1,0 +1,17 @@
+{
+  "short_name": "blog.bokken.io",
+  "name": "bokken.io",
+  "description": "A web tech blog",
+  "icons": [
+    {
+      "src": "/assets/img/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "144x144"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "background_color": "#6c6c6c",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#00a3af"
+}

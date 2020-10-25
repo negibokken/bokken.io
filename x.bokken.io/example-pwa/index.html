@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Example Progressive Web App</title>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"
+    ></script>
+
+    <link rel=stylesheet type=text/css href="assets/css/main.css" /> <link
+    rel="shortcut icon" href=assets/img/favicon.ico />
+
+    <!-- PWA related section from here-->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <script src="/assets/js/register-service-worker.js"></script>
+    <!-- PWA related section from here-->
+  </head>
+  <body>
+    <article>
+      <p>This is a sample site of PWA.</p>
+      <p>You can install this web site as an Application.</p>
+
+      <code>/assets/js/register-service-worker.js</code>
+
+      <pre>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/assets/js/sw.js', {scope: '.'})
+      .then((registration) => {
+        console.log(
+          'Successfully registered service worker with scope: ',
+          registration.scope
+        );
+      })
+      .catch((err) => {
+        console.error('Failed to register service worker with err: ', err);
+      });
+  });
+}
+</pre
+      >
+
+      <code>/assets/js/sw.js</code>
+
+      <pre>
+self.addEventListener('install', (event) => {
+  console.info('installed');
+});
+
+self.addEventListener('activate', (event) => {
+  console.info('service worker activated');
+});
+
+self.addEventListener('fetch', (event) => {
+  console.info('fetch event occurred');
+});</pre
+      >
+    </article>
+  </body>
+</html>
