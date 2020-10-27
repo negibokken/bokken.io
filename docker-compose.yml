@@ -24,7 +24,9 @@ services:
       ERROR_LOG: default
       ACCESS_LOG: default
     volumes:
-      - /var/log/nginx:/var/log/nginx/
+      - /var/log/nginx:/var/log/nginx
 
   bokken.io:
     image: bokken.io
+    volumes:
+      - /var/log/nginx:/var/log/nginx
