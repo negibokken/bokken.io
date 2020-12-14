@@ -162,7 +162,7 @@ is_debug = false
 is_component_build = true
 symbol_level = 0
 dcheck_always_on = true
-cc_wrapper=ccache
+cc_wrapper= "ccache"
 enable_nacl = false
 ```
 
