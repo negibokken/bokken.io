@@ -35,8 +35,10 @@ function scanFiles(path, ext, ignore = '') {
       articles.push(article);
     }
 
-    articles = articles.sort((a, b) => a.date < b.date);
-    const html = await ejs.renderFile('../templates/blog-index.ejs', {articles});
+    articles = articles.sort().reverse();
+    const html = await ejs.renderFile('../templates/blog-index.ejs', {
+      articles,
+    });
     console.log(format(html, {parser: 'html'}));
     process.exit(0);
   } catch (e) {
