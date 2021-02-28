@@ -10,14 +10,19 @@
 
   
   <url>
-    <loc>https://blog.bokken.io/articles/2020-10-27/</loc>
-    <lastmod>2020-10-27</lastmod>
+    <loc>https://blog.bokken.io/articles/2020-09-06/hello-world.html</loc>
+    <lastmod>2020-09-06</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html</loc>
+    <lastmod>2020-09-20</lastmod>
   </url>
   
   <url>
     <loc
-    >https://blog.bokken.io/articles/2020-10-26/how-to-develop-minimal-pwa-app.html</loc>
-    <lastmod>2020-10-26</lastmod>
+    >https://blog.bokken.io/articles/2020-09-30/html-parser-good-story.html</loc>
+    <lastmod>2020-09-30</lastmod>
   </url>
   
   <url>
@@ -28,18 +33,13 @@
   
   <url>
     <loc
-    >https://blog.bokken.io/articles/2020-09-30/html-parser-good-story.html</loc>
-    <lastmod>2020-09-30</lastmod>
+    >https://blog.bokken.io/articles/2020-10-26/how-to-build-chromium.html,how-to-develop-minimal-pwa-app.html</loc>
+    <lastmod>2020-10-26</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html</loc>
-    <lastmod>2020-09-20</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.bokken.io/articles/2020-09-06/hello-world.html</loc>
-    <lastmod>2020-09-06</lastmod>
+    <loc>https://blog.bokken.io/articles/2020-10-27/</loc>
+    <lastmod>2020-10-27</lastmod>
   </url>
   
 </urlset>
