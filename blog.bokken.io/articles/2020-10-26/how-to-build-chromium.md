@@ -23,15 +23,15 @@
    1. [開発用のツールを準備をする](#開発用のツールを準備をする)
       1. [フェッチする](#フェッチする)
       2. [更新する](#更新する)
-   2. [Chromium のビルドと実行](#Chromium-のビルドと実行)
+   2. [Chromium のビルドと実行](#chromium-のビルドと実行)
       1. [ビルド設定の生成](#ビルド設定の生成)
-      2. [Chromium のビルド](#Chromium-のビルド)
-      3. [Cromium の実行](#Cromium-の実行)
+      2. [Chromium のビルド](#chromium-のビルド)
+      3. [Chromium の実行](#chromium-の実行)
    3. [テストのビルドと実行](#テストのビルドと実行)
       1. [ユニットテストのビルド](#ユニットテストのビルド)
       2. [ユニットテストの実行](#ユニットテストの実行)
-      3. [Web テスト](#Web-テスト)
-      4. [Web テストの実行](#Web-テストの実行)
+      3. [Web テスト](#web-テスト)
+      4. [Web テストの実行](#web-テストの実行)
 5. [ビルド・テストの実行速度](#ビルドテストの実行速度)
    1. [ビルド時間](#ビルド時間)
    2. [テスト実行時間](#テスト実行時間)
@@ -47,17 +47,21 @@
 - MacBook Pro: (13-inch, 2019, Four Thunderbolt 3 ports)
 - Processor: 2.8GHz Quad-Core Intel Core7
 - Memory: 16GB 2133 MHz LPDDR3
-- Graphics Intel Iris Plus Grapphics 6555 1536MB
+- Graphics Intel Iris Plus Graphics 6555 1536MB
 
 この MacBook Pro を使ってビルドやテストを実行する。
 
 ### 必要なツール
 
-[この公式のページ](https://www.chromium.org/developers/design-documents) によると Chromium のビルドに必要なツールは下記である。
+[この公式のページ](https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md) によると Chromium のビルドに必要なツールは下記である。
 
 - Xcode 11.2+
 
 Xcode がインストールされているかは、下記のコマンドで .sdk ファイルが表示されるかを確認すればよい。
+
+```sh
+ls `xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs
+```
 
 加えてインストールしておくと良いのは下記の Homebrew と ccache だ。
 
@@ -127,7 +131,7 @@ fetch chromium
 
 #### 更新する
 
-リポジトリに更新があった際には下記のコマンドでリポジトリを最新の状態にすることができる。 fetch のタイミングで下記コマンドも実行されるので fetch して直後は必要がない。
+リポジトリに更新があった際には下記のコマンドでリポジトリを最新の状態にできる。 fetch のタイミングで下記コマンドも実行されるので fetch して直後は必要がない。
 
 ```sh
 gclient sync
@@ -168,7 +172,7 @@ enable_nacl = false
 
 するとビルドに必要なファイル群が `out/Default` 以下に生成される。
 
-この設定ファルを作るために参考にしたのは[この記事](https://www.chromium.org/developers/gn-build-configuration)と[この記事](https://chromium.googlesource.com/chromium/src/+/master/docs/ccache_mac.md)にある公式の設定で、これらの設定でビルド時間や再ビルド時間が短くなるらしい。
+この設定ファイルを作るために参考としたのは[この記事](https://www.chromium.org/developers/gn-build-configuration)と[この記事](https://chromium.googlesource.com/chromium/src/+/master/docs/ccache_mac.md)にある公式の設定で、これらの設定でビルド時間や再ビルド時間が短くなるらしい。
 
 ただし、上記の設定はひとまず早くビルドするための設定である。
 
@@ -204,7 +208,7 @@ chmod +x build_chromium
 
 ビルドにかかる時間についてはビルド時間にかかわる節で述べる。
 
-#### Cromium の実行
+#### Chromium の実行
 
 ビルドが終わるとローカル環境で Chromium を実行できる。
 
@@ -241,7 +245,7 @@ ninja -C out/Default chrome/test:unit_tests
 out/Default/unit_tests --disable-features="MediaRouter"
 ```
 
-[Checking out and building Chromium for Mac](https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md#avoiding-the-incoming-network-connections-dialog)にあるように、 "incoming network connections" のダイアログがたくさん出てくるので、それを抑えるために、 `--disable-features="MediaRouter"` を指定している。
+[Checking out and building Chromium for Mac](https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md#avoiding-the-incoming-network-connections-dialog)にあるように、 "incoming network connections" のダイアログがたくさん出てくるので、それを抑えるために `--disable-features="MediaRouter"` を指定している。
 
 #### Web テスト
 
@@ -257,18 +261,18 @@ autoninja -C out/Default blink_tests
 上記でテストがビルドできれば、下記コマンド列でテストが実行できる。
 
 ```sh
-
+#!/bin/bash
 strip out/Default/Content\ Shell.app/Contents/MacOS/Content\ Shell
 ./third_party/blink/tools/run_web_tests.py -t Default
 ```
 
-(Content_Shell については `strip ./xcodebuild/{Debug,Release}/content_shell.app/Contents/MacOS/content_shell` と書いてあるが、上記の手順ではパスが変わっているようである)
+(Content_Shell については `strip ./xcodebuild/{Debug,Release}/content_shell.app/Contents/MacOS/content_shell` と書いてあるが、現在ではパスが変わっているようである)
 
 上記までの手順で一通りビルド、およびテストの実行ができるようになった。
 
 ## ビルド・テストの実行速度
 
-さて、最後にビルドやテストにかかった時間を述べて終わろうと思う。
+さて、最後にビルドやテストにかかった時間を紹介する。
 
 計測方法は今まで紹介してきたコマンド列について time コマンドで計測した出力を掲載する。
 
