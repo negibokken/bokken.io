@@ -10,9 +10,13 @@
 
   
   <url>
-    <loc
-    >https://blog.bokken.io/articles/2020-10-05/privacy-policy-note.html</loc>
-    <lastmod>2020-10-05</lastmod>
+    <loc>https://blog.bokken.io/articles/2020-09-06/hello-world.html</loc>
+    <lastmod>2020-09-06</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html</loc>
+    <lastmod>2020-09-20</lastmod>
   </url>
   
   <url>
@@ -22,13 +26,20 @@
   </url>
   
   <url>
-    <loc>https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html</loc>
-    <lastmod>2020-09-20</lastmod>
+    <loc
+    >https://blog.bokken.io/articles/2020-10-05/privacy-policy-note.html</loc>
+    <lastmod>2020-10-05</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.bokken.io/articles/2020-09-06/hello-world.html</loc>
-    <lastmod>2020-09-06</lastmod>
+    <loc
+    >https://blog.bokken.io/articles/2020-10-26/how-to-build-chromium.html</loc>
+    <lastmod>2020-10-26</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2020-10-27/</loc>
+    <lastmod>2020-10-27</lastmod>
   </url>
   
 </urlset>

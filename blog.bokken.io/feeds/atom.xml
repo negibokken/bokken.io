@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2020-10-11T14:10:01.421Z</updated>
+  <updated>2021-02-28T13:53:31.100Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -61,6 +61,19 @@
       type="html"
     >もともと&lt;a href=&#34;https://negi-works.hatenablog.com/&#34;&gt;昔にブログ&lt;/a&gt;を書いていたが、
 ブログとしてアウトプットをする時間を取らず更新が滞ってしまっていた。</summary>
+  </entry>
+  
+  <entry>
+    <title>Chromium をビルド・テストする方法とその実行時間の備忘録</title>
+    <link
+      href="https://blog.bokken.io/articles/2020-10-26/how-to-build-chromium.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2020-10-26/how-to-build-chromium.html</id>
+    <updated>2021-02-28T13:53:31.100Z</updated>
+    <summary
+      type="html"
+    >趣味でブラウザを作っている延長で、 Chromium をビルドしてテストを走らせて遊んでいる。その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。</summary>
   </entry>
   
 </feed>
