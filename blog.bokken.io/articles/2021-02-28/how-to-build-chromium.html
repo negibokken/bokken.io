@@ -1,161 +1,747 @@
-# Progressive Web App 化する最低限の設定 @tags: [Web, PWA,App Manifest, Service
-Worker] @date: [2020-10-26, 2020-10-26] ## 概要 Progressive Web App (PWA)
-の勉強がてら `https://blog.bokken.io` を PWA 化した。
-
-<blockquote class="twitter-tweet">
-  <p lang="ja" dir="ltr">
-    ブログの PWA 化できたのでインストールできるようになった
-    <a href="https://t.co/O36JnpcPjc">pic.twitter.com/O36JnpcPjc</a>
-  </p>
-  &mdash; bokken✏ (@bokken_)
-  <a
-    href="https://twitter.com/bokken_/status/1320280517451804673?ref_src=twsrc%5Etfw"
-    >October 25, 2020</a
-  >
-</blockquote>
-
-本記事では、その内容をまとめておきたい。
-記事ではインストールを可能にするのみで、コンテンツのキャッシュや push
-通知などは行わない。 それは blog で対応した際に改めて記事にする。 ## 目次 1.
-[概要](#概要) 2. [目次](#目次) 3. [デモ](#デモ) 4. [Progressive Web App
-(PWA)とは](#Progressive-Web-App-PWAとは) 1. [PWA
-に必要なファイル概要](#PWA-に必要なファイル概要) 5. [Web App
-Manifest](#Web-App-Manifest) 6. [Service Workers](#Service-Workers) 7.
-[必要となるファイル](#必要となるファイル) 1. [scope について](#scope-について)
-8. [おわりに](#おわりに) 9. [参考リンク](#参考リンク) ## デモ 本 blog も PWA
-化しているが、別途[デモ](https://x.bokken.io/example-pwa/index.html)
-を用意している。 ## Progressive Web App (PWA)とは まず簡単に PWA
-とは何かをおさらいしておく。 PWA
-とはネイティブアプリケーションのようなユーザ体験を Web
-の技術で実現できる技術である。
-クロスプラットフォームで提供されているブラウザ上でネイティブライクに動くアプリケーションが提供できれば、少ないコストでユーザ体験を向上させることが期待できる技術である。
-要素技術的には下記が関係してくる。 - [Web App
-Manifest](https://www.w3.org/TR/appmanifest/) - [Service Workers
-1](https://www.w3.org/TR/service-workers/) もう一つ App Shell
-という概念も紹介されることが多い。 App Shell は PWA
-を実現するときのアーキテクチャの一つであって、最低限必要な技術要素ではない。
-Google の App Shell モデルの記事には下記のようにある。 > アプリケーション
-シェル（App Shell）アーキテクチャは、ネイティブ
-アプリのように瞬時に、そして確実にユーザーの画面に読み込める Progressive Web App
-を構築する方法の 1 つです。 > > -- [App Shell モデル  |  Web  |  Google
-Developers](https://developers.google.com/web/fundamentals/architecture/app-shell)
-なので、本記事では簡単に Web App Manifest と、Service Worker
-について紹介した上で、PWA 化するときの設定を紹介する。 ### PWA
-に必要なファイル概要 ひとまずこれらから必要になるファイルは下記である。 1. icon
-ファイル 1. Manifest フイル(manifest.json) 1. Service Worker を登録するための js
-ファイル (html に書いても良い) 1. 上記 1, 2 を読み込む html ファイル 1. Service
-Worker のファイル ## Web App Manifest Web App Manifest とは下記にあるように Web
-アプリケーションのメタデータ (名前、アイコン、リンクなど)を表すファイルである。
-> centralized place to put metadata associated with a web application. This
-metadata includes, but is not limited to, the web application's name, links to
-icons, as well as the preferred URL to open when a user launches the web
-application. > > -- [Web App Manifest](https://w3c.github.io/manifest/)
-例えば下記のようなデータである。 ```json { "short_name": "bokken-blog", "name":
-"blog.bokken.io", "description": "A web tech blog", "icons": [ { "src":
-"/icon.svg", "type": "image/svg+xml", "sizes": "144x144" } ], "start_url":
-"/?source=pwa", "background_color": "#6c6c6c", "display": "standalone", "scope":
-"/", "theme_color": "#00a3af" } ``` このファイル名で指定する icon ファイル
-(icon.svg) は別途用意しておく必要がある。(ない場合は動かない) この Web App
-Manifest ファイルの名前は `manifest.webmanifest` でもよいし、`manifest.json`
-でもよい。あるいは他のファイル名などであればサーバ側で `ContentType:
-application/manifest+json` で返せばブラウザが解釈できる。 そして、html
-ファイルから下記のように読み込むことでブラウザに Web
-ページのメタ情報を伝えることができる。 ```html
-<link rel="manifest" href="/manifest.json" />
-``` ## Service Workers Service Worker というのは [Web
-Worker](https://www.w3.org/TR/workers/) の一種である。 Service Worker
-はブラウザの JavaScript からインストールされてバックグラウンドで動作する。 この
-Service Worker
-はプッシュ通知やプロキシ、バックグラウンドでの同期などで利用されているのを見かける技術である。
-PWA 化するために Service Worker の JS ファイルとしては下記のような Event
-Listener を登録しておく。(下記はログを表示するだけである) ```js
-self.addEventListener('install', (event) => { console.info('installed'); });
-self.addEventListener('activate', (event) => { console.info('service worker
-activated'); }); self.addEventListener('fetch', (event) => { console.info('fetch
-event occurred'); }); ``` 中でも fetch に対する `addEventListener`
-がないと「Page does not work offline」
-と表示されてインストールができない。最低限 `fetch` に対する addEventListener
-を追加する必要がある。 このファイルを `sw.js` として保存しておき、下記のように
-html のページから `sw.js` を ブラウザに Service Worker として登録できる。 ```js
-if ('serviceWorker' in navigator) { window.addEventListener('load', () => {
-navigator.serviceWorker .register('/sw.js', {scope: '/'}) .then((registration)
-=> { console.log( 'Successfully registered service worker with scope: ',
-registration.scope ); }) .catch((err) => { console.error('Failed to register
-service worker with err: ', err); }); }); } ``` ## 必要となるファイル
-上記の説明を合わせると下記のようなファイル群が必要である。 1. icon ファイル 2.
-Web App Manifest ファイル ```json { "short_name": "blog.bokken.io", "name":
-"bokken.io", "description": "A web tech blog", "icons": [ { "src": "icon.svg",
-"type": "image/svg+xml", "sizes": "144x144" } ], "start_url": "/?source=pwa",
-"background_color": "#6c6c6c", "display": "standalone", "scope": "/",
-"theme_color": "#00a3af" } ``` 3. html ファイルと Service Worker
-を登録するための JavaScript ```html
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title></title>
-    <link rel="manifest" href="manifest.json" />
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>
+      Chromium をビルド・テストする方法とその実行時間の備忘録 | blog.bokken.io
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="趣味でブラウザを作っている延長で、 Chromium をビルドしてテストを走らせて遊んでいる。その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="author" href="humans.txt" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2021-02-28/how-to-build-chromium.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Chromium をビルド・テストする方法とその実行時間の備忘録"
+    />
+    <meta
+      property="og:description"
+      content="趣味でブラウザを作っている延長で、 Chromium をビルドしてテストを走らせて遊んでいる。その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
     <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("/sw.js", { scope: "/" })
-            .then((registration) => {
-              console.log(
-                "Successfully registered service worker with scope: ",
-                registration.scope
-              );
-            })
-            .catch((err) => {
-              console.error(
-                "Failed to register service worker with err: ",
-                err
-              );
-            });
-        });
-      }
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
     </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css
+    href=https://blog.bokken.io/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
   </head>
+
   <body>
-    HELLO WORLD
+    <header>
+      <a href="http://bokken.io"><h1>bokken.io</h1></a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2021-02-28/how-to-build-chromium.html"
+          >Chromium をビルド・テストする方法とその実行時間の備忘録</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2021-02-28</dd>
+          <dt>更新日</dt>
+          <dd>2021-02-28</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            browser, Chromium
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="Chromium をビルド・テストする方法とその実行時間の備忘録"
+            href="#Chromium をビルド・テストする方法とその実行時間の備忘録"
+            id="Chromium をビルド・テストする方法とその実行時間の備忘録"
+          >
+            Chromium をビルド・テストする方法とその実行時間の備忘録
+          </a>
+        </h1>
+        <h2>
+          <a name="概要" href="#概要" id="概要"> 概要 </a>
+        </h2>
+        <p>
+          趣味でブラウザを作っている延長で、 Chromium
+          をビルドしてテストを走らせて遊んでいる。
+        </p>
+        <p>
+          その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。
+        </p>
+        <p>
+          また、あまりビルドやテスト実行時間について紹介されている記事が少ないので、この記事ではその点についても言及する。
+        </p>
+        <h2>
+          <a name="目次" href="#目次" id="目次"> 目次 </a>
+        </h2>
+        <ol>
+          <li><a href="#%E6%A6%82%E8%A6%81">概要</a></li>
+          <li><a href="#%E7%9B%AE%E6%AC%A1">目次</a></li>
+          <li>
+            <a href="#%E7%92%B0%E5%A2%83%E6%BA%96%E5%82%99">環境準備</a>
+            <ol>
+              <li><a href="#%E7%92%B0%E5%A2%83">環境</a></li>
+              <li>
+                <a
+                  href="#%E5%BF%85%E8%A6%81%E3%81%AA%E3%83%84%E3%83%BC%E3%83%AB"
+                  >必要なツール</a
+                >
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a href="#%E6%89%8B%E9%A0%86">手順</a>
+            <ol>
+              <li>
+                <a
+                  href="#%E9%96%8B%E7%99%BA%E7%94%A8%E3%81%AE%E3%83%84%E3%83%BC%E3%83%AB%E3%82%92%E6%BA%96%E5%82%99%E3%82%92%E3%81%99%E3%82%8B"
+                  >開発用のツールを準備をする</a
+                >
+                <ol>
+                  <li>
+                    <a
+                      href="#%E3%83%95%E3%82%A7%E3%83%83%E3%83%81%E3%81%99%E3%82%8B"
+                      >フェッチする</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#%E6%9B%B4%E6%96%B0%E3%81%99%E3%82%8B">更新する</a>
+                  </li>
+                </ol>
+              </li>
+              <li>
+                <a
+                  href="#chromium-%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89%E3%81%A8%E5%AE%9F%E8%A1%8C"
+                  >Chromium のビルドと実行</a
+                >
+                <ol>
+                  <li>
+                    <a
+                      href="#%E3%83%93%E3%83%AB%E3%83%89%E8%A8%AD%E5%AE%9A%E3%81%AE%E7%94%9F%E6%88%90"
+                      >ビルド設定の生成</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#chromium-%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89"
+                      >Chromium のビルド</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#chromium-%E3%81%AE%E5%AE%9F%E8%A1%8C"
+                      >Chromium の実行</a
+                    >
+                  </li>
+                </ol>
+              </li>
+              <li>
+                <a
+                  href="#%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89%E3%81%A8%E5%AE%9F%E8%A1%8C"
+                  >テストのビルドと実行</a
+                >
+                <ol>
+                  <li>
+                    <a
+                      href="#%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89"
+                      >ユニットテストのビルド</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E5%AE%9F%E8%A1%8C"
+                      >ユニットテストの実行</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#web-%E3%83%86%E3%82%B9%E3%83%88">Web テスト</a>
+                  </li>
+                  <li>
+                    <a
+                      href="#web-%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E5%AE%9F%E8%A1%8C"
+                      >Web テストの実行</a
+                    >
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a
+              href="#%E3%83%93%E3%83%AB%E3%83%89%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E5%AE%9F%E8%A1%8C%E9%80%9F%E5%BA%A6"
+              >ビルド・テストの実行速度</a
+            >
+            <ol>
+              <li>
+                <a href="#%E3%83%93%E3%83%AB%E3%83%89%E6%99%82%E9%96%93"
+                  >ビルド時間</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C%E6%99%82%E9%96%93"
+                  >テスト実行時間</a
+                >
+              </li>
+            </ol>
+          </li>
+          <li><a href="#%E3%81%8A%E3%82%8F%E3%82%8A%E3%81%AB">おわりに</a></li>
+          <li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+        </ol>
+        <h2>
+          <a name="環境準備" href="#環境準備" id="環境準備"> 環境準備 </a>
+        </h2>
+        <h3>
+          <a name="環境" href="#環境" id="環境"> 環境 </a>
+        </h3>
+        <p>最初に筆者の計算機環境は下記である。</p>
+        <ul>
+          <li>MacBook Pro: (13-inch, 2019, Four Thunderbolt 3 ports)</li>
+          <li>Processor: 2.8GHz Quad-Core Intel Core7</li>
+          <li>Memory: 16GB 2133 MHz LPDDR3</li>
+          <li>Graphics Intel Iris Plus Graphics 6555 1536MB</li>
+        </ul>
+        <p>この MacBook Pro を使ってビルドやテストを実行する。</p>
+        <h3>
+          <a name="必要なツール" href="#必要なツール" id="必要なツール">
+            必要なツール
+          </a>
+        </h3>
+        <p>
+          <a
+            href="https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md"
+            >この公式のページ</a
+          >
+          によると Chromium のビルドに必要なツールは下記である。
+        </p>
+        <ul>
+          <li>Xcode 11.2+</li>
+        </ul>
+        <p>
+          Xcode がインストールされているかは、下記のコマンドで .sdk
+          ファイルが表示されるかを確認すればよい。
+        </p>
+        <pre><code class="language-sh">ls `xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs</code></pre>
+        <p>
+          加えてインストールしておくと良いのは下記の Homebrew と ccache だ。
+        </p>
+        <ul>
+          <li>
+            <p><a href="https://brew.sh/">Homebrew</a></p>
+            <pre><code class="language-sh">/bin/bash -c <span class="hljs-string">"<span class="hljs-variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>"</span></code></pre>
+          </li>
+          <li>
+            <p><a href="https://ccache.dev/">ccache</a></p>
+            <pre><code class="language-sh">brew install --HEAD ccache</code></pre>
+          </li>
+        </ul>
+        <p>
+          ccache
+          を導入しておくと再コンパイル時の時間が短縮できるようになる。それは<a
+            href="https://chromium.googlesource.com/chromium/src/+/master/docs/ccache_mac.md"
+            >この記事</a
+          >に書かれている。
+        </p>
+        <h2>
+          <a name="手順" href="#手順" id="手順"> 手順 </a>
+        </h2>
+        <p>
+          主に<a
+            href="https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md"
+            >こちら</a
+          >の公式サイトに書かれている内容を抜粋してより詳細に手順を説明する。
+        </p>
+        <p>
+          移行のディレクトリは下記のようになっていることを前提としてすすめる。(変更する場合は
+          PATH の設定などを適宜読み替えていただきたい)
+        </p>
+        <pre><code class="language-sh"><span class="hljs-built_in">cd</span> ~
+mkdir chromium
+<span class="hljs-built_in">cd</span> chromium</code></pre>
+        <h3>
+          <a
+            name="開発用のツールを準備をする"
+            href="#開発用のツールを準備をする"
+            id="開発用のツールを準備をする"
+          >
+            開発用のツールを準備をする
+          </a>
+        </h3>
+        <p>
+          Chromium 関連の開発をする際には
+          <a href="https://dev.chromium.org/developers/how-tos/depottools"
+            >depot_tool</a
+          >
+          というツール群を使うようだ。
+        </p>
+        <p>
+          この中にはリポジトリをフェッチするときに使う <code>fetch</code> や
+          sync するときに使う
+          <code>gclient</code> 、ビルドに必要な設定ファイル等を生成する
+          <code>gn</code> コマンドが含まれている。
+        </p>
+        <p>depot_tool は下記のコマンドで clone してくる。</p>
+        <pre><code class="language-sh">git <span class="hljs-built_in">clone</span> https://chromium.googlesource.com/chromium/tools/depot_tools.git</code></pre>
+        <p>
+          パスを通す必要があるため、使っているシェルに応じて
+          <code>~/.bashrc</code> や
+          <code>~/.zshrc</code> に下記の一行を追記する。
+        </p>
+        <pre><code class="language-sh"><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">"<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HOME</span>/depot_tools"</span></code></pre>
+        <p>
+          追記をしたあとは下記コマンドで、PATH
+          を通した設定ファイルを読み込み直す。
+        </p>
+        <pre><code class="language-sh"><span class="hljs-built_in">source</span> ~/.zshrc  <span class="hljs-comment"># zsh を使っているときの例</span></code></pre>
+        <p>以上で depot_tool を使うための下準備は完了した。</p>
+        <h4>
+          <a name="フェッチする" href="#フェッチする" id="フェッチする">
+            フェッチする
+          </a>
+        </h4>
+        <p>
+          depot_tool が準備できればようやく Chromium のソースを clone できる。
+        </p>
+        <p>その際のコマンドは下記である。</p>
+        <pre><code class="language-sh">fetch chromium</code></pre>
+        <p>
+          このコマンドにもかなりの時間がかかる。容量が大きいため、テザリング環境や貧弱なネット回線では決して実行しないようにしてほしい。
+        </p>
+        <h4>
+          <a name="更新する" href="#更新する" id="更新する"> 更新する </a>
+        </h4>
+        <p>
+          リポジトリに更新があった際には下記のコマンドでリポジトリを最新の状態にできる。
+          fetch のタイミングで下記コマンドも実行されるので fetch
+          して直後は必要がない。
+        </p>
+        <pre><code class="language-sh">gclient sync</code></pre>
+        <h3>
+          <a
+            name="Chromium のビルドと実行"
+            href="#Chromium のビルドと実行"
+            id="Chromium のビルドと実行"
+          >
+            Chromium のビルドと実行
+          </a>
+        </h3>
+        <p>下準備が長かったがようやくビルドができる。</p>
+        <p>
+          ビルドには、設定ファイルの生成、ビルドの実行といった手順が必要だ。
+        </p>
+        <p>順番に説明をする。</p>
+        <h4>
+          <a
+            name="ビルド設定の生成"
+            href="#ビルド設定の生成"
+            id="ビルド設定の生成"
+          >
+            ビルド設定の生成
+          </a>
+        </h4>
+        <p>まず、 fetch してきた Chromium のディレクトリに移動する。</p>
+        <pre><code class="language-sh"><span class="hljs-built_in">cd</span> src</code></pre>
+        <p>
+          次にビルドファイルの生成だが、これには
+          <code>gn</code>
+          というコマンドを使う。下記のようにコマンドを実行するとエディタが立ち上がる。
+        </p>
+        <pre><code class="language-sh">gn out out/Default</code></pre>
+        <p>そこに下記のような設定ファイルを書き込む。</p>
+        <pre><code class="language-sh">is_debug = <span class="hljs-literal">false</span>
+is_component_build = <span class="hljs-literal">true</span>
+symbol_level = 0
+dcheck_always_on = <span class="hljs-literal">true</span>
+cc_wrapper= <span class="hljs-string">"ccache"</span>
+enable_nacl = <span class="hljs-literal">false</span></code></pre>
+        <p>
+          するとビルドに必要なファイル群が
+          <code>out/Default</code> 以下に生成される。
+        </p>
+        <p>
+          この設定ファイルを作るために参考としたのは<a
+            href="https://www.chromium.org/developers/gn-build-configuration"
+            >この記事</a
+          >と<a
+            href="https://chromium.googlesource.com/chromium/src/+/master/docs/ccache_mac.md"
+            >この記事</a
+          >にある公式の設定で、これらの設定でビルド時間や再ビルド時間が短くなるらしい。
+        </p>
+        <p>ただし、上記の設定はひとまず早くビルドするための設定である。</p>
+        <p>
+          <code>is_debug</code> を <code>false</code> にしているため、Debug
+          に必要な情報が取れないなどの弊害がある。
+        </p>
+        <p>なので、Debug をしたい場合は全面的に設定を見直す必要がある。</p>
+        <h4>
+          <a
+            name="Chromium のビルド"
+            href="#Chromium のビルド"
+            id="Chromium のビルド"
+          >
+            Chromium のビルド
+          </a>
+        </h4>
+        <p>
+          上記を終えるとようやくビルドができる。その際、下記スクリプトを
+          <code>bulid_chromium</code> という名前で保存する。 (<a
+            href="https://chromium.googlesource.com/chromium/src/+/master/docs/ccache_mac.md#build"
+            >この公式の文書</a
+          >をもとに作製している)
+        </p>
+        <pre><code class="language-sh"><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-built_in">export</span> CCACHE_CPP2=yes
+<span class="hljs-built_in">export</span> CCACHE_SLOPPINESS=time_macros
+<span class="hljs-built_in">export</span> PATH=`<span class="hljs-built_in">pwd</span>`/third_party/llvm-build/Release+Asserts/bin:<span class="hljs-variable">$PATH</span>
+ninja -C out/Default chrome</code></pre>
+        <p>上記のファイルに実行権限をつける。</p>
+        <pre><code class="language-sh">chmod +x build_chromium</code></pre>
+        <p>そして実行する。</p>
+        <pre><code class="language-sh">./build_chromium</code></pre>
+        <p>
+          これで Chromium
+          がビルドされる。とても長い時間がかかるのと、リソースを持っていかれるため
+          PC を使わない時間帯に実行するとよい。
+        </p>
+        <p>ビルドにかかる時間についてはビルド時間にかかわる節で述べる。</p>
+        <h4>
+          <a
+            name="Chromium の実行"
+            href="#Chromium の実行"
+            id="Chromium の実行"
+          >
+            Chromium の実行
+          </a>
+        </h4>
+        <p>ビルドが終わるとローカル環境で Chromium を実行できる。</p>
+        <p>
+          .app ファイルも生成されているが、コマンド的には下記のように実行すると
+          Chromium が立ち上がる。
+        </p>
+        <pre><code class="language-sh"><span class="hljs-meta">#!/bin/bash</span>
+./out/Default/Chromium.app/Contents/MacOS/Chromium</code></pre>
+        <p>ここまででひとまず、Chromium 自身のビルドは完了だ。</p>
+        <h3>
+          <a
+            name="テストのビルドと実行"
+            href="#テストのビルドと実行"
+            id="テストのビルドと実行"
+          >
+            テストのビルドと実行
+          </a>
+        </h3>
+        <p>
+          さて Chromium
+          本体がビルドできてしまえば、あとは簡単にテストのビルドなども行える。
+        </p>
+        <p>
+          Chromium プロジェクトのテストにはユニットテストと Web テストがある。
+        </p>
+        <p>順番に説明する。</p>
+        <h4>
+          <a
+            name="ユニットテストのビルド"
+            href="#ユニットテストのビルド"
+            id="ユニットテストのビルド"
+          >
+            ユニットテストのビルド
+          </a>
+        </h4>
+        <p>ユニットテストをビルドするためには下記のコマンドを実行する。</p>
+        <pre><code class="language-sh">ninja -C out/Default chrome/<span class="hljs-built_in">test</span>:unit_tests</code></pre>
+        <h4>
+          <a
+            name="ユニットテストの実行"
+            href="#ユニットテストの実行"
+            id="ユニットテストの実行"
+          >
+            ユニットテストの実行
+          </a>
+        </h4>
+        <p>
+          ユニットテストのビルドが終わったら、ユニットテストは下記のように実行すれば良い。
+        </p>
+        <pre><code class="language-sh">out/Default/unit_tests --<span class="hljs-built_in">disable</span>-features=<span class="hljs-string">"MediaRouter"</span></code></pre>
+        <p>
+          <a
+            href="https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md#avoiding-the-incoming-network-connections-dialog"
+            >Checking out and building Chromium for Mac</a
+          >にあるように、 &quot;incoming network connections&quot;
+          のダイアログがたくさん出てくるので、それを抑えるために
+          <code>--disable-features=&quot;MediaRouter&quot;</code>
+          を指定している。
+        </p>
+        <h4>
+          <a name="Web テスト" href="#Web テスト" id="Web テスト">
+            Web テスト
+          </a>
+        </h4>
+        <p>
+          <a
+            href="https://chromium.googlesource.com/chromium/src/+/master/docs/testing/web_tests.md"
+            >Testing in Chromium - Web Tests (formerly known as Layout Tests or
+            LayoutTests)</a
+          >を参考に下記のコマンドでテストをビルドする。
+        </p>
+        <pre><code class="language-sh"><span class="hljs-meta">#!/bin/bash</span>
+autoninja -C out/Default blink_tests</code></pre>
+        <h4>
+          <a
+            name="Web テストの実行"
+            href="#Web テストの実行"
+            id="Web テストの実行"
+          >
+            Web テストの実行
+          </a>
+        </h4>
+        <p>
+          上記でテストがビルドできれば、下記コマンド列でテストが実行できる。
+        </p>
+        <pre><code class="language-sh"><span class="hljs-meta">#!/bin/bash</span>
+strip out/Default/Content\ Shell.app/Contents/MacOS/Content\ Shell
+./third_party/blink/tools/run_web_tests.py -t Default</code></pre>
+        <p>
+          (Content_Shell については
+          <code
+            >strip
+            ./xcodebuild/{Debug,Release}/content_shell.app/Contents/MacOS/content_shell</code
+          >
+          と書いてあるが、現在ではパスが変わっているようである)
+        </p>
+        <p>
+          上記までの手順で一通りビルド、およびテストの実行ができるようになった。
+        </p>
+        <h2>
+          <a
+            name="ビルド・テストの実行速度"
+            href="#ビルド・テストの実行速度"
+            id="ビルド・テストの実行速度"
+          >
+            ビルド・テストの実行速度
+          </a>
+        </h2>
+        <p>さて、最後にビルドやテストにかかった時間を紹介する。</p>
+        <p>
+          計測方法は今まで紹介してきたコマンド列について time
+          コマンドで計測した出力を掲載する。
+        </p>
+        <h3>
+          <a name="ビルド時間" href="#ビルド時間" id="ビルド時間">
+            ビルド時間
+          </a>
+        </h3>
+        <table>
+          <thead>
+            <tr>
+              <th align="center"></th>
+              <th align="right">real</th>
+              <th align="right">user</th>
+              <th align="right">sys</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="center">Chromium</td>
+              <td align="right">357m9.637s</td>
+              <td align="right">2477m45.654s</td>
+              <td align="right">216m50.804s</td>
+            </tr>
+            <tr>
+              <td align="center">ユニットテスト</td>
+              <td align="right">54m57.304s</td>
+              <td align="right">389m3.974s</td>
+              <td align="right">22m42.069s</td>
+            </tr>
+            <tr>
+              <td align="center">Web テスト</td>
+              <td align="right">43m16.608s</td>
+              <td align="right">308m35.270s</td>
+              <td align="right">17m8.060s</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>
+          <a name="テスト実行時間" href="#テスト実行時間" id="テスト実行時間">
+            テスト実行時間
+          </a>
+        </h3>
+        <table>
+          <thead>
+            <tr>
+              <th align="center"></th>
+              <th align="right">real</th>
+              <th align="right">user</th>
+              <th align="right">sys</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="center">ユニットテスト</td>
+              <td align="right">54m57.304s</td>
+              <td align="right">389m3.974s</td>
+              <td align="right">22m42.069s</td>
+            </tr>
+            <tr>
+              <td align="center">Web テスト</td>
+              <td align="right">43m16.608s</td>
+              <td align="right">308m35.270s</td>
+              <td align="right">17m8.060s</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
+        </h2>
+        <p>上記の手順や実行時間の例が、どなたかの参考となれば幸いである。</p>
+        <p>
+          もし間違いや訂正があれば、<a
+            href="https://github.com/negibokken/bokken.io/issues"
+            >issue</a
+          >
+          か Twitter アカウントの
+          <a href="https://twitter.com/bokken_">@bokken_</a>
+          までご報告いただけると嬉しい。
+        </p>
+        <h2>
+          <a name="参考文献" href="#参考文献" id="参考文献"> 参考文献 </a>
+        </h2>
+        <ol>
+          <li>
+            <a href="http://dev.chromium.org/Home"
+              >Chromium - The Chromium Projects</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md"
+              >Checking out and building Chromium for Mac</a
+            >
+          </li>
+          <li>
+            <a href="https://www.chromium.org/developers/gn-build-configuration"
+              >GN build configuration - The Chromium Projects</a
+            >
+          </li>
+          <li>
+            <a href="https://gn.googlesource.com/gn/+/master/docs/reference.md"
+              >GN Reference</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://chromium.googlesource.com/chromium/src/+/master/docs/ccache_mac.md"
+              >Using CCache on Mac</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://chromium.googlesource.com/chromium/src/+/master/docs/testing/web_tests_in_content_shell.md"
+              >Testing in Chromium - Running web tests using the content
+              shell</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://chromium.googlesource.com/chromium/src/+/master/docs/testing/web_tests.md"
+              >Testing in Chromium - Web Tests (formerly known as Layout Tests
+              or LayoutTests)</a
+            >
+          </li>
+          <li>
+            <a href="https://akaria.hatenablog.com/entry/2017/11/01/194502"
+              >大規模ソフトウェア(Chromium)を手探る 導入・ビルド編 -
+              あさりさんの作業ログ</a
+            >
+          </li>
+          <li>
+            <a href="https://qiita.com/toyoshim/items/b2f33e1ff961a3e178b3"
+              >Chromium を build しよう（libcaca で動く AA なやつを） - Qiita</a
+            >
+          </li>
+        </ol>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+      <div id="background"><img src="/assets/img/web.svg" /></div>
+
+      <div class="article-pager">
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
   </body>
 </html>
-``` 4. Service Worker のファイル ```js self.addEventListener('install', (event)
-=> { console.info('installed'); }); self.addEventListener('activate', (event) =>
-{ console.info('service worker activated'); }); self.addEventListener('fetch',
-(event) => { console.info('fetch event occurred'); }); ```
-これらのファイルを配信するだけで、PWA 化することができる。 ### scope について
-`manifest.json` や Service Worker 登録のタイミングで `scope`
-を指定するが、これは少しハマる可能性のあるポイントである。 要は PWA
-化したアプリケーションがどこのページを提供するのかを表現する。この scope 内を
-Application 化するとイメージできる。ここで指定した範囲のリクエストなどは fetch
-イベント発生時にフックされて、オフラインのキャッシュを返したり、独自の処理を挟むことができる。
-scope については Chrome の開発者である
-[@nhiroki\_](https://twitter.com/nhiroki_) さんの [ServiceWorker
-のスコープとページコントロールについて -
-Qiita](https://qiita.com/nhiroki/items/eb16b802101153352bba)
-の記事がとてもわかり易いので参照していただきたい。 ## おわりに Progressive Web
-App (PWA) 化に必要最低限の内容を紹介した。 これ以外にも `sw.js`
-を改良することで、インストール時やアクティベート時に処理を挟んだり、コンテンツのキャッシュをしておき
-fetch 時にプロキシ処理を挟むことでオフラインでアクセスできるようになったりする。
-本ブログも機会があれが PWA
-化し、そこで得た知見についてはまた記事にしたいと思う。
-もしも不足している内容や間違っている内容があれば
-[issue](https://github.com/negibokken/bokken.io/issues) か Twitter アカウント
-[@bokken\_](https://twitter.com/bokken_) まで連絡をいただけると嬉しい。 ##
-参考リンク - [What are Progressive Web Apps?](https://web.dev/what-are-pwas/) -
-[Making PWAs work offline with Service workers - Progressive web apps (PWAs) |
-MDN](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers)
-- [Introduction to Service Worker  |  Web  |  Google
-Developers](https://developers.google.com/web/ilt/pwa/introduction-to-service-worker)
-- [What makes a good Progressive Web App?](https://web.dev/pwa-checklist/) -
-[Progressive web apps (PWAs) |
-MDN](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) -
-[Service Workers 1](https://www.w3.org/TR/service-workers/) - [Service Workers:
-an Introduction  |  Web
-Fundamentals](https://developers.google.com/web/fundamentals/primers/service-workers?hl=en)
-[Service Worker の紹介  |  Web Fundamentals  |  Google
-Developers](https://developers.google.com/web/fundamentals/primers/service-workers?hl=ja)
-- [ServiceWorker のスコープとページコントロールについて -
-Qiita](https://qiita.com/nhiroki/items/eb16b802101153352bba)
 
