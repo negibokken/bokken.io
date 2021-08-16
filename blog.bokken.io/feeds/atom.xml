@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2021-02-28T14:05:32.978Z</updated>
+  <updated>2021-08-16T01:03:25.366Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -113,6 +113,20 @@
     <summary
       type="html"
     >趣味でブラウザを作っている延長で、 Chromium をビルドしてテストを走らせて遊んでいる。その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。</summary>
+  </entry>
+  
+  <entry>
+    <title
+    >Google Chrome の omnibox カスタム検索エンジンが使えなくなったと感じたときの tips</title>
+    <link
+      href="https://blog.bokken.io/articles/2021-03-04/omnibox-custom-search-engine.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2021-03-04/omnibox-custom-search-engine.html</id>
+    <updated>2021-08-16T01:03:25.366Z</updated>
+    <summary
+      type="html"
+    >結論からいうと &lt;code&gt;chrome://flags&lt;/code&gt; の &lt;code&gt;Omnibox keyword search button&lt;/code&gt; の設定が enable になってしまったからだった。設定を戻せば引き続き使える。アップデートによって実験的に機能をいくつかのユーザに公開しているのでその影響なのだろう。</summary>
   </entry>
   
 </feed>
