@@ -331,10 +331,21 @@ table {
   margin: 45px auto;
   padding: 5px;
 }
-th {
-  border-bottom: 2px solid #000;
+
+table th {
+  border-bottom: 2px solid #777;
 }
-td,
-th {
-  padding: 5px;
+
+table td,
+table th {
+  padding: 7px 20px;
+}
+
+table th {
+  color: #fff;
+  background-color: #777;
+}
+
+table tr:nth-child(even){
+  background-color: #eee
 }
