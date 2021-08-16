@@ -1,7 +1,7 @@
 {
   "title": "blog.bokken.io",
   "uri": "https://blog.bokken.io",
-  "updatedAt": "2021-02-28T14:05:32.978Z",
+  "updatedAt": "2021-08-16T01:03:25.366Z",
   "id": "2b743fd8-f4e8-4b94-8866-269347b3fbab",
   "articles": [
     {
@@ -59,6 +59,13 @@
       "uuid": "605a3738-de25-44dd-86a7-23fae983914c",
       "updatedAt": "2021-02-28T13:58:22.052Z",
       "summary": "趣味でブラウザを作っている延長で、 Chromium をビルドしてテストを走らせて遊んでいる。その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。"
+    },
+    {
+      "title": "Google Chrome の omnibox カスタム検索エンジンが使えなくなったと感じたときの tips",
+      "uri": "https://blog.bokken.io/articles/2021-03-04/omnibox-custom-search-engine.html",
+      "uuid": "27d6acf9-dacd-4d15-9227-cba4af7d9a89",
+      "updatedAt": "2021-08-16T01:03:25.366Z",
+      "summary": "結論からいうと <code>chrome://flags</code> の <code>Omnibox keyword search button</code> の設定が enable になってしまったからだった。設定を戻せば引き続き使える。アップデートによって実験的に機能をいくつかのユーザに公開しているのでその影響なのだろう。"
     }
   ]
 }

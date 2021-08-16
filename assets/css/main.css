@@ -3,7 +3,7 @@ html {
     'Hiragino Kaku Gothic ProN', 'Arial', 'Yu Gothic', 'Meiryo', sans-serif;
   height: 100%;
   color: #333;
-  line-height: 1.7;
+  line-height: 1.5;
 }
 
 body {
@@ -91,31 +91,32 @@ header > a > h1 {
 
 h1 {
   font-size: 1.5em;
-  margin-top: 1.5em;
+  margin-top: 1em;
 }
 
 h2 {
   font-size: 1.4em;
-  margin-top: 1.5em;
+  margin-top: 1.7em;
+  margin-bottom: 1.5em;
 }
 
 h3 {
   font-size: 1.3em;
-  margin-top: 1.5em;
+  margin-top: 1.7em;
 }
 h4 {
   font-size: 1.2em;
-  margin-top: 1.5em;
+  margin-top: 1.7em;
 }
 
 h5 {
   font-size: 1.1em;
-  margin-top: 1.5em;
+  margin-top: 1.7em;
 }
 
 h6 {
   font-size: 1em;
-  margin-top: 1.5em;
+  margin-top: 1.7em;
 }
 
 h1 > a,
@@ -167,7 +168,9 @@ dt {
   margin: 0.5em 0 0.5em;
 }
 
-header > h1 {
+header > a {
+  font-size: 17px;
+  font-weight: bold;
   margin: 0;
   padding: 0;
 }
@@ -198,40 +201,50 @@ div#background img {
 }
 
 pre {
-  padding: 15px;
+  padding: 12px 50px 12px 15px;
   font-size: 90%;
-  width: 60vw;
+  width: auto;
   min-width: 340px;
   background: #eee;
   overflow-x: visible;
   white-space: pre-wrap;
+  border-radius: 5px;
+  margin: 25px 0;
 }
 
 article {
   padding-top: 15px;
   padding-bottom: 25px;
   max-width: 1200px;
+  margin: 0 auto;
 }
 
 article > p {
   font-size: 17px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 article code {
   background: #eee;
-  padding: 5px;
+  border-radius: 5px;
+  word-break: break-word;
+}
+
+p code {
+  font-size: 90%;
+  padding: 3px 6px;
+  font-style: italic;
 }
 
 article > blockquote {
-  color: #777;
+  color: #444;
   background-color: #eee;
   padding: 15px 25px;
-  border-left: thick solid #888;
   font-size: 90%;
   line-height: 1.5;
   margin-top: 2em;
   margin-bottom: 2em;
+  border: 1px dashed;
 }
 
 main > article > ol,
@@ -284,6 +297,10 @@ div.blog-top {
   margin: 0 15px;
 }
 
+div.article-sns {
+  margin: 0 auto;
+}
+
 div.next-article {
   display: inline-block;
   text-align: right;
@@ -314,13 +331,24 @@ footer > a {
 
 table {
   border-collapse: collapse;
-  margin: 0 auto;
+  margin: 45px auto;
   padding: 5px;
 }
-th {
-  border-bottom: 2px solid #000;
+
+table th {
+  border-bottom: 2px solid #777;
 }
-td,
-th {
-  padding: 5px;
+
+table td,
+table th {
+  padding: 7px 20px;
+}
+
+table th {
+  color: #fff;
+  background-color: #777;
+}
+
+table tr:nth-child(even){
+  background-color: #eee
 }
