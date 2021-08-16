@@ -168,7 +168,9 @@ dt {
   margin: 0.5em 0 0.5em;
 }
 
-header > h1 {
+header > a {
+  font-size: 17px;
+  font-weight: bold;
   margin: 0;
   padding: 0;
 }
@@ -219,7 +221,7 @@ article {
 
 article > p {
   font-size: 17px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 article code {
