@@ -91,7 +91,7 @@ header > a > h1 {
 
 h1 {
   font-size: 1.5em;
-  margin-top: 1.5em;
+  margin-top: 1em;
 }
 
 h2 {
@@ -205,12 +205,14 @@ pre {
   background: #eee;
   overflow-x: visible;
   white-space: pre-wrap;
+  border-radius: 5px;
 }
 
 article {
   padding-top: 15px;
   padding-bottom: 25px;
   max-width: 1200px;
+  margin: 0 auto;
 }
 
 article > p {
@@ -220,7 +222,9 @@ article > p {
 
 article code {
   background: #eee;
-  padding: 5px;
+  padding: 3px;
+  border-radius: 5px;
+  word-break: break-word;
 }
 
 article > blockquote {
@@ -282,6 +286,10 @@ div.prev-article {
 div.blog-top {
   display: inline-block;
   margin: 0 15px;
+}
+
+div.article-sns {
+  margin: 0 auto;
 }
 
 div.next-article {
