@@ -3,7 +3,7 @@ html {
     'Hiragino Kaku Gothic ProN', 'Arial', 'Yu Gothic', 'Meiryo', sans-serif;
   height: 100%;
   color: #333;
-  line-height: 1.7;
+  line-height: 1.5;
 }
 
 body {
@@ -216,7 +216,7 @@ article {
 }
 
 article > p {
-  font-size: 17px;
+  font-size: 16px;
   margin-bottom: 20px;
 }
 
@@ -228,14 +228,14 @@ article code {
 }
 
 article > blockquote {
-  color: #777;
+  color: #444;
   background-color: #eee;
   padding: 15px 25px;
-  border-left: thick solid #888;
   font-size: 90%;
   line-height: 1.5;
   margin-top: 2em;
   margin-bottom: 2em;
+  border: 1px dashed;
 }
 
 main > article > ol,
