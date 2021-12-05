@@ -14,7 +14,7 @@ const {format} = require('prettier');
       prev,
       next,
     });
-    await m2h.init()
+    await m2h.init();
     const text = m2h.toString();
     console.log(format(text, {parser: 'html'}));
     return 0;

@@ -17,6 +17,9 @@ const extractDate = (text) => {
   let localDates = text.substring(i + 1, j).split(',');
   return localDates.map((d) => d.trim());
 };
+
+let isIndexBefore = false;
+
 // Custom Renderer
 const renderer = {
   paragraph: (text) => {
@@ -46,6 +49,15 @@ const renderer = {
   </a>
 </h${level}>
 `;
+    if (isIndexBefore) {
+      isIndexBefore = false;
+      return `</details>${h}`;
+    }
+    if (text === '目次' || text == 'もくじ') {
+      isIndexBefore = true;
+      return `<details><summary>## ${text} (click で開く)</summary>${h}`;
+    }
+
     return h;
   },
 };
