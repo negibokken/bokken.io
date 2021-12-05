@@ -40,12 +40,13 @@ const renderer = {
     if (level == 1) {
       articleTitle = text;
     }
-    return `<h${level}>
+    const h = `<h${level}>
   <a name="${escapedText}" href="#${escapedText}" id="${escapedText}">
     ${text}
   </a>
 </h${level}>
 `;
+    return h;
   },
 };
 
@@ -79,9 +80,8 @@ class BMarkdown2HTML {
         next: option ? option.next : undefined,
       },
     };
-    
   }
-  async init(){
+  async init() {
     try {
       if (!this.template) return;
       this.content = await ejs.renderFile(this.template, this.data);
