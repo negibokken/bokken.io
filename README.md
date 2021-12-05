@@ -21,7 +21,6 @@ Execute `./scripts/update` to update your `www` contents.
   127.0.0.1 lab.bokken.io
   127.0.0.1 blog.bokken.io
   127.0.0.1 x.bokken.io
-
   ```
 
 - Execute `./scripts/start-local`
