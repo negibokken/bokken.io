@@ -227,7 +227,7 @@ pre {
   font-size: 90%;
   background: #eee;
   overflow-x: auto;
-  white-space: nowrap;
+
   border-radius: 5px;
   margin: 20px 0;
 }
@@ -365,7 +365,7 @@ table {
   margin: 35px auto;
   padding: 5px;
   display: block;
-  overflow-x: scroll;
+  overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 }
