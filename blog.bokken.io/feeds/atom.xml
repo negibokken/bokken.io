@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2021-08-16T01:03:25.366Z</updated>
+  <updated>2021-12-30T04:27:11.988Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -127,6 +127,18 @@
     <summary
       type="html"
     >結論からいうと &lt;code&gt;chrome://flags&lt;/code&gt; の &lt;code&gt;Omnibox keyword search button&lt;/code&gt; の設定が enable になってしまったからだった。設定を戻せば引き続き使える。アップデートによって実験的に機能をいくつかのユーザに公開しているのでその影響なのだろう。</summary>
+  </entry>
+  
+  <entry>
+    <title>テンプレート用ファイル</title>
+    <link
+      href="https://blog.bokken.io/articles/2021-12-30/lookback-2021.html"
+    />
+    <id>https://blog.bokken.io/articles/2021-12-30/lookback-2021.html</id>
+    <updated>2021-12-30T04:27:11.988Z</updated>
+    <summary type="html">2021年がもう終わろうとしているので振り返りをしたい。
+テックよりの話とライフイベントよりな話の両方でつらつらとまとめてみる。例年は本を読んだり、自分でプログラムを書いたりして一人で満足しているだけだったのだが、
+今年はいつもに比べて対外的な活動、人と関わりがある活動を進めていこうとしてもがいていた年だった。</summary>
   </entry>
   
 </feed>
