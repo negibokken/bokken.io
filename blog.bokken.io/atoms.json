@@ -1,7 +1,7 @@
 {
   "title": "blog.bokken.io",
   "uri": "https://blog.bokken.io",
-  "updatedAt": "2021-08-16T01:03:25.366Z",
+  "updatedAt": "2021-12-30T04:27:11.988Z",
   "id": "2b743fd8-f4e8-4b94-8866-269347b3fbab",
   "articles": [
     {
@@ -66,6 +66,13 @@
       "uuid": "27d6acf9-dacd-4d15-9227-cba4af7d9a89",
       "updatedAt": "2021-08-16T01:03:25.366Z",
       "summary": "結論からいうと <code>chrome://flags</code> の <code>Omnibox keyword search button</code> の設定が enable になってしまったからだった。設定を戻せば引き続き使える。アップデートによって実験的に機能をいくつかのユーザに公開しているのでその影響なのだろう。"
+    },
+    {
+      "title": "テンプレート用ファイル",
+      "uri": "https://blog.bokken.io/articles/2021-12-30/lookback-2021.html",
+      "uuid": "cd4db710-23c3-4a09-aea6-2fbc0f25ad2a",
+      "updatedAt": "2021-12-30T04:27:11.988Z",
+      "summary": "2021年がもう終わろうとしているので振り返りをしたい。\nテックよりの話とライフイベントよりな話の両方でつらつらとまとめてみる。例年は本を読んだり、自分でプログラムを書いたりして一人で満足しているだけだったのだが、\n今年はいつもに比べて対外的な活動、人と関わりがある活動を進めていこうとしてもがいていた年だった。"
     }
   ]
 }
