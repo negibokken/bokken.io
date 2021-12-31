@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2021-12-30T04:27:11.988Z</updated>
+  <updated>2021-12-31T16:49:37.912Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -139,6 +139,20 @@
     <summary type="html">2021年がもう終わろうとしているので振り返りをしたい。
 テックよりの話とライフイベントよりな話の両方でつらつらとまとめてみる。例年は本を読んだり、自分でプログラムを書いたりして一人で満足しているだけだったのだが、
 今年はいつもに比べて対外的な活動、人と関わりがある活動を進めていこうとしてもがいていた年だった。</summary>
+  </entry>
+  
+  <entry>
+    <title>きれいなコミットメッセージとは</title>
+    <link
+      href="https://blog.bokken.io/articles/2022-01-01/a-clean-commit-message.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2022-01-01/a-clean-commit-message.html</id>
+    <updated>2021-12-31T16:49:37.912Z</updated>
+    <summary
+      type="html"
+    >最近、大きなコードベースを触る機会が増えてきれいなコミットメッセージについて考える事が増えた。
+きれいなコミットメッセージの定義は様々あると思うが、筆者は下記がきれいなコミットメッセージに必要なことだと考えている。</summary>
   </entry>
   
 </feed>
