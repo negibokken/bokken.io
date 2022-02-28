@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2021-12-31T16:49:37.912Z</updated>
+  <updated>2022-02-28T12:55:53.455Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -153,6 +153,19 @@
       type="html"
     >最近、大きなコードベースを触る機会が増えてきれいなコミットメッセージについて考える事が増えた。
 きれいなコミットメッセージの定義は様々あると思うが、筆者は下記がきれいなコミットメッセージに必要なことだと考えている。</summary>
+  </entry>
+  
+  <entry>
+    <title
+    >Chromium のバグを直しているときに知った HTTP ヘッダ関連の Web 標準の読み方</title>
+    <link
+      href="https://blog.bokken.io/articles/2022-02-28/investigate-chromium-cors-header-parse-failure.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2022-02-28/investigate-chromium-cors-header-parse-failure.html</id>
+    <updated>2022-02-28T12:55:53.455Z</updated>
+    <summary type="html">最近、Chromium へのコントリビューション活動をしている。
+直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。具体的に取り組んでいたのは、&lt;a href=&#34;https://bugs.chromium.org/p/chromium/issues/detail?id=978146&#34;&gt;こちらのバグ&lt;/a&gt;である。</summary>
   </entry>
   
 </feed>

@@ -1,7 +1,7 @@
 {
   "title": "blog.bokken.io",
   "uri": "https://blog.bokken.io",
-  "updatedAt": "2021-12-31T16:49:37.912Z",
+  "updatedAt": "2022-02-28T12:55:53.455Z",
   "id": "2b743fd8-f4e8-4b94-8866-269347b3fbab",
   "articles": [
     {
@@ -80,6 +80,13 @@
       "uuid": "02a771e0-cef8-4667-8be9-ed4ea3f2fd86",
       "updatedAt": "2021-12-31T16:49:37.912Z",
       "summary": "最近、大きなコードベースを触る機会が増えてきれいなコミットメッセージについて考える事が増えた。\nきれいなコミットメッセージの定義は様々あると思うが、筆者は下記がきれいなコミットメッセージに必要なことだと考えている。"
+    },
+    {
+      "title": "Chromium のバグを直しているときに知った HTTP ヘッダ関連の Web 標準の読み方",
+      "uri": "https://blog.bokken.io/articles/2022-02-28/investigate-chromium-cors-header-parse-failure.html",
+      "uuid": "383dc096-0e85-4b13-83dc-0906689e656b",
+      "updatedAt": "2022-02-28T12:55:53.455Z",
+      "summary": "最近、Chromium へのコントリビューション活動をしている。\n直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。具体的に取り組んでいたのは、<a href=\"https://bugs.chromium.org/p/chromium/issues/detail?id=978146\">こちらのバグ</a>である。"
     }
   ]
 }
