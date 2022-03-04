@@ -12,8 +12,8 @@
 ## TL;DR
 
 - HTTP ヘッダの値のパース方法は各ヘッダごとに決められている。
-- 具体的には Structured Field Values for HTTP (RFC8941) か、HTTP の ABNF (RFC 7230) がある。
-- Structured Field Values for HTTP は 2021年2月に RFC が出ていて比較的新しいので、こちらを使うのが正しいと思ったが、CORS 関連の仕様を読むと ABNF を参照するのが正しかった
+- 具体的には Structured Field Values for HTTP (RFC8941) か、それぞれのヘッダごとに定義されている ABNF (RFC 7230) を使う。
+- Structured Field Values for HTTP は 2021年2月に RFC が出ていて比較的新しいので、こちらを使うのが正しいと思ったが、CORS 関連の仕様を読むと CORS 用の ABNF を参照するのが正しかった
 - Structured Field Values for HTTP のパース方法は厳密だが、ABNF はレガシーシステムへの対応も加味されていて比較的緩い
 - 仕様を注意深く読むことが大事
 
@@ -54,7 +54,7 @@ Fetch Standard を読むと、[2.2.2 Headers](https://fetch.spec.whatwg.org/#con
 Structured Field Values for HTTP の場合は厳格なパースが求められ、今回の , bb-8 のような不正な value を認めない。もともとヘッダを構造化してパース方法を統一、厳格化しようとして生まれたのでこういった値を弾くのは当然だろう。今回の WPT の FAIL も Structured Field Values を使うようになったのに、追従できていないのではないか？と誤解してしまった。
 
 しかし、実際にはヘッダの Field Values のパース方法は各ヘッダの仕様ごとに策定されている。
-今回の Access-Control-Expose-Headers の場合には、[Fetch Standard](https://fetch.spec.whatwg.org/#http-new-header-syntax) に HTTP の ABNF を参照するのが正しいと記載されており、内容としては下記のように #field-name というように定義されている。
+今回の Access-Control-Expose-Headers の場合には、[Fetch Standard](https://fetch.spec.whatwg.org/#http-new-header-syntax) に CORS の ABNF を参照するのが正しいと記載されており、内容としては下記のように #field-name というように定義されている。
 
 ```http
 Access-Control-Request-Method    = method
