@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2022-02-28T12:55:53.455Z</updated>
+  <updated>2022-03-31T13:52:35.516Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -166,6 +166,19 @@
     <updated>2022-02-28T12:55:53.455Z</updated>
     <summary type="html">最近、Chromium へのコントリビューション活動をしている。
 直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。具体的に取り組んでいたのは、&lt;a href=&#34;https://bugs.chromium.org/p/chromium/issues/detail?id=978146&#34;&gt;こちらのバグ&lt;/a&gt;である。</summary>
+  </entry>
+  
+  <entry>
+    <title>Web 標準を読む会</title>
+    <link
+      href="https://blog.bokken.io/articles/2022-03-31/whats-new-2022-03.html"
+    />
+    <id>https://blog.bokken.io/articles/2022-03-31/whats-new-2022-03.html</id>
+    <updated>2022-03-31T13:52:35.516Z</updated>
+    <summary
+      type="html"
+    >最近、Web 標準を読む会を開催して、複数人で Web 標準を読んでいる。やっていることはシンプルで、 &lt;a href=&#34;https://fetch.spec.whatwg.org/&#34;&gt;Fetch Standard&lt;/a&gt; を DeepL で日本語に翻訳している文章を参加者が順番に音読する。
+そしてその内容を読み解くというものだ。</summary>
   </entry>
   
 </feed>
