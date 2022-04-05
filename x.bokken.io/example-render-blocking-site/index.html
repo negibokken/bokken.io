@@ -3,10 +3,17 @@
     <head>
         <meta charset="UTF-8" />
         <title>render-blocking resource example site</title>
-        <title>Lighthouse performance audit failures</title>
-        <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"
+        ></script>
+
+        <link rel=stylesheet type=text/css href="assets/css/main.css" /> <link
+        rel="shortcut icon" href=assets/img/favicon.ico />
+
         <link rel="stylesheet" href="styles/bootstrap-grid.css" />
         <link rel="stylesheet" href="styles/bootstrap-reboot.css" />
         <link
@@ -17,7 +24,7 @@
         <script src="scripts/bootstrap.js"></script>
         <script src="scripts/bootstrap.bundle.js"></script>
         <link
-            href="styles/main.css"
+            href="assets/css/main.css"
             type="text/css"
             rel="stylesheet"
             media="screen,print"
@@ -30,6 +37,33 @@
         />
     </head>
     <body>
-        <p>This is a heavy web site that has render-blocking resource.</p>
+        <header>
+            <a href="https://bokken.io"><h1>bokken.io</h1></a>
+            <nav>
+                <ul>
+                    <li><a href="https://blog.bokken.io">Blog</a></li>
+                    <li><a href="https://x.bokken.io">Exp</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <ul id="bread">
+                <li><a href="https://x.bokken.io">x.bokken.io</a></li>
+                <li>
+                    <a href="https://x.bokken.io/example-pwa">example-pwa</a>
+                </li>
+            </ul>
+
+            <article>
+                <p>
+                    This is a heavy web site that has render-blocking resource.
+                </p>
+            </article>
+        </main>
     </body>
+    <footer>
+        Copyright &copy; 2018 bokken. All Rights Reserved.
+        <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
 </html>
