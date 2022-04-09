@@ -35,5 +35,7 @@ services:
 
   app.bokken.io:
     image: app.bokken.io
+    ports:
+      - "80:3000"
     volumes:
       - /var/log/nginx:/var/log/nginx
