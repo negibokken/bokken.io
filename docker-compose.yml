@@ -7,9 +7,11 @@ services:
       - '443:443'
     links:
       - 'bokken.io'
+      - 'app.bokken.io'
     restart: always
     depends_on:
       - bokken.io
+      - app.bokken.io
     environment:
       # NG
       # DOMAINS: 'localhost -> http://bokken.io:80, www.localhost -> http://www.bokken.io:80, blog.localhost -> http://blog.bokken.io:80, career.localhost -> http://career.bokken.io:80, x.localhost -> http://x.bokken.io:80'
