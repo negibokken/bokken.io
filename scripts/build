@@ -1,2 +1,3 @@
 #!/bin/bash
 docker build -t bokken.io .
+docker build -t app.bokken.io app.bokken.io
