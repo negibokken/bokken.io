@@ -16,12 +16,12 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag('js', new Date());
-      gtag('config', 'UA-83287008-4');
+      gtag("js", new Date());
+      gtag("config", "UA-83287008-4");
     </script>
     <title>Exp | bokken.io</title>
 
-    <link rel="shortcut icon" href=assets/img/favicon.ico />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@bokken_" />
@@ -40,6 +40,15 @@
 
     <link rel=stylesheet type=text/css href=assets/css/main.css />
     <link rel="preload" href="assets/img/web.svg" as="image" />
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const output = document.querySelector("#output");
+            const data = performance.getEntries().map(entry => JSON.stringify(entry, null, 2));
+            const span = document.createElement('span');
+            span.innerText = data;
+            output.appendChild(span);
+        });
+    </script>
   </head>
 
   <body>
@@ -59,16 +68,15 @@
     </ul>
 
     <main>
-      <section>
-        <h2>Exp</h2>
-        <ul>
-          <li><a href="example-pwa/index.html">Example PWA</a></li>
-        </ul>
-      </section>
-
-      <div id="background"><img src="assets/img/web.svg" /></div>
+        <p>This page is example of <a rel="noopener" target="_blank" href="https://w3c.github.io/performance-timeline">Performance Timeline API</a> execution.<p>
+        <p>The result of <code>performance.getEntries()</code> is as followings:</p>
+        <pre><code id="output" class="language-json"></code></pre>
+        <div id="background"><img src="assets/img/web.svg" /></div>
     </main>
 
-    <%- include('footer'); %>
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
   </body>
 </html>
