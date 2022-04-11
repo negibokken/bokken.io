@@ -1,43 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>render-blocking resource example site</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="bokken.io" />
+    <link rel="author" href="humans.txt" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-83287008-4");
+    </script>
+    <title>Exp | bokken.io</title>
 
-        <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"
-        ></script>
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta property="og:url" content="https://x.bokken.io" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="x.bokken.io" />
+    <meta property="og:description" content="bokken tech web" />
+    <meta property="og:site_name" content="x.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
 
-        <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="preload" href="/assets/img/web.svg" as="image" />
+    <script src="scripts/jquery-3.6.0.js"></script>
+    <script src="scripts/bootstrap.js"></script>
+    <script src="scripts/bootstrap.bundle.js"></script>
+    <link
+        href="styles/bootstrap.css"
+        type="text/css"
+        rel="stylesheet"
+        media="screen,print"
+    />
+    <link rel=stylesheet type=text/css href=/assets/css/main.css />
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const output = document.querySelector("#output");
+            const data = performance.getEntries().map(entry => JSON.stringify(entry, null, 2));
+            const span = document.createElement('span');
+            span.innerText = data;
+            output.appendChild(span);
+        });
+    </script>
+  </head>
 
-        <link rel="stylesheet" href="styles/bootstrap-grid.css" />
-        <link rel="stylesheet" href="styles/bootstrap-reboot.css" />
-        <link
-            href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
-            rel="stylesheet"
-        />
-        <script src="scripts/jquery-3.6.0.js"></script>
-        <script src="scripts/bootstrap.js"></script>
-        <script src="scripts/bootstrap.bundle.js"></script>
-        <link
-            href="styles/bootstrap.css"
-            type="text/css"
-            rel="stylesheet"
-            media="screen,print"
-        />
-    </head>
-    <body>
-        <main>
-            <article>
-                <p>
-                    This is a heavy web site that has render-blocking resource.
-                </p>
-                <p>After executing lighthouse analysis, we can see the warning "Eliminate render-blocking resources".</p>
-                <img src="img/sample.png" width=1200>
-            </article>
-        </main>
-    </body>
+  <body>
+    <header>
+      <a href="https://bokken.io"><h1>bokken.io</h1></a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://x.bokken.io">Exp</a></li>
+    </ul>
+
+    <main>
+        <p>This is a heavy web site that has render-blocking resource.</p>
+        <p>After executing lighthouse analysis, we can see the warning "Eliminate render-blocking resources".</p>
+        <img src="img/sample.png" width=900>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
 </html>
