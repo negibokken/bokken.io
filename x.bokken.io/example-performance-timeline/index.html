@@ -39,14 +39,61 @@
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
 
     <link rel=stylesheet type=text/css href=/assets/css/main.css />
+    <link rel="stylesheet" type=text/css href="/assets/css/small.css" media="screen and (max-width:480px)">
     <link rel="preload" href="/assets/img/web.svg" as="image" />
+
+    <script defer src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script async src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script>
+        function createOption(t) {
+            const option = document.createElement('option')
+            option.innerText = t;
+            option.value = t;
+            return option;
+        }
+        let entries = [];
+        let types = [];
         document.addEventListener('DOMContentLoaded', () => {
+            // get all entries and append it firstly
             const output = document.querySelector("#output");
-            const data = performance.getEntries().map(entry => JSON.stringify(entry, null, 2));
+            entries = performance.getEntries();
+            const data = entries.map(entry => JSON.stringify(entry, null, 2));
+            types = entries.map(e => e.entryType);
+            types = Array.from(new Set(types));
+            console.log('types', types);
             const span = document.createElement('span');
             span.innerText = data;
             output.appendChild(span);
+
+            const selectBox = document.querySelector("#selectbox");
+            // all
+            selectBox.appendChild(createOption('all'));
+
+            for (const t of types) {
+                const option = document.createElement('option')
+                option.innerText = t;
+                option.value = t;
+                selectBox.appendChild(option);
+            }
+
+            selectBox.addEventListener('change', () => {
+                if(!selectBox || !selectBox.value || selectBox.value === 'all') {
+                    const span = document.createElement('span');
+                    const newEntries = entries;
+                    const data = newEntries.map(entry => JSON.stringify(entry, null, 2));
+                    span.innerText = data;
+                    output.innerHTML = ""
+                    output.appendChild(span)
+                    return;
+                }
+                const span = document.createElement('span');
+                const newEntries = entries.filter(entry => entry.entryType === selectBox.value);
+                const data = newEntries.map(entry => JSON.stringify(entry, null, 2));
+                span.innerText = data;
+                output.innerHTML = ""
+                output.appendChild(span)
+            });
+
         });
     </script>
   </head>
@@ -70,6 +117,9 @@
     <main>
         <p>This page is example of <a rel="noopener" target="_blank" href="https://w3c.github.io/performance-timeline">Performance Timeline API</a> execution.<p>
         <p>The result of <code>performance.getEntries()</code> is as followings:</p>
+        <p>(If your screen is less than 480px then font color gets red.)</p>
+        <label for"selectbox">entry type: </label>
+        <select id="selectbox"></select>
         <pre><code id="output" class="language-json"></code></pre>
     </main>
 
