@@ -76,6 +76,7 @@
                 selectBox.appendChild(option);
             }
 
+            // filter by selected type
             selectBox.addEventListener('change', () => {
                 if(!selectBox || !selectBox.value || selectBox.value === 'all') {
                     const span = document.createElement('span');
