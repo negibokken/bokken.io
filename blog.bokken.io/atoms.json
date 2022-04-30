@@ -68,7 +68,7 @@
       "summary": "結論からいうと <code>chrome://flags</code> の <code>Omnibox keyword search button</code> の設定が enable になってしまったからだった。設定を戻せば引き続き使える。アップデートによって実験的に機能をいくつかのユーザに公開しているのでその影響なのだろう。"
     },
     {
-      "title": "テンプレート用ファイル",
+      "title": "2021年の振り返り",
       "uri": "https://blog.bokken.io/articles/2021-12-30/lookback-2021.html",
       "uuid": "cd4db710-23c3-4a09-aea6-2fbc0f25ad2a",
       "updatedAt": "2021-12-30T04:27:11.988Z",
