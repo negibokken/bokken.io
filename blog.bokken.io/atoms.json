@@ -1,7 +1,7 @@
 {
   "title": "blog.bokken.io",
   "uri": "https://blog.bokken.io",
-  "updatedAt": "2022-03-31T13:52:35.516Z",
+  "updatedAt": "2022-04-30T08:00:59.735Z",
   "id": "2b743fd8-f4e8-4b94-8866-269347b3fbab",
   "articles": [
     {
@@ -94,6 +94,13 @@
       "uuid": "ddf8918a-94a1-48f3-9761-e8d638b92143",
       "updatedAt": "2022-03-31T13:52:35.516Z",
       "summary": "最近、Web 標準を読む会を開催して、複数人で Web 標準を読んでいる。やっていることはシンプルで、 <a href=\"https://fetch.spec.whatwg.org/\">Fetch Standard</a> を DeepL で日本語に翻訳している文章を参加者が順番に音読する。\nそしてその内容を読み解くというものだ。"
+    },
+    {
+      "title": "働いているけど Google Summer of Code (GSoC) に応募した",
+      "uri": "https://blog.bokken.io/articles/2022-04-30/apply-google-summer-of-code.html",
+      "uuid": "114d7f4b-74c0-4715-8319-abee9c1493f4",
+      "updatedAt": "2022-04-30T08:00:59.735Z",
+      "summary": "今年から <a href=\"https://opensource.googleblog.com/2021/11/expanding-google-summer-of-code-in-2022.html\">Google Summer of Code (GSoC) の応募制限が緩和</a>されて、18 歳以上であれば、\n誰でも応募できるようになった。"
     }
   ]
 }
