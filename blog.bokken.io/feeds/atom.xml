@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2022-03-31T13:52:35.516Z</updated>
+  <updated>2022-04-30T08:00:59.735Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -179,6 +179,20 @@
       type="html"
     >最近、Web 標準を読む会を開催して、複数人で Web 標準を読んでいる。やっていることはシンプルで、 &lt;a href=&#34;https://fetch.spec.whatwg.org/&#34;&gt;Fetch Standard&lt;/a&gt; を DeepL で日本語に翻訳している文章を参加者が順番に音読する。
 そしてその内容を読み解くというものだ。</summary>
+  </entry>
+  
+  <entry>
+    <title>働いているけど Google Summer of Code (GSoC) に応募した</title>
+    <link
+      href="https://blog.bokken.io/articles/2022-04-30/apply-google-summer-of-code.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2022-04-30/apply-google-summer-of-code.html</id>
+    <updated>2022-04-30T08:00:59.735Z</updated>
+    <summary
+      type="html"
+    >今年から &lt;a href=&#34;https://opensource.googleblog.com/2021/11/expanding-google-summer-of-code-in-2022.html&#34;&gt;Google Summer of Code (GSoC) の応募制限が緩和&lt;/a&gt;されて、18 歳以上であれば、
+誰でも応募できるようになった。</summary>
   </entry>
   
 </feed>
