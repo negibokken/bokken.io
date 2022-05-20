@@ -2,7 +2,7 @@
 
 @tags: [Google Summer of Code, GSoC]
 
-@date: [2022-04-30, 2022-04-20]
+@date: [2022-04-30, 2022-05-20]
 
 ## 概要
 
@@ -87,3 +87,9 @@
 - [Google Summer of Code 2018 参加記 (1) 応募編 - n-yoshikawa’s blog](https://n-yoshikawa.hatenablog.com/entry/2018/04/26/015549)
 - [Google Summer of Code 2018 参加記 (2) プロジェクト終了編 - n-yoshikawa’s blog](https://n-yoshikawa.hatenablog.com/entry/2018/08/25/175142)
 - [Google Summer of Code 2019 参加記 (1) - n-yoshikawa’s blog](https://n-yoshikawa.hatenablog.com/entry/2019/06/29/111527)
+
+## 2022/05/21 追記
+
+正式に不採用通知がメールにて届いた。
+
+結構時間をかけて書いたので辛いには辛いが、個人でもコントリビューションできるので切り替えてコントリビューションしていこうと思う。
