@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2022-04-30T08:00:59.735Z</updated>
+  <updated>2022-05-21T07:10:06.863Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -193,6 +193,20 @@
       type="html"
     >今年から &lt;a href=&#34;https://opensource.googleblog.com/2021/11/expanding-google-summer-of-code-in-2022.html&#34;&gt;Google Summer of Code (GSoC) の応募制限が緩和&lt;/a&gt;されて、18 歳以上であれば、
 誰でも応募できるようになった。</summary>
+  </entry>
+  
+  <entry>
+    <title
+    >Chromium の開発時に便利な Visual Studio Code の機能拡張を作った</title>
+    <link
+      href="https://blog.bokken.io/articles/2022-05-21/vscode-extension-chromium-code-search-permalink.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2022-05-21/vscode-extension-chromium-code-search-permalink.html</id>
+    <updated>2022-05-21T07:10:06.863Z</updated>
+    <summary
+      type="html"
+    >Chromium の開発をしているときに、他の人にコードのどの部分かを説明したいことがある。そんなときに GitHub では、&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url&#34;&gt;Copy GitHub URL&lt;/a&gt;というプラグインで、VS Code で編集しているコードのパーマリンクを取得できるため、このパーマリンクを共有すればよい。</summary>
   </entry>
   
 </feed>
