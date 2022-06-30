@@ -1,7 +1,7 @@
 {
   "title": "blog.bokken.io",
   "uri": "https://blog.bokken.io",
-  "updatedAt": "2022-05-21T07:10:06.863Z",
+  "updatedAt": "2022-06-30T10:06:43.428Z",
   "id": "2b743fd8-f4e8-4b94-8866-269347b3fbab",
   "articles": [
     {
@@ -108,6 +108,13 @@
       "uuid": "9fb138ce-bdcc-4cbc-a822-e34f21b23475",
       "updatedAt": "2022-05-21T07:10:06.863Z",
       "summary": "Chromium の開発をしているときに、他の人にコードのどの部分かを説明したいことがある。そんなときに GitHub では、<a href=\"https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url\">Copy GitHub URL</a>というプラグインで、VS Code で編集しているコードのパーマリンクを取得できるため、このパーマリンクを共有すればよい。"
+    },
+    {
+      "title": "HTTP RFC Publication Study で HTTP/3 について発表しました",
+      "uri": "https://blog.bokken.io/articles/2022-06-30/http-rfc-publication-study.html",
+      "uuid": "f17afed7-2afc-44af-b400-b481f2f1cbe8",
+      "updatedAt": "2022-06-30T10:06:43.428Z",
+      "summary": "<a href=\"https://web-study.connpass.com/event/250730/\">HTTP RFC Publication Study</a>に発表者として参加した。"
     }
   ]
 }
