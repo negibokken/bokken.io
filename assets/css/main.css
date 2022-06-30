@@ -262,6 +262,10 @@ article code {
   word-break: break-word;
 }
 
+article img {
+  max-width: 500px;
+}
+
 p code {
   font-size: 90%;
   padding: 3px 6px;
