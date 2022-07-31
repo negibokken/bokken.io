@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2022-06-30T10:06:43.428Z</updated>
+  <updated>2022-07-31T14:21:50.950Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -220,6 +220,19 @@
     <summary
       type="html"
     >&lt;a href=&#34;https://web-study.connpass.com/event/250730/&#34;&gt;HTTP RFC Publication Study&lt;/a&gt;に発表者として参加した。</summary>
+  </entry>
+  
+  <entry>
+    <title>GitHub permalink の URL の仕様について</title>
+    <link
+      href="https://blog.bokken.io/articles/2022-07-31/research-on-github-permalink.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2022-07-31/research-on-github-permalink.html</id>
+    <updated>2022-07-31T14:21:50.950Z</updated>
+    <summary
+      type="html"
+    >筆者は VS Code で &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url&#34;&gt;GitHub の permalink をコピーできる拡張機能&lt;/a&gt;をよく使っている。</summary>
   </entry>
   
 </feed>
