@@ -13,7 +13,7 @@
 例えば、下記のような pathname を持つファイルは正しい URL をコピーできない。
 
 ```text
-/@foo/[bar]/a!"#$%&'()*+,:;<=>?@[]^`\{|\}~.txt
+/@foo/[bar]/a !"#$%&'()*+,-.:;<=>?@[\]^`{|}~.txt
 ```
 
 今回はこの URL がどのように生成されているのか調べてみることにした。
@@ -49,13 +49,14 @@ https://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?query
 前述したファイルのパスは下記のようにエンコードされる。
 
 ```text
-/@foo/%5Bbar%5D/a!%22%23$%25&'()*+,:;%3C=%3E%3F@%5B%5D%5E%60%5C%7B%7C%5C%7D~.txt
+/@foo/%5Bbar%5D/a%20!%22%23$%25&'()*+,-.:;%3C=%3E%3F@%5B%5C%5D%5E%60%7B%7C%7D~.txt
 ```
 
 各記号とそれがどのようにエンコードされるのかをまとめたのが下記の表だ。
 
 | 記号 | GitHub permalink 上の表現 | encodeURI | encodeURIComponent |
 | :-: | :-: | :-: | :-: |
+| SP | %20 | %20 | %20 |
 | ! | ! | ! | ! |
 | " | %22 | %22 | %22 |
 | # | %23 | # | %23 |
@@ -68,6 +69,8 @@ https://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?query
 | * | * | * | * |
 | + | + | + | %2B |
 | , | , | , | %2C |
+| - | - | - | - |
+| . | . | . | . |
 | / | / | / | / |
 | : | : | : | %3A |
 | ; | ; | ; | %3B |
@@ -77,6 +80,7 @@ https://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?query
 | ? | %3F | ? | %3F |
 | @ | @ | @ | %40 |
 | [ | %5B | %5B | %5B |
+| \ | %5C | %5C | %5C |
 | ] | %5D | %5D | %5D |
 | ^ | %5E | %5E | %5E |
 | ` | %60 | %60 | %60 |
