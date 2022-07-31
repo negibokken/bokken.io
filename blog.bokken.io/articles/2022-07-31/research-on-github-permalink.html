@@ -144,18 +144,24 @@
         <p>早く知りたい人向けに結論を書く。</p>
         <ul>
           <li>
-            <p>
-              <code
-                >https://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?query=test#L11</code
-              >
-              のような形式を持つ
-            </p>
+            <p>GitHub の permalink は 次のような形式になっている</p>
+            <ul>
+              <li>
+                <code
+                  >https://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?query=test#L11</code
+                >
+              </li>
+            </ul>
           </li>
           <li>
             <p>
-              クエリパラメータ以前の URL について
-              <code>encodeURI</code> を実行し、<code>#</code> を
-              <code>%23</code>、<code>?</code> を <code>%3F</code> に置換する
+              上記 URL のうちクエリパラメータ以前の URL について
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI"
+                ><code>encodeURI</code></a
+              >
+              を実行し、<code>#</code> を <code>%23</code> に、<code>?</code> を
+              <code>%3F</code> に置換する
             </p>
             <pre><code class="language-javascript"><span class="hljs-keyword">const</span> encoded = <span class="hljs-built_in">encodeURI</span>(url).replace(<span class="hljs-string">'#'</span>, <span class="hljs-string">'%23'</span>).replace(<span class="hljs-string">'?'</span>, <span class="hljs-string">'%3F'</span>)</code></pre>
           </li>
@@ -392,6 +398,11 @@
           <code>?</code>
           がフラグメントやクエリパラメータとして特別な意味を持っているため、ファイル名で使えないためだと考えられる。
         </p>
+        <h2>
+          <a name="エンコード処理" href="#エンコード処理" id="エンコード処理">
+            エンコード処理
+          </a>
+        </h2>
         <p>
           これらのことから、エンコード前の GitHub の URL を permalink
           の形式にする処理としては下記のようになるだろう。
@@ -408,7 +419,7 @@
           上のリンクの遷移では <code>%40</code> にエンコードされる。
         </p>
         <h2>
-          <a name="まとめ" href="#まとめ" id="まとめ"> まとめ </a>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
         </h2>
         <p>
           分かってしまうと簡単な規則でパーマリンクが実現されていることが分かった。
