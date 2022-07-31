@@ -22,8 +22,9 @@
 
 早く知りたい人向けに結論を書く。
 
-* `https://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?query=test#L11` のような形式を持つ
-* クエリパラメータ以前の URL について `encodeURI` を実行し、`#` を `%23`、`?` を `%3F` に置換する
+* GitHub の permalink は 次のような形式になっている
+  * `https://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?query=test#L11`
+* 上記 URL のうちクエリパラメータ以前の URL について [`encodeURI`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI) を実行し、`#` を `%23` に、`?` を `%3F` に置換する
 
     ```javascript
     const encoded = encodeURI(url).replace('#', '%23').replace('?', '%3F')
@@ -92,6 +93,8 @@ https://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?query
 
 これは、`#` や `?` がフラグメントやクエリパラメータとして特別な意味を持っているため、ファイル名で使えないためだと考えられる。
 
+## エンコード処理
+
 これらのことから、エンコード前の GitHub の URL を permalink の形式にする処理としては下記のようになるだろう。
 
 ```javascript
@@ -102,7 +105,7 @@ const encoded = encodeURI(url).replace('#', '%23').replace('?', '%3F')
 
 なお、GitHub 上のページ遷移で表示されるリンクと permalink の生成とでエンコードされる URL は違うようである。例えば `@` は、permalink 上ではエンコードされないが、GitHub 上のリンクの遷移では `%40` にエンコードされる。
 
-## まとめ
+## おわりに
 
 分かってしまうと簡単な規則でパーマリンクが実現されていることが分かった。
 
