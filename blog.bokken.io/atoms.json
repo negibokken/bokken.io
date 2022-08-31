@@ -1,7 +1,7 @@
 {
   "title": "blog.bokken.io",
   "uri": "https://blog.bokken.io",
-  "updatedAt": "2022-07-31T14:21:50.950Z",
+  "updatedAt": "2022-08-31T10:40:08.351Z",
   "id": "2b743fd8-f4e8-4b94-8866-269347b3fbab",
   "articles": [
     {
@@ -122,6 +122,13 @@
       "uuid": "80110d5a-1930-45e4-ba49-5e45a69e3e01",
       "updatedAt": "2022-07-31T14:21:50.950Z",
       "summary": "筆者は VS Code で <a href=\"https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url\">GitHub の permalink をコピーできる拡張機能</a>をよく使っている。"
+    },
+    {
+      "title": "Chromium のコミットを検索できるサイトを作った",
+      "uri": "https://blog.bokken.io/articles/2022-08-31/chromium-commits.html",
+      "uuid": "6fbd4dcf-4a46-4a9e-ba70-a5d4d4d26da9",
+      "updatedAt": "2022-08-31T10:40:08.351Z",
+      "summary": "<a href=\"https://chromium-news.vercel.app\">Chromium News</a> というサイトを作りました。\n現状は Chromium の commit を検索できるだけのサイトだが、今後様々な情報ソースを集約したり、それらをまとめる記事を書ければと思っている。"
     }
   ]
 }

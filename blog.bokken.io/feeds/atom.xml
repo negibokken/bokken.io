@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2022-07-31T14:21:50.950Z</updated>
+  <updated>2022-08-31T10:40:08.351Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -233,6 +233,19 @@
     <summary
       type="html"
     >筆者は VS Code で &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url&#34;&gt;GitHub の permalink をコピーできる拡張機能&lt;/a&gt;をよく使っている。</summary>
+  </entry>
+  
+  <entry>
+    <title>Chromium のコミットを検索できるサイトを作った</title>
+    <link
+      href="https://blog.bokken.io/articles/2022-08-31/chromium-commits.html"
+    />
+    <id>https://blog.bokken.io/articles/2022-08-31/chromium-commits.html</id>
+    <updated>2022-08-31T10:40:08.351Z</updated>
+    <summary
+      type="html"
+    >&lt;a href=&#34;https://chromium-news.vercel.app&#34;&gt;Chromium News&lt;/a&gt; というサイトを作りました。
+現状は Chromium の commit を検索できるだけのサイトだが、今後様々な情報ソースを集約したり、それらをまとめる記事を書ければと思っている。</summary>
   </entry>
   
 </feed>
