@@ -18,7 +18,7 @@ services:
     volumes:
       - type: bind
         source: /var/log/nginx
-        target: /var/log/nginx
+        target: ${PWD}/var/log/nginx
 
       
   bokken.io:
@@ -26,7 +26,7 @@ services:
     volumes:
       - type: bind
         source: /var/log/nginx
-        target: /var/log/nginx
+        target: ${PWD}/var/log/nginx
       - type: bind
         source: www.bokken.io/.
         target:  /usr/share/nginx/html/www.bokken.io/
