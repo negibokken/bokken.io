@@ -12,6 +12,7 @@ services:
       - bokken.io
     environment:
       DOMAINS: 'bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io, app.bokken.io -> http://bokken_io:3000'
+      # DOMAINS: 'localhost -> http://bokken_io, www.localhost -> http://bokken_io, blog.localhost -> http://bokken_io, x.localhost -> http://bokken_io, app.localhost -> http://bokken_io:3000'
       STAGE: local
       ERROR_LOG: default
       ACCESS_LOG: default
@@ -43,7 +44,7 @@ services:
         source: nginx/.
         target:  /etc/nginx
 
-  app.bokken.io:
+  app.bokken_io:
     image: app.bokken.io
     ports:
       - '3000:3000'
