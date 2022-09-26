@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2022-08-31T10:40:08.351Z</updated>
+  <updated>2022-09-26T14:40:19.020Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -246,6 +246,20 @@
       type="html"
     >&lt;a href=&#34;https://chromium-news.vercel.app&#34;&gt;Chromium News&lt;/a&gt; というサイトを作りました。
 現状は Chromium の commit を検索できるだけのサイトだが、今後様々な情報ソースを集約したり、それらをまとめる記事を書ければと思っている。</summary>
+  </entry>
+  
+  <entry>
+    <title>Anonymous iframe とは (WIP)</title>
+    <link
+      href="https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html</id>
+    <updated>2022-09-26T14:40:19.020Z</updated>
+    <summary
+      type="html"
+    >&lt;a href=&#34;https://wicg.github.io/anonymous-iframe/&#34;&gt;Anonymous iframe&lt;/a&gt; という仕様がある。
+この仕様が何を問題意識として、何を解決するための仕様なのかをまとめる。</summary>
   </entry>
   
 </feed>
