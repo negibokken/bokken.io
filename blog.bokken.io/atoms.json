@@ -1,7 +1,7 @@
 {
   "title": "blog.bokken.io",
   "uri": "https://blog.bokken.io",
-  "updatedAt": "2022-08-31T10:40:08.351Z",
+  "updatedAt": "2022-09-26T14:40:19.020Z",
   "id": "2b743fd8-f4e8-4b94-8866-269347b3fbab",
   "articles": [
     {
@@ -129,6 +129,13 @@
       "uuid": "6fbd4dcf-4a46-4a9e-ba70-a5d4d4d26da9",
       "updatedAt": "2022-08-31T10:40:08.351Z",
       "summary": "<a href=\"https://chromium-news.vercel.app\">Chromium News</a> というサイトを作りました。\n現状は Chromium の commit を検索できるだけのサイトだが、今後様々な情報ソースを集約したり、それらをまとめる記事を書ければと思っている。"
+    },
+    {
+      "title": "Anonymous iframe とは (WIP)",
+      "uri": "https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html",
+      "uuid": "beb1b60f-3c2b-4406-a051-5e394a610280",
+      "updatedAt": "2022-09-26T14:40:19.020Z",
+      "summary": "<a href=\"https://wicg.github.io/anonymous-iframe/\">Anonymous iframe</a> という仕様がある。\nこの仕様が何を問題意識として、何を解決するための仕様なのかをまとめる。"
     }
   ]
 }
