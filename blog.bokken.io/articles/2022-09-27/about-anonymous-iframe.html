@@ -162,7 +162,7 @@
         </p>
         <p>
           要するに Spectre などの CPU
-          の脆弱性を突いてプライベートな情報を盗み取るような攻撃を防ぐために、安全な外部リソースの読み込みおよび、外部リソースからの読み込みを防ぐための仕様であると言える。
+          の脆弱性を突いてプライベートな情報を盗み取るような攻撃を防ぐために、安全な外部リソースの読み込みのみに限定し、安全とは言いきれない外部リソースからの読み込みを防ぐための仕様であると言える。
         </p>
         <p>
           COEP には、unsafe-none (デフォルト値) か require-corp (CORP
@@ -171,7 +171,7 @@
         <pre><code class="language-http"><span class="hljs-attribute">Cross-Origin-Embedder-Policy</span>: unsafe-none | require-corp</code></pre>
         <p>
           require-corp を指定すると、 Cross Origin Resource Policy
-          にてリソースの読み込みポリシーを定義する。 ここには、same-site
+          でリソースの読み込みポリシーを定義する。 ここには、same-site
           のリソースのみ、same-origin のリソースのみ、cross-origin
           でも読み込みができる、という 3 つが指定できる。
         </p>
