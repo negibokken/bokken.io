@@ -27,6 +27,8 @@ COEP については、[@agektmr](https://web.dev/coop-coep/) さんの[この�
 
 ここでいう外部リソースは、iframe や script、img、ポップアップなどを含んでいる。
 
+## COEP ヘッダと CORP ヘッダの指定
+
 COEP ヘッダには、unsafe-none (デフォルト値) か require-corp (CORP による指定が必要) を指定できる。
 
 ```http
@@ -40,21 +42,46 @@ require-corp を指定すると、 Cross Origin Resource Policy (CORP)ヘッダ�
 Cross-Origin-Resource-Policy: same-site | same-origin | cross-origin
 ```
 
-credentialless という機能が実装されている。
-https://chromestatus.com/feature/4918234241302528
+COEP 指定下では、img や script などは下記のように [crossorigin attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin) を指定することで、クロスオリジンのリソースであっても読み込みができるようになっている。
 
-これは（ドキュメント｜リソース）への読み込みのリクエストについてクレデンシャルを含まないようにすることで、
+```html
+<img src="https://third-party.example.com/image.jpg" crossorigin>
+```
+
+しかし、それでもすべてのリソースに crossorigin をつけて回るのが難しいサイトもある。
+
+そこで、 COEP credentialless という機能が [Chromium に実装](https://chromestatus.com/feature/4918234241302528)されている。
+
+これはリソースのリクエストについてクレデンシャルを含まないようにすることで、
 パブリックなリソースしか読み込まないようにするための機能である。そうすることで、たとえ攻撃者がドキュメントの情報を窃取しようとしても表示されている内容はパブリックな情報のみなので攻撃されたときのリスクを下げることができるというものだ。
 
+しかし、iframe については、 crossorigin attribute はセキュリティ上の懸念があるので crossorigin を指定するだけでは利用できない。
+
+そこでセキュリティ上の懸念を解消して iframe を利用できるようにするための仕様が Anonymous iframe である。
 
 ## Anonymous iframe 詳解
+
+Anonymous iframe の指定は先述の crossorigin attribute のように `anonymous` attribute を指定するだけだ。
 
 ```html
 <iframe anonymous src="https://example.com">
 ```
 
-COEP でブロックされないようにするためには、下記のように crossorigin attribute を指定する。
+`anonymous` attribute の指定はその子孫 iframe にも継承される。仕様に記載されている図がとてもわかり易いので引用する。
 
+![](https://placeholder.jp/150x150)
+
+iframe 内のドキュメントは
+
+```javascript
+widndow.anonymouslyFramed
 ```
-<img src="https://third-party.example.com/image.jpg" crossorigin>
-```
+
+という形で自身が anonymous 指定された iframe なのかどうかを認識できる。
+
+### どのようにセキュリティを考えるか
+
+非常にシンプルに指定できるのだが、その裏には実に考え抜かれた安全に外部リソースを利用できる仕組みが考えられている。
+
+Anonymous iframe では sandboxed frame と違い、Storage API の呼び出しや、新たな Cookie の登録はできる。
+
