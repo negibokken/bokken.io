@@ -1,8 +1,8 @@
-# Anonymous iframe とは (WIP)
+# Anonymous iframe とは
 
 @tags: [iframe, spec, COEP, CORP]
 
-@date: [2022-09-27, 2022-10-10]
+@date: [2022-09-27, 2022-10-11]
 
 ## はじめに
 
