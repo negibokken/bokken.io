@@ -68,7 +68,12 @@ COEP 指定下でリソースが CORP を指定していなくても、 CORS で
 ## iframe
 
 しかし、iframe についてはこういった crossorigin attribute による指定や、 COEP credentialless による制限の緩和はできなかった。
-iframe はそれ自身がコンテキストを生成し、iframe 内で Storage API の呼び出しや iframe 内での iframe の呼び出しなどもできるという点で img や script などとは違った性質を持つためである。
+
+[4.3. Make COEP:credentialless to affect \<iframe\>](https://wicg.github.io/anonymous-iframe/#alternatives-coep-credentialless)には下記のようにある。
+
+> Originally, COEP:credentialless scope was meant to include both simple subresources like it does today, but also the &#60;iframe&#62;. The latter is very different in kind, because this is not only about the request’s credentials, but also about every storage API usage made later by the document. So it has been postponed here.
+
+要するに、COEP credentialless で iframe が対象外となったのは iframe はそれ自身がコンテキストを生成し、iframe 内で Storage API の呼び出しや iframe 内での iframe の呼び出しなどもできるという点で img や script などとは違った性質を持つためである。
 そうした背景から iframe でも外部リソースを安全に利用するための仕様が Anonymous iframe である。
 
 ## Anonymous iframe 詳解
@@ -81,7 +86,7 @@ Anonymous iframe の指定は先述の crossorigin attribute のように `anony
 
 `anonymous` attribute の指定はその子孫 iframe にも継承される。仕様に記載されている図がとてもわかり易いので引用する。
 
-![](./img/inheritance.png)
+![inheritance of anonymous](./img/inheritance.png)
 
 ([Anonymous iframe](https://wicg.github.io/anonymous-iframe/#proposal-whatis)より引用)
 
@@ -91,10 +96,35 @@ iframe 内のドキュメントは下記の定数を参照することで自身�
 widndow.anonymouslyFramed
 ```
 
-### どのように攻撃を防ぐか
+Anonymous iframe では既存のクレデンシャルや shared storage は利用できない。ただし、sandboxed frame と違い blank な状態から storage API を使うことや、Cookie の登録は可能だ。クレデンシャルや storage の共有は同じ Anonymous iframe のページ内に限らるように分離されている。
 
-T.B.W.
+### どのように分離を実現するか
 
+Anonymous iframe では既存の storage key に変更して分離を実現している。通常、 [storage key は Origin で分離されている](https://storage.spec.whatwg.org/#storage-key)が、Anonymous iframe では iframe のトップレベルのサイトと、トップレベルのサイトごとに持つ nonce の組み合わせで storage key を区別する。こちらについてもスペックの図がわかりやすいので引用する。
+
+![partition key](./img/partition-key.png)
+([Anonymous iframe](https://wicg.github.io/anonymous-iframe/#proposal-credentials)より引用)
+
+nonce はトップレベルサイトごとに決まり、子孫の Anonymous iframe に共有される。こうすることで、ある Origin ですでに利用されていた storage であっても、Anonymous iframe 以下であれば nonce が違うので分離が実現される。
+
+また、同一 Origin であっても各 navigate ごとに nonce は変わるので、過去に storage を使っていたとしても再利用はできない。
+ただし、back-forward cache を使って restore された場合については、storage も再利用できるので、これらの挙動には注意が必要だろう。
+
+![page nonce per navigation](./img/page-change-nonce.png)
+
+## その他細かなブラウザの挙動
+
+COEP ヘッダが送られてきたときに Anonymous iframe を使って入れば、ブラウザは COEP ヘッダをチェックしないようになっている。(もともと COEP ヘッダが iframe 内のサイトでデプロイされていない課題を解決したかたので当然だが)
+
+合わせてパスワードマネージャによるオートフィルも効かないようになる。筆者はパスワードマネージャが表示されるかどうかもフィッシング詐欺サイトではないことの目安にしていたので、パスワードマネージャが表示されないことでユーザに疑念を抱かれる懸念はありそうだ。
+
+## おわりに
+
+今回 Anonymous iframe という COEP ヘッダ (require-corp) 指定下で、iframe が動かない問題を解決するための仕様をまとめた。
+
+このまとめを通して、安全に分離を実現するためにはどのように考えるべきなのかを知れた。このまとめを通して気になった点も今後まとめていきたい。
+
+もし、何かしら間違いやコメントがあった場合、[issue](https://github.com/negibokken/bokken.io/issues) か [@bokken_](https://twitter.com/bokken_) までもらえると嬉しい。
 
 ## 参考
 
