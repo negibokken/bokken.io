@@ -13,7 +13,6 @@
 
 ## メモ
 
-
 クライアント Storage は、JavaScript API が提供されていて、クライアントサイド(ブラウザ)上にデータを保存する仕組みのことをいう。
 
 [MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage)
@@ -27,7 +26,8 @@ MDN で具体的にクライアントサイド Storage と分類されている�
 * IndexedDB
 * CacheAPI
 * ServiceWorker
-* (WebSQL もあるが多くのブラウザやユースケースで deprecated になっており、[W3C の Web Application Working Group もメンテナンスをしておらず](https://www.w3.org/TR/webdatabase/)、 Web Storage や Indexed DB の仕様を策定をしているようだ)
+
+(WebSQL もあるが多くのブラウザやユースケースで deprecated になっており、[W3C の Web Application Working Group もメンテナンスをしておらず](https://www.w3.org/TR/webdatabase/)、 Web Storage や Indexed DB の仕様を策定をしているようだ)
 
 ブラウザが変わるとそのデータの同期はされないのが特徴だ。
 （TODO: これってブラウザ Sync してたら共有されるんだろうか？）
@@ -41,34 +41,54 @@ Cookie は古くから Storage として使われていた仕組みである。
 
 現在ではクライアントサイドでユーザのアプリケーションデータを保存するのには Web Storage や IndexedDB といった仕組みが使われている。
 
+## Storage の分類
+
+4 種類あるストレージのうち用途が似ているもので分けると下記のようになる。
+
+* Web Storage と IndexedDB
+* Cache API と ServiceWorker
+
+それぞれ、アプリケーションデータを保持するために使うのと、キャッシュとして使うというようにざっくりとした利用用途が分かれている。
+
 ## Web Storage と IndexedDB
 
-Web Storage と IndexedDB の違いは下記のようなところだ。
+Web Storage と IndexedDB の違いは
 
-### Web Storage
+* 扱えるデータの種別
+* API
 
-Web Storage は下記の用に使う。
+にある。
 
-### localStorage と sessionStorage
+### WebStorage
 
-sessionStorage maintains a separate storage area for each given origin that's available for the duration of the page session (as long as the browser is open, including page reloads and restores).
-localStorage does the same thing, but persists even when the browser is closed and reopened.
+Web Storage は sessionStorage と localStorage に分かれる。
+データはオリジンごとに分けて保持され、データの保存期間は、 sessionStorage はブラウザ(タブ)が閉じられるまで、 localStorage はブラウザが閉じられたとしても保持される。
+セットできるデータとしては string のみである([Storage.setItem() - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem))。
 
-[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API)によると、下記のようにいくつかのアクセス方法がある。
+オブジェクトをセットしても下記のように `toString()` でシリアライズされて保持される。
 
-
+```javascript
+const value = {foo: 'bar'};
+window.sessionStorage.setItem('test', value);
+console.log(window.sessionStorage.getItem('test'));
+// '[object Object]'
 ```
+
+なので、 複雑なデータ構造を保持する場合は `JSON.stringify()` などで別途 string にシリアライズする必要がある。
+
+上記の例では、setItem と getItem を使っているが、[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API)によると、下記のようにいくつかのアクセス方法がある。
+
+```javascript
 localStorage.colorSetting = '#a4509b';
 localStorage['colorSetting'] = '#a4509b';
 localStorage.setItem('colorSetting', '#a4509b');
 ```
 
-
-
 ### IndexedDB
 
-IndexedDB は下記の用に使う。
+IndexedDB は Web Storage と違って audio や video といった複雑なデータでも保存できる storage だ。
 
+> You can store videos, images, and pretty much anything else in an IndexedDB instance.
 
 ## Cache API と Service Worker
 
@@ -80,9 +100,6 @@ IndexedDB は下記の用に使う。
 
 ### Shared Worker
 
-
-
-
 ## 参考
 
 1. [Client-side storage - Learn web development | MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage)
@@ -90,3 +107,4 @@ IndexedDB は下記の用に使う。
 3. [Client-Side Storage Partitioning | storage-partitioning](https://privacycg.github.io/storage-partitioning/)
 4. [Deprecations and removals in Chrome 94 - Chrome Developers](https://developer.chrome.com/blog/deps-rems-94/#deprecate-and-remove-websql-in-third-party-contexts)
 5. [Using the Web Storage API - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API)
+6. [Storage for the web](https://web.dev/storage-for-the-web/)
