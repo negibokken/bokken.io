@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>
+      ブラウザのクライアントサイド storage についてまとめる | blog.bokken.io
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="&lt;a href=&#34;https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html&#34;&gt;前回の Anonymous iframe の記事&lt;/a&gt;で、storage について触れた。"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="author" href="humans.txt" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2022-10-24/about-client-side-storage.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="ブラウザのクライアントサイド storage についてまとめる"
+    />
+    <meta
+      property="og:description"
+      content="&lt;a href=&#34;https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html&#34;&gt;前回の Anonymous iframe の記事&lt;/a&gt;で、storage について触れた。"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io">bokken.io</a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2022-10-24/about-client-side-storage.html"
+          >ブラウザのクライアントサイド storage についてまとめる</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2022-10-24</dd>
+          <dt>更新日</dt>
+          <dd>2022-10-24</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            browser, storage
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="ブラウザのクライアントサイド storage についてまとめる"
+            href="#ブラウザのクライアントサイド storage についてまとめる"
+            id="ブラウザのクライアントサイド storage についてまとめる"
+          >
+            ブラウザのクライアントサイド storage についてまとめる
+          </a>
+        </h1>
+        <h2>
+          <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
+        </h2>
+        <p>
+          <a
+            href="https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html"
+            >前回の Anonymous iframe の記事</a
+          >で、storage について触れた。
+        </p>
+        <p>
+          ブラウザが持つ storage にはどんなものがあるのか気になったので、
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
+            >MDN</a
+          >
+          や
+          <a href="https://storage.spec.whatwg.org/">Storage Standard</a>
+          を読んでまとめてみる。
+        </p>
+        <h2>
+          <a
+            name="クライアント Storage"
+            href="#クライアント Storage"
+            id="クライアント Storage"
+          >
+            クライアント Storage
+          </a>
+        </h2>
+        <p>
+          クライアント Storage は、JavaScript API
+          が提供されていて、クライアントサイド(ブラウザ)上にデータを保存する仕組みのことをいう。
+        </p>
+        <p>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
+            >MDN</a
+          >
+          にはクライアントサイド Storage
+          は、例えば、サイトの個別の設定（色やフォントなど）、以前訪れたときのサイトの行動(ログイン状態、ショッピングカートなど)、Web
+          サイトのアセット(HTML, JavaScript,
+          CSS)、ドキュメントなどを保存するのに使えるとある。
+        </p>
+        <p>
+          MDN で具体的にクライアントサイド Storage と分類されているのは下記の 4
+          種類だ。
+        </p>
+        <ul>
+          <li>
+            Web Storage
+            <ul>
+              <li>local storage</li>
+              <li>session storage</li>
+            </ul>
+          </li>
+          <li>IndexedDB</li>
+          <li>CacheAPI</li>
+          <li>ServiceWorker</li>
+        </ul>
+        <p>
+          (WebSQL もあるが多くのブラウザやユースケースで deprecated
+          になっており、<a href="https://www.w3.org/TR/webdatabase/"
+            >W3C の Web Application Working Group もメンテナンスをしておらず</a
+          >、 Web Storage や Indexed DB の仕様を策定をしているようだ)
+        </p>
+        <p>
+          クライアントサイド Storage とサーバサイド Storage
+          はどちらか一方しか使えないようなものではなく、用途によって併用できる。
+        </p>
+        <h2>
+          <a name="Storage の分類" href="#Storage の分類" id="Storage の分類">
+            Storage の分類
+          </a>
+        </h2>
+        <p>
+          4
+          種類あるストレージのうち用途が似ているもので分けると下記のようになる。
+        </p>
+        <ul>
+          <li>Web Storage と IndexedDB</li>
+          <li>Cache API と ServiceWorker</li>
+        </ul>
+        <p>
+          それぞれ、アプリケーションデータを保持するために使うのと、キャッシュとして使うというようにざっくりとした利用用途が分かれている。
+        </p>
+        <h2>
+          <a
+            name="Web Storage と IndexedDB"
+            href="#Web Storage と IndexedDB"
+            id="Web Storage と IndexedDB"
+          >
+            Web Storage と IndexedDB
+          </a>
+        </h2>
+        <p>Web Storage と IndexedDB の違いは</p>
+        <ul>
+          <li>扱えるデータの種別</li>
+          <li>データサイズ</li>
+          <li>API</li>
+        </ul>
+        <p>にある。</p>
+        <h3>
+          <a name="WebStorage" href="#WebStorage" id="WebStorage">
+            WebStorage
+          </a>
+        </h3>
+        <p>
+          Web Storage は sessionStorage と localStorage に分かれる。
+          データはオリジンごとに分けて保持され、データの保存期間は、
+          sessionStorage はブラウザ(タブ)が閉じられるまで、 localStorage
+          はブラウザが閉じられたとしても保持される。保存できるデータサイズはユーザ環境に依存するが、5
+          - 10 MB ほどだ。扱えるデータの種別としては string のみである(<a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem"
+            >Storage.setItem() - Web APIs | MDN</a
+          >)。
+        </p>
+        <p>
+          オブジェクトをセットしても下記のように
+          <code>toString()</code> でシリアライズされて保持される。
+        </p>
+        <pre><code class="language-javascript"><span class="hljs-keyword">const</span> value = {<span class="hljs-attr">foo</span>: <span class="hljs-string">'bar'</span>};
+<span class="hljs-built_in">window</span>.sessionStorage.setItem(<span class="hljs-string">'test'</span>, value);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.sessionStorage.getItem(<span class="hljs-string">'test'</span>));
+<span class="hljs-comment">// '[object Object]'</span></code></pre>
+        <p>
+          なので、 複雑なデータ構造を保持する場合は
+          <code>JSON.stringify()</code> などで別途 string
+          にシリアライズする必要がある。
+        </p>
+        <p>
+          上記の例では、setItem と getItem を使っているが、<a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API"
+            >MDN</a
+          >によると、下記のようにいくつかのアクセス方法がある。
+        </p>
+        <pre><code class="language-javascript">localStorage.colorSetting = <span class="hljs-string">'#a4509b'</span>;
+localStorage[<span class="hljs-string">'colorSetting'</span>] = <span class="hljs-string">'#a4509b'</span>;
+localStorage.setItem(<span class="hljs-string">'colorSetting'</span>, <span class="hljs-string">'#a4509b'</span>);</code></pre>
+        <p>
+          このように Web Storage の API
+          は比較的かんたんにデータのセットやゲットができる。
+        </p>
+        <h3>
+          <a name="IndexedDB" href="#IndexedDB" id="IndexedDB"> IndexedDB </a>
+        </h3>
+        <p>
+          IndexedDB は Web Storage と違って audio や video
+          といった複雑なデータでも扱うことができる storage
+          だ。トランザクションやインデックスもサポートされており、IndexedDB
+          の名が表すようによくあるデータベースのように使える。また、IndexedDB も
+          localStorage
+          と同様にブラウザを閉じてもデータは保存されている。扱えるデータサイズは10
+          MB - 2 GB 程度で、Web Storage と比べると遥かに大きい。
+        </p>
+        <p>
+          API は Web Storage
+          と違って少し複雑になっている。データベースの利用に必要な手順は下記のとおりだ。
+        </p>
+        <ol>
+          <li>
+            初期化処理
+            <ol>
+              <li>データベースを開くリクエストを送る</li>
+              <li>
+                リクエスト成功時(更新が必要なとき)、データベースにオブジェクトストアを作る
+              </li>
+            </ol>
+          </li>
+          <li>
+            データを書き込む
+            <ol>
+              <li>データベースを開く</li>
+              <li>トランザクションを作る</li>
+              <li>リクエストを発行する</li>
+              <li>イベントをハンドルする</li>
+            </ol>
+          </li>
+          <li>
+            データを読み込む
+            <ol>
+              <li>データベースを開く</li>
+              <li>トランザクションを作る</li>
+              <li>リクエストを発行する</li>
+              <li>イベントをハンドルする</li>
+            </ol>
+          </li>
+        </ol>
+        <p>コードにすると次のようになる。</p>
+        <h4>
+          <a name="初期化する" href="#初期化する" id="初期化する">
+            初期化する
+          </a>
+        </h4>
+        <p>
+          <code>window.indexedDB.open(&#39;db&#39;, 1)</code> で DB
+          を開くリクエストを送る。リクエストオブジェクトはイベントハンドラを設定できるようになっているので、<code
+            >upgradeneeded</code
+          >
+          や <code>success</code>、<code>error</code>
+          といったイベントにハンドラを設定することになる。
+        </p>
+        <pre><code class="language-javascript"><span class="hljs-keyword">let</span> db;
+<span class="hljs-comment">// データベースを開くリクエストを送る</span>
+<span class="hljs-keyword">const</span> request = <span class="hljs-built_in">window</span>.indexedDB.open(<span class="hljs-string">'db'</span>, <span class="hljs-number">1</span>);
+<span class="hljs-comment">// データベースの更新が必要なとき</span>
+request.onupgradeneeded = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> db = request.result;
+  <span class="hljs-comment">// 今回は users データストアがないときにデータストアを作る</span>
+  <span class="hljs-keyword">if</span> (!db.objectStoreNames.contains(<span class="hljs-string">'users'</span>)) {
+    db.createObjectStore(<span class="hljs-string">'users'</span>, {<span class="hljs-attr">keyPath</span>: <span class="hljs-string">'id'</span>, <span class="hljs-attr">autoIncrement</span>: <span class="hljs-literal">true</span>});
+  }
+};
+request.onsuccess = <span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
+    db = request.result;
+};</code></pre>
+        <h4>
+          <a
+            name="データを書き込むとき"
+            href="#データを書き込むとき"
+            id="データを書き込むとき"
+          >
+            データを書き込むとき
+          </a>
+        </h4>
+        <p>
+          データを書き込むときは、DB
+          を開くリクエストを送る（DBオブジェクトをキャッシュしていない場合）、トランザクションを張る、リクエストに対するイベントをハンドルする、という流れで処理を行う。ここでは
+          db はキャッシュされている例を紹介する。
+        </p>
+        <pre><code class="language-javascript"><span class="hljs-comment">// トランザクションを張る</span>
+<span class="hljs-keyword">let</span> transaction = db.transaction(<span class="hljs-string">'users'</span>, <span class="hljs-string">'readwrite'</span>);
+<span class="hljs-comment">// users へのトランザクションを張る</span>
+<span class="hljs-keyword">let</span> users = transaction.objectStore(<span class="hljs-string">'users'</span>);
+
+<span class="hljs-comment">// 書き込むべきユーザを作成する</span>
+<span class="hljs-keyword">const</span> user = {<span class="hljs-attr">name</span>: <span class="hljs-string">'John'</span>, <span class="hljs-attr">email</span>: <span class="hljs-string">'john@example.com'</span>};
+<span class="hljs-comment">// ユーザ書き込みリクエストを送る</span>
+<span class="hljs-keyword">const</span> request = users.add(user);
+
+<span class="hljs-comment">// リクエストが success したときのイベントハンドラを設定する</span>
+request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'success request'</span>, event.srcElement.transaction.db);
+};</code></pre>
+        <h4>
+          <a
+            name="データを読み込むとき"
+            href="#データを読み込むとき"
+            id="データを読み込むとき"
+          >
+            データを読み込むとき
+          </a>
+        </h4>
+        <p>
+          データを読み込むときはほとんどデータを書き込むときと同様で、users への
+          transaction
+          を張り、読み込みリクエストを送り、リクエストに対するイベントをハンドルするという具合になる。
+        </p>
+        <pre><code class="language-javascript"><span class="hljs-keyword">let</span> transaction = db.transaction(<span class="hljs-string">'users'</span>, <span class="hljs-string">'readonly'</span>);
+<span class="hljs-keyword">let</span> users = transaction.objectStore(<span class="hljs-string">'users'</span>);
+<span class="hljs-keyword">const</span> request = users.getAll();
+request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'user'</span>, event.srcElement.result);
+}</code></pre>
+        <h3>
+          <a
+            name="IndexedDB まとめ"
+            href="#IndexedDB まとめ"
+            id="IndexedDB まとめ"
+          >
+            IndexedDB まとめ
+          </a>
+        </h3>
+        <p>
+          ここまで見てきたように IndexedDB は Web Storage
+          と比べて少し複雑に見える。しかし、トランザクションをサポートしていることや、扱えるデータが多数あること、保存できるデータサイズが
+          Web Storage と違うといった点で Web Storage と違った利点がある。
+        </p>
+        <h2>
+          <a
+            name="Cache API と Service Worker"
+            href="#Cache API と Service Worker"
+            id="Cache API と Service Worker"
+          >
+            Cache API と Service Worker
+          </a>
+        </h2>
+        <p>
+          Web Storage と IndexedDB について見てきたところで、次は Cache API と
+          Service Worker について見てみる。
+        </p>
+        <p>
+          Cache API と Service Worker
+          は一言で言うと、キャッシュやプロキシのために組み合わせて使う仕組みで、
+          HTTP Request に対して前処理、後処理をしたり HTTP Response
+          をキャッシュするために使う。
+          今までアプリケーションデータを保存するための Storage
+          を紹介したが、Cache API と Service Worker
+          の組み合わせは少し異なる用途の Storage になる。
+        </p>
+        <h3>
+          <a name="実際の使い方" href="#実際の使い方" id="実際の使い方">
+            実際の使い方
+          </a>
+        </h3>
+        <p>
+          Cache API は HTTP Request に対して HTTP Response
+          を保存するための仕組みである。
+        </p>
+        <p>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage#offline_asset_storage"
+            >MDN</a
+          >
+          を参考に Cache API と Serivce Worker は下記のように使う。
+        </p>
+        <p>
+          まず、クライアントサイドで Service Worker
+          の登録を行う。ここでは、Service Worker は
+          <code>service-worker.js</code> という名前で記載されているとする。
+        </p>
+        <pre><code class="language-javascript">navigator.serviceWorker.register(<span class="hljs-string">`/path/to/service-worker.js`</span>).</code></pre>
+        <p>
+          <code>service-worker.js</code> には下記のように install イベントと
+          fetch
+          イベントのためのイベントリスナーを設定し、それぞれのイベントのハンドルを行う。
+        </p>
+        <pre><code class="language-javascript">self.addEventListener(<span class="hljs-string">'install'</span>, (e) =&gt; {
+    e.waitUntil(
+        caches.open(<span class="hljs-string">'example-cache-storage'</span>)
+            .then(<span class="hljs-function">(<span class="hljs-params">cache</span>) =&gt;</span> {
+                cache.addAll([
+                    <span class="hljs-string">'/path/to/resource-a'</span>,
+                    <span class="hljs-string">'/path/to/resource-b'</span>,
+                    <span class="hljs-string">'/path/to/resource-c'</span>,
+                ])
+            })
+    )
+})
+self.addEventListener(<span class="hljs-string">'fetch'</span>, (e) =&gt; {
+    e.respondWith(
+        caches.match(e.request).then(<span class="hljs-function">(<span class="hljs-params">response</span>) =&gt;</span> response) || fetch(e.request);
+    )
+})</code></pre>
+        <p>
+          install でやっていることとしては、 Cache Storage を開くことと、Cache
+          する URL を指定することである。 ここで指定された URL のリソースは
+          Fetch され、 Cache Storage にキャッシュされることになる。
+        </p>
+        <p>
+          一点注意することとしては、 Cache API は HTTP
+          キャッシュヘッダを見ないという点には注意したい。
+        </p>
+        <blockquote>
+          <p>Note: The caching API doesn&#39;t honor HTTP caching headers.</p>
+          <p>
+            --
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Cache#:~:text=entries%20in%20the-,Cache,-object."
+              >MDN</a
+            >
+          </p>
+        </blockquote>
+        <h2>
+          <a
+            name="Additional Storage"
+            href="#Additional Storage"
+            id="Additional Storage"
+          >
+            Additional Storage
+          </a>
+        </h2>
+        <p>
+          Chrome のデベロッパーツールにある Application タブを見ると、Coookie や
+          Trust Tokens、Interest Groups といったものも Storage
+          のようだ。機会があったらこれらについても触れたい。
+        </p>
+        <p><img src="./img/storage.png" alt="Additional Storage" /></p>
+        <h2>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
+        </h2>
+        <p>今回は Client サイドの Storage 4 種類について概観した。</p>
+        <p>
+          これらの Storage
+          の使い分けについて理解することで、適切なユースケースでそれぞれの
+          Storage を使っていきたい。
+        </p>
+        <h2>
+          <a name="参考" href="#参考" id="参考"> 参考 </a>
+        </h2>
+        <ol>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
+              >Client-side storage - Learn web development | MDN</a
+            >
+          </li>
+          <li>
+            <a href="https://storage.spec.whatwg.org/">Storage Standard</a>
+          </li>
+          <li>
+            <a href="https://privacycg.github.io/storage-partitioning/"
+              >Client-Side Storage Partitioning | storage-partitioning</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://developer.chrome.com/blog/deps-rems-94/#deprecate-and-remove-websql-in-third-party-contexts"
+              >Deprecations and removals in Chrome 94 - Chrome Developers</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API"
+              >Using the Web Storage API - Web APIs | MDN</a
+            >
+          </li>
+          <li>
+            <a href="https://web.dev/storage-for-the-web/"
+              >Storage for the web</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB"
+              >Using IndexedDB - Web APIs | MDN</a
+            >
+          </li>
+          <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache"
+              >Cache - Web APIs | MDN</a
+            >
+          </li>
+        </ol>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+
+      <div>
+        Subscribe via <a href="https://blog.bokken.io/feeds/atom.xml">RSS</a>
+      </div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a
+            href="https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html"
+          >
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
+

@@ -2,7 +2,7 @@
 
 @tags: [browser, storage]
 
-@date: [2022-10-21, 2022-10-21]
+@date: [2022-10-24, 2022-10-24]
 
 ## はじめに
 
@@ -11,7 +11,7 @@
 ブラウザが持つ storage にはどんなものがあるのか気になったので、
 [MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage) や [Storage Standard](https://storage.spec.whatwg.org/) を読んでまとめてみる。
 
-## メモ
+## クライアント Storage
 
 クライアント Storage は、JavaScript API が提供されていて、クライアントサイド(ブラウザ)上にデータを保存する仕組みのことをいう。
 
@@ -162,15 +162,52 @@ request.onsuccess = (event) => {
 
 Web Storage と IndexedDB について見てきたところで、次は Cache API と Service Worker について見てみる。
 
-Cache API と Service Worker は一言で言うと、オフラインの際に活躍する Storage だ。
+Cache API と Service Worker は一言で言うと、キャッシュやプロキシのために組み合わせて使う仕組みで、 HTTP Request に対して前処理、後処理をしたり HTTP Response をキャッシュするために使う。
+今までアプリケーションデータを保存するための Storage を紹介したが、Cache API と Service Worker の組み合わせは少し異なる用途の Storage になる。
 
-### Cache API
+### 実際の使い方
 
-### Service Worker
+Cache API は HTTP Request に対して HTTP Response を保存するための仕組みである。
 
-### Web Worker
+[MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage#offline_asset_storage) を参考に Cache API と Serivce Worker は下記のように使う。
 
-### Shared Worker
+まず、クライアントサイドで Service Worker の登録を行う。ここでは、Service Worker は `service-worker.js` という名前で記載されているとする。
+
+```javascript
+navigator.serviceWorker.register(`/path/to/service-worker.js`).
+```
+
+`service-worker.js` には下記のように install イベントと fetch イベントのためのイベントリスナーを設定し、それぞれのイベントのハンドルを行う。
+
+```javascript
+self.addEventListener('install', (e) => {
+    e.waitUntil(
+        caches.open('example-cache-storage')
+            .then((cache) => {
+                cache.addAll([
+                    '/path/to/resource-a',
+                    '/path/to/resource-b',
+                    '/path/to/resource-c',
+                ])
+            })
+    )
+})
+self.addEventListener('fetch', (e) => {
+    e.respondWith(
+        caches.match(e.request).then((response) => response) || fetch(e.request);
+    )
+})
+```
+
+install でやっていることとしては、 Cache Storage を開くことと、Cache する URL を指定することである。
+ここで指定された URL のリソースは Fetch され、 Cache Storage にキャッシュされることになる。
+
+一点注意することとしては、 Cache API は HTTP キャッシュヘッダを見ないという点には注意したい。
+
+> Note: The caching API doesn't honor HTTP caching headers.
+>
+> -- [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Cache#:~:text=entries%20in%20the-,Cache,-object.)
+
 
 ## Additional Storage
 
@@ -193,3 +230,4 @@ Chrome のデベロッパーツールにある Application タブを見ると、
 5. [Using the Web Storage API - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API)
 6. [Storage for the web](https://web.dev/storage-for-the-web/)
 7. [Using IndexedDB - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB)
+8. [Cache - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Cache)

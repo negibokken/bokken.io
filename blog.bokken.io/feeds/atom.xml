@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2022-09-26T14:40:19.020Z</updated>
+  <updated>2022-10-24T13:30:54.924Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -260,6 +260,31 @@
       type="html"
     >&lt;a href=&#34;https://wicg.github.io/anonymous-iframe/&#34;&gt;Anonymous iframe&lt;/a&gt; という仕様がある。
 この仕様が何を問題意識として、何を解決するための仕様なのかをまとめる。</summary>
+  </entry>
+  
+  <entry>
+    <title>ブラウザのクライアントサイド storage についてまとめる</title>
+    <link
+      href="https://blog.bokken.io/articles/2022-10-24/blog-md-template.html"
+    />
+    <id>https://blog.bokken.io/articles/2022-10-24/blog-md-template.html</id>
+    <updated>2022-10-24T13:28:25.431Z</updated>
+    <summary
+      type="html"
+    >&lt;a href=&#34;https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html&#34;&gt;前回の Anonymous iframe の記事&lt;/a&gt;で、storage について触れた。</summary>
+  </entry>
+  
+  <entry>
+    <title>ブラウザのクライアントサイド storage についてまとめる</title>
+    <link
+      href="https://blog.bokken.io/articles/2022-10-24/about-client-side-storage.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2022-10-24/about-client-side-storage.html</id>
+    <updated>2022-10-24T13:30:54.924Z</updated>
+    <summary
+      type="html"
+    >&lt;a href=&#34;https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html&#34;&gt;前回の Anonymous iframe の記事&lt;/a&gt;で、storage について触れた。</summary>
   </entry>
   
 </feed>
