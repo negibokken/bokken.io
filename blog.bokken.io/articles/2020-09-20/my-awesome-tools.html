@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。要点は下記である。プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。例えば DB の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。"
+      content="最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。要点は下記である。プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。例えば DB の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。そこで ~/.gitconfig に下記のように設定を追加し、例えば下記のようにだ。"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -31,7 +31,7 @@
     <meta property="og:title" content="生産性アップのための一工夫" />
     <meta
       property="og:description"
-      content="最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。要点は下記である。プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。例えば DB の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。"
+      content="最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。要点は下記である。プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。例えば DB の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。そこで ~/.gitconfig に下記のように設定を追加し、例えば下記のようにだ。"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -139,7 +139,8 @@
           の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。
         </p>
         <pre><code class="language-shell">yarn db-data-insert
-yarn test some-test</code></pre>
+yarn test some-test
+</code></pre>
         <p>
           テストは開発中何度も実行するので、これらのコマンドを何度も実行するとなると少し手間である。また、コマンドが長くなるとなおさらだ。
         </p>
@@ -148,7 +149,8 @@ yarn test some-test</code></pre>
         </p>
         <pre><code class="language-shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
 yarn db-data-insert
-yarn test some-test</code></pre>
+yarn test some-test
+</code></pre>
         <p>
           しかしこのままでは、git
           で管理されているプロジェクトの場合、このファイルをコミットしないように気をつけなければいけない。
@@ -166,12 +168,14 @@ yarn test some-test</code></pre>
         </p>
         <p>そこで <code>~/.gitconfig</code> に下記のように設定を追加し、</p>
         <pre><code class="language-gitconfig">[core]
-  excludeSfile = ~/.gitignore.global</code></pre>
+  excludeSfile = ~/.gitignore.global
+</code></pre>
         <p>
           <code>~/.gitignore.global</code>
           に自分自身のスクリプトのファイル名を追加すると自分の特定の操作をコミットせずに保持できる。
         </p>
-        <pre><code class="language-sh">my-script</code></pre>
+        <pre><code class="language-sh">my-script
+</code></pre>
         <p>
           ひとまず、これだけでも特定の連続したコマンド列の操作を、コミットせずに好き勝手に追加できる。
         </p>
@@ -192,7 +196,8 @@ yarn test some-test</code></pre>
         <pre><code class="language-sh">my-script1
 my-script2
 my-script3
-<span class="hljs-comment"># ...</span></code></pre>
+<span class="hljs-comment"># ...</span>
+</code></pre>
         <p>これでは少し手間である。</p>
         <h2>
           <a
@@ -209,7 +214,8 @@ my-script3
           >
           にディレクトリを追加してしまえばよい。
         </p>
-        <pre><code class="language-sh">my-awesome-tools</code></pre>
+        <pre><code class="language-sh">my-awesome-tools
+</code></pre>
         <p>
           こうしてやると、
           <code>my-awesome-tools</code> ディレクトリやそれ以下のファイルは
@@ -221,7 +227,8 @@ my-script3
           >、<code>my-script2</code>、<code>my-script3</code>...、と追加してやればよい。
         </p>
         <pre><code class="language-sh">$ ls my-awesome-tools
-my-scripts1 my-scripts2 my-scripts3</code></pre>
+my-scripts1 my-scripts2 my-scripts3
+</code></pre>
         <p>
           こうすると、
           <code>./my-awesome-tools/my-script1</code>
@@ -243,7 +250,8 @@ my-scripts1 my-scripts2 my-scripts3</code></pre>
           >
           に <code>PATH</code> を通してやればよい。
         </p>
-        <pre><code class="language-sh"><span class="hljs-built_in">export</span> PATH=./my-awesome-tools:<span class="hljs-variable">$PATH</span></code></pre>
+        <pre><code class="language-sh"><span class="hljs-built_in">export</span> PATH=./my-awesome-tools:<span class="hljs-variable">$PATH</span>
+</code></pre>
         <p>
           すると、自分のプロジェクトのルートで、<code>my-script1</code>
           と打ち込むとコマンドが実行できる。
@@ -258,7 +266,8 @@ my-scripts1 my-scripts2 my-scripts3</code></pre>
 │   └── my-script3
 └── src
     └── main.js
-    ...</code></pre>
+    ...
+</code></pre>
         <p>
           一点注意として、プロジェクトのルートではない
           <code>src</code> ディレクトリなどでは

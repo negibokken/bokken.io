@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Progressive Web App (PWA) の勉強がてら &lt;code&gt;https://blog.bokken.io&lt;/code&gt; を PWA 化した。本記事では、その内容をまとめておきたい。"
+      content="Progressive Web App (PWA) の勉強がてら https://blog.bokken.io を PWA 化した。本記事では、その内容をまとめておきたい。記事ではインストールを可能にするのみで、コンテンツのキャッシュや push 通知などは行わない。それは blog で対応した際に改めて記事にする。まず簡単に PWA とは何かをおさらいしておく。要素技術的には下記が関係してくる。"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -34,7 +34,7 @@
     />
     <meta
       property="og:description"
-      content="Progressive Web App (PWA) の勉強がてら &lt;code&gt;https://blog.bokken.io&lt;/code&gt; を PWA 化した。本記事では、その内容をまとめておきたい。"
+      content="Progressive Web App (PWA) の勉強がてら https://blog.bokken.io を PWA 化した。本記事では、その内容をまとめておきたい。記事ではインストールを可能にするのみで、コンテンツのキャッシュや push 通知などは行わない。それは blog で対応した際に改めて記事にする。まず簡単に PWA とは何かをおさらいしておく。要素技術的には下記が関係してくる。"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -310,7 +310,8 @@
   <span class="hljs-attr">"display"</span>: <span class="hljs-string">"standalone"</span>,
   <span class="hljs-attr">"scope"</span>: <span class="hljs-string">"/"</span>,
   <span class="hljs-attr">"theme_color"</span>: <span class="hljs-string">"#00a3af"</span>
-}</code></pre>
+}
+</code></pre>
         <p>
           このファイル名で指定する icon ファイル (icon.svg)
           は別途用意しておく必要がある。(ない場合は動かない)
@@ -328,7 +329,8 @@
           そして、html ファイルから下記のように読み込むことでブラウザに Web
           ページのメタ情報を伝えることができる。
         </p>
-        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"manifest"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/manifest.json"</span> /&gt;</span></code></pre>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"manifest"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/manifest.json"</span> /&gt;</span>
+</code></pre>
         <h2>
           <a
             name="Service Workers"
@@ -362,7 +364,8 @@ self.addEventListener(<span class="hljs-string">'activate'</span>, (event) =&gt;
 
 self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
   <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'fetch event occurred'</span>);
-});</code></pre>
+});
+</code></pre>
         <p>
           中でも fetch に対する <code>addEventListener</code> がないと「Page
           does not work offline」 と表示されてインストールができない。最低限
@@ -387,7 +390,8 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
         <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Failed to register service worker with err: '</span>, err);
       });
   });
-}</code></pre>
+}
+</code></pre>
         <h2>
           <a
             name="必要となるファイル"
@@ -418,7 +422,8 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
   <span class="hljs-attr">"display"</span>: <span class="hljs-string">"standalone"</span>,
   <span class="hljs-attr">"scope"</span>: <span class="hljs-string">"/"</span>,
   <span class="hljs-attr">"theme_color"</span>: <span class="hljs-string">"#00a3af"</span>
-}</code></pre>
+}
+</code></pre>
           </li>
           <li>
             <p>html ファイルと Service Worker を登録するための JavaScript</p>
@@ -452,7 +457,8 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
     HELLO WORLD
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
           </li>
           <li>
             <p>Service Worker のファイル</p>
@@ -466,7 +472,8 @@ self.addEventListener(<span class="hljs-string">'activate'</span>, (event) =&gt;
 
 self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
   <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'fetch event occurred'</span>);
-});</code></pre>
+});
+</code></pre>
           </li>
         </ol>
         <p>これらのファイルを配信するだけで、PWA 化することができる。</p>
@@ -601,6 +608,14 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
 
         <div class="blog-top">
           <a href="https://blog.bokken.io">TOP</a>
+        </div>
+
+        <div class="next-article">
+          <a
+            href="https://blog.bokken.io/articles/2021-02-28/how-to-build-chromium.html"
+          >
+            次の記事へ
+          </a>
         </div>
       </div>
     </main>

@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="&lt;a href=&#34;https://wicg.github.io/anonymous-iframe/&#34;&gt;Anonymous iframe&lt;/a&gt; という仕様がある。
-この仕様が何を問題としていて、何を解決するための仕様なのかをまとめる。"
+      content="Anonymous iframe という仕様がある。
+この仕様が何を問題としていて、何を解決するための仕様なのかをまとめる。Anonymous iframe は COEP (Cross Origin Embedder Policy) require-corp 環境下で外部リソースの利用が制限された状態あっても、安全な形で iframe を利用するための仕様である。"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -32,8 +32,8 @@
     <meta property="og:title" content="Anonymous iframe とは" />
     <meta
       property="og:description"
-      content="&lt;a href=&#34;https://wicg.github.io/anonymous-iframe/&#34;&gt;Anonymous iframe&lt;/a&gt; という仕様がある。
-この仕様が何を問題としていて、何を解決するための仕様なのかをまとめる。"
+      content="Anonymous iframe という仕様がある。
+この仕様が何を問題としていて、何を解決するための仕様なのかをまとめる。Anonymous iframe は COEP (Cross Origin Embedder Policy) require-corp 環境下で外部リソースの利用が制限された状態あっても、安全な形で iframe を利用するための仕様である。"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -186,7 +186,8 @@
           CORP は Resource
           がどこからのリクエストのときに読み込めるかを指定するためのヘッダで、下記のようなヘッダを指定できる機能である。
         </p>
-        <pre><code class="language-http"><span class="hljs-attribute">Cross-Origin-Resource-Policy</span>: same-site | same-origin | cross-origin</code></pre>
+        <pre><code class="language-http"><span class="hljs-attribute">Cross-Origin-Resource-Policy</span>: same-site | same-origin | cross-origin
+</code></pre>
         <p>
           それぞれ、same-site のリソースのみ、same-origin
           のリソースのみ、cross-origin でも読み込みができることを表す。
@@ -205,7 +206,8 @@
           を指定することを要求できる。COEP ヘッダには、unsafe-none
           (デフォルト値) か require-corp (CORP による指定が必要) を指定できる。
         </p>
-        <pre><code class="language-http"><span class="hljs-attribute">Cross-Origin-Embedder-Policy</span>: unsafe-none | require-corp</code></pre>
+        <pre><code class="language-http"><span class="hljs-attribute">Cross-Origin-Embedder-Policy</span>: unsafe-none | require-corp
+</code></pre>
         <p>
           こうすることで、COEP ヘッダが指定されているドキュメントについては CORP
           の制約を満たしたリソースのみが存在していることになる。
@@ -219,7 +221,8 @@
           >
           を指定することで、クロスオリジンのリソースであっても読み込みができるようになっている。
         </p>
-        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://third-party.example.com/image.jpg"</span> <span class="hljs-attr">crossorigin</span>&gt;</span></code></pre>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://third-party.example.com/image.jpg"</span> <span class="hljs-attr">crossorigin</span>&gt;</span>
+</code></pre>
         <p>(※crossorigin 指定は crossorigin=&quot;anonymous&quot; と同様)</p>
         <h2>
           <a
@@ -286,7 +289,8 @@
           Anonymous iframe の指定は先述の crossorigin attribute のように
           <code>anonymous</code> attribute を指定するだけだ。
         </p>
-        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">anonymous</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span></code></pre>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">anonymous</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span>
+</code></pre>
         <p>
           <code>anonymous</code> attribute の指定はその子孫 iframe
           にも継承される。仕様に記載されている図がとてもわかり易いので引用する。
@@ -303,7 +307,8 @@
           iframe 内のドキュメントは下記の定数を参照することで自身が anonymous
           指定された iframe なのかどうかを認識できる。
         </p>
-        <pre><code class="language-javascript">widndow.anonymouslyFramed</code></pre>
+        <pre><code class="language-javascript">widndow.anonymouslyFramed
+</code></pre>
         <p>
           Anonymous iframe では既存のクレデンシャルや shared storage
           は利用できない。ただし、sandboxed frame と違い blank な状態から

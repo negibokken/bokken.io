@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="筆者はブラウザをスクラッチで書いている。そのときに HTML の標準を読みながらブラウザを書いているそのときに仕様の不備のように疑われる挙動に出会った。内容について調査しているうちに"
+      content="筆者はブラウザをスクラッチで書いている。そのときに HTML の標準を読みながらブラウザを書いているそのときに仕様の不備のように疑われる挙動に出会った。内容について調査しているうちにということを再認識できたので、その内容について紹介したい。まず、筆者がどういう背景でどのような挙動に出会ったかを簡単に紹介する。筆者はブラウザに興味があり、ブラウザをフルスクラッチで作っている。"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -36,7 +36,7 @@
     />
     <meta
       property="og:description"
-      content="筆者はブラウザをスクラッチで書いている。そのときに HTML の標準を読みながらブラウザを書いているそのときに仕様の不備のように疑われる挙動に出会った。内容について調査しているうちに"
+      content="筆者はブラウザをスクラッチで書いている。そのときに HTML の標準を読みながらブラウザを書いているそのときに仕様の不備のように疑われる挙動に出会った。内容について調査しているうちにということを再認識できたので、その内容について紹介したい。まず、筆者がどういう背景でどのような挙動に出会ったかを簡単に紹介する。筆者はブラウザに興味があり、ブラウザをフルスクラッチで作っている。"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -173,16 +173,20 @@
           が許されている。
         </p>
         <p>つまり、下記の三種類の書き方ができる。</p>
-        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre>
         <!-- prettier-ignore -->
-        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">'https://example.com'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
-        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">https://example.com</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">'https://example.com'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">https://example.com</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre>
         <p>
           この仕様に沿って parser を書いてると、どうも anchor
           タグのテストが通らないという事象に出会った。
         </p>
         <p>そのときのテスト入力には下記のように書いていた。</p>
-        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">https://example.com/</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">https://example.com/</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre>
         <p>
           URL の末尾に <code>/</code> を書き、さらに属性値の
           <code>&#39;</code> や <code>&quot;</code> を省略している状態だ。

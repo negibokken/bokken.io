@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="&lt;a href=&#34;https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html&#34;&gt;前回の Anonymous iframe の記事&lt;/a&gt;で、storage について触れた。"
+      content="前回の Anonymous iframe の記事で、storage について触れた。クライアント Storage は、JavaScript API が提供されていて、クライアントサイド(ブラウザ)上にデータを保存する仕組みのことをいう。MDN で具体的にクライアントサイド Storage と分類されているのは下記の 4 種類だ。Web Storage と IndexedDB の違いはにある。"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -36,7 +36,7 @@
     />
     <meta
       property="og:description"
-      content="&lt;a href=&#34;https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html&#34;&gt;前回の Anonymous iframe の記事&lt;/a&gt;で、storage について触れた。"
+      content="前回の Anonymous iframe の記事で、storage について触れた。クライアント Storage は、JavaScript API が提供されていて、クライアントサイド(ブラウザ)上にデータを保存する仕組みのことをいう。MDN で具体的にクライアントサイド Storage と分類されているのは下記の 4 種類だ。Web Storage と IndexedDB の違いはにある。"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -240,7 +240,8 @@
         <pre><code class="language-javascript"><span class="hljs-keyword">const</span> value = {<span class="hljs-attr">foo</span>: <span class="hljs-string">'bar'</span>};
 <span class="hljs-built_in">window</span>.sessionStorage.setItem(<span class="hljs-string">'test'</span>, value);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.sessionStorage.getItem(<span class="hljs-string">'test'</span>));
-<span class="hljs-comment">// '[object Object]'</span></code></pre>
+<span class="hljs-comment">// '[object Object]'</span>
+</code></pre>
         <p>
           なので、 複雑なデータ構造を保持する場合は
           <code>JSON.stringify()</code> などで別途 string
@@ -254,7 +255,8 @@
         </p>
         <pre><code class="language-javascript">localStorage.colorSetting = <span class="hljs-string">'#a4509b'</span>;
 localStorage[<span class="hljs-string">'colorSetting'</span>] = <span class="hljs-string">'#a4509b'</span>;
-localStorage.setItem(<span class="hljs-string">'colorSetting'</span>, <span class="hljs-string">'#a4509b'</span>);</code></pre>
+localStorage.setItem(<span class="hljs-string">'colorSetting'</span>, <span class="hljs-string">'#a4509b'</span>);
+</code></pre>
         <p>
           このように Web Storage の API
           は比較的かんたんにデータのセットやゲットができる。
@@ -331,7 +333,8 @@ request.onupgradeneeded = <span class="hljs-function"><span class="hljs-params">
 };
 request.onsuccess = <span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
     db = request.result;
-};</code></pre>
+};
+</code></pre>
         <h4>
           <a
             name="データを書き込むとき"
@@ -359,7 +362,8 @@ request.onsuccess = <span class="hljs-function"><span class="hljs-params">event<
 <span class="hljs-comment">// リクエストが success したときのイベントハンドラを設定する</span>
 request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'success request'</span>, event.srcElement.transaction.db);
-};</code></pre>
+};
+</code></pre>
         <h4>
           <a
             name="データを読み込むとき"
@@ -379,7 +383,8 @@ request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event
 <span class="hljs-keyword">const</span> request = users.getAll();
 request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'user'</span>, event.srcElement.result);
-}</code></pre>
+}
+</code></pre>
         <h3>
           <a
             name="IndexedDB まとめ"
@@ -437,7 +442,8 @@ request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event
           の登録を行う。ここでは、Service Worker は
           <code>service-worker.js</code> という名前で記載されているとする。
         </p>
-        <pre><code class="language-javascript">navigator.serviceWorker.register(<span class="hljs-string">`/path/to/service-worker.js`</span>).</code></pre>
+        <pre><code class="language-javascript">navigator.serviceWorker.register(<span class="hljs-string">`/path/to/service-worker.js`</span>).
+</code></pre>
         <p>
           <code>service-worker.js</code> には下記のように install イベントと
           fetch
@@ -459,7 +465,8 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (e) =&gt; {
     e.respondWith(
         caches.match(e.request).then(<span class="hljs-function">(<span class="hljs-params">response</span>) =&gt;</span> response) || fetch(e.request);
     )
-})</code></pre>
+})
+</code></pre>
         <p>
           install でやっていることとしては、 Cache Storage を開くことと、Cache
           する URL を指定することである。 ここで指定された URL のリソースは
