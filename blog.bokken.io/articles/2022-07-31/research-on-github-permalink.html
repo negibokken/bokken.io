@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="筆者は VS Code で &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url&#34;&gt;GitHub の permalink をコピーできる拡張機能&lt;/a&gt;をよく使っている。"
+      content="筆者は VS Code で GitHub の permalink をコピーできる拡張機能をよく使っている。この拡張機能は一部のエンコードが必要な URL についてはサポートされていない。例えば、下記のような pathname を持つファイルは正しい URL をコピーできない。今回はこの URL がどのように生成されているのか調べてみることにした。早く知りたい人向けに結論を書く。"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -34,7 +34,7 @@
     />
     <meta
       property="og:description"
-      content="筆者は VS Code で &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url&#34;&gt;GitHub の permalink をコピーできる拡張機能&lt;/a&gt;をよく使っている。"
+      content="筆者は VS Code で GitHub の permalink をコピーできる拡張機能をよく使っている。この拡張機能は一部のエンコードが必要な URL についてはサポートされていない。例えば、下記のような pathname を持つファイルは正しい URL をコピーできない。今回はこの URL がどのように生成されているのか調べてみることにした。早く知りたい人向けに結論を書く。"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -134,7 +134,8 @@
           例えば、下記のような pathname を持つファイルは正しい URL
           をコピーできない。
         </p>
-        <pre><code class="language-text">/@foo/[bar]/a !"#$%&amp;'()*+,-.:;&lt;=&gt;?@[\]^`{|}~.txt</code></pre>
+        <pre><code class="language-text">/@foo/[bar]/a !"#$%&amp;'()*+,-.:;&lt;=&gt;?@[\]^`{|}~.txt
+</code></pre>
         <p>
           今回はこの URL がどのように生成されているのか調べてみることにした。
         </p>
@@ -163,7 +164,8 @@
               を実行し、<code>#</code> を <code>%23</code> に、<code>?</code> を
               <code>%3F</code> に置換する
             </p>
-            <pre><code class="language-javascript"><span class="hljs-keyword">const</span> encoded = <span class="hljs-built_in">encodeURI</span>(url).replace(<span class="hljs-string">'#'</span>, <span class="hljs-string">'%23'</span>).replace(<span class="hljs-string">'?'</span>, <span class="hljs-string">'%3F'</span>)</code></pre>
+            <pre><code class="language-javascript"><span class="hljs-keyword">const</span> encoded = <span class="hljs-built_in">encodeURI</span>(url).replace(<span class="hljs-string">'#'</span>, <span class="hljs-string">'%23'</span>).replace(<span class="hljs-string">'?'</span>, <span class="hljs-string">'%3F'</span>)
+</code></pre>
           </li>
           <li>
             <p>
@@ -179,7 +181,8 @@
         <p>
           まず、GitHub の permalink の基本的な形式は下記のようになっている。
         </p>
-        <pre><code class="language-text">https://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?query=test#L11</code></pre>
+        <pre><code class="language-text">https://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?query=test#L11
+</code></pre>
         <p>
           調査をする過程で<a
             href="https://github.com/negibokken/github-url-test"
@@ -197,7 +200,8 @@
           といった記号はパーセントエンコードされないといった具合だ。
         </p>
         <p>前述したファイルのパスは下記のようにエンコードされる。</p>
-        <pre><code class="language-text">/@foo/%5Bbar%5D/a%20!%22%23$%25&amp;'()*+,-.:;%3C=%3E%3F@%5B%5C%5D%5E%60%7B%7C%7D~.txt</code></pre>
+        <pre><code class="language-text">/@foo/%5Bbar%5D/a%20!%22%23$%25&amp;'()*+,-.:;%3C=%3E%3F@%5B%5C%5D%5E%60%7B%7C%7D~.txt
+</code></pre>
         <p>
           各記号とそれがどのようにエンコードされるのかをまとめたのが下記の表だ。
         </p>
@@ -431,7 +435,8 @@
           これらのことから、エンコード前の GitHub の URL を permalink
           の形式にする処理としては下記のようになるだろう。
         </p>
-        <pre><code class="language-javascript"><span class="hljs-keyword">const</span> encoded = <span class="hljs-built_in">encodeURI</span>(url).replace(<span class="hljs-string">'#'</span>, <span class="hljs-string">'%23'</span>).replace(<span class="hljs-string">'?'</span>, <span class="hljs-string">'%3F'</span>)</code></pre>
+        <pre><code class="language-javascript"><span class="hljs-keyword">const</span> encoded = <span class="hljs-built_in">encodeURI</span>(url).replace(<span class="hljs-string">'#'</span>, <span class="hljs-string">'%23'</span>).replace(<span class="hljs-string">'?'</span>, <span class="hljs-string">'%3F'</span>)
+</code></pre>
         <p>
           ただし、クエリパラメータや、URL フラグメントがある場合は分離した上で
           url として渡す必要がある。

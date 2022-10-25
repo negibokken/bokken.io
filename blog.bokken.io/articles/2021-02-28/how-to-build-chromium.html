@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="趣味でブラウザを作っている延長で、 Chromium をビルドしてテストを走らせて遊んでいる。その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。"
+      content="趣味でブラウザを作っている延長で、 Chromium をビルドしてテストを走らせて遊んでいる。その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。また、あまりビルドやテスト実行時間について紹介されている記事が少ないので、この記事ではその点についても言及する。最初に筆者の計算機環境は下記である。その際のコマンドは下記である。順番に説明をする。"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -36,7 +36,7 @@
     />
     <meta
       property="og:description"
-      content="趣味でブラウザを作っている延長で、 Chromium をビルドしてテストを走らせて遊んでいる。その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。"
+      content="趣味でブラウザを作っている延長で、 Chromium をビルドしてテストを走らせて遊んでいる。その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。また、あまりビルドやテスト実行時間について紹介されている記事が少ないので、この記事ではその点についても言及する。最初に筆者の計算機環境は下記である。その際のコマンドは下記である。順番に説明をする。"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -288,18 +288,21 @@
           Xcode がインストールされているかは、下記のコマンドで .sdk
           ファイルが表示されるかを確認すればよい。
         </p>
-        <pre><code class="language-sh">ls `xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs</code></pre>
+        <pre><code class="language-sh">ls `xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs
+</code></pre>
         <p>
           加えてインストールしておくと良いのは下記の Homebrew と ccache だ。
         </p>
         <ul>
           <li>
             <p><a href="https://brew.sh/">Homebrew</a></p>
-            <pre><code class="language-sh">/bin/bash -c <span class="hljs-string">"<span class="hljs-variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>"</span></code></pre>
+            <pre><code class="language-sh">/bin/bash -c <span class="hljs-string">"<span class="hljs-variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>"</span>
+</code></pre>
           </li>
           <li>
             <p><a href="https://ccache.dev/">ccache</a></p>
-            <pre><code class="language-sh">brew install --HEAD ccache</code></pre>
+            <pre><code class="language-sh">brew install --HEAD ccache
+</code></pre>
           </li>
         </ul>
         <p>
@@ -324,7 +327,8 @@
         </p>
         <pre><code class="language-sh"><span class="hljs-built_in">cd</span> ~
 mkdir chromium
-<span class="hljs-built_in">cd</span> chromium</code></pre>
+<span class="hljs-built_in">cd</span> chromium
+</code></pre>
         <h3>
           <a
             name="開発用のツールを準備をする"
@@ -348,18 +352,21 @@ mkdir chromium
           <code>gn</code> コマンドが含まれている。
         </p>
         <p>depot_tool は下記のコマンドで clone してくる。</p>
-        <pre><code class="language-sh">git <span class="hljs-built_in">clone</span> https://chromium.googlesource.com/chromium/tools/depot_tools.git</code></pre>
+        <pre><code class="language-sh">git <span class="hljs-built_in">clone</span> https://chromium.googlesource.com/chromium/tools/depot_tools.git
+</code></pre>
         <p>
           パスを通す必要があるため、使っているシェルに応じて
           <code>~/.bashrc</code> や
           <code>~/.zshrc</code> に下記の一行を追記する。
         </p>
-        <pre><code class="language-sh"><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">"<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HOME</span>/depot_tools"</span></code></pre>
+        <pre><code class="language-sh"><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">"<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HOME</span>/depot_tools"</span>
+</code></pre>
         <p>
           追記をしたあとは下記コマンドで、PATH
           を通した設定ファイルを読み込み直す。
         </p>
-        <pre><code class="language-sh"><span class="hljs-built_in">source</span> ~/.zshrc  <span class="hljs-comment"># zsh を使っているときの例</span></code></pre>
+        <pre><code class="language-sh"><span class="hljs-built_in">source</span> ~/.zshrc  <span class="hljs-comment"># zsh を使っているときの例</span>
+</code></pre>
         <p>以上で depot_tool を使うための下準備は完了した。</p>
         <h4>
           <a name="フェッチする" href="#フェッチする" id="フェッチする">
@@ -370,7 +377,8 @@ mkdir chromium
           depot_tool が準備できればようやく Chromium のソースを clone できる。
         </p>
         <p>その際のコマンドは下記である。</p>
-        <pre><code class="language-sh">fetch chromium</code></pre>
+        <pre><code class="language-sh">fetch chromium
+</code></pre>
         <p>
           このコマンドにもかなりの時間がかかる。容量が大きいため、テザリング環境や貧弱なネット回線では決して実行しないようにしてほしい。
         </p>
@@ -382,7 +390,8 @@ mkdir chromium
           fetch のタイミングで下記コマンドも実行されるので fetch
           して直後は必要がない。
         </p>
-        <pre><code class="language-sh">gclient sync</code></pre>
+        <pre><code class="language-sh">gclient sync
+</code></pre>
         <h3>
           <a
             name="Chromium のビルドと実行"
@@ -407,20 +416,23 @@ mkdir chromium
           </a>
         </h4>
         <p>まず、 fetch してきた Chromium のディレクトリに移動する。</p>
-        <pre><code class="language-sh"><span class="hljs-built_in">cd</span> src</code></pre>
+        <pre><code class="language-sh"><span class="hljs-built_in">cd</span> src
+</code></pre>
         <p>
           次にビルドファイルの生成だが、これには
           <code>gn</code>
           というコマンドを使う。下記のようにコマンドを実行するとエディタが立ち上がる。
         </p>
-        <pre><code class="language-sh">gn gen out/Default</code></pre>
+        <pre><code class="language-sh">gn gen out/Default
+</code></pre>
         <p>そこに下記のような設定ファイルを書き込む。</p>
         <pre><code class="language-sh">is_debug = <span class="hljs-literal">false</span>
 is_component_build = <span class="hljs-literal">true</span>
 symbol_level = 0
 dcheck_always_on = <span class="hljs-literal">true</span>
 cc_wrapper= <span class="hljs-string">"ccache"</span>
-enable_nacl = <span class="hljs-literal">false</span></code></pre>
+enable_nacl = <span class="hljs-literal">false</span>
+</code></pre>
         <p>
           するとビルドに必要なファイル群が
           <code>out/Default</code> 以下に生成される。
@@ -460,11 +472,14 @@ enable_nacl = <span class="hljs-literal">false</span></code></pre>
 <span class="hljs-built_in">export</span> CCACHE_CPP2=yes
 <span class="hljs-built_in">export</span> CCACHE_SLOPPINESS=time_macros
 <span class="hljs-built_in">export</span> PATH=`<span class="hljs-built_in">pwd</span>`/third_party/llvm-build/Release+Asserts/bin:<span class="hljs-variable">$PATH</span>
-ninja -C out/Default chrome</code></pre>
+ninja -C out/Default chrome
+</code></pre>
         <p>上記のファイルに実行権限をつける。</p>
-        <pre><code class="language-sh">chmod +x build_chromium</code></pre>
+        <pre><code class="language-sh">chmod +x build_chromium
+</code></pre>
         <p>そして実行する。</p>
-        <pre><code class="language-sh">./build_chromium</code></pre>
+        <pre><code class="language-sh">./build_chromium
+</code></pre>
         <p>
           これで Chromium
           がビルドされる。とても長い時間がかかるのと、リソースを持っていかれるため
@@ -486,7 +501,8 @@ ninja -C out/Default chrome</code></pre>
           Chromium が立ち上がる。
         </p>
         <pre><code class="language-sh"><span class="hljs-meta">#!/bin/bash</span>
-./out/Default/Chromium.app/Contents/MacOS/Chromium</code></pre>
+./out/Default/Chromium.app/Contents/MacOS/Chromium
+</code></pre>
         <p>ここまででひとまず、Chromium 自身のビルドは完了だ。</p>
         <h3>
           <a
@@ -515,7 +531,8 @@ ninja -C out/Default chrome</code></pre>
           </a>
         </h4>
         <p>ユニットテストをビルドするためには下記のコマンドを実行する。</p>
-        <pre><code class="language-sh">ninja -C out/Default chrome/<span class="hljs-built_in">test</span>:unit_tests</code></pre>
+        <pre><code class="language-sh">ninja -C out/Default chrome/<span class="hljs-built_in">test</span>:unit_tests
+</code></pre>
         <h4>
           <a
             name="ユニットテストの実行"
@@ -528,7 +545,8 @@ ninja -C out/Default chrome</code></pre>
         <p>
           ユニットテストのビルドが終わったら、ユニットテストは下記のように実行すれば良い。
         </p>
-        <pre><code class="language-sh">out/Default/unit_tests --<span class="hljs-built_in">disable</span>-features=<span class="hljs-string">"MediaRouter"</span></code></pre>
+        <pre><code class="language-sh">out/Default/unit_tests --<span class="hljs-built_in">disable</span>-features=<span class="hljs-string">"MediaRouter"</span>
+</code></pre>
         <p>
           <a
             href="https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md#avoiding-the-incoming-network-connections-dialog"
@@ -551,7 +569,8 @@ ninja -C out/Default chrome</code></pre>
           >を参考に下記のコマンドでテストをビルドする。
         </p>
         <pre><code class="language-sh"><span class="hljs-meta">#!/bin/bash</span>
-autoninja -C out/Default blink_tests</code></pre>
+autoninja -C out/Default blink_tests
+</code></pre>
         <h4>
           <a
             name="Web テストの実行"
@@ -566,7 +585,8 @@ autoninja -C out/Default blink_tests</code></pre>
         </p>
         <pre><code class="language-sh"><span class="hljs-meta">#!/bin/bash</span>
 strip out/Default/Content\ Shell.app/Contents/MacOS/Content\ Shell
-./third_party/blink/tools/run_web_tests.py -t Default</code></pre>
+./third_party/blink/tools/run_web_tests.py -t Default
+</code></pre>
         <p>
           (Content_Shell については
           <code
@@ -743,6 +763,14 @@ strip out/Default/Content\ Shell.app/Contents/MacOS/Content\ Shell
       </div>
 
       <div class="article-pager">
+        <div class="prev-article">
+          <a
+            href="https://blog.bokken.io/articles/2020-10-26/how-to-develop-minimal-pwa-app.html"
+          >
+            前の記事へ
+          </a>
+        </div>
+
         <div class="blog-top">
           <a href="https://blog.bokken.io">TOP</a>
         </div>

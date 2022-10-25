@@ -12,7 +12,8 @@
     <meta
       name="description"
       content="最近、Chromium へのコントリビューション活動をしている。
-直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。具体的に取り組んでいたのは、&lt;a href=&#34;https://bugs.chromium.org/p/chromium/issues/detail?id=978146&#34;&gt;こちらのバグ&lt;/a&gt;である。"
+直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。具体的に取り組んでいたのは、こちらのバグである。具体的な WPT のテストケースは下記のケースだ。結論からいうと、WPT は間違っておらず、Chromium の実装の一部に問題があった。
+ただし一部混乱する部分があった。"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -39,7 +40,8 @@
     <meta
       property="og:description"
       content="最近、Chromium へのコントリビューション活動をしている。
-直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。具体的に取り組んでいたのは、&lt;a href=&#34;https://bugs.chromium.org/p/chromium/issues/detail?id=978146&#34;&gt;こちらのバグ&lt;/a&gt;である。"
+直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。具体的に取り組んでいたのは、こちらのバグである。具体的な WPT のテストケースは下記のケースだ。結論からいうと、WPT は間違っておらず、Chromium の実装の一部に問題があった。
+ただし一部混乱する部分があった。"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -174,7 +176,8 @@
 {
   &quot;input&quot;: &quot;Access-Control-Expose-Headers: ,bb-8&quot;,
   &quot;exposed&quot;: true
-},</code></pre>
+},
+</code></pre>
         <p>
           今回、特に取り上げたいのは2番目のケースである。 この WPT
           では、ヘッダとして input を使って CORS request をした際に、 bb-8
@@ -229,7 +232,8 @@ Access-Control-Allow-Credentials = %s&quot;true&quot; ; case-sensitive
 Access-Control-Expose-Headers    = #field-name
 Access-Control-Max-Age           = delta-seconds
 Access-Control-Allow-Methods     = #method
-Access-Control-Allow-Headers     = #field-name</code></pre>
+Access-Control-Allow-Headers     = #field-name
+</code></pre>
         <p>
           <code>#</code> という記号については、１つ以上の value
           のリストを表しており、<code>field-name</code> は
@@ -242,7 +246,8 @@ Access-Control-Allow-Headers     = #field-name</code></pre>
 tchar          = "!" / "#" / "$" / "%" / "&amp;" / "'" / "*"
                 / "+" / "-" / "." / "^" / "_" / "`" / "|" / "~"
                 / DIGIT / ALPHA
-                ; any VCHAR, except delimiters</code></pre>
+                ; any VCHAR, except delimiters
+</code></pre>
         <p>
           これを確認すると、<code>,</code>
           が最初に来るような文字列については、パースが FAIL し、値が expose
