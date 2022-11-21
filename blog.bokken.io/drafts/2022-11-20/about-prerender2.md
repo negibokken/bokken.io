@@ -24,9 +24,9 @@ Prerender2 という仕様がある。
 
 ここで、メンテナンスが難しいのは Prerender の機能自身のことだと考えられるが、具体的にどの部分がメンテナンスコストを上げているのかは記載がなかった。
 
-ただ、Prerendering が [2011年にアナウンスされている](https://blog.chromium.org/2011/06/prerendering-in-chrome.html)機能であり、相当古い機能なのでコードも古くなってメンテナンスが難しくなるのは想像に難くない。
+ただ、Prerender が [2011年にアナウンスされている](https://blog.chromium.org/2011/06/prerendering-in-chrome.html)機能であり、相当古い機能なのでコードも古くなってメンテナンスが難しくなるのは想像に難くない。
 
-Prerendering も NoState Prefetch も `<link rel="prerender">` という形で機能を使うため、いっそのこと削除しようという判断だったのかもしれない。
+Prerender も NoState Prefetch も `<link rel="prerender">` という形で機能を使うため、いっそのこと削除しようという判断だったのかもしれない。
 
 いずれにしても Prerender は一度こういった背景で取り下げられた。
 
