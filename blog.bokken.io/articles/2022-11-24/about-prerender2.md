@@ -52,7 +52,7 @@ Prerender は Rendering を予め行い、ユーザのリンククリック時�
 
 > Current implementations are also not necessarily compatible with storage partitioning, as they were designed before such efforts. So there may need to be future backward-incompatible changes to them to meet browser teams' new goals around privacy.
 
-現在の実装は storage partitioning との互換性が必要ないときに設計されたため、現在のプライバシーゴールに到達していないとのことだ。この記載は `<link rel="prerender">`、つまり NoState Prefetch についての記載であるが、おそらく NoState Prefetch 以前の機能である Legacy Prerender についても同様なことが予想される。Legacy Prerender が [2011年にアナウンスされている](https://blog.chromium.org/2011/06/prerendering-in-chrome.html)機能であることから、コードが古くなっていて、上記のゴールを達成するためのメンテナンスが難しくなっているのは想像に難くない。
+現在の実装は storage partitioning との互換性が必要ないときに設計されたため、現在のプライバシーゴールに到達していないとのことだ。この記載は `<link rel="prerender">`、つまり Legacy Prerender が取り下げられた現在では NoState Prefetch についての記載であるが、おそらく NoState Prefetch 以前の機能である Legacy Prerender についても同様なことが予想される。Legacy Prerender が [2011年にアナウンスされている](https://blog.chromium.org/2011/06/prerendering-in-chrome.html)機能であることから、コードが古くなっていて、上記のゴールを達成するためのメンテナンスが難しくなっているのは想像に難くない。
 
 いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。
 
@@ -69,6 +69,8 @@ Prerender は Rendering を予め行い、ユーザのリンククリック時�
 過去の Prerender を取り下げた当時の問題を今なら解決できるということらしい。
 Legacy Prerender の実装がなくなったり、リファクタを重ねた結果、Prerender2 をモダンな形で実装できるようになったのだろう。
 Chromium の Commit を見ても、Legacy Prerender の削除や、Refactor、Prerender2 の実装が行われているのが[伺える](https://chromium-news.vercel.app/?query=Prerender)。
+
+2022年11月24日現在では Android と Desktop 版の Chrome/Chromium で使えるようだ。
 
 ### Prerender2 を使う方法
 
@@ -93,7 +95,7 @@ Chrome 107.0.5304.110 では確認できなかったので動作確認の際に�
 
 内容としては、リンク先のページが大きな画像を表示するサイトで Prerender2 を使うかどうかを切り替えられるのだが、Prerender2 を適用しない場合は遷移後のページでは画像が少し遅れて表示されることが分かる。
 
-また、新しいタブで開いたときにも Prerender2 は働かないようなので、動作確認の際にリンクをクリックしていただきたい。
+また、新しいタブで開いたときにも Prerender2 は働かないので、動作確認の際にリンクをクリックしていただきたい。
 
 ### feature detection
 

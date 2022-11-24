@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。ということらしい。いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。また、新しいタブで開いたときにも Prerender2 は働かないようなので、動作確認の際にリンクをクリックしていただきたい。"
+      content="Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。ということらしい。いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。2022年11月24日現在では Android と Desktop 版の Chrome/Chromium で使えるようだ。"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -31,7 +31,7 @@
     <meta property="og:title" content="Prerender2 という機能について" />
     <meta
       property="og:description"
-      content="Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。ということらしい。いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。また、新しいタブで開いたときにも Prerender2 は働かないようなので、動作確認の際にリンクをクリックしていただきたい。"
+      content="Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。ということらしい。いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。2022年11月24日現在では Android と Desktop 版の Chrome/Chromium で使えるようだ。"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -272,10 +272,10 @@
         <p>
           現在の実装は storage partitioning
           との互換性が必要ないときに設計されたため、現在のプライバシーゴールに到達していないとのことだ。この記載は
-          <code>&lt;link rel=&quot;prerender&quot;&gt;</code>、つまり NoState
-          Prefetch についての記載であるが、おそらく NoState Prefetch
-          以前の機能である Legacy Prerender
-          についても同様なことが予想される。Legacy Prerender が
+          <code>&lt;link rel=&quot;prerender&quot;&gt;</code>、つまり Legacy
+          Prerender が取り下げられた現在では NoState Prefetch
+          についての記載であるが、おそらく NoState Prefetch 以前の機能である
+          Legacy Prerender についても同様なことが予想される。Legacy Prerender が
           <a
             href="https://blog.chromium.org/2011/06/prerendering-in-chrome.html"
             >2011年にアナウンスされている</a
@@ -330,6 +330,10 @@
             >伺える</a
           >。
         </p>
+        <p>
+          2022年11月24日現在では Android と Desktop 版の Chrome/Chromium
+          で使えるようだ。
+        </p>
         <h3>
           <a
             name="Prerender2 を使う方法"
@@ -380,7 +384,7 @@
         </p>
         <p>
           また、新しいタブで開いたときにも Prerender2
-          は働かないようなので、動作確認の際にリンクをクリックしていただきたい。
+          は働かないので、動作確認の際にリンクをクリックしていただきたい。
         </p>
         <h3>
           <a
