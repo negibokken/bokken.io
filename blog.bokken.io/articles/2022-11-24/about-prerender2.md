@@ -12,7 +12,8 @@ Prerender2 という機能の実装が Chrome/Chromium で進んでいる。こ�
 
 <!-- vim-markdown-toc GFM -->
 
-* [Legacy Prerender](#legacy-prerender)
+* [Prerender とは](#prerender-とは)
+* [Legacy Prerender とはなにか](#legacy-prerender-とはなにか)
 * [Prerender2](#prerender2)
     * [Prerender2 を使う方法](#prerender2-を使う方法)
     * [feature detection](#feature-detection)
@@ -24,16 +25,18 @@ Prerender2 という機能の実装が Chrome/Chromium で進んでいる。こ�
     * [Referrer Policy](#referrer-policy)
     * [target_hint について](#target_hint-について)
     * [API の利用の制限](#api-の利用の制限)
-* [終わりに](#終わりに)
+* [おわりに](#おわりに)
 * [参考・関連リンク](#参考・関連リンク)
 
 <!-- vim-markdown-toc -->
 
-## Legacy Prerender
+## Prerender とは
 
 Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。
 
 近年開発が進んでいるのは Prerender2 という機能だ。過去に Prerender という機能が実装されていたが、それとは別物になる。この記事では読みやすさのために Prerender2 を Prerender2、過去の Prerender を Legacy Prerender と呼称することにする。
+
+## Legacy Prerender とはなにか
 
 現在 Legacy Prerender は機能としては提供されておらず、取り下げられている。なぜ Legacy Prerender は取り下げられたのか。それについては、Prerender の [Intent to Deprecate and Remove: Prerender](https://groups.google.com/a/chromium.org/g/Blink-dev/c/0nSxuuv9bBw) の投稿に下記のように書かれている。
 
@@ -43,11 +46,13 @@ Prerender は Rendering を予め行い、ユーザのリンククリック時�
 * パフォーマンスの恩恵に比べてリソースを消費してしまう
 * 別途パフォーマンスを改善するために開発されている NoState Prefetch が prerender に未知の依存を作らないようにする
 
+ということらしい。
+
 ここで、メンテナンスの難しさについては、[WICG/nav-speculation](https://github.com/WICG/nav-speculation/blob/main/triggers.md#general-interop-and-compat-concerns) に少し関連していそうな記載がある。
 
 > Current implementations are also not necessarily compatible with storage partitioning, as they were designed before such efforts. So there may need to be future backward-incompatible changes to them to meet browser teams' new goals around privacy.
 
-現在の実装 (`<link rel="prerender">` ) は storage partitioning との互換性が必要ないときに設計されたため、現在のプライバシーゴールに到達していないという記載がある。この部分は `<link rel="prerender">`、つまり NoState Prefetch についての記載であるが、おそらく NoState Prefetch 以前の機能である Legacy Prerender についても同様なことが予想される。Legacy Prerender が [2011年にアナウンスされている](https://blog.chromium.org/2011/06/prerendering-in-chrome.html)機能であることから、コードが古くなっていて、上記のゴールを達成するためのメンテナンスが難しくなっているのは想像に難くない。
+現在の実装は storage partitioning との互換性が必要ないときに設計されたため、現在のプライバシーゴールに到達していないとのことだ。この記載は `<link rel="prerender">`、つまり Legacy Prerender が取り下げられた現在では NoState Prefetch についての記載であるが、おそらく NoState Prefetch 以前の機能である Legacy Prerender についても同様なことが予想される。Legacy Prerender が [2011年にアナウンスされている](https://blog.chromium.org/2011/06/prerendering-in-chrome.html)機能であることから、コードが古くなっていて、上記のゴールを達成するためのメンテナンスが難しくなっているのは想像に難くない。
 
 いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。
 
@@ -64,6 +69,8 @@ Prerender は Rendering を予め行い、ユーザのリンククリック時�
 過去の Prerender を取り下げた当時の問題を今なら解決できるということらしい。
 Legacy Prerender の実装がなくなったり、リファクタを重ねた結果、Prerender2 をモダンな形で実装できるようになったのだろう。
 Chromium の Commit を見ても、Legacy Prerender の削除や、Refactor、Prerender2 の実装が行われているのが[伺える](https://chromium-news.vercel.app/?query=Prerender)。
+
+2022年11月24日現在では Android と Desktop 版の Chrome/Chromium で使えるようだ。
 
 ### Prerender2 を使う方法
 
@@ -88,7 +95,7 @@ Chrome 107.0.5304.110 では確認できなかったので動作確認の際に�
 
 内容としては、リンク先のページが大きな画像を表示するサイトで Prerender2 を使うかどうかを切り替えられるのだが、Prerender2 を適用しない場合は遷移後のページでは画像が少し遅れて表示されることが分かる。
 
-また、新しいタブで開いたときにも Prerender2 は働かないようなので、動作確認の際にリンクをクリックしていただきたい。
+また、新しいタブで開いたときにも Prerender2 は働かないので、動作確認の際にリンクをクリックしていただきたい。
 
 ### feature detection
 
@@ -224,7 +231,7 @@ Prerender されたコンテンツが利用できる API には制限が課さ�
 
 また、それぞれの API に関する検討は [Restrictions on prerendered content - Google Docs](https://docs.google.com/document/d/1zY15k_wFTik2EoxBf3_RT7YjYpFMDaeNspy15n0rtww/edit) や [Spread Sheet](https://docs.google.com/spreadsheets/d/1V9Rm_3XACVHexaI4z41xciZxRh6zWrq5mFfSHYrs1XE/edit?usp=sharing) にまとめられているので、API を使う際にはこちらを見て利用に問題がないか確認した上で利用するのが良いだろう。
 
-## 終わりに
+## おわりに
 
 今回、実装が進んでいる Prerender2 について現状や使い方、今後について分かっていることを紹介した。
 Speculation Rules に指定するだけで簡単に使える仕様でありながら、ドキュメントに記載されている内容の多さや、Prerender2 関連の Commit の多さから苦労が伺える。

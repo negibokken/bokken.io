@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>Prerender2 という機能について | blog.bokken.io</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。ということらしい。いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。2022年11月24日現在では Android と Desktop 版の Chrome/Chromium で使えるようだ。"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="author" href="humans.txt" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2022-11-24/about-prerender2.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Prerender2 という機能について" />
+    <meta
+      property="og:description"
+      content="Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。ということらしい。いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。2022年11月24日現在では Android と Desktop 版の Chrome/Chromium で使えるようだ。"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io">bokken.io</a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2022-11-24/about-prerender2.html"
+          >Prerender2 という機能について</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2022-11-24</dd>
+          <dt>更新日</dt>
+          <dd>2022-11-24</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            Web, browser, Prerender2
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="Prerender2 という機能について"
+            href="#Prerender2 という機能について"
+            id="Prerender2 という機能について"
+          >
+            Prerender2 という機能について
+          </a>
+        </h1>
+        <h2>
+          <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
+        </h2>
+        <p>
+          Prerender2 という機能の実装が Chrome/Chromium
+          で進んでいる。この機能はページのレンダリングを予め行うことでページを高速に閲覧できるようにするための機能だ。この記事ではなぜ
+          Prerender<strong>2</strong>
+          なのか、どうすれば適用できるのか、使う際の注意点はなにかを 2022/11/23
+          時点での情報についてまとめる。最新の情報については、それぞれの文書を参照されたい。
+        </p>
+        <details>
+          <summary>## もくじ (click で開く)</summary>
+          <h2>
+            <a name="もくじ" href="#もくじ" id="もくじ"> もくじ </a>
+          </h2>
+          <!-- vim-markdown-toc GFM -->
+
+          <ul>
+            <li><a href="#prerender-%E3%81%A8%E3%81%AF">Prerender とは</a></li>
+            <li>
+              <a
+                href="#legacy-prerender-%E3%81%A8%E3%81%AF%E3%81%AA%E3%81%AB%E3%81%8B"
+                >Legacy Prerender とはなにか</a
+              >
+            </li>
+            <li>
+              <a href="#prerender2">Prerender2</a>
+              <ul>
+                <li>
+                  <a
+                    href="#prerender2-%E3%82%92%E4%BD%BF%E3%81%86%E6%96%B9%E6%B3%95"
+                    >Prerender2 を使う方法</a
+                  >
+                </li>
+                <li><a href="#feature-detection">feature detection</a></li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="#prerender2-%E3%81%AE%E6%A4%9C%E8%A8%8E%E4%BA%8B%E9%A0%85%E3%81%AA%E3%81%A9"
+                >Prerender2 の検討事項など</a
+              >
+              <ul>
+                <li>
+                  <a href="#privacy-considerations">Privacy considerations</a>
+                </li>
+                <li>
+                  <a
+                    href="#%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%A8-cookie-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"
+                    >ネットワークリクエストと Cookie について</a
+                  >
+                </li>
+                <li>
+                  <a href="#http-cache-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"
+                    >HTTP Cache について</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#link-relprerender-%E3%82%BF%E3%82%B0%E3%81%AE%E6%B3%A8%E6%84%8F%E7%82%B9"
+                    ><code>&lt;link rel=prerender&gt;</code> タグの注意点</a
+                  >
+                </li>
+                <li><a href="#referrer-policy">Referrer Policy</a></li>
+                <li>
+                  <a href="#target_hint-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"
+                    >target_hint について</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#api-%E3%81%AE%E5%88%A9%E7%94%A8%E3%81%AE%E5%88%B6%E9%99%90"
+                    >API の利用の制限</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#%E3%81%8A%E3%82%8F%E3%82%8A%E3%81%AB">おわりに</a>
+            </li>
+            <li>
+              <a
+                href="#%E5%8F%82%E8%80%83%E3%83%BB%E9%96%A2%E9%80%A3%E3%83%AA%E3%83%B3%E3%82%AF"
+                >参考・関連リンク</a
+              >
+            </li>
+          </ul>
+          <!-- vim-markdown-toc -->
+        </details>
+        <h2>
+          <a name="Prerender とは" href="#Prerender とは" id="Prerender とは">
+            Prerender とは
+          </a>
+        </h2>
+        <p>
+          Prerender は Rendering
+          を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。
+        </p>
+        <p>
+          近年開発が進んでいるのは Prerender2 という機能だ。過去に Prerender
+          という機能が実装されていたが、それとは別物になる。この記事では読みやすさのために
+          Prerender2 を Prerender2、過去の Prerender を Legacy Prerender
+          と呼称することにする。
+        </p>
+        <h2>
+          <a
+            name="Legacy Prerender とはなにか"
+            href="#Legacy Prerender とはなにか"
+            id="Legacy Prerender とはなにか"
+          >
+            Legacy Prerender とはなにか
+          </a>
+        </h2>
+        <p>
+          現在 Legacy Prerender
+          は機能としては提供されておらず、取り下げられている。なぜ Legacy
+          Prerender は取り下げられたのか。それについては、Prerender の
+          <a
+            href="https://groups.google.com/a/chromium.org/g/Blink-dev/c/0nSxuuv9bBw"
+            >Intent to Deprecate and Remove: Prerender</a
+          >
+          の投稿に下記のように書かれている。
+        </p>
+        <blockquote>
+          <p>
+            Prerender is difficult to maintain and wastes resources compared to
+            its performance benefit. More efficient ways to achieve the same
+            performance goal are in development, but as they will behave quite
+            differently from prerender we need to resolve any unknown external
+            dependencies by deprecating prerender cleanly.
+          </p>
+        </blockquote>
+        <ul>
+          <li>メンテナンスが難しい</li>
+          <li>パフォーマンスの恩恵に比べてリソースを消費してしまう</li>
+          <li>
+            別途パフォーマンスを改善するために開発されている NoState Prefetch が
+            prerender に未知の依存を作らないようにする
+          </li>
+        </ul>
+        <p>ということらしい。</p>
+        <p>
+          ここで、メンテナンスの難しさについては、<a
+            href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#general-interop-and-compat-concerns"
+            >WICG/nav-speculation</a
+          >
+          に少し関連していそうな記載がある。
+        </p>
+        <blockquote>
+          <p>
+            Current implementations are also not necessarily compatible with
+            storage partitioning, as they were designed before such efforts. So
+            there may need to be future backward-incompatible changes to them to
+            meet browser teams&#39; new goals around privacy.
+          </p>
+        </blockquote>
+        <p>
+          現在の実装は storage partitioning
+          との互換性が必要ないときに設計されたため、現在のプライバシーゴールに到達していないとのことだ。この記載は
+          <code>&lt;link rel=&quot;prerender&quot;&gt;</code>、つまり Legacy
+          Prerender が取り下げられた現在では NoState Prefetch
+          についての記載であるが、おそらく NoState Prefetch 以前の機能である
+          Legacy Prerender についても同様なことが予想される。Legacy Prerender が
+          <a
+            href="https://blog.chromium.org/2011/06/prerendering-in-chrome.html"
+            >2011年にアナウンスされている</a
+          >機能であることから、コードが古くなっていて、上記のゴールを達成するためのメンテナンスが難しくなっているのは想像に難くない。
+        </p>
+        <p>
+          いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。
+        </p>
+        <h2>
+          <a name="Prerender2" href="#Prerender2" id="Prerender2">
+            Prerender2
+          </a>
+        </h2>
+        <p>
+          2017 年に Intent to Deprecate and Remove: Prerender が出てから 4
+          年の月日が流れ、2021年 8 月に Prerender2
+          の仕様に関する文書が作成された。
+          <a
+            href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit#heading=h.gfguuhafev5j"
+            >Prerender2 のドキュメント</a
+          >には下記のようにある。
+        </p>
+        <blockquote>
+          <h2>
+            <a
+              name="What’s about “2”, or why are we resurrecting it?"
+              href="#What’s about “2”, or why are we resurrecting it?"
+              id="What’s about “2”, or why are we resurrecting it?"
+            >
+              What’s about “2”, or why are we resurrecting it?
+            </a>
+          </h2>
+          <ul>
+            <li>
+              We used to have prerendering, but turned it down, and are creating
+              a new one.
+            </li>
+            <li>
+              We think we can bring it back without the problems
+              <strong>of</strong> the past.
+            </li>
+          </ul>
+        </blockquote>
+        <p>
+          過去の Prerender
+          を取り下げた当時の問題を今なら解決できるということらしい。 Legacy
+          Prerender の実装がなくなったり、リファクタを重ねた結果、Prerender2
+          をモダンな形で実装できるようになったのだろう。 Chromium の Commit
+          を見ても、Legacy Prerender の削除や、Refactor、Prerender2
+          の実装が行われているのが<a
+            href="https://chromium-news.vercel.app/?query=Prerender"
+            >伺える</a
+          >。
+        </p>
+        <p>
+          2022年11月24日現在では Android と Desktop 版の Chrome/Chromium
+          で使えるようだ。
+        </p>
+        <h3>
+          <a
+            name="Prerender2 を使う方法"
+            href="#Prerender2 を使う方法"
+            id="Prerender2 を使う方法"
+          >
+            Prerender2 を使う方法
+          </a>
+        </h3>
+        <p>
+          ここまで、Prerender2 の歴史について主に触れてきたが、次節からは
+          Prerender2 をどのように使うのかを紹介する。
+        </p>
+        <p>
+          Prerender2 の有効化は比較的簡単で
+          <a
+            href="https://wicg.github.io/nav-speculation/speculation-rules.html"
+            >Speculation Rules</a
+          >を用いて行われる。 具体的には次のようになる。
+        </p>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"speculationrules"</span>&gt;</span><span class="actionscript">
+{ prerender: [{ source: <span class="hljs-string">'list'</span>, urls: [<span class="hljs-string">'next.html'</span>] }] }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+        <p>
+          簡単な<a href="https://x.bokken.io/example-prerender2/">デモページ</a
+          >を用意した。手元の環境では Chrome Beta の 108.0.5359.48
+          で動作を確認できた。 Chrome 107.0.5304.110
+          では確認できなかったので動作確認の際にはバージョンに注意していただきたい。
+        </p>
+        <div style="display: flex">
+          <img
+            alt="Prerender2 true"
+            src="./img/prerender2_true.gif"
+            width="350"
+          />
+          <img
+            alt="Prerender2 false"
+            src="./img/prerender2_false.gif"
+            width="350"
+          />
+        </div>
+
+        <p>
+          内容としては、リンク先のページが大きな画像を表示するサイトで
+          Prerender2 を使うかどうかを切り替えられるのだが、Prerender2
+          を適用しない場合は遷移後のページでは画像が少し遅れて表示されることが分かる。
+        </p>
+        <p>
+          また、新しいタブで開いたときにも Prerender2
+          は働かないので、動作確認の際にリンクをクリックしていただきたい。
+        </p>
+        <h3>
+          <a
+            name="feature detection"
+            href="#feature detection"
+            id="feature detection"
+          >
+            feature detection
+          </a>
+        </h3>
+        <p>
+          Prerender2 は Speculation Rules を利用しているため、Prerender2
+          を利用するためにはブラウザが Speculation Rules
+          をサポートしている必要がある。
+          そのための方法としては下記のような形でチェックするようだ。
+        </p>
+        <pre><code class="language-javascript"><span class="hljs-keyword">if</span> (HTMLScriptElement.supports &amp;&amp; HTMLScriptElement.supports(<span class="hljs-string">'speculationrules'</span>)) {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Your browser supports speculationrules.'</span>);
+}
+</code></pre>
+        <p>
+          また、Prerender2 でレンダリングされたかどうかは
+          <code>document.prerendering</code> を確認するとよい。
+        </p>
+        <h2>
+          <a
+            name="Prerender2 の検討事項など"
+            href="#Prerender2 の検討事項など"
+            id="Prerender2 の検討事項など"
+          >
+            Prerender2 の検討事項など
+          </a>
+        </h2>
+        <p>
+          ここまでで Prerender2 はとても簡単に使える事がわかってきた。
+          ただ、プライバシーや細かい動作の挙動について懸念することはたくさんある。そちらについてもドキュメントにかかれていたので紹介する。
+        </p>
+        <h3>
+          <a
+            name="Privacy considerations"
+            href="#Privacy considerations"
+            id="Privacy considerations"
+          >
+            Privacy considerations
+          </a>
+        </h3>
+        <p>
+          まずはじめに紹介するのは Privacy Considerations についてだ。 Privacy
+          に関しては下記のように書かれている。
+        </p>
+        <blockquote>
+          <p>
+            Prerendering normally raises privacy concerns because the user may
+            not intend to visit the page being prerendered. The privacy risk is
+            smaller in the same-origin case, which is the initial origin trial.
+          </p>
+        </blockquote>
+        <p>
+          Prerender2
+          を使うと、あるページにアクセスしたときユーザが意図せず別のページを訪問することになる。
+          ただ、これは same-origin であれば問題がないため、現状の same-origin
+          Prerender2 であれば特に問題はないということだ。
+        </p>
+        <p>cross-origin の場合については下記のように記載がある。</p>
+        <blockquote>
+          <p>
+            The rest of this section covers the same-origin case. For the
+            cross-origin cases, much work is being done as part of proposed web
+            standards. See this work at
+            <a href="https://github.com/jeremyroman/alternate-loading-modes/"
+              >https://github.com/jeremyroman/alternate-loading-modes/</a
+            >
+          </p>
+        </blockquote>
+        <p>
+          cross-origin については今後 Web Standards で議論が進んでいくようだ。
+        </p>
+        <h3>
+          <a
+            name="ネットワークリクエストと Cookie について"
+            href="#ネットワークリクエストと Cookie について"
+            id="ネットワークリクエストと Cookie について"
+          >
+            ネットワークリクエストと Cookie について
+          </a>
+        </h3>
+        <p>
+          ネットワークについて他にも<a
+            href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit#bookmark=id.vbnic8jwys3e"
+            >ドキュメント</a
+          >に記載がある。
+        </p>
+        <blockquote>
+          <p>
+            The plan is for the prerendering page to have mostly unrestricted
+            access to network, including having cookies present on the requests.
+            This includes for cross-origin subresource requests. While
+            third-party cookies are a known privacy concern, there is ongoing
+            other work in Chromium to reduce the privacy risk of these that we
+            expect to be automatically applied to prerendering. But it is worth
+            noting that that work will likely only restrict cross-site cookies,
+            and not cross-origin ones. Nevertheless, the same-origin prerender
+            does not give the main page any more power to make cross-origin
+            requests than it can already do with an iframe.
+          </p>
+        </blockquote>
+        <p>
+          Prerender2 では、ネットワークリクエストの際に Prerender
+          されるリクエストに Cookie も付与する。 合わせて、Prerender
+          されるドキュメントが cross-origin
+          のサブリソースを読み込む必要がある際にも Cookie を付与することになる。
+          これはプライバシーに関する懸念として知られているが、Chromium
+          では別の作業(おそらく CHIPS 関連の作業？)が進行中のため、それが
+          Prerender2 に自動的に適用されることを期待している状態とのことだ。
+        </p>
+        <p>
+          また、面白いのは cross-origin の iframe については下記にあるように
+          load されるのを遅らせるようになっているらしい。
+        </p>
+        <blockquote>
+          <p>
+            One restriction in prerendering is that cross-origin iframes will
+            delay loading until activation. This improves privacy and simplifies
+            cross-process concerns (there are no out-of-process iframes), but it
+            can limit the effectiveness of prerendering if essential content for
+            the page is in the iframe.
+          </p>
+        </blockquote>
+        <p>
+          これによってセキュリティが向上することができるとのことだ。
+          また、筆者自身も Prerender2
+          で考えるべきことを減らせるため、とても良い決断のように思う。
+        </p>
+        <h3>
+          <a
+            name="HTTP Cache について"
+            href="#HTTP Cache について"
+            id="HTTP Cache について"
+          >
+            HTTP Cache について
+          </a>
+        </h3>
+        <p>
+          続いては HTTP Cache に関する挙動だ。 HTTP Cache
+          の節には下記のように書かれている。
+        </p>
+        <blockquote>
+          <p>
+            Prerendering a page will modify the normal HTTP cache as if it were
+            a normal navigation. This is the current behavior of
+            NoStatePrefetch. However, the long-term goal is for prerendering to
+            use an isolated, ephemeral cache that is only usable by the next
+            top-level navigation or has a timeout on the order of 5 minutes like
+            the current prefetch cache. The cross-origin prerendering milestones
+            will be blocked on the implementation of this cache.
+          </p>
+        </blockquote>
+        <p>
+          HTTP Cache は Prerender されると通常のリクエストと同様に HTTP Cache
+          が更新される。 これは NoState Prefetch
+          と同じだが、将来的には分離された一時的な Cache
+          を利用するか、PrefetchCache のように 5
+          分でタイムアウトするようにすることが目標とのこと。
+        </p>
+        <h3>
+          <a
+            name="<code>&lt;link rel=prerender&gt;</code> タグの注意点"
+            href="#<code>&lt;link rel=prerender&gt;</code> タグの注意点"
+            id="<code>&lt;link rel=prerender&gt;</code> タグの注意点"
+          >
+            <code>&lt;link rel=prerender&gt;</code> タグの注意点
+          </a>
+        </h3>
+        <p>
+          <code>&lt;link rel=&quot;prerender&quot;&gt;</code> という形では
+          NoState Prefetch が働くだけで、Prerender2 はトリガーされない。
+        </p>
+        <p>これは下記のような理由からだそうだ。</p>
+        <ul>
+          <li>
+            <code>&lt;link rel=&quot;prerender&quot;&gt;</code>
+            の挙動を変えるのはリスクであること
+          </li>
+          <li>
+            speculationrules はもっとパワフルで柔軟な API
+            になることが想定されている
+          </li>
+          <li>
+            Prerender2 がトリガされるのか、NoState Prefetch
+            がトリガされるのか説明が複雑になる
+          </li>
+        </ul>
+        <p>
+          ただ、ドキュメントには下記のようにあり、将来的には
+          <code>&lt;link rel=&quot;prerender&quot;&gt;</code>
+          をサポートする予定なのでいくらか混乱が少なくなりそうだ。
+        </p>
+        <blockquote>
+          <h2>
+            <a name="Followup work" href="#Followup work" id="Followup work">
+              Followup work
+            </a>
+          </h2>
+          <h3>
+            <a name="Triggering" href="#Triggering" id="Triggering">
+              Triggering
+            </a>
+          </h3>
+          <p>Beyond speculationrules, we may trigger in other cases:</p>
+          <ul>
+            <li><link rel="”prerender”" /> and <link rel="”next”" /></li>
+          </ul>
+        </blockquote>
+        <h3>
+          <a
+            name="Referrer Policy"
+            href="#Referrer Policy"
+            id="Referrer Policy"
+          >
+            Referrer Policy
+          </a>
+        </h3>
+        <p>
+          Referrer Policy について、Prerender のための navigation request は
+          speculation rules を記載されているドキュメントの Referrer Policy
+          を尊重するという記載がある。
+        </p>
+        <blockquote>
+          <p>
+            The prerender navigation request respects the referrer policy of the
+            document that uses speculation rules.
+          </p>
+        </blockquote>
+        <p>
+          ただし、上記の speculation rules のドキュメントの Referrer Policy は
+          Prerender されたドキュメントには伝播されない(つまり、Prerender
+          されたあとは Prerender されたあとのドキュメントの Referrer Policy
+          に従う)ということだろう。また、Prerender された Referrer Policy
+          に従うので覚えておく必要がありそうだ。
+        </p>
+        <blockquote>
+          <p>
+            The referrer policy of the triggering document does not propagate to
+            the prerendered document itself. Subresources from the prerendered
+            document respect the referrer policy of the prerendered document.
+          </p>
+        </blockquote>
+        <p>
+          ただし、これは Speculation Rules に
+          <code>referrer_policy</code> を記載できるようになる Intent (<a
+            href="https://groups.google.com/a/chromium.org/g/blink-dev/c/qzElfWpzWXg"
+            >Intent to Prototype: Speculation rules referrer policy key</a
+          >) が出されているので、 Speculation Rules で Referrer Policy
+          を上書きできるようにもなりそうだ。(<a
+            href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#explicit-referrer-policy"
+            >WICG/nav-speculation</a
+          >)
+        </p>
+        <h3>
+          <a
+            name="target_hint について"
+            href="#target_hint について"
+            id="target_hint について"
+          >
+            target_hint について
+          </a>
+        </h3>
+        <p>
+          現在デモページの節でも新しいタブで開いた場合には Prerender2
+          は起動されないようだ。 この新しいタブで開いた際にも Prerender2
+          を有効にする方法として
+          <a
+            href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#window-name-targeting-hints"
+            ><code>target_hint</code> の仕様策定</a
+          >が進んでいる。
+        </p>
+        <p>
+          これは下記のように <code>target_hint</code> というプロパティに browser
+          context の keyword
+          を指定することで、ブラウザにどういったコンテキストでページをレンダリングするかを伝える。
+        </p>
+        <blockquote>
+          <pre><code class="language-json">{
+  <span class="hljs-attr">"prerender"</span>: [
+   {<span class="hljs-attr">"source"</span>: <span class="hljs-string">"list"</span>,
+    <span class="hljs-attr">"target_hint"</span>: <span class="hljs-string">"_self"</span>,
+    <span class="hljs-attr">"urls"</span>: [<span class="hljs-string">"page.html"</span>]
+   },
+   {<span class="hljs-attr">"source"</span>: <span class="hljs-string">"list"</span>,
+    <span class="hljs-attr">"target_hint"</span>: <span class="hljs-string">"_blank"</span>,
+    <span class="hljs-attr">"urls"</span>: [<span class="hljs-string">"page.html"</span>]
+   }]
+}
+</code></pre>
+        </blockquote>
+        <p>
+          <code>target_hint</code> に
+          <code>_self</code> を指定すると同じタブ、<code>_blank</code>
+          を指定すると新しいタブで開くという具合にブラウザにヒントを出すことができる。
+          上記のように指定すると、同じタブで開いたとしても新しいタブで開いたとしても
+          Prerender2 がトリガされることになる。
+        </p>
+        <p>
+          ただし、上記のように 2 つ指定するとリソースを 2
+          倍消費することになるため、下記のように可能であれば避けた方が良いという記載がある。
+        </p>
+        <blockquote>
+          <p>
+            However, in implementations such as Chromium that need the target
+            hint, this will prerender the page twice, and thus use twice as many
+            resources. So this is best avoided if possible.
+          </p>
+        </blockquote>
+        <p>
+          この target_hint について、現在の実装を確認したが、Chrome Beta の
+          108.0.5359.48 であってもまだ動作を確認できなかった。
+          <a
+            href="https://chromium.googlesource.com/chromium/src/+/df487ceb%5E%21/"
+            >target_hint に関する CL</a
+          >
+          は存在するが、まだ browser process
+          はこれを使っていないという記載があるためまだ利用できないようだ。
+          実装されるのを楽しみに待ちたい。
+        </p>
+        <h3>
+          <a
+            name="API の利用の制限"
+            href="#API の利用の制限"
+            id="API の利用の制限"
+          >
+            API の利用の制限
+          </a>
+        </h3>
+        <p>
+          Prerender されたコンテンツが利用できる API
+          には制限が課されている事がある。
+        </p>
+        <p>
+          仕様については
+          <a
+            href="https://wicg.github.io/nav-speculation/prerendering.html#intrusive-behaviors"
+            >Prerendering Revamped</a
+          >
+          に記載がある。
+        </p>
+        <p>
+          また、それぞれの API に関する検討は
+          <a
+            href="https://docs.google.com/document/d/1zY15k_wFTik2EoxBf3_RT7YjYpFMDaeNspy15n0rtww/edit"
+            >Restrictions on prerendered content - Google Docs</a
+          >
+          や
+          <a
+            href="https://docs.google.com/spreadsheets/d/1V9Rm_3XACVHexaI4z41xciZxRh6zWrq5mFfSHYrs1XE/edit?usp=sharing"
+            >Spread Sheet</a
+          >
+          にまとめられているので、API
+          を使う際にはこちらを見て利用に問題がないか確認した上で利用するのが良いだろう。
+        </p>
+        <h2>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
+        </h2>
+        <p>
+          今回、実装が進んでいる Prerender2
+          について現状や使い方、今後について分かっていることを紹介した。
+          Speculation Rules
+          に指定するだけで簡単に使える仕様でありながら、ドキュメントに記載されている内容の多さや、Prerender2
+          関連の Commit の多さから苦労が伺える。
+          これだけの大仕事を、簡単な使い方にまとめてしまえる Chrome / Chromium
+          開発者のみなさんには畏敬の念を感じずにはいられない。
+        </p>
+        <p>
+          Prerender2
+          はまだまだ開発が進んでいくため、これからも動向を楽しみに待ちたい。
+        </p>
+        <p>
+          もしも、誤りや追加の情報があれば
+          <a href="https://github.com/negibokken/bokken.io/issues">issue</a> や
+          <a href="https://twitter.com/bokken_">@bokken_</a>
+          までいただけると嬉しい。
+        </p>
+        <h2>
+          <a
+            name="参考・関連リンク"
+            href="#参考・関連リンク"
+            id="参考・関連リンク"
+          >
+            参考・関連リンク
+          </a>
+        </h2>
+        <ol>
+          <li>
+            <a
+              href="https://docs.google.com/document/d/1EpLshvc9RRW3vswmXsJGrbCkhlFmxDsWfbvgxmYDTfs/edit"
+              >P2D: Prerender2 for Desktop - Google Docs</a
+            >
+          </li>
+          <li>
+            <a href="https://chromestatus.com/feature/5197044678393856"
+              >Prerender2 for Desktop - Chrome Platform Status</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit"
+              >Prerender2 [public] - Google Docs</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/WICG/nav-speculation/blob/main/triggers.md"
+              >nav-speculation/triggers.md at main · WICG/nav-speculation</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://docs.google.com/document/d/1zY15k_wFTik2EoxBf3_RT7YjYpFMDaeNspy15n0rtww/edit"
+              >Restrictions on prerendered content - Google Docs</a
+            >
+          </li>
+          <li>
+            <a href="https://www.w3.org/TR/resource-hints/">Resource Hints</a>
+          </li>
+          <li>
+            <a
+              href="https://blog.araya.dev/posts/2021-08-12/speculation-rules-prefetch.html"
+              >Private Prefetch Proxy と Speculation
+              Rulesによるprefetch/prerender</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.chromium.org/developers/design-documents/prerender/"
+              >Chrome Prerendering</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://blog.chromium.org/2011/06/prerendering-in-chrome.html"
+              >Chromium Blog: Prerendering in Chrome</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://groups.google.com/a/chromium.org/g/Blink-dev/c/0nSxuuv9bBw"
+              >Intent to Deprecate and Remove: Prerender</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://html.spec.whatwg.org/multipage/links.html#link-type-prerender"
+            >
+              link-type-prerender | HTML Standard</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://docs.google.com/document/d/16VCYGGWau483IMSxODpg5faZny1FJ6vNK2v-BuM5EhU/edit#heading=h.uajrcfabdbg5"
+              >NoState Prefetch - Google ドキュメント</a
+            >
+          </li>
+          <li>
+            <a href="https://developer.chrome.com/blog/nostate-prefetch/"
+              >Introducing NoState Prefetch - Chrome Developers</a
+            >
+          </li>
+          <li>
+            <a href="https://chromestatus.com/feature/5928321099497472"
+              >No State Prefetch - Chrome Platform Status</a
+            >
+          </li>
+        </ol>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+
+      <div>
+        Subscribe via <a href="https://blog.bokken.io/feeds/atom.xml">RSS</a>
+      </div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a
+            href="https://blog.bokken.io/articles/2022-10-24/about-client-side-storage.html"
+          >
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
+

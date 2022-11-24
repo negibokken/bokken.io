@@ -61,7 +61,42 @@
     <main>
         <h2>Overview</h2>
         <p>This is an example site for Prerender2.</p>
-        <div>
+        <script>
+            const speculationrules = `
+                {
+                    "prerender": [
+                        {
+                            "source": "list",
+                            "urls": ["/too-heavy-image-page/index.html"]
+                        }
+                    ]
+                }
+            `;
+            let state = true;
+            document.addEventListener("DOMContentLoaded", () => {
+                const container = document.querySelector("#container");
+
+                const $state = document.querySelector("#state");
+                $state.innerText = state ? "enabled" : "disabled";
+                const $container = document.querySelector("#container");
+                const toggle = document.querySelector("#toggle");
+                toggle.addEventListener("click", () => {
+                    state = !state;
+                    $state.innerText =  state ? "enabled" : "disabled";
+                    if(state) {
+                        // Toggle doesn't work well. So reload.
+                        window.location.reload();
+                        // const $script = document.createElement("script");
+                        // $script.setAttribute("type", "speculationrules");
+                        // $script.innerText = JSON.stringify(JSON.parse(speculationrules));
+                        // $container.appendChild($script);
+                    } else {
+                        $container.removeChild($container.querySelector("script"))
+                    }
+                })
+            });
+        </script>
+        <div id="container">
             <script type="speculationrules">
             {
                 "prerender": [
@@ -72,8 +107,15 @@
                 ]
             }
             </script>
-            <a href="/too-heavy-image-page/index.html">Too heavy website</a>
         </div>
+        <a href="/too-heavy-image-page/index.html">
+            Too heavy website
+            <span>(Prerender: <output id="state"></output>)</span>
+        </a>
+
+        <br/>
+        <br/>
+        <button id="toggle">Prerender toggler</button>
     </main>
 
     <footer>

@@ -32,7 +32,7 @@ for i in `seq 0 $(expr ${#directories[@]} - 1)`; do
   fi
   filename=`basename $path`
   name=`echo $filename | sed 's/\.[^.]*$//'`
-  
+
   outpath=$base/$dir/$name.html
 
   findIndex $dir ${directories[@]}
