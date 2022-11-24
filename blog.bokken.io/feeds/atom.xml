@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2022-10-24T13:30:54.924Z</updated>
+  <updated>2022-11-24T06:03:55.903Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -74,19 +74,6 @@
       type="html"
     >もともと&lt;a href=&#34;https://negi-works.hatenablog.com/&#34;&gt;昔にブログ&lt;/a&gt;を書いていたが、
 ブログとしてアウトプットをする時間を取らず更新が滞ってしまっていた。</summary>
-  </entry>
-  
-  <entry>
-    <title>Chromium をビルド・テストする方法とその実行時間の備忘録</title>
-    <link
-      href="https://blog.bokken.io/articles/2020-10-26/how-to-build-chromium.html"
-    />
-    <id
-    >https://blog.bokken.io/articles/2020-10-26/how-to-build-chromium.html</id>
-    <updated>2021-02-28T13:53:31.100Z</updated>
-    <summary
-      type="html"
-    >趣味でブラウザを作っている延長で、 Chromium をビルドしてテストを走らせて遊んでいる。その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。</summary>
   </entry>
   
   <entry>
@@ -249,7 +236,7 @@
   </entry>
   
   <entry>
-    <title>Anonymous iframe とは (WIP)</title>
+    <title>Anonymous iframe とは</title>
     <link
       href="https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html"
     />
@@ -265,18 +252,6 @@
   <entry>
     <title>ブラウザのクライアントサイド storage についてまとめる</title>
     <link
-      href="https://blog.bokken.io/articles/2022-10-24/blog-md-template.html"
-    />
-    <id>https://blog.bokken.io/articles/2022-10-24/blog-md-template.html</id>
-    <updated>2022-10-24T13:28:25.431Z</updated>
-    <summary
-      type="html"
-    >&lt;a href=&#34;https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html&#34;&gt;前回の Anonymous iframe の記事&lt;/a&gt;で、storage について触れた。</summary>
-  </entry>
-  
-  <entry>
-    <title>ブラウザのクライアントサイド storage についてまとめる</title>
-    <link
       href="https://blog.bokken.io/articles/2022-10-24/about-client-side-storage.html"
     />
     <id
@@ -285,6 +260,18 @@
     <summary
       type="html"
     >&lt;a href=&#34;https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html&#34;&gt;前回の Anonymous iframe の記事&lt;/a&gt;で、storage について触れた。</summary>
+  </entry>
+  
+  <entry>
+    <title>Prerender2 という機能について</title>
+    <link
+      href="https://blog.bokken.io/articles/2022-11-24/about-prerender2.html"
+    />
+    <id>https://blog.bokken.io/articles/2022-11-24/about-prerender2.html</id>
+    <updated>2022-11-24T06:03:55.903Z</updated>
+    <summary
+      type="html"
+    >Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。ここまで、Prerender2 の歴史について主に触れてきたが、次節からは Prerender2 をどのように使うのかを紹介する。</summary>
   </entry>
   
 </feed>
