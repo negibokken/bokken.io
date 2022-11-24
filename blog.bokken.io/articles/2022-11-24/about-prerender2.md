@@ -229,7 +229,7 @@ Prerender されたコンテンツが利用できる API には制限が課さ�
 
 仕様については [Prerendering Revamped](https://wicg.github.io/nav-speculation/prerendering.html#intrusive-behaviors) に記載がある。
 
-また、それぞれの API に関する検討は [Restrictions on prerendered content - Google Docs](https://docs.google.com/document/d/1zY15k_wFTik2EoxBf3_RT7YjYpFMDaeNspy15n0rtww/edit) や [Spread Sheet](https://docs.google.com/spreadsheets/d/1V9Rm_3XACVHexaI4z41xciZxRh6zWrq5mFfSHYrs1XE/edit?usp=sharing) にまとめられているので、API を使う際にはこちらを見て利用に問題がないか確認した上で利用するのが良いだろう。
+また、それぞれの API に関する検討は [Restrictions on prerendered content - Google Docs](https://docs.google.com/document/d/1zY15k_wFTik2EoxBf3_RT7YjYpFMDaeNspy15n0rtww/edit) や [Spread Sheet(public を意図しているようだが現在はアクセス権限がない)](https://docs.google.com/spreadsheets/d/1V9Rm_3XACVHexaI4z41xciZxRh6zWrq5mFfSHYrs1XE/edit?usp=sharing) にまとめられているので、API を使う際にはこちらを見て利用に問題がないか確認した上で利用するのが良いだろう。
 
 ## おわりに
 
