@@ -12,8 +12,7 @@
     <meta
       name="description"
       content="最近、Chromium へのコントリビューション活動をしている。
-直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。具体的に取り組んでいたのは、こちらのバグである。具体的な WPT のテストケースは下記のケースだ。結論からいうと、WPT は間違っておらず、Chromium の実装の一部に問題があった。
-ただし一部混乱する部分があった。"
+直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。具体的な WPT のテストケースは下記のケースだ。ただし、WPT が誤っているケースもありえる。今回のバグ対応では WPT が間違っているのか、Chromium の実装が間違っているのかを判断する必要があった。"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -40,8 +39,7 @@
     <meta
       property="og:description"
       content="最近、Chromium へのコントリビューション活動をしている。
-直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。具体的に取り組んでいたのは、こちらのバグである。具体的な WPT のテストケースは下記のケースだ。結論からいうと、WPT は間違っておらず、Chromium の実装の一部に問題があった。
-ただし一部混乱する部分があった。"
+直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。具体的な WPT のテストケースは下記のケースだ。ただし、WPT が誤っているケースもありえる。今回のバグ対応では WPT が間違っているのか、Chromium の実装が間違っているのかを判断する必要があった。"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -158,7 +156,9 @@
         </h2>
         <p>
           具体的に取り組んでいたのは、<a
+            target="_blank"
             href="https://bugs.chromium.org/p/chromium/issues/detail?id=978146"
+            rel="noopener"
             >こちらのバグ</a
           >である。
         </p>
@@ -199,7 +199,9 @@
         </p>
         <p>
           Fetch Standard を読むと、<a
+            target="_blank"
             href="https://fetch.spec.whatwg.org/#concept-header-list-get-structured-header"
+            rel="noopener"
             >2.2.2 Headers</a
           >
           のはじめには Structured Field Values
@@ -216,7 +218,9 @@
           しかし、実際にはヘッダの Field Values
           のパース方法は各ヘッダの仕様ごとに策定されている。 今回の
           Access-Control-Expose-Headers の場合には、<a
+            target="_blank"
             href="https://fetch.spec.whatwg.org/#http-new-header-syntax"
+            rel="noopener"
             >Fetch Standard</a
           >
           に CORS の ABNF
@@ -255,7 +259,10 @@ tchar          = "!" / "#" / "$" / "%" / "&amp;" / "'" / "*"
         </p>
         <p>
           だが、実際には
-          <a href="https://datatracker.ietf.org/doc/html/rfc7230#section-7"
+          <a
+            target="_blank"
+            href="https://datatracker.ietf.org/doc/html/rfc7230#section-7"
+            rel="noopener"
             ># に関する拡張ルール</a
           >を注意深く読む必要がありる。この仕様を読むと古い list rule
           との互換性のために、リストにある空白の要素は受領し、無視しなければいけないという記載がある。
@@ -274,7 +281,9 @@ tchar          = "!" / "#" / "$" / "%" / "&amp;" / "'" / "*"
         <p>
           結果としてこの
           <a
+            target="_blank"
             href="https://chromium.googlesource.com/chromium/src/+/f04938e02551c56a0363fca50d49fe97b0c9098f"
+            rel="noopener"
             >CL</a
           >
           を作成し、現在はマージされている。成果として、今まで Chromium が FAIL

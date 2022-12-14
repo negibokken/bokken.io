@@ -123,18 +123,27 @@
         </h2>
         <p>
           <a
+            target="_blank"
             href="https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html"
+            rel="noopener"
             >前回の Anonymous iframe の記事</a
           >で、storage について触れた。
         </p>
         <p>
           ブラウザが持つ storage にはどんなものがあるのか気になったので、
           <a
+            target="_blank"
             href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
+            rel="noopener"
             >MDN</a
           >
           や
-          <a href="https://storage.spec.whatwg.org/">Storage Standard</a>
+          <a
+            target="_blank"
+            href="https://storage.spec.whatwg.org/"
+            rel="noopener"
+            >Storage Standard</a
+          >
           を読んでまとめてみる。
         </p>
         <h2>
@@ -152,7 +161,9 @@
         </p>
         <p>
           <a
+            target="_blank"
             href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
+            rel="noopener"
             >MDN</a
           >
           にはクライアントサイド Storage
@@ -178,7 +189,10 @@
         </ul>
         <p>
           (WebSQL もあるが多くのブラウザやユースケースで deprecated
-          になっており、<a href="https://www.w3.org/TR/webdatabase/"
+          になっており、<a
+            target="_blank"
+            href="https://www.w3.org/TR/webdatabase/"
+            rel="noopener"
             >W3C の Web Application Working Group もメンテナンスをしておらず</a
           >、 Web Storage や Indexed DB の仕様を策定をしているようだ)
         </p>
@@ -229,7 +243,9 @@
           sessionStorage はブラウザ(タブ)が閉じられるまで、 localStorage
           はブラウザが閉じられたとしても保持される。保存できるデータサイズはユーザ環境に依存するが、5
           - 10 MB ほどだ。扱えるデータの種別としては string のみである(<a
+            target="_blank"
             href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem"
+            rel="noopener"
             >Storage.setItem() - Web APIs | MDN</a
           >)。
         </p>
@@ -249,7 +265,9 @@
         </p>
         <p>
           上記の例では、setItem と getItem を使っているが、<a
+            target="_blank"
             href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API"
+            rel="noopener"
             >MDN</a
           >によると、下記のようにいくつかのアクセス方法がある。
         </p>
@@ -432,7 +450,9 @@ request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event
         </p>
         <p>
           <a
+            target="_blank"
             href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage#offline_asset_storage"
+            rel="noopener"
             >MDN</a
           >
           を参考に Cache API と Serivce Worker は下記のように使う。
@@ -481,7 +501,9 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (e) =&gt; {
           <p>
             --
             <a
+              target="_blank"
               href="https://developer.mozilla.org/en-US/docs/Web/API/Cache#:~:text=entries%20in%20the-,Cache,-object."
+              rel="noopener"
               >MDN</a
             >
           </p>
@@ -516,43 +538,65 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (e) =&gt; {
         <ol>
           <li>
             <a
+              target="_blank"
               href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
+              rel="noopener"
               >Client-side storage - Learn web development | MDN</a
             >
           </li>
           <li>
-            <a href="https://storage.spec.whatwg.org/">Storage Standard</a>
+            <a
+              target="_blank"
+              href="https://storage.spec.whatwg.org/"
+              rel="noopener"
+              >Storage Standard</a
+            >
           </li>
           <li>
-            <a href="https://privacycg.github.io/storage-partitioning/"
+            <a
+              target="_blank"
+              href="https://privacycg.github.io/storage-partitioning/"
+              rel="noopener"
               >Client-Side Storage Partitioning | storage-partitioning</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://developer.chrome.com/blog/deps-rems-94/#deprecate-and-remove-websql-in-third-party-contexts"
+              rel="noopener"
               >Deprecations and removals in Chrome 94 - Chrome Developers</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API"
+              rel="noopener"
               >Using the Web Storage API - Web APIs | MDN</a
             >
           </li>
           <li>
-            <a href="https://web.dev/storage-for-the-web/"
+            <a
+              target="_blank"
+              href="https://web.dev/storage-for-the-web/"
+              rel="noopener"
               >Storage for the web</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB"
+              rel="noopener"
               >Using IndexedDB - Web APIs | MDN</a
             >
           </li>
           <li>
-            <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache"
+            <a
+              target="_blank"
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Cache"
+              rel="noopener"
               >Cache - Web APIs | MDN</a
             >
           </li>

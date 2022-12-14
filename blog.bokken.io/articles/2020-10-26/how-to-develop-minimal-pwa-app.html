@@ -147,42 +147,54 @@
             <a name="目次" href="#目次" id="目次"> 目次 </a>
           </h2>
           <ol>
-            <li><a href="#%E6%A6%82%E8%A6%81">概要</a></li>
-            <li><a href="#%E7%9B%AE%E6%AC%A1">目次</a></li>
-            <li><a href="#%E3%83%87%E3%83%A2">デモ</a></li>
+            <li><a target="_blank" href="#概要" rel="noopener">概要</a></li>
+            <li><a target="_blank" href="#目次" rel="noopener">目次</a></li>
+            <li><a target="_blank" href="#デモ" rel="noopener">デモ</a></li>
             <li>
-              <a href="#Progressive-Web-App-PWA%E3%81%A8%E3%81%AF"
+              <a
+                target="_blank"
+                href="#Progressive-Web-App-PWAとは"
+                rel="noopener"
                 >Progressive Web App (PWA)とは</a
               >
               <ol>
                 <li>
                   <a
-                    href="#PWA-%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%A6%82%E8%A6%81"
+                    target="_blank"
+                    href="#PWA-に必要なファイル概要"
+                    rel="noopener"
                     >PWA に必要なファイル概要</a
                   >
                 </li>
               </ol>
             </li>
-            <li><a href="#Web-App-Manifest">Web App Manifest</a></li>
-            <li><a href="#Service-Workers">Service Workers</a></li>
             <li>
-              <a
-                href="#%E5%BF%85%E8%A6%81%E3%81%A8%E3%81%AA%E3%82%8B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"
+              <a target="_blank" href="#Web-App-Manifest" rel="noopener"
+                >Web App Manifest</a
+              >
+            </li>
+            <li>
+              <a target="_blank" href="#Service-Workers" rel="noopener"
+                >Service Workers</a
+              >
+            </li>
+            <li>
+              <a target="_blank" href="#必要となるファイル" rel="noopener"
                 >必要となるファイル</a
               >
               <ol>
                 <li>
-                  <a href="#scope-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"
+                  <a target="_blank" href="#scope-について" rel="noopener"
                     >scope について</a
                   >
                 </li>
               </ol>
             </li>
             <li>
-              <a href="#%E3%81%8A%E3%82%8F%E3%82%8A%E3%81%AB">おわりに</a>
+              <a target="_blank" href="#おわりに" rel="noopener">おわりに</a>
             </li>
             <li>
-              <a href="#%E5%8F%82%E8%80%83%E3%83%AA%E3%83%B3%E3%82%AF"
+              <a target="_blank" href="#参考リンク" rel="noopener"
                 >参考リンク</a
               >
             </li>
@@ -193,7 +205,9 @@
         </h2>
         <p>
           本 blog も PWA 化しているが、別途<a
+            target="_blank"
             href="https://x.bokken.io/example-pwa/index.html"
+            rel="noopener"
             >デモ</a
           >
           を用意している。
@@ -218,10 +232,18 @@
         <p>要素技術的には下記が関係してくる。</p>
         <ul>
           <li>
-            <a href="https://www.w3.org/TR/appmanifest/">Web App Manifest</a>
+            <a
+              target="_blank"
+              href="https://www.w3.org/TR/appmanifest/"
+              rel="noopener"
+              >Web App Manifest</a
+            >
           </li>
           <li>
-            <a href="https://www.w3.org/TR/service-workers/"
+            <a
+              target="_blank"
+              href="https://www.w3.org/TR/service-workers/"
+              rel="noopener"
               >Service Workers 1</a
             >
           </li>
@@ -241,7 +263,9 @@
           <p>
             --
             <a
+              target="_blank"
               href="https://developers.google.com/web/fundamentals/architecture/app-shell"
+              rel="noopener"
               >App Shell モデル  |  Web  |  Google Developers</a
             >
           </p>
@@ -290,7 +314,13 @@
             to open when a user launches the web application.
           </p>
           <p>
-            -- <a href="https://w3c.github.io/manifest/">Web App Manifest</a>
+            --
+            <a
+              target="_blank"
+              href="https://w3c.github.io/manifest/"
+              rel="noopener"
+              >Web App Manifest</a
+            >
           </p>
         </blockquote>
         <p>例えば下記のようなデータである。</p>
@@ -342,8 +372,13 @@
         </h2>
         <p>
           Service Worker というのは
-          <a href="https://www.w3.org/TR/workers/">Web Worker</a> の一種である。
-          Service Worker はブラウザの JavaScript
+          <a
+            target="_blank"
+            href="https://www.w3.org/TR/workers/"
+            rel="noopener"
+            >Web Worker</a
+          >
+          の一種である。 Service Worker はブラウザの JavaScript
           からインストールされてバックグラウンドで動作する。
         </p>
         <p>
@@ -496,8 +531,14 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
         </p>
         <p>
           scope については Chrome の開発者である
-          <a href="https://twitter.com/nhiroki_">@nhiroki_</a> さんの
-          <a href="https://qiita.com/nhiroki/items/eb16b802101153352bba"
+          <a target="_blank" href="https://twitter.com/nhiroki_" rel="noopener"
+            >@nhiroki_</a
+          >
+          さんの
+          <a
+            target="_blank"
+            href="https://qiita.com/nhiroki/items/eb16b802101153352bba"
+            rel="noopener"
             >ServiceWorker のスコープとページコントロールについて - Qiita</a
           >
           の記事がとてもわかり易いので参照していただきたい。
@@ -519,9 +560,16 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
         </p>
         <p>
           もしも不足している内容や間違っている内容があれば
-          <a href="https://github.com/negibokken/bokken.io/issues">issue</a> か
-          Twitter アカウント
-          <a href="https://twitter.com/bokken_">@bokken_</a>
+          <a
+            target="_blank"
+            href="https://github.com/negibokken/bokken.io/issues"
+            rel="noopener"
+            >issue</a
+          >
+          か Twitter アカウント
+          <a target="_blank" href="https://twitter.com/bokken_" rel="noopener"
+            >@bokken_</a
+          >
           まで連絡をいただけると嬉しい。
         </p>
         <h2>
@@ -531,52 +579,74 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
         </h2>
         <ul>
           <li>
-            <a href="https://web.dev/what-are-pwas/"
+            <a
+              target="_blank"
+              href="https://web.dev/what-are-pwas/"
+              rel="noopener"
               >What are Progressive Web Apps?</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers"
+              rel="noopener"
               >Making PWAs work offline with Service workers - Progressive web
               apps (PWAs) | MDN</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://developers.google.com/web/ilt/pwa/introduction-to-service-worker"
+              rel="noopener"
               >Introduction to Service Worker  |  Web  |  Google Developers</a
             >
           </li>
           <li>
-            <a href="https://web.dev/pwa-checklist/"
+            <a
+              target="_blank"
+              href="https://web.dev/pwa-checklist/"
+              rel="noopener"
               >What makes a good Progressive Web App?</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps"
+              rel="noopener"
               >Progressive web apps (PWAs) | MDN</a
             >
           </li>
           <li>
-            <a href="https://www.w3.org/TR/service-workers/"
+            <a
+              target="_blank"
+              href="https://www.w3.org/TR/service-workers/"
+              rel="noopener"
               >Service Workers 1</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://developers.google.com/web/fundamentals/primers/service-workers?hl=en"
+              rel="noopener"
               >Service Workers: an Introduction  |  Web Fundamentals</a
             >
             <a
+              target="_blank"
               href="https://developers.google.com/web/fundamentals/primers/service-workers?hl=ja"
+              rel="noopener"
               >Service Worker の紹介  |  Web Fundamentals  |  Google
               Developers</a
             >
           </li>
           <li>
-            <a href="https://qiita.com/nhiroki/items/eb16b802101153352bba"
+            <a
+              target="_blank"
+              href="https://qiita.com/nhiroki/items/eb16b802101153352bba"
+              rel="noopener"
               >ServiceWorker のスコープとページコントロールについて - Qiita</a
             >
           </li>
