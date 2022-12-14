@@ -63,6 +63,9 @@ const renderer = {
 
         return h;
     },
+    link: (href, title, text) => {
+        return `<a target="_blank" href="${href}" rel="noopener">${text}</a>`;
+    }
 };
 
 class BMarkdown2HTML {

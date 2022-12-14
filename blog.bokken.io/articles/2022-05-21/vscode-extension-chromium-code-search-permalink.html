@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Chromium の開発をしているときに、他の人にコードのどの部分かを説明したいことがある。ただ、Chromium は Chromium Code Search で主に管理されており、Chromium Code Search のパーマリンクがほしい。今回はそのためのプラグインを作った。デモは下記である。ブランチがきちんと考慮される点や、複数行選択もできることが気に入っているポイントである。"
+      content="Chromium の開発をしているときに、他の人にコードのどの部分かを説明したいことがある。デモは下記である。このプラグインでできることはシンプルで、「ランチャーから、選択した行について Chromium Code Search 上でのパーマリンクを生成する」だけである。ブランチがきちんと考慮される点や、複数行選択もできることが気に入っているポイントである。"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -37,7 +37,7 @@
     />
     <meta
       property="og:description"
-      content="Chromium の開発をしているときに、他の人にコードのどの部分かを説明したいことがある。ただ、Chromium は Chromium Code Search で主に管理されており、Chromium Code Search のパーマリンクがほしい。今回はそのためのプラグインを作った。デモは下記である。ブランチがきちんと考慮される点や、複数行選択もできることが気に入っているポイントである。"
+      content="Chromium の開発をしているときに、他の人にコードのどの部分かを説明したいことがある。デモは下記である。このプラグインでできることはシンプルで、「ランチャーから、選択した行について Chromium Code Search 上でのパーマリンクを生成する」だけである。ブランチがきちんと考慮される点や、複数行選択もできることが気に入っているポイントである。"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -128,14 +128,18 @@
         </p>
         <p>
           そんなときに GitHub では、<a
+            target="_blank"
             href="https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url"
+            rel="noopener"
             >Copy GitHub URL</a
           >というプラグインで、VS Code
           で編集しているコードのパーマリンクを取得できるため、このパーマリンクを共有すればよい。
         </p>
         <p>
           ただ、Chromium は
-          <a href="https://cs.chromium.org/">Chromium Code Search</a>
+          <a target="_blank" href="https://cs.chromium.org/" rel="noopener"
+            >Chromium Code Search</a
+          >
           で主に管理されており、Chromium Code Search
           のパーマリンクがほしい。今回はそのためのプラグインを作った。
         </p>
@@ -156,7 +160,9 @@
         </h2>
         <p>
           このパーマリンクを作ることで、crbug や、GSoC のプロポーザルを書く際(<a
+            target="_blank"
             href="https://blog.bokken.io/articles/2022-04-30/apply-google-summer-of-code.html"
+            rel="noopener"
             >前記事</a
           >)にコードの該当箇所を説明するのにとても役に立った。
         </p>
@@ -166,9 +172,13 @@
         </p>
         <p>
           もし不具合があったり、Windows での動作確認ができたら
-          <a href="https://twitter.com/bokken_">@bokken_</a>
+          <a target="_blank" href="https://twitter.com/bokken_" rel="noopener"
+            >@bokken_</a
+          >
           にメンションするか、<a
+            target="_blank"
             href="https://github.com/negibokken/chromium-code-search-permalink-vscode-extension"
+            rel="noopener"
             >リポジトリ</a
           >の issue に登録してもらえると嬉しい。
         </p>

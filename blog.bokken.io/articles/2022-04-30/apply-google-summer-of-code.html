@@ -10,9 +10,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="今年から Google Summer of Code (GSoC) の応募制限が緩和されて、18 歳以上であれば、
-誰でも応募できるようになった。私はフルタイムでエンジニアとして働いているのだが、前述の通り募集条件が緩和され私も条件に当てはまるようになったので、
-今年は応募してみたのであった。最後に今回 Proposal を書くにあたってお世話になった記事を掲載しておく。（ありがとうございました）"
+      content="私はフルタイムでエンジニアとして働いているのだが、前述の通り募集条件が緩和され私も条件に当てはまるようになったので、
+今年は応募してみたのであった。まだ、結果は出ていないのだが周りを見てるとダメそうな気配を感じているので、
+せめて応募に際してどんなことをしたのかをまとめて供養しておく。最後に今回 Proposal を書くにあたってお世話になった記事を掲載しておく。（ありがとうございました）"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -38,9 +38,9 @@
     />
     <meta
       property="og:description"
-      content="今年から Google Summer of Code (GSoC) の応募制限が緩和されて、18 歳以上であれば、
-誰でも応募できるようになった。私はフルタイムでエンジニアとして働いているのだが、前述の通り募集条件が緩和され私も条件に当てはまるようになったので、
-今年は応募してみたのであった。最後に今回 Proposal を書くにあたってお世話になった記事を掲載しておく。（ありがとうございました）"
+      content="私はフルタイムでエンジニアとして働いているのだが、前述の通り募集条件が緩和され私も条件に当てはまるようになったので、
+今年は応募してみたのであった。まだ、結果は出ていないのだが周りを見てるとダメそうな気配を感じているので、
+せめて応募に際してどんなことをしたのかをまとめて供養しておく。最後に今回 Proposal を書くにあたってお世話になった記事を掲載しておく。（ありがとうございました）"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -128,7 +128,9 @@
         <p>
           今年から
           <a
+            target="_blank"
             href="https://opensource.googleblog.com/2021/11/expanding-google-summer-of-code-in-2022.html"
+            rel="noopener"
             >Google Summer of Code (GSoC) の応募制限が緩和</a
           >されて、18 歳以上であれば、 誰でも応募できるようになった。
         </p>
@@ -146,7 +148,9 @@
         <p>
           はじまりは
           <a
+            target="_blank"
             href="https://www.publickey1.jp/blog/22/google_summer_of_code18.html"
+            rel="noopener"
             >Publickey の GSoC に関する記事</a
           >
           を読んだことだった。
@@ -157,7 +161,9 @@
         <p>
           ちょうど、
           <a
+            target="_blank"
             href="https://blog.bokken.io/articles/2022-02-28/investigate-chromium-cors-header-parse-failure.html"
+            rel="noopener"
             >Chromium へのコントリビューションをしている</a
           >こともあり、 応募するなら Chromium
           と決めていて、もう少し規模の大きなことをして貢献したいなと思った。
@@ -175,7 +181,9 @@
           応募することが決まったら Proposal を書かなければいけない。Proposal
           を書くにしても何かしらテーマがなければ書けない。 幸い Chromium
           に関するプロジェクトは<a
+            target="_blank"
             href="https://docs.google.com/document/d/1QnqhnsmEnHxoD1j7sWNFL5nybQ7rh5bMgPuf3NQLAtg/edit#heading=h.604ls06hmu0p"
+            rel="noopener"
             >こちら</a
           >からテーマを探すことができたのでこの一覧から探すことにした。
           (この他にも自分が興味のあるプロジェクトや取り組みたい bugs
@@ -186,7 +194,9 @@
           に興味があっため、そういった一連のプロセスを経験できるようなテーマを探した。
           結果として、「
           <a
+            target="_blank"
             href="https://docs.google.com/document/d/1QnqhnsmEnHxoD1j7sWNFL5nybQ7rh5bMgPuf3NQLAtg/edit#bookmark=kix.tngp8wlygnyc"
+            rel="noopener"
             >4. Expose Render Blocking Status in Resource Timing</a
           >」では、私の希望が叶いそうだったのでこのプロジェクトに応募してみることにした。
         </p>
@@ -206,7 +216,9 @@
         <p>
           結果として、この「
           <a
+            target="_blank"
             href="https://docs.google.com/document/d/1QnqhnsmEnHxoD1j7sWNFL5nybQ7rh5bMgPuf3NQLAtg/edit#bookmark=kix.tngp8wlygnyc"
+            rel="noopener"
             >4. Expose Render Blocking Status in Resource Timing</a
           >」では、
         </p>
@@ -225,7 +237,9 @@
         </ul>
         <p>
           というようなことが分かった。最終的に出来上がった Proposal は<a
+            target="_blank"
             href="https://docs.google.com/document/d/11J7GYUEAUlFnN3l9yWdMUEvd08hCLe4AeKZnbB4yyfk/edit?usp=sharing"
+            rel="noopener"
             >こちら</a
           >に公開している。
         </p>
@@ -258,10 +272,16 @@
           ではChromium
           のコードを読みながら、どの部分のことを指しているのか示す必要があったので、
           さくっと
-          <a href="https://source.chromium.org/chromium">Chromium Code Search</a
+          <a
+            target="_blank"
+            href="https://source.chromium.org/chromium"
+            rel="noopener"
+            >Chromium Code Search</a
           >の対象のリンクを
           <a
+            target="_blank"
             href="https://marketplace.visualstudio.com/items?itemName=negibokken.chromium-code-search-permalink"
+            rel="noopener"
             >VS Code でコピーできる拡張</a
           >を作った。 この拡張機能のおかげでサクッとコピーして Proposal
           に転記するという作業がサクッとできたのでよかった。
@@ -269,10 +289,14 @@
         <p>
           合わせて、今回の Proposal に関して必要そうな実験的な Web
           サイトをサクッと作ったのも良かった。 (<a
+            target="_blank"
             href="https://x.bokken.io/example-render-blocking-site/index.html"
+            rel="noopener"
             >example of render-blocking site</a
           >,<a
+            target="_blank"
             href="https://x.bokken.io/example-performance-timeline/index.html"
+            rel="noopener"
             >example of performance timeline</a
           >)
         </p>
@@ -314,29 +338,44 @@
         </h2>
         <ul>
           <li>
-            <a href="https://travelingresearcher.com/entry/2017/05/06/010453"
+            <a
+              target="_blank"
+              href="https://travelingresearcher.com/entry/2017/05/06/010453"
+              rel="noopener"
               >GSoCに採択された話 - 旅する情報系大学院生</a
             >
           </li>
           <li>
-            <a href="https://hakatashi.hatenadiary.com/entry/2016/05/28/200827"
+            <a
+              target="_blank"
+              href="https://hakatashi.hatenadiary.com/entry/2016/05/28/200827"
+              rel="noopener"
               >Google Summer of Code 2016 参加記 その1 応募編 - 博多電光</a
             >
           </li>
           <li>
-            <a href="https://n-yoshikawa.hatenablog.com/entry/2018/04/26/015549"
+            <a
+              target="_blank"
+              href="https://n-yoshikawa.hatenablog.com/entry/2018/04/26/015549"
+              rel="noopener"
               >Google Summer of Code 2018 参加記 (1) 応募編 - n-yoshikawa’s
               blog</a
             >
           </li>
           <li>
-            <a href="https://n-yoshikawa.hatenablog.com/entry/2018/08/25/175142"
+            <a
+              target="_blank"
+              href="https://n-yoshikawa.hatenablog.com/entry/2018/08/25/175142"
+              rel="noopener"
               >Google Summer of Code 2018 参加記 (2) プロジェクト終了編 -
               n-yoshikawa’s blog</a
             >
           </li>
           <li>
-            <a href="https://n-yoshikawa.hatenablog.com/entry/2019/06/29/111527"
+            <a
+              target="_blank"
+              href="https://n-yoshikawa.hatenablog.com/entry/2019/06/29/111527"
+              rel="noopener"
               >Google Summer of Code 2019 参加記 (1) - n-yoshikawa’s blog</a
             >
           </li>

@@ -131,71 +131,98 @@
           <!-- vim-markdown-toc GFM -->
 
           <ul>
-            <li><a href="#prerender-%E3%81%A8%E3%81%AF">Prerender とは</a></li>
+            <li>
+              <a target="_blank" href="#prerender-とは" rel="noopener"
+                >Prerender とは</a
+              >
+            </li>
             <li>
               <a
-                href="#legacy-prerender-%E3%81%A8%E3%81%AF%E3%81%AA%E3%81%AB%E3%81%8B"
+                target="_blank"
+                href="#legacy-prerender-とはなにか"
+                rel="noopener"
                 >Legacy Prerender とはなにか</a
               >
             </li>
             <li>
-              <a href="#prerender2">Prerender2</a>
+              <a target="_blank" href="#prerender2" rel="noopener"
+                >Prerender2</a
+              >
               <ul>
                 <li>
                   <a
-                    href="#prerender2-%E3%82%92%E4%BD%BF%E3%81%86%E6%96%B9%E6%B3%95"
+                    target="_blank"
+                    href="#prerender2-を使う方法"
+                    rel="noopener"
                     >Prerender2 を使う方法</a
                   >
                 </li>
-                <li><a href="#feature-detection">feature detection</a></li>
+                <li>
+                  <a target="_blank" href="#feature-detection" rel="noopener"
+                    >feature detection</a
+                  >
+                </li>
               </ul>
             </li>
             <li>
               <a
-                href="#prerender2-%E3%81%AE%E6%A4%9C%E8%A8%8E%E4%BA%8B%E9%A0%85%E3%81%AA%E3%81%A9"
+                target="_blank"
+                href="#prerender2-の検討事項など"
+                rel="noopener"
                 >Prerender2 の検討事項など</a
               >
               <ul>
                 <li>
-                  <a href="#privacy-considerations">Privacy considerations</a>
+                  <a
+                    target="_blank"
+                    href="#privacy-considerations"
+                    rel="noopener"
+                    >Privacy considerations</a
+                  >
                 </li>
                 <li>
                   <a
-                    href="#%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%A8-cookie-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"
+                    target="_blank"
+                    href="#ネットワークリクエストと-cookie-について"
+                    rel="noopener"
                     >ネットワークリクエストと Cookie について</a
                   >
                 </li>
                 <li>
-                  <a href="#http-cache-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"
+                  <a target="_blank" href="#http-cache-について" rel="noopener"
                     >HTTP Cache について</a
                   >
                 </li>
                 <li>
                   <a
-                    href="#link-relprerender-%E3%82%BF%E3%82%B0%E3%81%AE%E6%B3%A8%E6%84%8F%E7%82%B9"
+                    target="_blank"
+                    href="#link-relprerender-タグの注意点"
+                    rel="noopener"
                     ><code>&lt;link rel=prerender&gt;</code> タグの注意点</a
                   >
                 </li>
-                <li><a href="#referrer-policy">Referrer Policy</a></li>
                 <li>
-                  <a href="#target_hint-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"
+                  <a target="_blank" href="#referrer-policy" rel="noopener"
+                    >Referrer Policy</a
+                  >
+                </li>
+                <li>
+                  <a target="_blank" href="#target_hint-について" rel="noopener"
                     >target_hint について</a
                   >
                 </li>
                 <li>
-                  <a
-                    href="#api-%E3%81%AE%E5%88%A9%E7%94%A8%E3%81%AE%E5%88%B6%E9%99%90"
+                  <a target="_blank" href="#api-の利用の制限" rel="noopener"
                     >API の利用の制限</a
                   >
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#%E3%81%8A%E3%82%8F%E3%82%8A%E3%81%AB">おわりに</a>
+              <a target="_blank" href="#おわりに" rel="noopener">おわりに</a>
             </li>
             <li>
-              <a
-                href="#%E5%8F%82%E8%80%83%E3%83%BB%E9%96%A2%E9%80%A3%E3%83%AA%E3%83%B3%E3%82%AF"
+              <a target="_blank" href="#参考・関連リンク" rel="noopener"
                 >参考・関連リンク</a
               >
             </li>
@@ -231,7 +258,9 @@
           は機能としては提供されておらず、取り下げられている。なぜ Legacy
           Prerender は取り下げられたのか。それについては、Prerender の
           <a
+            target="_blank"
             href="https://groups.google.com/a/chromium.org/g/Blink-dev/c/0nSxuuv9bBw"
+            rel="noopener"
             >Intent to Deprecate and Remove: Prerender</a
           >
           の投稿に下記のように書かれている。
@@ -256,7 +285,9 @@
         <p>ということらしい。</p>
         <p>
           ここで、メンテナンスの難しさについては、<a
+            target="_blank"
             href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#general-interop-and-compat-concerns"
+            rel="noopener"
             >WICG/nav-speculation</a
           >
           に少し関連していそうな記載がある。
@@ -277,7 +308,9 @@
           についての記載であるが、おそらく NoState Prefetch 以前の機能である
           Legacy Prerender についても同様なことが予想される。Legacy Prerender が
           <a
+            target="_blank"
             href="https://blog.chromium.org/2011/06/prerendering-in-chrome.html"
+            rel="noopener"
             >2011年にアナウンスされている</a
           >機能であることから、コードが古くなっていて、上記のゴールを達成するためのメンテナンスが難しくなっているのは想像に難くない。
         </p>
@@ -294,7 +327,9 @@
           年の月日が流れ、2021年 8 月に Prerender2
           の仕様に関する文書が作成された。
           <a
+            target="_blank"
             href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit#heading=h.gfguuhafev5j"
+            rel="noopener"
             >Prerender2 のドキュメント</a
           >には下記のようにある。
         </p>
@@ -326,7 +361,9 @@
           をモダンな形で実装できるようになったのだろう。 Chromium の Commit
           を見ても、Legacy Prerender の削除や、Refactor、Prerender2
           の実装が行われているのが<a
+            target="_blank"
             href="https://chromium-news.vercel.app/?query=Prerender"
+            rel="noopener"
             >伺える</a
           >。
         </p>
@@ -350,7 +387,9 @@
         <p>
           Prerender2 の有効化は比較的簡単で
           <a
+            target="_blank"
             href="https://wicg.github.io/nav-speculation/speculation-rules.html"
+            rel="noopener"
             >Speculation Rules</a
           >を用いて行われる。 具体的には次のようになる。
         </p>
@@ -359,7 +398,11 @@
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
         <p>
-          簡単な<a href="https://x.bokken.io/example-prerender2/">デモページ</a
+          簡単な<a
+            target="_blank"
+            href="https://x.bokken.io/example-prerender2/"
+            rel="noopener"
+            >デモページ</a
           >を用意した。手元の環境では Chrome Beta の 108.0.5359.48
           で動作を確認できた。 Chrome 107.0.5304.110
           では確認できなかったので動作確認の際にはバージョンに注意していただきたい。
@@ -454,7 +497,10 @@
             The rest of this section covers the same-origin case. For the
             cross-origin cases, much work is being done as part of proposed web
             standards. See this work at
-            <a href="https://github.com/jeremyroman/alternate-loading-modes/"
+            <a
+              target="_blank"
+              href="https://github.com/jeremyroman/alternate-loading-modes/"
+              rel="noopener"
               >https://github.com/jeremyroman/alternate-loading-modes/</a
             >
           </p>
@@ -473,7 +519,9 @@
         </h3>
         <p>
           ネットワークについて他にも<a
+            target="_blank"
             href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit#bookmark=id.vbnic8jwys3e"
+            rel="noopener"
             >ドキュメント</a
           >に記載がある。
         </p>
@@ -635,11 +683,15 @@
         <p>
           ただし、これは Speculation Rules に
           <code>referrer_policy</code> を記載できるようになる Intent (<a
+            target="_blank"
             href="https://groups.google.com/a/chromium.org/g/blink-dev/c/qzElfWpzWXg"
+            rel="noopener"
             >Intent to Prototype: Speculation rules referrer policy key</a
           >) が出されているので、 Speculation Rules で Referrer Policy
           を上書きできるようにもなりそうだ。(<a
+            target="_blank"
             href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#explicit-referrer-policy"
+            rel="noopener"
             >WICG/nav-speculation</a
           >)
         </p>
@@ -657,7 +709,9 @@
           は起動されないようだ。 この新しいタブで開いた際にも Prerender2
           を有効にする方法として
           <a
+            target="_blank"
             href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#window-name-targeting-hints"
+            rel="noopener"
             ><code>target_hint</code> の仕様策定</a
           >が進んでいる。
         </p>
@@ -702,7 +756,9 @@
           この target_hint について、現在の実装を確認したが、Chrome Beta の
           108.0.5359.48 であってもまだ動作を確認できなかった。
           <a
+            target="_blank"
             href="https://chromium.googlesource.com/chromium/src/+/df487ceb%5E%21/"
+            rel="noopener"
             >target_hint に関する CL</a
           >
           は存在するが、まだ browser process
@@ -725,7 +781,9 @@
         <p>
           仕様については
           <a
+            target="_blank"
             href="https://wicg.github.io/nav-speculation/prerendering.html#intrusive-behaviors"
+            rel="noopener"
             >Prerendering Revamped</a
           >
           に記載がある。
@@ -733,12 +791,16 @@
         <p>
           また、それぞれの API に関する検討は
           <a
+            target="_blank"
             href="https://docs.google.com/document/d/1zY15k_wFTik2EoxBf3_RT7YjYpFMDaeNspy15n0rtww/edit"
+            rel="noopener"
             >Restrictions on prerendered content - Google Docs</a
           >
           や
           <a
+            target="_blank"
             href="https://docs.google.com/spreadsheets/d/1V9Rm_3XACVHexaI4z41xciZxRh6zWrq5mFfSHYrs1XE/edit?usp=sharing"
+            rel="noopener"
             >Spread Sheet(public
             を意図しているようだが現在はアクセス権限がない)</a
           >
@@ -763,8 +825,16 @@
         </p>
         <p>
           もしも、誤りや追加の情報があれば
-          <a href="https://github.com/negibokken/bokken.io/issues">issue</a> や
-          <a href="https://twitter.com/bokken_">@bokken_</a>
+          <a
+            target="_blank"
+            href="https://github.com/negibokken/bokken.io/issues"
+            rel="noopener"
+            >issue</a
+          >
+          や
+          <a target="_blank" href="https://twitter.com/bokken_" rel="noopener"
+            >@bokken_</a
+          >
           までいただけると嬉しい。
         </p>
         <h2>
@@ -779,81 +849,115 @@
         <ol>
           <li>
             <a
+              target="_blank"
               href="https://docs.google.com/document/d/1EpLshvc9RRW3vswmXsJGrbCkhlFmxDsWfbvgxmYDTfs/edit"
+              rel="noopener"
               >P2D: Prerender2 for Desktop - Google Docs</a
             >
           </li>
           <li>
-            <a href="https://chromestatus.com/feature/5197044678393856"
+            <a
+              target="_blank"
+              href="https://chromestatus.com/feature/5197044678393856"
+              rel="noopener"
               >Prerender2 for Desktop - Chrome Platform Status</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit"
+              rel="noopener"
               >Prerender2 [public] - Google Docs</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://github.com/WICG/nav-speculation/blob/main/triggers.md"
+              rel="noopener"
               >nav-speculation/triggers.md at main · WICG/nav-speculation</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://docs.google.com/document/d/1zY15k_wFTik2EoxBf3_RT7YjYpFMDaeNspy15n0rtww/edit"
+              rel="noopener"
               >Restrictions on prerendered content - Google Docs</a
             >
           </li>
           <li>
-            <a href="https://www.w3.org/TR/resource-hints/">Resource Hints</a>
+            <a
+              target="_blank"
+              href="https://www.w3.org/TR/resource-hints/"
+              rel="noopener"
+              >Resource Hints</a
+            >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://blog.araya.dev/posts/2021-08-12/speculation-rules-prefetch.html"
+              rel="noopener"
               >Private Prefetch Proxy と Speculation
               Rulesによるprefetch/prerender</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://www.chromium.org/developers/design-documents/prerender/"
+              rel="noopener"
               >Chrome Prerendering</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://blog.chromium.org/2011/06/prerendering-in-chrome.html"
+              rel="noopener"
               >Chromium Blog: Prerendering in Chrome</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://groups.google.com/a/chromium.org/g/Blink-dev/c/0nSxuuv9bBw"
+              rel="noopener"
               >Intent to Deprecate and Remove: Prerender</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://html.spec.whatwg.org/multipage/links.html#link-type-prerender"
+              rel="noopener"
             >
               link-type-prerender | HTML Standard</a
             >
           </li>
           <li>
             <a
+              target="_blank"
               href="https://docs.google.com/document/d/16VCYGGWau483IMSxODpg5faZny1FJ6vNK2v-BuM5EhU/edit#heading=h.uajrcfabdbg5"
+              rel="noopener"
               >NoState Prefetch - Google ドキュメント</a
             >
           </li>
           <li>
-            <a href="https://developer.chrome.com/blog/nostate-prefetch/"
+            <a
+              target="_blank"
+              href="https://developer.chrome.com/blog/nostate-prefetch/"
+              rel="noopener"
               >Introducing NoState Prefetch - Chrome Developers</a
             >
           </li>
           <li>
-            <a href="https://chromestatus.com/feature/5928321099497472"
+            <a
+              target="_blank"
+              href="https://chromestatus.com/feature/5928321099497472"
+              rel="noopener"
               >No State Prefetch - Chrome Platform Status</a
             >
           </li>
