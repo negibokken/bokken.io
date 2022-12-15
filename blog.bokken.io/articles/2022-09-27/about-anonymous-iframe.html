@@ -118,7 +118,7 @@
         <h2>
           <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
         </h2>
-        <p>
+        <p id="K/E3sJyOxBKArqzHeUhHpA==" class="paragraph">
           <a
             target="_blank"
             href="https://wicg.github.io/anonymous-iframe/"
@@ -126,30 +126,50 @@
             >Anonymous iframe</a
           >
           という仕様がある。
-          この仕様が何を問題としていて、何を解決するための仕様なのかをまとめる。
+          この仕様が何を問題としていて、何を解決するための仕様なのかをまとめる。<a
+            href="#K/E3sJyOxBKArqzHeUhHpA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="tl;dr" href="#tl;dr" id="tl;dr"> tl;dr </a>
         </h2>
-        <p>
+        <p id="XWmprwxNaEgpiXunxB+5mA==" class="paragraph">
           Anonymous iframe は COEP (Cross Origin Embedder Policy) require-corp
           環境下で外部リソースの利用が制限された状態あっても、安全な形で iframe
-          を利用するための仕様である。
+          を利用するための仕様である。<a
+            href="#XWmprwxNaEgpiXunxB+5mA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="0G9Lt1wGXOeml3NWtXLc/Q==" class="paragraph">
           親から iframe でサイトを埋め込もうとすると、iframe 内のサイトにも COEP
-          が指定されている必要がある。
+          が指定されている必要がある。<a
+            href="#0G9Lt1wGXOeml3NWtXLc/Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="Yd2sa1hHpCYsCXrIJEVC4Q==" class="paragraph">
           サードパーティのサイトである場合、COEP
           を指定してもらうことが難しいか、あるいは時間がかかることがある。そのため、自分のサイトで
           COEP を指定しようとしても、サードパーティのサイトを iframe
           で利用したいがために、自分のサイトで COEP
-          指定できないことが起こりうる。
+          指定できないことが起こりうる。<a
+            href="#Yd2sa1hHpCYsCXrIJEVC4Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="zCrANTiCbsrZh91K1CKN6A==" class="paragraph">
           これを COEP 指定下であっても iframe を利用できるようにするための仕様が
-          Anonymous iframe である。
+          Anonymous iframe である。<a
+            href="#zCrANTiCbsrZh91K1CKN6A=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a
@@ -160,7 +180,7 @@
             Cross Origin Embedder Policy (COEP)
           </a>
         </h2>
-        <p>
+        <p id="/ewi+zYGk9T5DkFINtdSTQ==" class="paragraph">
           COEP については、<a
             target="_blank"
             href="https://web.dev/coop-coep/"
@@ -172,19 +192,35 @@
             href="https://web.dev/coop-coep/"
             rel="noopener"
             >このページ</a
-          >が詳しい。
+          >が詳しい。<a
+            href="#/ewi+zYGk9T5DkFINtdSTQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="9Ziq8FG6BbbBOL/Kasc98Q==" class="paragraph">
           要するに Spectre などの CPU
-          の脆弱性を突いてプライベートな情報を盗み取るような攻撃に対して、オプトインされた外部リソースの読み込みのみに限定することでリスクを低減するための仕様であるといえる。
+          の脆弱性を突いてプライベートな情報を盗み取るような攻撃に対して、オプトインされた外部リソースの読み込みのみに限定することでリスクを低減するための仕様であるといえる。<a
+            href="#9Ziq8FG6BbbBOL/Kasc98Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="+2A9kJpB5r3pbYDiZq9wLA==" class="paragraph">
           ここでいう外部リソースは、iframe や
-          script、img、ポップアップなどを含んでいる。
+          script、img、ポップアップなどを含んでいる。<a
+            href="#+2A9kJpB5r3pbYDiZq9wLA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="Cyiq5qy6deDY4tHQ5rsH4A==" class="paragraph">
           COEP には、Cross Origin Resource Policy (CORP)
-          の理解が欠かせないので紹介する。
+          の理解が欠かせないので紹介する。<a
+            href="#Cyiq5qy6deDY4tHQ5rsH4A=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a
@@ -195,37 +231,58 @@
             Cross Origin Resource Policy (CORP)
           </a>
         </h2>
-        <p>
+        <p id="KXy3iqqEipwQ/JcIb4JlRw==" class="paragraph">
           CORP は Resource
-          がどこからのリクエストのときに読み込めるかを指定するためのヘッダで、下記のようなヘッダを指定できる機能である。
+          がどこからのリクエストのときに読み込めるかを指定するためのヘッダで、下記のようなヘッダを指定できる機能である。<a
+            href="#KXy3iqqEipwQ/JcIb4JlRw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-http"><span class="hljs-attribute">Cross-Origin-Resource-Policy</span>: same-site | same-origin | cross-origin
 </code></pre>
-        <p>
+        <p id="gYlu3vovFKivkhL7JiYzLA==" class="paragraph">
           それぞれ、same-site のリソースのみ、same-origin
-          のリソースのみ、cross-origin でも読み込みができることを表す。
+          のリソースのみ、cross-origin でも読み込みができることを表す。<a
+            href="#gYlu3vovFKivkhL7JiYzLA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="rkSbyxykXgsq9i1tyEaacw==" class="paragraph">
           CORP ヘッダを指定することで、画像や script
-          などのリソースがどこで利用できるのか明示できる。そのため、開発者が意図しないサイトで利用されることを防ぐことができる。
+          などのリソースがどこで利用できるのか明示できる。そのため、開発者が意図しないサイトで利用されることを防ぐことができる。<a
+            href="#rkSbyxykXgsq9i1tyEaacw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="COEP と CORP" href="#COEP と CORP" id="COEP と CORP">
             COEP と CORP
           </a>
         </h2>
-        <p>
+        <p id="rWTwN83QJeiyylbsay94Uw==" class="paragraph">
           COEP では自身が使用する外部リソースに CORP
           を指定することを要求できる。COEP ヘッダには、unsafe-none
-          (デフォルト値) か require-corp (CORP による指定が必要) を指定できる。
+          (デフォルト値) か require-corp (CORP による指定が必要)
+          を指定できる。<a
+            href="#rWTwN83QJeiyylbsay94Uw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-http"><span class="hljs-attribute">Cross-Origin-Embedder-Policy</span>: unsafe-none | require-corp
 </code></pre>
-        <p>
+        <p id="HjCsFaUmDfmmG6hhRaqruA==" class="paragraph">
           こうすることで、COEP ヘッダが指定されているドキュメントについては CORP
-          の制約を満たしたリソースのみが存在していることになる。
+          の制約を満たしたリソースのみが存在していることになる。<a
+            href="#HjCsFaUmDfmmG6hhRaqruA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="GVZBqLSuteClicVEedOSdw==" class="paragraph">
           COEP 指定下でリソースが CORP を指定していなくても、 CORS
           で許可されているリソースであれば、img や script などは下記のように
           <a
@@ -234,11 +291,21 @@
             rel="noopener"
             >crossorigin attribute</a
           >
-          を指定することで、クロスオリジンのリソースであっても読み込みができるようになっている。
+          を指定することで、クロスオリジンのリソースであっても読み込みができるようになっている。<a
+            href="#GVZBqLSuteClicVEedOSdw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://third-party.example.com/image.jpg"</span> <span class="hljs-attr">crossorigin</span>&gt;</span>
 </code></pre>
-        <p>(※crossorigin 指定は crossorigin=&quot;anonymous&quot; と同様)</p>
+        <p id="+LGL8HG0gDmCvpIYDhiEkA==" class="paragraph">
+          (※crossorigin 指定は crossorigin=&quot;anonymous&quot; と同様)<a
+            href="#+LGL8HG0gDmCvpIYDhiEkA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h2>
           <a
             name="COEP credentialless"
@@ -248,7 +315,7 @@
             COEP credentialless
           </a>
         </h2>
-        <p>
+        <p id="DZLn0bS8yzEBUePrhNXW6w==" class="paragraph">
           また同様に COEP credentialless という<a
             target="_blank"
             href="https://html.spec.whatwg.org/multipage/origin.html#coep"
@@ -261,42 +328,65 @@
             rel="noopener"
             >Chromium に実装</a
           >されている。(2022年10月10日現在では Chromium
-          ベースのブラウザだけで、Safari や Firefox では実装されていない)
+          ベースのブラウザだけで、Safari や Firefox では実装されていない)<a
+            href="#DZLn0bS8yzEBUePrhNXW6w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          これはリソースのリクエストについてクレデンシャルを含まないようにすることで、パブリックなリソースしか読み込まないようにするための機能である。そうすることで、たとえ攻撃者がドキュメントの情報を窃取しようとしても表示されている内容はパブリックな情報のみなので攻撃されたときのリスクを下げることができるというものだ。
+        <p id="Vpx3zDHvjxEf8Ey2NLGAFQ==" class="paragraph">
+          これはリソースのリクエストについてクレデンシャルを含まないようにすることで、パブリックなリソースしか読み込まないようにするための機能である。そうすることで、たとえ攻撃者がドキュメントの情報を窃取しようとしても表示されている内容はパブリックな情報のみなので攻撃されたときのリスクを下げることができるというものだ。<a
+            href="#Vpx3zDHvjxEf8Ey2NLGAFQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="iframe" href="#iframe" id="iframe"> iframe </a>
         </h2>
-        <p>
+        <p id="V8ByNsxsUMUaqYdS3d7szA==" class="paragraph">
           しかし、iframe についてはこういった crossorigin attribute
-          による指定や、 COEP credentialless による制限の緩和はできなかった。
+          による指定や、 COEP credentialless による制限の緩和はできなかった。<a
+            href="#V8ByNsxsUMUaqYdS3d7szA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="HtgVXLBNINVEzh9U3F0tmQ==" class="paragraph">
           <a
             target="_blank"
             href="https://wicg.github.io/anonymous-iframe/#alternatives-coep-credentialless"
             rel="noopener"
             >4.3. Make COEP:credentialless to affect &lt;iframe&gt;</a
-          >には下記のようにある。
+          >には下記のようにある。<a
+            href="#HtgVXLBNINVEzh9U3F0tmQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <blockquote>
-          <p>
+          <p id="6aPytSYmmZZDU2qwVNTDYQ==" class="paragraph">
             Originally, COEP:credentialless scope was meant to include both
             simple subresources like it does today, but also the
             &#60;iframe&#62;. The latter is very different in kind, because this
             is not only about the request’s credentials, but also about every
             storage API usage made later by the document. So it has been
-            postponed here.
+            postponed here.<a
+              href="#6aPytSYmmZZDU2qwVNTDYQ=="
+              class="paragraph-anchor"
+              >¶</a
+            >
           </p>
         </blockquote>
-        <p>
+        <p id="P/kVPrqb0tbGzWDxc2vXLw==" class="paragraph">
           要するに、COEP credentialless で iframe が対象外となったのは iframe
           はそれ自身がコンテキストを生成し、iframe 内で Storage API の呼び出しや
           iframe 内での iframe の呼び出しなどもできるという点で img や script
           などとは違った性質を持つためである。 そうした背景から iframe
-          でも外部リソースを安全に利用するための仕様が Anonymous iframe である。
+          でも外部リソースを安全に利用するための仕様が Anonymous iframe
+          である。<a href="#P/kVPrqb0tbGzWDxc2vXLw==" class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a
@@ -307,39 +397,61 @@
             Anonymous iframe 詳解
           </a>
         </h2>
-        <p>
+        <p id="ANXiekOnhrkOHS/hxgGGZg==" class="paragraph">
           Anonymous iframe の指定は先述の crossorigin attribute のように
-          <code>anonymous</code> attribute を指定するだけだ。
+          <code>anonymous</code> attribute を指定するだけだ。<a
+            href="#ANXiekOnhrkOHS/hxgGGZg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">anonymous</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span>
 </code></pre>
-        <p>
+        <p id="EFT5qu15VO4z00L8i5bRKA==" class="paragraph">
           <code>anonymous</code> attribute の指定はその子孫 iframe
-          にも継承される。仕様に記載されている図がとてもわかり易いので引用する。
+          にも継承される。仕様に記載されている図がとてもわかり易いので引用する。<a
+            href="#EFT5qu15VO4z00L8i5bRKA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          <img src="./img/inheritance.png" alt="inheritance of anonymous" />
+        <p id="MKaB571GyXU36kxR608JjA==" class="paragraph">
+          <img src="./img/inheritance.png" alt="inheritance of anonymous" /><a
+            href="#MKaB571GyXU36kxR608JjA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="aElIzjFbOP4OrIvv5QToQQ==" class="paragraph">
           (<a
             target="_blank"
             href="https://wicg.github.io/anonymous-iframe/#proposal-whatis"
             rel="noopener"
             >Anonymous iframe</a
-          >より引用)
+          >より引用)<a href="#aElIzjFbOP4OrIvv5QToQQ==" class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="bp+lsKqkA1XFX/+VUMvcXg==" class="paragraph">
           iframe 内のドキュメントは下記の定数を参照することで自身が anonymous
-          指定された iframe なのかどうかを認識できる。
+          指定された iframe なのかどうかを認識できる。<a
+            href="#bp+lsKqkA1XFX/+VUMvcXg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-javascript">widndow.anonymouslyFramed
 </code></pre>
-        <p>
+        <p id="O82AUX0x+NxFZYM+sDhMeA==" class="paragraph">
           Anonymous iframe では既存のクレデンシャルや shared storage
           は利用できない。ただし、sandboxed frame と違い blank な状態から
           storage API を使うことや、Cookie の登録は可能だ。クレデンシャルや
           storage の共有は同じ Anonymous iframe
-          のページ内に限らるように分離されている。
+          のページ内に限らるように分離されている。<a
+            href="#O82AUX0x+NxFZYM+sDhMeA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h3>
           <a
@@ -350,7 +462,7 @@
             どのように分離を実現するか
           </a>
         </h3>
-        <p>
+        <p id="qLG8Z8VGueltoYOFFdR4zA==" class="paragraph">
           Anonymous iframe では既存の storage key
           に変更して分離を実現している。通常、
           <a
@@ -361,34 +473,48 @@
           >が、Anonymous iframe では iframe
           のトップレベルのサイトと、トップレベルのサイトごとに持つ nonce
           の組み合わせで storage key
-          を区別する。こちらについてもスペックの図がわかりやすいので引用する。
+          を区別する。こちらについてもスペックの図がわかりやすいので引用する。<a
+            href="#qLG8Z8VGueltoYOFFdR4zA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="rWLUSJVdNF0NYGIV9Z5XXQ==" class="paragraph">
           <img src="./img/partition-key.png" alt="partition key" /> (<a
             target="_blank"
             href="https://wicg.github.io/anonymous-iframe/#proposal-credentials"
             rel="noopener"
             >Anonymous iframe</a
-          >より引用)
+          >より引用)<a href="#rWLUSJVdNF0NYGIV9Z5XXQ==" class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="vMLKBPPVVqQVmZJRUEX5Yw==" class="paragraph">
           nonce はトップレベルサイトごとに決まり、子孫の Anonymous iframe
           に共有される。こうすることで、ある Origin ですでに利用されていた
           storage であっても、Anonymous iframe 以下であれば nonce
-          が違うので分離が実現される。
+          が違うので分離が実現される。<a
+            href="#vMLKBPPVVqQVmZJRUEX5Yw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="jBNHBP1pQkN0um+Pbzd+pQ==" class="paragraph">
           また、同一 Origin であっても各 navigate ごとに nonce
           は変わるので、過去に storage を使っていたとしても再利用はできない。
           ただし、back-forward cache を使って restore
           された場合については、storage
-          も再利用できるので、これらの挙動には注意が必要だろう。
+          も再利用できるので、これらの挙動には注意が必要だろう。<a
+            href="#jBNHBP1pQkN0um+Pbzd+pQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="eQT0632rGdiCqDkw6RS4Iw==" class="paragraph">
           <img
             src="./img/page-change-nonce.png"
             alt="page nonce per navigation"
-          />
+          /><a href="#eQT0632rGdiCqDkw6RS4Iw==" class="paragraph-anchor">¶</a>
         </p>
         <h2>
           <a
@@ -399,26 +525,42 @@
             その他細かなブラウザの挙動
           </a>
         </h2>
-        <p>
+        <p id="eY+9MVm/KlYcBEhvM1KWUw==" class="paragraph">
           COEP ヘッダが送られてきたときに Anonymous iframe
           を使って入れば、ブラウザは COEP
           ヘッダをチェックしないようになっている。(もともと COEP ヘッダが iframe
-          内のサイトでデプロイされていない課題を解決したかたので当然だが)
+          内のサイトでデプロイされていない課題を解決したかたので当然だが)<a
+            href="#eY+9MVm/KlYcBEhvM1KWUw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          合わせてパスワードマネージャによるオートフィルも効かないようになる。筆者はパスワードマネージャが表示されるかどうかもフィッシング詐欺サイトではないことの目安にしていたので、パスワードマネージャが表示されないことでユーザに疑念を抱かれる懸念はありそうだ。
+        <p id="Z7px83WGJjkY0BBvhPgYkA==" class="paragraph">
+          合わせてパスワードマネージャによるオートフィルも効かないようになる。筆者はパスワードマネージャが表示されるかどうかもフィッシング詐欺サイトではないことの目安にしていたので、パスワードマネージャが表示されないことでユーザに疑念を抱かれる懸念はありそうだ。<a
+            href="#Z7px83WGJjkY0BBvhPgYkA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
         </h2>
-        <p>
+        <p id="nDaiciEna+NE+JJSgX3JKw==" class="paragraph">
           今回 Anonymous iframe という COEP ヘッダ (require-corp)
-          指定下で、iframe が動かない問題を解決するための仕様をまとめた。
+          指定下で、iframe が動かない問題を解決するための仕様をまとめた。<a
+            href="#nDaiciEna+NE+JJSgX3JKw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          このまとめを通して、安全に分離を実現するためにはどのように考えるべきなのかを知れた。このまとめを通して気になった点も今後まとめていきたい。
+        <p id="BaGT4nJnUOCBoxTrXPCyHQ==" class="paragraph">
+          このまとめを通して、安全に分離を実現するためにはどのように考えるべきなのかを知れた。このまとめを通して気になった点も今後まとめていきたい。<a
+            href="#BaGT4nJnUOCBoxTrXPCyHQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="ZE54lIgTsBeDwsj9JPMbVg==" class="paragraph">
           もし、何かしら間違いやコメントがあった場合、<a
             target="_blank"
             href="https://github.com/negibokken/bokken.io/issues"
@@ -429,7 +571,11 @@
           <a target="_blank" href="https://twitter.com/bokken_" rel="noopener"
             >@bokken_</a
           >
-          までもらえると嬉しい。
+          までもらえると嬉しい。<a
+            href="#ZE54lIgTsBeDwsj9JPMbVg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="参考" href="#参考" id="参考"> 参考 </a>

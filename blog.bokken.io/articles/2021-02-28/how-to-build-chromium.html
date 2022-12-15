@@ -121,15 +121,27 @@
         <h2>
           <a name="概要" href="#概要" id="概要"> 概要 </a>
         </h2>
-        <p>
+        <p id="agi4T79rrgQLgeLxPglJnQ==" class="paragraph">
           趣味でブラウザを作っている延長で、 Chromium
-          をビルドしてテストを走らせて遊んでいる。
+          をビルドしてテストを走らせて遊んでいる。<a
+            href="#agi4T79rrgQLgeLxPglJnQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。
+        <p id="tjKv3JMYV4XKdwxpdu8dJQ==" class="paragraph">
+          その際、ビルド、実行に必要なリンクが各所にあって難しいなと感じたので、この記事にまとめて備忘録としておきたい。<a
+            href="#tjKv3JMYV4XKdwxpdu8dJQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          また、あまりビルドやテスト実行時間について紹介されている記事が少ないので、この記事ではその点についても言及する。
+        <p id="H77ZlhYIT8gcVDZB1783fA==" class="paragraph">
+          また、あまりビルドやテスト実行時間について紹介されている記事が少ないので、この記事ではその点についても言及する。<a
+            href="#H77ZlhYIT8gcVDZB1783fA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <details>
           <summary>## 目次 (click で開く)</summary>
@@ -267,83 +279,123 @@
         <h3>
           <a name="環境" href="#環境" id="環境"> 環境 </a>
         </h3>
-        <p>最初に筆者の計算機環境は下記である。</p>
+        <p id="v1GSqITyBZeOgjEvi8DfTA==" class="paragraph">
+          最初に筆者の計算機環境は下記である。<a
+            href="#v1GSqITyBZeOgjEvi8DfTA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <ul>
           <li>MacBook Pro: (13-inch, 2019, Four Thunderbolt 3 ports)</li>
           <li>Processor: 2.8GHz Quad-Core Intel Core7</li>
           <li>Memory: 16GB 2133 MHz LPDDR3</li>
           <li>Graphics Intel Iris Plus Graphics 6555 1536MB</li>
         </ul>
-        <p>この MacBook Pro を使ってビルドやテストを実行する。</p>
+        <p id="CykLmaAsJ5zJzUKvW7ZY4g==" class="paragraph">
+          この MacBook Pro を使ってビルドやテストを実行する。<a
+            href="#CykLmaAsJ5zJzUKvW7ZY4g=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h3>
           <a name="必要なツール" href="#必要なツール" id="必要なツール">
             必要なツール
           </a>
         </h3>
-        <p>
+        <p id="hZtT9CUUFOl/7QBMnqfoKg==" class="paragraph">
           <a
             target="_blank"
             href="https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md"
             rel="noopener"
             >この公式のページ</a
           >
-          によると Chromium のビルドに必要なツールは下記である。
+          によると Chromium のビルドに必要なツールは下記である。<a
+            href="#hZtT9CUUFOl/7QBMnqfoKg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <ul>
           <li>Xcode 11.2+</li>
         </ul>
-        <p>
+        <p id="0ABUlxg8OJBmHiMXO5gdJg==" class="paragraph">
           Xcode がインストールされているかは、下記のコマンドで .sdk
-          ファイルが表示されるかを確認すればよい。
+          ファイルが表示されるかを確認すればよい。<a
+            href="#0ABUlxg8OJBmHiMXO5gdJg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh">ls `xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs
 </code></pre>
-        <p>
-          加えてインストールしておくと良いのは下記の Homebrew と ccache だ。
+        <p id="gWh41kZFo8Ut81m53NJqkQ==" class="paragraph">
+          加えてインストールしておくと良いのは下記の Homebrew と ccache だ。<a
+            href="#gWh41kZFo8Ut81m53NJqkQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <ul>
           <li>
-            <p>
+            <p id="cbjPgV2do98GwsUwoxy4Pw==" class="paragraph">
               <a target="_blank" href="https://brew.sh/" rel="noopener"
                 >Homebrew</a
+              ><a href="#cbjPgV2do98GwsUwoxy4Pw==" class="paragraph-anchor"
+                >¶</a
               >
             </p>
             <pre><code class="language-sh">/bin/bash -c <span class="hljs-string">"<span class="hljs-variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>"</span>
 </code></pre>
           </li>
           <li>
-            <p>
+            <p id="mAhtbAwlpWMHeYHvB4rUJA==" class="paragraph">
               <a target="_blank" href="https://ccache.dev/" rel="noopener"
                 >ccache</a
+              ><a href="#mAhtbAwlpWMHeYHvB4rUJA==" class="paragraph-anchor"
+                >¶</a
               >
             </p>
             <pre><code class="language-sh">brew install --HEAD ccache
 </code></pre>
           </li>
         </ul>
-        <p>
+        <p id="MCpZnWJiJL1yu/wexyryAQ==" class="paragraph">
           ccache
           を導入しておくと再コンパイル時の時間が短縮できるようになる。それは<a
             target="_blank"
             href="https://chromium.googlesource.com/chromium/src/+/master/docs/ccache_mac.md"
             rel="noopener"
             >この記事</a
-          >に書かれている。
+          >に書かれている。<a
+            href="#MCpZnWJiJL1yu/wexyryAQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="手順" href="#手順" id="手順"> 手順 </a>
         </h2>
-        <p>
+        <p id="YFcNgt6xHfGH32hz348LOw==" class="paragraph">
           主に<a
             target="_blank"
             href="https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md"
             rel="noopener"
             >こちら</a
-          >の公式サイトに書かれている内容を抜粋してより詳細に手順を説明する。
+          >の公式サイトに書かれている内容を抜粋してより詳細に手順を説明する。<a
+            href="#YFcNgt6xHfGH32hz348LOw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="5+1x8Xt84i5U0FkgaQ4E5A==" class="paragraph">
           移行のディレクトリは下記のようになっていることを前提としてすすめる。(変更する場合は
-          PATH の設定などを適宜読み替えていただきたい)
+          PATH の設定などを適宜読み替えていただきたい)<a
+            href="#5+1x8Xt84i5U0FkgaQ4E5A=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh"><span class="hljs-built_in">cd</span> ~
 mkdir chromium
@@ -358,7 +410,7 @@ mkdir chromium
             開発用のツールを準備をする
           </a>
         </h3>
-        <p>
+        <p id="53VNvTZqmxImkcHgDUHwoQ==" class="paragraph">
           Chromium 関連の開発をする際には
           <a
             target="_blank"
@@ -366,52 +418,98 @@ mkdir chromium
             rel="noopener"
             >depot_tool</a
           >
-          というツール群を使うようだ。
+          というツール群を使うようだ。<a
+            href="#53VNvTZqmxImkcHgDUHwoQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="wl1kadUQHI3Geyxp+SIXqw==" class="paragraph">
           この中にはリポジトリをフェッチするときに使う <code>fetch</code> や
           sync するときに使う
           <code>gclient</code> 、ビルドに必要な設定ファイル等を生成する
-          <code>gn</code> コマンドが含まれている。
+          <code>gn</code> コマンドが含まれている。<a
+            href="#wl1kadUQHI3Geyxp+SIXqw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>depot_tool は下記のコマンドで clone してくる。</p>
+        <p id="JNF+qyrj/gBzWLkGDi7YAw==" class="paragraph">
+          depot_tool は下記のコマンドで clone してくる。<a
+            href="#JNF+qyrj/gBzWLkGDi7YAw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-sh">git <span class="hljs-built_in">clone</span> https://chromium.googlesource.com/chromium/tools/depot_tools.git
 </code></pre>
-        <p>
+        <p id="YtwRUDcYrilEsh+0CyEjXw==" class="paragraph">
           パスを通す必要があるため、使っているシェルに応じて
           <code>~/.bashrc</code> や
-          <code>~/.zshrc</code> に下記の一行を追記する。
+          <code>~/.zshrc</code> に下記の一行を追記する。<a
+            href="#YtwRUDcYrilEsh+0CyEjXw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh"><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">"<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HOME</span>/depot_tools"</span>
 </code></pre>
-        <p>
+        <p id="E6e1SOnAKfiVNPEtHOX+eg==" class="paragraph">
           追記をしたあとは下記コマンドで、PATH
-          を通した設定ファイルを読み込み直す。
+          を通した設定ファイルを読み込み直す。<a
+            href="#E6e1SOnAKfiVNPEtHOX+eg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh"><span class="hljs-built_in">source</span> ~/.zshrc  <span class="hljs-comment"># zsh を使っているときの例</span>
 </code></pre>
-        <p>以上で depot_tool を使うための下準備は完了した。</p>
+        <p id="BuNlq0km32EhXWtNKMRvhg==" class="paragraph">
+          以上で depot_tool を使うための下準備は完了した。<a
+            href="#BuNlq0km32EhXWtNKMRvhg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h4>
           <a name="フェッチする" href="#フェッチする" id="フェッチする">
             フェッチする
           </a>
         </h4>
-        <p>
-          depot_tool が準備できればようやく Chromium のソースを clone できる。
+        <p id="lUX0V6gbbqXsHdDGWqjrDA==" class="paragraph">
+          depot_tool が準備できればようやく Chromium のソースを clone できる。<a
+            href="#lUX0V6gbbqXsHdDGWqjrDA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>その際のコマンドは下記である。</p>
+        <p id="7Ahy5XL5qf6hiqoRBzUdxA==" class="paragraph">
+          その際のコマンドは下記である。<a
+            href="#7Ahy5XL5qf6hiqoRBzUdxA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-sh">fetch chromium
 </code></pre>
-        <p>
-          このコマンドにもかなりの時間がかかる。容量が大きいため、テザリング環境や貧弱なネット回線では決して実行しないようにしてほしい。
+        <p id="hki85xSfRvdRGcZcuRhN1A==" class="paragraph">
+          このコマンドにもかなりの時間がかかる。容量が大きいため、テザリング環境や貧弱なネット回線では決して実行しないようにしてほしい。<a
+            href="#hki85xSfRvdRGcZcuRhN1A=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h4>
           <a name="更新する" href="#更新する" id="更新する"> 更新する </a>
         </h4>
-        <p>
+        <p id="/PMZY3b7Ctm8wX3HnK6acQ==" class="paragraph">
           リポジトリに更新があった際には下記のコマンドでリポジトリを最新の状態にできる。
           fetch のタイミングで下記コマンドも実行されるので fetch
-          して直後は必要がない。
+          して直後は必要がない。<a
+            href="#/PMZY3b7Ctm8wX3HnK6acQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh">gclient sync
 </code></pre>
@@ -424,11 +522,27 @@ mkdir chromium
             Chromium のビルドと実行
           </a>
         </h3>
-        <p>下準備が長かったがようやくビルドができる。</p>
-        <p>
-          ビルドには、設定ファイルの生成、ビルドの実行といった手順が必要だ。
+        <p id="bGVbK7O7MgEFln44gBZddA==" class="paragraph">
+          下準備が長かったがようやくビルドができる。<a
+            href="#bGVbK7O7MgEFln44gBZddA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>順番に説明をする。</p>
+        <p id="b8XIVmbFT7+DOAI3t2iueg==" class="paragraph">
+          ビルドには、設定ファイルの生成、ビルドの実行といった手順が必要だ。<a
+            href="#b8XIVmbFT7+DOAI3t2iueg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="ztRlhpNy+wvD4dXb8qXMsA==" class="paragraph">
+          順番に説明をする。<a
+            href="#ztRlhpNy+wvD4dXb8qXMsA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h4>
           <a
             name="ビルド設定の生成"
@@ -438,17 +552,33 @@ mkdir chromium
             ビルド設定の生成
           </a>
         </h4>
-        <p>まず、 fetch してきた Chromium のディレクトリに移動する。</p>
+        <p id="4V/mO+WcFDvPIGp+qxk0Cg==" class="paragraph">
+          まず、 fetch してきた Chromium のディレクトリに移動する。<a
+            href="#4V/mO+WcFDvPIGp+qxk0Cg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-sh"><span class="hljs-built_in">cd</span> src
 </code></pre>
-        <p>
+        <p id="wtHucSlakxR1QLQ3JIbl2Q==" class="paragraph">
           次にビルドファイルの生成だが、これには
           <code>gn</code>
-          というコマンドを使う。下記のようにコマンドを実行するとエディタが立ち上がる。
+          というコマンドを使う。下記のようにコマンドを実行するとエディタが立ち上がる。<a
+            href="#wtHucSlakxR1QLQ3JIbl2Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh">gn gen out/Default
 </code></pre>
-        <p>そこに下記のような設定ファイルを書き込む。</p>
+        <p id="3F1BrPDM7HaiEsmNL4CPAw==" class="paragraph">
+          そこに下記のような設定ファイルを書き込む。<a
+            href="#3F1BrPDM7HaiEsmNL4CPAw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-sh">is_debug = <span class="hljs-literal">false</span>
 is_component_build = <span class="hljs-literal">true</span>
 symbol_level = 0
@@ -456,11 +586,15 @@ dcheck_always_on = <span class="hljs-literal">true</span>
 cc_wrapper= <span class="hljs-string">"ccache"</span>
 enable_nacl = <span class="hljs-literal">false</span>
 </code></pre>
-        <p>
+        <p id="F5uwVhghKo3ZSEbZE9s5NA==" class="paragraph">
           するとビルドに必要なファイル群が
-          <code>out/Default</code> 以下に生成される。
+          <code>out/Default</code> 以下に生成される。<a
+            href="#F5uwVhghKo3ZSEbZE9s5NA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="Egorbx3dWfigY8WGoJ2UOA==" class="paragraph">
           この設定ファイルを作るために参考としたのは<a
             target="_blank"
             href="https://www.chromium.org/developers/gn-build-configuration"
@@ -471,14 +605,34 @@ enable_nacl = <span class="hljs-literal">false</span>
             href="https://chromium.googlesource.com/chromium/src/+/master/docs/ccache_mac.md"
             rel="noopener"
             >この記事</a
-          >にある公式の設定で、これらの設定でビルド時間や再ビルド時間が短くなるらしい。
+          >にある公式の設定で、これらの設定でビルド時間や再ビルド時間が短くなるらしい。<a
+            href="#Egorbx3dWfigY8WGoJ2UOA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>ただし、上記の設定はひとまず早くビルドするための設定である。</p>
-        <p>
+        <p id="tRzdOyPzxC/4dIqzhCLP8Q==" class="paragraph">
+          ただし、上記の設定はひとまず早くビルドするための設定である。<a
+            href="#tRzdOyPzxC/4dIqzhCLP8Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="kvY04aYoh10GJ6z88uF83g==" class="paragraph">
           <code>is_debug</code> を <code>false</code> にしているため、Debug
-          に必要な情報が取れないなどの弊害がある。
+          に必要な情報が取れないなどの弊害がある。<a
+            href="#kvY04aYoh10GJ6z88uF83g=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>なので、Debug をしたい場合は全面的に設定を見直す必要がある。</p>
+        <p id="GdZn9L6vTcgmw56aO3lxbw==" class="paragraph">
+          なので、Debug をしたい場合は全面的に設定を見直す必要がある。<a
+            href="#GdZn9L6vTcgmw56aO3lxbw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h4>
           <a
             name="Chromium のビルド"
@@ -488,14 +642,18 @@ enable_nacl = <span class="hljs-literal">false</span>
             Chromium のビルド
           </a>
         </h4>
-        <p>
+        <p id="QP+nsWwR5jktcC4EdBzdPw==" class="paragraph">
           上記を終えるとようやくビルドができる。その際、下記スクリプトを
           <code>bulid_chromium</code> という名前で保存する。 (<a
             target="_blank"
             href="https://chromium.googlesource.com/chromium/src/+/master/docs/ccache_mac.md#build"
             rel="noopener"
             >この公式の文書</a
-          >をもとに作製している)
+          >をもとに作製している)<a
+            href="#QP+nsWwR5jktcC4EdBzdPw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-built_in">export</span> CCACHE_CPP2=yes
@@ -503,18 +661,40 @@ enable_nacl = <span class="hljs-literal">false</span>
 <span class="hljs-built_in">export</span> PATH=`<span class="hljs-built_in">pwd</span>`/third_party/llvm-build/Release+Asserts/bin:<span class="hljs-variable">$PATH</span>
 ninja -C out/Default chrome
 </code></pre>
-        <p>上記のファイルに実行権限をつける。</p>
+        <p id="UGzCuQkn3s4YdBzFw7KeHw==" class="paragraph">
+          上記のファイルに実行権限をつける。<a
+            href="#UGzCuQkn3s4YdBzFw7KeHw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-sh">chmod +x build_chromium
 </code></pre>
-        <p>そして実行する。</p>
+        <p id="YpFDhTZtxWGfSFWua2ipkQ==" class="paragraph">
+          そして実行する。<a
+            href="#YpFDhTZtxWGfSFWua2ipkQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-sh">./build_chromium
 </code></pre>
-        <p>
+        <p id="9uAr/2xIp1vTsitUHasBOw==" class="paragraph">
           これで Chromium
           がビルドされる。とても長い時間がかかるのと、リソースを持っていかれるため
-          PC を使わない時間帯に実行するとよい。
+          PC を使わない時間帯に実行するとよい。<a
+            href="#9uAr/2xIp1vTsitUHasBOw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>ビルドにかかる時間についてはビルド時間にかかわる節で述べる。</p>
+        <p id="5Yo8zs1KoePIs2TWcgLkwg==" class="paragraph">
+          ビルドにかかる時間についてはビルド時間にかかわる節で述べる。<a
+            href="#5Yo8zs1KoePIs2TWcgLkwg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h4>
           <a
             name="Chromium の実行"
@@ -524,15 +704,31 @@ ninja -C out/Default chrome
             Chromium の実行
           </a>
         </h4>
-        <p>ビルドが終わるとローカル環境で Chromium を実行できる。</p>
-        <p>
+        <p id="TYIj8q5EUbRIdKCB5xJjNw==" class="paragraph">
+          ビルドが終わるとローカル環境で Chromium を実行できる。<a
+            href="#TYIj8q5EUbRIdKCB5xJjNw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="OIC/Qh7ZtKLQGdzfdmTQMw==" class="paragraph">
           .app ファイルも生成されているが、コマンド的には下記のように実行すると
-          Chromium が立ち上がる。
+          Chromium が立ち上がる。<a
+            href="#OIC/Qh7ZtKLQGdzfdmTQMw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh"><span class="hljs-meta">#!/bin/bash</span>
 ./out/Default/Chromium.app/Contents/MacOS/Chromium
 </code></pre>
-        <p>ここまででひとまず、Chromium 自身のビルドは完了だ。</p>
+        <p id="4gMZ6c2/Um/ATtxow6dW2w==" class="paragraph">
+          ここまででひとまず、Chromium 自身のビルドは完了だ。<a
+            href="#4gMZ6c2/Um/ATtxow6dW2w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h3>
           <a
             name="テストのビルドと実行"
@@ -542,14 +738,28 @@ ninja -C out/Default chrome
             テストのビルドと実行
           </a>
         </h3>
-        <p>
+        <p id="ZlEuVNHzaotpQHhPdiO7CA==" class="paragraph">
           さて Chromium
-          本体がビルドできてしまえば、あとは簡単にテストのビルドなども行える。
+          本体がビルドできてしまえば、あとは簡単にテストのビルドなども行える。<a
+            href="#ZlEuVNHzaotpQHhPdiO7CA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          Chromium プロジェクトのテストにはユニットテストと Web テストがある。
+        <p id="+nU0YpdnD2IVoZYG31ji3w==" class="paragraph">
+          Chromium プロジェクトのテストにはユニットテストと Web テストがある。<a
+            href="#+nU0YpdnD2IVoZYG31ji3w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>順番に説明する。</p>
+        <p id="buw3VPqQEX3wWpAFB1nXSA==" class="paragraph">
+          順番に説明する。<a
+            href="#buw3VPqQEX3wWpAFB1nXSA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h4>
           <a
             name="ユニットテストのビルド"
@@ -559,7 +769,13 @@ ninja -C out/Default chrome
             ユニットテストのビルド
           </a>
         </h4>
-        <p>ユニットテストをビルドするためには下記のコマンドを実行する。</p>
+        <p id="4CHxfA7PC7tVxlSFtADuWQ==" class="paragraph">
+          ユニットテストをビルドするためには下記のコマンドを実行する。<a
+            href="#4CHxfA7PC7tVxlSFtADuWQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-sh">ninja -C out/Default chrome/<span class="hljs-built_in">test</span>:unit_tests
 </code></pre>
         <h4>
@@ -571,12 +787,16 @@ ninja -C out/Default chrome
             ユニットテストの実行
           </a>
         </h4>
-        <p>
-          ユニットテストのビルドが終わったら、ユニットテストは下記のように実行すれば良い。
+        <p id="nsxg6domrSzspOgEYsFOkA==" class="paragraph">
+          ユニットテストのビルドが終わったら、ユニットテストは下記のように実行すれば良い。<a
+            href="#nsxg6domrSzspOgEYsFOkA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh">out/Default/unit_tests --<span class="hljs-built_in">disable</span>-features=<span class="hljs-string">"MediaRouter"</span>
 </code></pre>
-        <p>
+        <p id="O+H/4loiMo0WJykdoT+YqQ==" class="paragraph">
           <a
             target="_blank"
             href="https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md#avoiding-the-incoming-network-connections-dialog"
@@ -585,21 +805,29 @@ ninja -C out/Default chrome
           >にあるように、 &quot;incoming network connections&quot;
           のダイアログがたくさん出てくるので、それを抑えるために
           <code>--disable-features=&quot;MediaRouter&quot;</code>
-          を指定している。
+          を指定している。<a
+            href="#O+H/4loiMo0WJykdoT+YqQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h4>
           <a name="Web テスト" href="#Web テスト" id="Web テスト">
             Web テスト
           </a>
         </h4>
-        <p>
+        <p id="uBFPpUFJqpQXu7z4YYXk9Q==" class="paragraph">
           <a
             target="_blank"
             href="https://chromium.googlesource.com/chromium/src/+/master/docs/testing/web_tests.md"
             rel="noopener"
             >Testing in Chromium - Web Tests (formerly known as Layout Tests or
             LayoutTests)</a
-          >を参考に下記のコマンドでテストをビルドする。
+          >を参考に下記のコマンドでテストをビルドする。<a
+            href="#uBFPpUFJqpQXu7z4YYXk9Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh"><span class="hljs-meta">#!/bin/bash</span>
 autoninja -C out/Default blink_tests
@@ -613,23 +841,35 @@ autoninja -C out/Default blink_tests
             Web テストの実行
           </a>
         </h4>
-        <p>
-          上記でテストがビルドできれば、下記コマンド列でテストが実行できる。
+        <p id="WqNn0zTsTNxkY43evKXOWA==" class="paragraph">
+          上記でテストがビルドできれば、下記コマンド列でテストが実行できる。<a
+            href="#WqNn0zTsTNxkY43evKXOWA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh"><span class="hljs-meta">#!/bin/bash</span>
 strip out/Default/Content\ Shell.app/Contents/MacOS/Content\ Shell
 ./third_party/blink/tools/run_web_tests.py -t Default
 </code></pre>
-        <p>
+        <p id="KG3blcCLOZ3IIFy3XHIXhw==" class="paragraph">
           (Content_Shell については
           <code
             >strip
             ./xcodebuild/{Debug,Release}/content_shell.app/Contents/MacOS/content_shell</code
           >
-          と書いてあるが、現在ではパスが変わっているようである)
+          と書いてあるが、現在ではパスが変わっているようである)<a
+            href="#KG3blcCLOZ3IIFy3XHIXhw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          上記までの手順で一通りビルド、およびテストの実行ができるようになった。
+        <p id="ogvFs2YV/2JVBCk5PVIyxQ==" class="paragraph">
+          上記までの手順で一通りビルド、およびテストの実行ができるようになった。<a
+            href="#ogvFs2YV/2JVBCk5PVIyxQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a
@@ -640,10 +880,20 @@ strip out/Default/Content\ Shell.app/Contents/MacOS/Content\ Shell
             ビルド・テストの実行速度
           </a>
         </h2>
-        <p>さて、最後にビルドやテストにかかった時間を紹介する。</p>
-        <p>
+        <p id="BZHdLbQOMtBdSWV9QczOrA==" class="paragraph">
+          さて、最後にビルドやテストにかかった時間を紹介する。<a
+            href="#BZHdLbQOMtBdSWV9QczOrA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="hPxcj+AaOpH8P7cwQG8Ewg==" class="paragraph">
           計測方法は今まで紹介してきたコマンド列について time
-          コマンドで計測した出力を掲載する。
+          コマンドで計測した出力を掲載する。<a
+            href="#hPxcj+AaOpH8P7cwQG8Ewg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h3>
           <a name="ビルド時間" href="#ビルド時間" id="ビルド時間">
@@ -712,8 +962,14 @@ strip out/Default/Content\ Shell.app/Contents/MacOS/Content\ Shell
         <h2>
           <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
         </h2>
-        <p>上記の手順や実行時間の例が、どなたかの参考となれば幸いである。</p>
-        <p>
+        <p id="tYxcyC3nqI3FR2igmDGCHw==" class="paragraph">
+          上記の手順や実行時間の例が、どなたかの参考となれば幸いである。<a
+            href="#tYxcyC3nqI3FR2igmDGCHw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="b2/vMAC6U/e4RMZVfLSc7g==" class="paragraph">
           もし間違いや訂正があれば、<a
             target="_blank"
             href="https://github.com/negibokken/bokken.io/issues"
@@ -724,7 +980,11 @@ strip out/Default/Content\ Shell.app/Contents/MacOS/Content\ Shell
           <a target="_blank" href="https://twitter.com/bokken_" rel="noopener"
             >@bokken_</a
           >
-          までご報告いただけると嬉しい。
+          までご報告いただけると嬉しい。<a
+            href="#b2/vMAC6U/e4RMZVfLSc7g=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="参考文献" href="#参考文献" id="参考文献"> 参考文献 </a>

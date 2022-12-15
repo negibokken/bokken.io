@@ -256,6 +256,19 @@ article > p {
   margin-inline-end: 0px;
 }
 
+.paragraph-anchor  {
+    display: inline;
+    visibility: hidden;
+}
+.paragraph-anchor:hover {
+    display: inline;
+    visibility: visible;
+}
+
+.paragraph:hover .paragraph-anchor {
+    visibility: visible;
+}
+
 article code {
   background: #eee;
   border-radius: 5px;
