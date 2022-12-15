@@ -116,10 +116,20 @@
         <h2>
           <a name="概要" href="#概要" id="概要"> 概要 </a>
         </h2>
-        <p>
-          最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。
+        <p id="l0Ra1FRl45GTpRr/RebYtA==" class="paragraph">
+          最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。<a
+            href="#l0Ra1FRl45GTpRr/RebYtA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>要点は下記である。</p>
+        <p id="Yv42k61C1I07zBNdEgfPqA==" class="paragraph">
+          要点は下記である。<a
+            href="#Yv42k61C1I07zBNdEgfPqA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <ul>
           <li>何度も繰り返すコマンドはスクリプトに</li>
           <li>コミットしてしまわないように .gitignore に追加</li>
@@ -131,53 +141,91 @@
         <h2>
           <a name="背景" href="#背景" id="背景"> 背景 </a>
         </h2>
-        <p>
-          プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。
+        <p id="5IAZ0v0l+nemrcj1rVCQ/A==" class="paragraph">
+          プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。<a
+            href="#5IAZ0v0l+nemrcj1rVCQ/A=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="OJMpmpOyl3kjc2k5lSOCdw==" class="paragraph">
           例えば DB
-          の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。
+          の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。<a
+            href="#OJMpmpOyl3kjc2k5lSOCdw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-shell">yarn db-data-insert
 yarn test some-test
 </code></pre>
-        <p>
-          テストは開発中何度も実行するので、これらのコマンドを何度も実行するとなると少し手間である。また、コマンドが長くなるとなおさらだ。
+        <p id="vSwwdiv22F3NzA4p1RLJhQ==" class="paragraph">
+          テストは開発中何度も実行するので、これらのコマンドを何度も実行するとなると少し手間である。また、コマンドが長くなるとなおさらだ。<a
+            href="#vSwwdiv22F3NzA4p1RLJhQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          何度も実行するとなると、これらのコマンドをシェルスクリプトにまとめてしまうのがよい。例えば下記のようにだ。
+        <p id="4DzSmaQF5GQkOO9HwqgkMw==" class="paragraph">
+          何度も実行するとなると、これらのコマンドをシェルスクリプトにまとめてしまうのがよい。例えば下記のようにだ。<a
+            href="#4DzSmaQF5GQkOO9HwqgkMw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
 yarn db-data-insert
 yarn test some-test
 </code></pre>
-        <p>
+        <p id="oicM/GhQscB0avOcM2R1dw==" class="paragraph">
           しかしこのままでは、git
-          で管理されているプロジェクトの場合、このファイルをコミットしないように気をつけなければいけない。
+          で管理されているプロジェクトの場合、このファイルをコミットしないように気をつけなければいけない。<a
+            href="#oicM/GhQscB0avOcM2R1dw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="簡潔な方法" href="#簡潔な方法" id="簡潔な方法">
             簡潔な方法
           </a>
         </h2>
-        <p>
+        <p id="9wUorTWwfM52VAb6IY3dmg==" class="paragraph">
           一つの方法としては
           <code>.gitignore</code>
           に書く方法がある。しかし、これではプロジェクトの
-          <code>.gitignore</code> に個人のスクリプト名が入ってしまう。
+          <code>.gitignore</code> に個人のスクリプト名が入ってしまう。<a
+            href="#9wUorTWwfM52VAb6IY3dmg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>そこで <code>~/.gitconfig</code> に下記のように設定を追加し、</p>
+        <p id="MxVEEgN+cORyPGgfTfPmDA==" class="paragraph">
+          そこで <code>~/.gitconfig</code> に下記のように設定を追加し、<a
+            href="#MxVEEgN+cORyPGgfTfPmDA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-gitconfig">[core]
   excludeSfile = ~/.gitignore.global
 </code></pre>
-        <p>
+        <p id="lKlZ8V8CHQOFONBPwdhk4w==" class="paragraph">
           <code>~/.gitignore.global</code>
-          に自分自身のスクリプトのファイル名を追加すると自分の特定の操作をコミットせずに保持できる。
+          に自分自身のスクリプトのファイル名を追加すると自分の特定の操作をコミットせずに保持できる。<a
+            href="#lKlZ8V8CHQOFONBPwdhk4w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh">my-script
 </code></pre>
-        <p>
-          ひとまず、これだけでも特定の連続したコマンド列の操作を、コミットせずに好き勝手に追加できる。
+        <p id="ePm6+QnJr606phRMbHyctg==" class="paragraph">
+          ひとまず、これだけでも特定の連続したコマンド列の操作を、コミットせずに好き勝手に追加できる。<a
+            href="#ePm6+QnJr606phRMbHyctg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a
@@ -188,17 +236,33 @@ yarn test some-test
             簡潔な方法の問題点
           </a>
         </h2>
-        <p>
+        <p id="LeR0UIsH1Z2uJWyxzaFjlg==" class="paragraph">
           しかし、このままでは新たなコマンドを追加するごとに、
-          <code>~/.gitignore.global</code> を更新しなければいけない。
+          <code>~/.gitignore.global</code> を更新しなければいけない。<a
+            href="#LeR0UIsH1Z2uJWyxzaFjlg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>例えば下記のようにだ。</p>
+        <p id="8GXb46v8muxmMTSQg84Q0Q==" class="paragraph">
+          例えば下記のようにだ。<a
+            href="#8GXb46v8muxmMTSQg84Q0Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-sh">my-script1
 my-script2
 my-script3
 <span class="hljs-comment"># ...</span>
 </code></pre>
-        <p>これでは少し手間である。</p>
+        <p id="mOYMpGO7zsGw+vHPuSH8qg==" class="paragraph">
+          これでは少し手間である。<a
+            href="#mOYMpGO7zsGw+vHPuSH8qg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h2>
           <a
             name="簡潔な方法の改善"
@@ -208,55 +272,95 @@ my-script3
             簡潔な方法の改善
           </a>
         </h2>
-        <p>
+        <p id="WSHp+AjXKNFAQhAuJy0+2w==" class="paragraph">
           何度も <code>~/.gitignore.global</code> を更新しないために、<code
             >~/.gitignore.global</code
           >
-          にディレクトリを追加してしまえばよい。
+          にディレクトリを追加してしまえばよい。<a
+            href="#WSHp+AjXKNFAQhAuJy0+2w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh">my-awesome-tools
 </code></pre>
-        <p>
+        <p id="V8ZtDuLJfcjSpgCm7CsSCQ==" class="paragraph">
           こうしてやると、
           <code>my-awesome-tools</code> ディレクトリやそれ以下のファイルは
-          ignore される。
+          ignore される。<a
+            href="#V8ZtDuLJfcjSpgCm7CsSCQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="UGxpIIpFe4o2tlzlIUuffA==" class="paragraph">
           つまり、 <code>my-awesome-tools</code> に
           <code>my-script1</code
-          >、<code>my-script2</code>、<code>my-script3</code>...、と追加してやればよい。
+          >、<code>my-script2</code>、<code>my-script3</code>...、と追加してやればよい。<a
+            href="#UGxpIIpFe4o2tlzlIUuffA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh">$ ls my-awesome-tools
 my-scripts1 my-scripts2 my-scripts3
 </code></pre>
-        <p>
+        <p id="rOsSB5yWlRYlYcSKxLY1fw==" class="paragraph">
           こうすると、
           <code>./my-awesome-tools/my-script1</code>
-          とするとスクリプトを実行することができる。
+          とするとスクリプトを実行することができる。<a
+            href="#rOsSB5yWlRYlYcSKxLY1fw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="発展" href="#発展" id="発展"> 発展 </a>
         </h2>
-        <p>
+        <p id="/V5tD6KmTHck9h6oAxaUeQ==" class="paragraph">
           ただし、このままでは、毎回
           <code>./my-awesome-tools</code>
-          と入力しなければいけない。これも少し手間である。
+          と入力しなければいけない。これも少し手間である。<a
+            href="#/V5tD6KmTHck9h6oAxaUeQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>できれば、<code>my-script1</code> と書くだけで実行したい。</p>
-        <p>
+        <p id="AWrNpQ5zm8oKT42X6kEj0Q==" class="paragraph">
+          できれば、<code>my-script1</code> と書くだけで実行したい。<a
+            href="#AWrNpQ5zm8oKT42X6kEj0Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="X3GZulf47spORneyU4S4wg==" class="paragraph">
           その場合、自身の <code>~/.zshrc</code> や
           <code>~/.bashrc</code> に下記の一行を追加して、<code
             >my-awesome-tools</code
           >
-          に <code>PATH</code> を通してやればよい。
+          に <code>PATH</code> を通してやればよい。<a
+            href="#X3GZulf47spORneyU4S4wg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-sh"><span class="hljs-built_in">export</span> PATH=./my-awesome-tools:<span class="hljs-variable">$PATH</span>
 </code></pre>
-        <p>
+        <p id="bBu56jkWFMzeg+bZli5bUw==" class="paragraph">
           すると、自分のプロジェクトのルートで、<code>my-script1</code>
-          と打ち込むとコマンドが実行できる。
+          と打ち込むとコマンドが実行できる。<a
+            href="#bBu56jkWFMzeg+bZli5bUw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>ディレクトリ構成としては、下記のようになるイメージである。</p>
+        <p id="D5quvAhALdFHqcUl+e64tg==" class="paragraph">
+          ディレクトリ構成としては、下記のようになるイメージである。<a
+            href="#D5quvAhALdFHqcUl+e64tg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code>% tree .
 .
 ├── README.md
@@ -268,26 +372,44 @@ my-scripts1 my-scripts2 my-scripts3
     └── main.js
     ...
 </code></pre>
-        <p>
+        <p id="RBShqUxBgCZLIdOolpBhhw==" class="paragraph">
           一点注意として、プロジェクトのルートではない
           <code>src</code> ディレクトリなどでは
-          <code>my-script?</code> は実行できない。
+          <code>my-script?</code> は実行できない。<a
+            href="#RBShqUxBgCZLIdOolpBhhw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="iV78TTNFVxJk6amL6ojpkg==" class="paragraph">
           これは <code>PATH</code> が通っているのは
           <code>./my-awesome-tools</code>
           だけで、プロジェクトのルートにいるときのみ、<code
             >${プロジェクトのルート}/my-awesome-tools</code
           >
-          で参照できるからである。
+          で参照できるからである。<a
+            href="#iV78TTNFVxJk6amL6ojpkg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="まとめ" href="#まとめ" id="まとめ"> まとめ </a>
         </h2>
-        <p>
-          ここまで、コミットするほどではないが、何度も実行するコマンドをスクリプト化し、誤ってプロジェクトに追加することなく作成する方法を紹介した。
+        <p id="E+qQqhKHjWOyG3vjadrJaw==" class="paragraph">
+          ここまで、コミットするほどではないが、何度も実行するコマンドをスクリプト化し、誤ってプロジェクトに追加することなく作成する方法を紹介した。<a
+            href="#E+qQqhKHjWOyG3vjadrJaw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>最初にも述べたが要点は下記である。</p>
+        <p id="bQ0G43/btON93c7ds3IUfg==" class="paragraph">
+          最初にも述べたが要点は下記である。<a
+            href="#bQ0G43/btON93c7ds3IUfg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <ul>
           <li>何度も繰り返すコマンドはスクリプトに</li>
           <li>コミットしてしまわないように .gitignore に追加</li>
@@ -296,7 +418,13 @@ my-scripts1 my-scripts2 my-scripts3
             PATH を追加
           </li>
         </ul>
-        <p>また引き続き何か良い方法が見つかれば紹介していきたい。</p>
+        <p id="kLOhV9DGbHqCgeLPQ22r+A==" class="paragraph">
+          また引き続き何か良い方法が見つかれば紹介していきたい。<a
+            href="#kLOhV9DGbHqCgeLPQ22r+A=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
       </article>
 
       <!-- prettier-ignore -->

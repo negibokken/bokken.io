@@ -126,10 +126,14 @@
         <h2>
           <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
         </h2>
-        <p>
+        <p id="alvERCZ7B79rBf7dzQblVQ==" class="paragraph">
           最近、Chromium へのコントリビューション活動をしている。 直近で
           Chromium のバグ fix
-          のために仕様を読んでいて面白いなと思ったことがあったので共有したい。
+          のために仕様を読んでいて面白いなと思ったことがあったので共有したい。<a
+            href="#alvERCZ7B79rBf7dzQblVQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="TL;DR" href="#TL;DR" id="TL;DR"> TL;DR </a>
@@ -154,21 +158,33 @@
         <h2>
           <a name="背景" href="#背景" id="背景"> 背景 </a>
         </h2>
-        <p>
+        <p id="eMgwZHQBxpEBYIZMniSDvg==" class="paragraph">
           具体的に取り組んでいたのは、<a
             target="_blank"
             href="https://bugs.chromium.org/p/chromium/issues/detail?id=978146"
             rel="noopener"
             >こちらのバグ</a
-          >である。
+          >である。<a href="#eMgwZHQBxpEBYIZMniSDvg==" class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="uU6bguKGC8p0V+Sje3Pxrw==" class="paragraph">
           内容は <code>Access-Control-Expose-Headers</code> に関する Web
           Platform Test のうち、
           <code>Access-Control-Expose-Headers</code>
-          の値がうまくパースできておらず、Expose されないというものだった。
+          の値がうまくパースできておらず、Expose されないというものだった。<a
+            href="#uU6bguKGC8p0V+Sje3Pxrw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>具体的な WPT のテストケースは下記のケースだ。</p>
+        <p id="oSeAf4zh+gfZ+AFC/sgsvg==" class="paragraph">
+          具体的な WPT のテストケースは下記のケースだ。<a
+            href="#oSeAf4zh+gfZ+AFC/sgsvg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-json">{
   &quot;input&quot;: &quot;Access-Control-Expose-Headers:\r\nAccess-Control-Expose-Headers: bb-8&quot;,
   &quot;exposed&quot;: true
@@ -178,26 +194,38 @@
   &quot;exposed&quot;: true
 },
 </code></pre>
-        <p>
+        <p id="3H9yRzmlnDXJIvR4MaY+HA==" class="paragraph">
           今回、特に取り上げたいのは2番目のケースである。 この WPT
           では、ヘッダとして input を使って CORS request をした際に、 bb-8
           というヘッダがリクエストに付与されているかどうか (exopsed)
           をテストするものでだった。 こちらの二番目のケースは exposed が true
-          にも関わらず expose されていなかった。
+          にも関わらず expose されていなかった。<a
+            href="#3H9yRzmlnDXJIvR4MaY+HA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="2CqAmhQyrJvoiP1Rwc206w==" class="paragraph">
           ただし、WPT が誤っているケースもありえる。今回のバグ対応では WPT
           が間違っているのか、Chromium
-          の実装が間違っているのかを判断する必要があった。
+          の実装が間違っているのかを判断する必要があった。<a
+            href="#2CqAmhQyrJvoiP1Rwc206w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="調査" href="#調査" id="調査"> 調査 </a>
         </h2>
-        <p>
+        <p id="BJf4vsOPdS/hCYAjXWTlAQ==" class="paragraph">
           結論からいうと、WPT は間違っておらず、Chromium
-          の実装の一部に問題があった。 ただし一部混乱する部分があった。
+          の実装の一部に問題があった。 ただし一部混乱する部分があった。<a
+            href="#BJf4vsOPdS/hCYAjXWTlAQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="K3LR7cKjWFrvgL6nvYLKQg==" class="paragraph">
           Fetch Standard を読むと、<a
             target="_blank"
             href="https://fetch.spec.whatwg.org/#concept-header-list-get-structured-header"
@@ -205,16 +233,24 @@
             >2.2.2 Headers</a
           >
           のはじめには Structured Field Values
-          をパースをする方法が記載されている。
+          をパースをする方法が記載されている。<a
+            href="#K3LR7cKjWFrvgL6nvYLKQg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="0gf41ds60fmxnKqWTbX0TQ==" class="paragraph">
           Structured Field Values for HTTP
           の場合は厳格なパースが求められ、今回の , bb-8 のような不正な value
           を認めない。もともとヘッダを構造化してパース方法を統一、厳格化しようとして生まれたのでこういった値を弾くのは当然だろう。今回の
           WPT の FAIL も Structured Field Values
-          を使うようになったのに、追従できていないのではないか？と誤解してしまった。
+          を使うようになったのに、追従できていないのではないか？と誤解してしまった。<a
+            href="#0gf41ds60fmxnKqWTbX0TQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="iSFYSuwMBTTED3vXCySHpQ==" class="paragraph">
           しかし、実際にはヘッダの Field Values
           のパース方法は各ヘッダの仕様ごとに策定されている。 今回の
           Access-Control-Expose-Headers の場合には、<a
@@ -225,7 +261,11 @@
           >
           に CORS の ABNF
           を参照するのが正しいと記載されており、内容としては下記のように
-          #field-name というように定義されている。
+          #field-name というように定義されている。<a
+            href="#iSFYSuwMBTTED3vXCySHpQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-http">Access-Control-Request-Method    = method
 Access-Control-Request-Headers   = 1#field-name
@@ -238,12 +278,16 @@ Access-Control-Max-Age           = delta-seconds
 Access-Control-Allow-Methods     = #method
 Access-Control-Allow-Headers     = #field-name
 </code></pre>
-        <p>
+        <p id="NdcajsQPmVatBUi0Qvsz0g==" class="paragraph">
           <code>#</code> という記号については、１つ以上の value
           のリストを表しており、<code>field-name</code> は
           <code>token</code> として定義されている。また、<code>token</code> は
           <code>1*tchar</code> 、<code>tchar</code>
-          は下記のように定義されている。
+          は下記のように定義されている。<a
+            href="#NdcajsQPmVatBUi0Qvsz0g=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <pre><code class="language-text">token          = 1*tchar
 
@@ -252,12 +296,16 @@ tchar          = "!" / "#" / "$" / "%" / "&amp;" / "'" / "*"
                 / DIGIT / ALPHA
                 ; any VCHAR, except delimiters
 </code></pre>
-        <p>
+        <p id="43F0Wkp5MhJL9fe/yRc5Ww==" class="paragraph">
           これを確認すると、<code>,</code>
           が最初に来るような文字列については、パースが FAIL し、値が expose
-          されないのが正解であるかのように見える。
+          されないのが正解であるかのように見える。<a
+            href="#43F0Wkp5MhJL9fe/yRc5Ww=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="KTx7Uqq5upo0aF83SWdrdw==" class="paragraph">
           だが、実際には
           <a
             target="_blank"
@@ -265,20 +313,32 @@ tchar          = "!" / "#" / "$" / "%" / "&amp;" / "'" / "*"
             rel="noopener"
             ># に関する拡張ルール</a
           >を注意深く読む必要がありる。この仕様を読むと古い list rule
-          との互換性のために、リストにある空白の要素は受領し、無視しなければいけないという記載がある。
+          との互換性のために、リストにある空白の要素は受領し、無視しなければいけないという記載がある。<a
+            href="#KTx7Uqq5upo0aF83SWdrdw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <blockquote>
-          <p>
+          <p id="7FtX/mua4VkTXa30wrBCpw==" class="paragraph">
             For compatibility with legacy list rules, a recipient MUST parse and
-            ignore a reasonable number of empty list elements:
+            ignore a reasonable number of empty list elements:<a
+              href="#7FtX/mua4VkTXa30wrBCpw=="
+              class="paragraph-anchor"
+              >¶</a
+            >
           </p>
         </blockquote>
-        <p>
+        <p id="P5Z/v/sP+47G1AuVyD36TA==" class="paragraph">
           今回の問題としては、<code>Access-Control-Expose-Headers</code>
           をパースする際にこの部分を考慮しきれていなかったことが問題だった。こうした仕様による裏付けが取れたため、WPT
-          の修正ではなく Chromium の実装の修正に取り組むことができた。
+          の修正ではなく Chromium の実装の修正に取り組むことができた。<a
+            href="#P5Z/v/sP+47G1AuVyD36TA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="aG21ej7ETnbvnqNwRzXVPw==" class="paragraph">
           結果としてこの
           <a
             target="_blank"
@@ -288,16 +348,24 @@ tchar          = "!" / "#" / "$" / "%" / "&amp;" / "'" / "*"
           >
           を作成し、現在はマージされている。成果として、今まで Chromium が FAIL
           していた WPT がパスするようになった。Web
-          をより良くできたような気がして、とても嬉しい気持ちになった。
+          をより良くできたような気がして、とても嬉しい気持ちになった。<a
+            href="#aG21ej7ETnbvnqNwRzXVPw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="最後に" href="#最後に" id="最後に"> 最後に </a>
         </h2>
-        <p>
+        <p id="nZ+0vMKCO7dvcdMAuC1Dtg==" class="paragraph">
           WPT
           は必ずしも正しいとは限らないので仕様を読むことは大切。仕様を読む上では大元（今回でいうと
           CORS 関連ヘッダの定義と ABNF
-          ルール）からたどっていくことが大事だと身にしみて分かった。
+          ルール）からたどっていくことが大事だと身にしみて分かった。<a
+            href="#nZ+0vMKCO7dvcdMAuC1Dtg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
       </article>
 

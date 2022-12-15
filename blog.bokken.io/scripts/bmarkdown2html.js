@@ -1,6 +1,7 @@
 const marked = require('marked');
 const ejs = require('ejs');
 const hljs = require('highlightjs');
+const hash = require('crypto').createHash;
 
 let articleTitle = '';
 let tags = '';
@@ -38,7 +39,8 @@ const renderer = {
             const t = text.slice();
             summary += t.replaceAll(htmltagRegexp, '');
         }
-        return `<p>${text}</p>`;
+        const h = hash('md5').update(text).digest('base64')
+        return `<p id="${h}" class="paragraph">${text}<a href="#${h}" class="paragraph-anchor">¶</a></p>`;
     },
     heading: (text, level) => {
         // const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
@@ -65,7 +67,7 @@ const renderer = {
     },
     link: (href, title, text) => {
         return `<a target="_blank" href="${href}" rel="noopener">${text}</a>`;
-    }
+    },
 };
 
 class BMarkdown2HTML {

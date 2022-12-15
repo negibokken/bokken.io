@@ -115,20 +115,34 @@
             きれいなコミットメッセージとは
           </a>
         </h1>
-        <p>
+        <p id="g4bH3Qqe8Hm7LLDvdJh66A==" class="paragraph">
           最近、大きなコードベースを触る機会が増えてきれいなコミットメッセージについて考える事が増えた。
-          きれいなコミットメッセージの定義は様々あると思うが、筆者は下記がきれいなコミットメッセージに必要なことだと考えている。
+          きれいなコミットメッセージの定義は様々あると思うが、筆者は下記がきれいなコミットメッセージに必要なことだと考えている。<a
+            href="#g4bH3Qqe8Hm7LLDvdJh66A=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <ol>
           <li>どこに対する変更かが分かる</li>
           <li>どんな変更かが分かる</li>
           <li>プロジェクト内で統一されている</li>
         </ol>
-        <p>
+        <p id="HP39NLc/5VqHUg0ZQeEw3w==" class="paragraph">
           これに対して、私はcommit_type(module): message
-          という形式でコミットメッセージを記載するのが分かりやすさと手間がちょうど良いのではないかと思っている。
+          という形式でコミットメッセージを記載するのが分かりやすさと手間がちょうど良いのではないかと思っている。<a
+            href="#HP39NLc/5VqHUg0ZQeEw3w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>順番に説明をしていく。</p>
+        <p id="kkWVlMiPbboX4JKqHBeDgw==" class="paragraph">
+          順番に説明をしていく。<a
+            href="#kkWVlMiPbboX4JKqHBeDgw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h2>
           <a
             name="どこに対する変更か"
@@ -138,37 +152,65 @@
             どこに対する変更か
           </a>
         </h2>
-        <p>
+        <p id="NIVeIn8EHwQDoOaANRpn1w==" class="paragraph">
           1
           つめについては、当たり前のことであると感じるかもしれないが、このうち特に
           &quot;どこ&quot;
-          の部分がをわかりやすく書くのは難しいのではないかと思っていた。
+          の部分がをわかりやすく書くのは難しいのではないかと思っていた。<a
+            href="#NIVeIn8EHwQDoOaANRpn1w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="ypPhJOuSNZFRSHNF30ibyA==" class="paragraph">
           例えば Fix accuracy of retuened value from functionA
-          というコミットメッセージを書いたとしよう。これはどんな変更なのかは分かる、とても普通のコミットメッセージだと思う。
+          というコミットメッセージを書いたとしよう。これはどんな変更なのかは分かる、とても普通のコミットメッセージだと思う。<a
+            href="#ypPhJOuSNZFRSHNF30ibyA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="NwupHQ3wVlwmoIq7/zL4JA==" class="paragraph">
           ただ、これが大規模なコードベースとなった場合、この functionA
           がどのモジュール（どこ）なのか、コミットメッセージだけでは判断がつかない。diff
           を見ればどこのモジュールの変更なのかは一目瞭然であるが、diff
-          を見る手間が発生する(tig などを使えばある程度削減されるが)。
+          を見る手間が発生する(tig などを使えばある程度削減されるが)。<a
+            href="#NwupHQ3wVlwmoIq7/zL4JA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          気づかないうちにある部分が壊れていて原因となったコミットを探す際、1つ2つのコミットを遡るのであればこれでも良いが、大量のコミットがあるようなプロジェクトの場合、この手間は大きなコストになる。
+        <p id="QAA/O89PdS1q83udfdl3+g==" class="paragraph">
+          気づかないうちにある部分が壊れていて原因となったコミットを探す際、1つ2つのコミットを遡るのであればこれでも良いが、大量のコミットがあるようなプロジェクトの場合、この手間は大きなコストになる。<a
+            href="#QAA/O89PdS1q83udfdl3+g=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="Y4UeraMIW9DGch/xMdW2Ow==" class="paragraph">
           function A in module X
-          というようにモジュールを書くようにするという方法もあるが、少し冗長になってしまうし、英文の最後まで読まなければ分からないという課題もある。
+          というようにモジュールを書くようにするという方法もあるが、少し冗長になってしまうし、英文の最後まで読まなければ分からないという課題もある。<a
+            href="#Y4UeraMIW9DGch/xMdW2Ow=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="Lon+cufaZc08GblcZA6pqA==" class="paragraph">
           そこで (module)
           という部分を追加することで、どのモジュールかがはっきりと分かる。こうすることで、あるモジュールが壊れていることに気づいたときに
           (module) で grep すれば、該当コミットが見つけやすい。ここで、module
-          の粒度はチーム内で合意が取れている粒度で記載する。（そうでなければ結局自由に記載しているのと変わらない）
+          の粒度はチーム内で合意が取れている粒度で記載する。（そうでなければ結局自由に記載しているのと変わらない）<a
+            href="#Lon+cufaZc08GblcZA6pqA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          このように記載することで、英文を書くのに比べて狙いが分かりやすくなると考える。
+        <p id="ao7W9GnSDZLljqtKL4QRTg==" class="paragraph">
+          このように記載することで、英文を書くのに比べて狙いが分かりやすくなると考える。<a
+            href="#ao7W9GnSDZLljqtKL4QRTg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a
@@ -179,14 +221,22 @@
             どんな変更かが分かる
           </a>
         </h2>
-        <p>
+        <p id="qONmKVKZsaKerL9kDWv08Q==" class="paragraph">
           次にどんな変更なのか内容が分かりやすく書くためにはどうするべきかについて述べる。
           まず、message
-          の部分に、普段どおりのメッセージを記載しておけば、どんな変更なのかはある程度分かる。ただし、英文で記載されているので、どういう変更なのかは英文を読み解かなければ、機能追加なのか、バグフィックスなのかがすぐさま判断つかないことがある。
+          の部分に、普段どおりのメッセージを記載しておけば、どんな変更なのかはある程度分かる。ただし、英文で記載されているので、どういう変更なのかは英文を読み解かなければ、機能追加なのか、バグフィックスなのかがすぐさま判断つかないことがある。<a
+            href="#qONmKVKZsaKerL9kDWv08Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="exheejAmvVXWTaEm+8DdQA==" class="paragraph">
           そこで、commit_type を記載するようにする。この commit_type
-          は、例えば下記のようにコミットの作業を大別したもので、チームの中で合意が取れているものにする。
+          は、例えば下記のようにコミットの作業を大別したもので、チームの中で合意が取れているものにする。<a
+            href="#exheejAmvVXWTaEm+8DdQA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <ul>
           <li>feat</li>
@@ -198,22 +248,42 @@
           <li>style</li>
           <li>test</li>
         </ul>
-        <p>こうすることで、どういった変更なのかがよりわかりやすくなる。</p>
-        <p>
+        <p id="nyjWymL+S78Q8JxKKmYnEQ==" class="paragraph">
+          こうすることで、どういった変更なのかがよりわかりやすくなる。<a
+            href="#nyjWymL+S78Q8JxKKmYnEQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="c9VtTy9Tg81S6g+Y9uoUCQ==" class="paragraph">
           加えて、可能であれば、ここにより長いコミットメッセージを 3
           行目以降に記載してもよいと思う。加えて、どの issue
-          に紐付いているのかをコミットメッセージに記載するのも有効なように思う。
+          に紐付いているのかをコミットメッセージに記載するのも有効なように思う。<a
+            href="#c9VtTy9Tg81S6g+Y9uoUCQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>具体的には下記のように。</p>
+        <p id="ucDws8Nw8h1z2F3e+cPvig==" class="paragraph">
+          具体的には下記のように。<a
+            href="#ucDws8Nw8h1z2F3e+cPvig=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code>commit_type(module): short message
 
 long message.
 
 issue: 123456
 </code></pre>
-        <p>
+        <p id="aCck6CNv07hmSO8C4MF8hQ==" class="paragraph">
           この long_message や issue を書くかどうかは、手間や、タスクが issue
-          で管理されているかどうかなどに応じて追加してもよいように思う。
+          で管理されているかどうかなどに応じて追加してもよいように思う。<a
+            href="#aCck6CNv07hmSO8C4MF8hQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a
@@ -224,39 +294,67 @@ issue: 123456
             プロジェクト内で統一されている
           </a>
         </h2>
-        <p>
+        <p id="Q8yblnZP7cgPTR6c+C067Q==" class="paragraph">
           先程までのテンプレートに沿うことでプロジェクト内である程度の統一することができる。
-          コミットメッセージが統一されていることで、コミットメッセージを読む側からすると、コミットメッセージごとに読み方の切り替えをする必要性が少なくなり負担が少なくなる。
+          コミットメッセージが統一されていることで、コミットメッセージを読む側からすると、コミットメッセージごとに読み方の切り替えをする必要性が少なくなり負担が少なくなる。<a
+            href="#Q8yblnZP7cgPTR6c+C067Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h2>
           <a name="終わりに" href="#終わりに" id="終わりに"> 終わりに </a>
         </h2>
-        <p>
-          このエントリではコミットメッセージをきれいに書くために下記が必要であるという考えを述べた。
+        <p id="X9Dj/c2bpgJent2TZUZ0fQ==" class="paragraph">
+          このエントリではコミットメッセージをきれいに書くために下記が必要であるという考えを述べた。<a
+            href="#X9Dj/c2bpgJent2TZUZ0fQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <ol>
           <li>どこに対する変更かが分かる</li>
           <li>どんな変更かが分かる</li>
           <li>プロジェクト内で統一されている</li>
         </ol>
-        <p>これに対して、具体的に私はcommit_type(module): message か</p>
+        <p id="PYpRu4SJ4aGR4wcj9ECsmg==" class="paragraph">
+          これに対して、具体的に私はcommit_type(module): message か<a
+            href="#PYpRu4SJ4aGR4wcj9ECsmg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code>commit_type(module): message
 
 long message.
 
 issue: 123456
 </code></pre>
-        <p>というコミットメッセージを書くのが良いのではという考えを述べた。</p>
-        <p>
-          この考え方に至ったのは最近で、現在運用しているところなのでまた追加で気づいた事があれば、
-          このエントリをアップデートしたいと思う。
+        <p id="dU77L3bn19B3KfxZfCAR3w==" class="paragraph">
+          というコミットメッセージを書くのが良いのではという考えを述べた。<a
+            href="#dU77L3bn19B3KfxZfCAR3w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="2yIKD38gv6IIOuBJnNC62w==" class="paragraph">
+          この考え方に至ったのは最近で、現在運用しているところなのでまた追加で気づいた事があれば、
+          このエントリをアップデートしたいと思う。<a
+            href="#2yIKD38gv6IIOuBJnNC62w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="1O8uVDV8FTTV0788piA5Gw==" class="paragraph">
           もしもよりよいコミットメッセージの書き方、コミットの考え方などがあれば、
           <a target="_blank" href="https://twitter.com/bokken_" rel="noopener"
             >@bokken_</a
           >
-          まで教えていただけると嬉しい。
+          まで教えていただけると嬉しい。<a
+            href="#1O8uVDV8FTTV0788piA5Gw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
       </article>
 

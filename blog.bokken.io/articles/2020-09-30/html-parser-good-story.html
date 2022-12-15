@@ -121,29 +121,59 @@
         <h2>
           <a name="TL;DR" href="#TL;DR" id="TL;DR"> TL;DR </a>
         </h2>
-        <p>
+        <p id="hubQhBKbpuso7LRu71FYuA==" class="paragraph">
           筆者はブラウザをスクラッチで書いている。そのときに HTML
-          の標準を読みながらブラウザを書いている
+          の標準を読みながらブラウザを書いている<a
+            href="#hubQhBKbpuso7LRu71FYuA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>そのときに仕様の不備のように疑われる挙動に出会った。</p>
-        <p>内容について調査しているうちに</p>
+        <p id="MHjG/0RY/MiP1Tcgo7wcWw==" class="paragraph">
+          そのときに仕様の不備のように疑われる挙動に出会った。<a
+            href="#MHjG/0RY/MiP1Tcgo7wcWw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="Y+bT0qrL6BPSW/16/wVwgw==" class="paragraph">
+          内容について調査しているうちに<a
+            href="#Y+bT0qrL6BPSW/16/wVwgw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <ul>
           <li>Web は標準を壊さないようにしている</li>
           <li>動いているものが Web</li>
         </ul>
-        <p>ということを再認識できたので、その内容について紹介したい。</p>
+        <p id="QM0Y/NdBNDW+LZWd6rTB9Q==" class="paragraph">
+          ということを再認識できたので、その内容について紹介したい。<a
+            href="#QM0Y/NdBNDW+LZWd6rTB9Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h2>
           <a name="出会った背景" href="#出会った背景" id="出会った背景">
             出会った背景
           </a>
         </h2>
-        <p>
-          まず、筆者がどういう背景でどのような挙動に出会ったかを簡単に紹介する。
+        <p id="gPusojd8fgRBFRZ04a7LIQ==" class="paragraph">
+          まず、筆者がどういう背景でどのような挙動に出会ったかを簡単に紹介する。<a
+            href="#gPusojd8fgRBFRZ04a7LIQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
-          筆者はブラウザに興味があり、ブラウザをフルスクラッチで作っている。
+        <p id="+8vlfqrPKlhvkyUC+t/25w==" class="paragraph">
+          筆者はブラウザに興味があり、ブラウザをフルスクラッチで作っている。<a
+            href="#+8vlfqrPKlhvkyUC+t/25w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="xrhNmtM0F3PtZzNuA0k4Vg==" class="paragraph">
           その中で HTML の parser を
           <a
             target="_blank"
@@ -151,13 +181,21 @@
             rel="noopener"
             >WHATWG の仕様</a
           >
-          を読み解きながら実装している。
+          を読み解きながら実装している。<a
+            href="#xrhNmtM0F3PtZzNuA0k4Vg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="ENtZjXkus2euS43ZbS2h1g==" class="paragraph">
           そのときに、attribute (<code
             >&lt;a href=&quot;https://example.com&quot;&gt;&lt;/a&gt;</code
           >の <code>href</code> などの部分) の parse
-          処理を実装しているときに出会った。
+          処理を実装しているときに出会った。<a
+            href="#ENtZjXkus2euS43ZbS2h1g=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <h3>
           <a
@@ -168,14 +206,24 @@
             HTML タグの attribute の書き方
           </a>
         </h3>
-        <p>
+        <p id="1YMwHQl/VLcpxQqIbm9Eig==" class="paragraph">
           HTML タグの attribute value は
           <code>double-quoted</code>,<code>single-quoted</code>,<code
             >unquoted</code
           >
-          が許されている。
+          が許されている。<a
+            href="#1YMwHQl/VLcpxQqIbm9Eig=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>つまり、下記の三種類の書き方ができる。</p>
+        <p id="idYR+CgroojZJDv5NtJ7vg==" class="paragraph">
+          つまり、下記の三種類の書き方ができる。<a
+            href="#idYR+CgroojZJDv5NtJ7vg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
 </code></pre>
         <!-- prettier-ignore -->
@@ -183,20 +231,38 @@
 </code></pre>
         <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">https://example.com</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
 </code></pre>
-        <p>
+        <p id="x/rntv9pn6MiVvc28/dU+Q==" class="paragraph">
           この仕様に沿って parser を書いてると、どうも anchor
-          タグのテストが通らないという事象に出会った。
+          タグのテストが通らないという事象に出会った。<a
+            href="#x/rntv9pn6MiVvc28/dU+Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>そのときのテスト入力には下記のように書いていた。</p>
+        <p id="BIi68mWt+T0EDElzNxGD1w==" class="paragraph">
+          そのときのテスト入力には下記のように書いていた。<a
+            href="#BIi68mWt+T0EDElzNxGD1w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">https://example.com/</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
 </code></pre>
-        <p>
+        <p id="OBLhqdTl54MVQ9SzpQmw+g==" class="paragraph">
           URL の末尾に <code>/</code> を書き、さらに属性値の
-          <code>&#39;</code> や <code>&quot;</code> を省略している状態だ。
+          <code>&#39;</code> や <code>&quot;</code> を省略している状態だ。<a
+            href="#OBLhqdTl54MVQ9SzpQmw+g=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="aYUJtfgMjJmm68XMK9iU2g==" class="paragraph">
           このときに実装していた HTML parser
-          ではどのように解釈されていたかをかいつまんで説明すると下記である。
+          ではどのように解釈されていたかをかいつまんで説明すると下記である。<a
+            href="#aYUJtfgMjJmm68XMK9iU2g=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <ol>
           <li>a タグの開始</li>
@@ -210,25 +276,43 @@
           <li>a タグは self closing <code>/&gt;</code></li>
           <li>a タグの閉じタグが余っている (<code>&lt;/a&gt;</code>)</li>
         </ol>
-        <p>
+        <p id="acrZm5/49SmZ0xCk5psJyQ==" class="paragraph">
           という具合に処理されて、<code>&lt;/a&gt;</code>
-          が浮いてしまい、テストが落ちていたのだっ た
+          が浮いてしまい、テストが落ちていたのだっ た<a
+            href="#acrZm5/49SmZ0xCk5psJyQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="WuROMRUMmblXjge9uFujZQ==" class="paragraph">
           WHATWG の仕様には沿っているし、URL としては
-          <code>https://example.com/</code> と書いていても問題なさそうだ。
+          <code>https://example.com/</code> と書いていても問題なさそうだ。<a
+            href="#WuROMRUMmblXjge9uFujZQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="kpXBMfRqdY99fjdTNt2I0w==" class="paragraph">
           これの挙動については、なにか議論ができるかもしれないと思い、issue
-          を立ててみるかと思い立ったのだった。
+          を立ててみるかと思い立ったのだった。<a
+            href="#kpXBMfRqdY99fjdTNt2I0w=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>このあと分かったことだがこの挙動は Web として正しい。</p>
+        <p id="7pR0jQhxd4V9Ah067yOmMQ==" class="paragraph">
+          このあと分かったことだがこの挙動は Web として正しい。<a
+            href="#7pR0jQhxd4V9Ah067yOmMQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h2>
           <a name="issue の調査" href="#issue の調査" id="issue の調査">
             issue の調査
           </a>
         </h2>
-        <p>
+        <p id="hGRqkFP2q3i1mDR9kmEdoQ==" class="paragraph">
           WHATWG/html の issue
           を調査をしてみると、すでに似たようなことについては
           <a
@@ -238,14 +322,22 @@
             >[Parser] Make `/` in unquoted attribute value a parse error. ·
             Issue #2665 · whatwg/html</a
           >
-          で議論がなされていた。
+          で議論がなされていた。<a
+            href="#hGRqkFP2q3i1mDR9kmEdoQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="HUCcBDncxOyw+00JTXiFeA==" class="paragraph">
           この issue では、この挙動への変更について @hsivonen
-          氏は下記のように述べて、変更をしない方が良いということを述べている。
+          氏は下記のように述べて、変更をしない方が良いということを述べている。<a
+            href="#HUCcBDncxOyw+00JTXiFeA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <blockquote>
-          <p>
+          <p id="iDEt9LqwueR4MiaCaXhAag==" class="paragraph">
             If we now recanted on this, we&#39;d undermine the WHATWG&#39;s
             credibility as source of reliable requirements than don&#39;t change
             on whim and that don&#39;t need &quot;defensive coding&quot; in case
@@ -253,10 +345,20 @@
             that you should always do something extra (quotes, end tags), just
             in case, because you never know how things work out if you do
             something easy and convenient and you can&#39;t trust things to
-            actually work the way specs say.
+            actually work the way specs say.<a
+              href="#iDEt9LqwueR4MiaCaXhAag=="
+              class="paragraph-anchor"
+              >¶</a
+            >
           </p>
         </blockquote>
-        <p>簡単に要約すると、下記のようだった。</p>
+        <p id="E4XNJkNRHDxe4I+vSFb2Kw==" class="paragraph">
+          簡単に要約すると、下記のようだった。<a
+            href="#E4XNJkNRHDxe4I+vSFb2Kw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <ul>
           <li>WHATWG の信頼性を損なってしまう</li>
           <li>
@@ -267,46 +369,94 @@
             WHATWG の仕様に記載されている通り動いているものも信用ができなくなる
           </li>
         </ul>
-        <p>
-          確かにこの仕様を変更するだけで、いくつのソフトウェアが書き直されるかわからないし、この挙動を前提として書かれたウェブページもあるかもしれない。
+        <p id="atDay2mhKe9cbTJfgSSA6g==" class="paragraph">
+          確かにこの仕様を変更するだけで、いくつのソフトウェアが書き直されるかわからないし、この挙動を前提として書かれたウェブページもあるかもしれない。<a
+            href="#atDay2mhKe9cbTJfgSSA6g=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>そういう状況では仕様を変更することにはかなりの危険が伴うのだ。</p>
+        <p id="W3dnmxqeUnzcEeYGVyyDbw==" class="paragraph">
+          そういう状況では仕様を変更することにはかなりの危険が伴うのだ。<a
+            href="#W3dnmxqeUnzcEeYGVyyDbw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <h2>
           <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
         </h2>
-        <p>
+        <p id="7fefYxN2GREga6zTHggI5Q==" class="paragraph">
           WHATWG の<a
             target="_blank"
             href="https://whatwg.org/faq#change-at-any-time"
             rel="noopener"
             >標準の変更に対する考え</a
-          >にも変更はとても慎重になることが書かれている。
+          >にも変更はとても慎重になることが書かれている。<a
+            href="#7fefYxN2GREga6zTHggI5Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="jtP/lXnhKiLP3+TSHt0AzQ==" class="paragraph">
           また、団体が少し変わるが W3C の<a
             target="_blank"
             href="https://www.w3.org/People/Bos/DesignGuide/compatibility.html"
             rel="noopener"
             >後方互換性に関する説明書き</a
           >
-          にも下記のように述べられている。
+          にも下記のように述べられている。<a
+            href="#jtP/lXnhKiLP3+TSHt0AzQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
         <blockquote>
-          <p>The Web itself is designed to be backwards compatible.</p>
+          <p id="+Kg55BTVTAqqTKs7JG26OQ==" class="paragraph">
+            The Web itself is designed to be backwards compatible.<a
+              href="#+Kg55BTVTAqqTKs7JG26OQ=="
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
         </blockquote>
-        <p>
+        <p id="hdiPcDPZ0Qv8nz33zid1Pg==" class="paragraph">
           Web
-          というのはとても互換性を大切に作られてきている。また、実際に動くものを重視しているのも間違いない。
+          というのはとても互換性を大切に作られてきている。また、実際に動くものを重視しているのも間違いない。<a
+            href="#hdiPcDPZ0Qv8nz33zid1Pg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>
+        <p id="XloVO1sIQrr9BpYoQm9tuQ==" class="paragraph">
           少なくとも標準化までに、仕様の提案、各ベンダによる実装、仕様の改善がなされてはじめて標準として成立して、今
-          Web は動いている。
+          Web は動いている。<a
+            href="#XloVO1sIQrr9BpYoQm9tuQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
-        <p>よほどのことがない限り、今動いているものが正義なのだ。</p>
-        <p>それをより身近に感じられた出来事だった。</p>
-        <p>
+        <p id="UqXAHKxe5Wkc/CVqVLIWMg==" class="paragraph">
+          よほどのことがない限り、今動いているものが正義なのだ。<a
+            href="#UqXAHKxe5Wkc/CVqVLIWMg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="hvsR4++w+aUhEaSrbDBZpA==" class="paragraph">
+          それをより身近に感じられた出来事だった。<a
+            href="#hvsR4++w+aUhEaSrbDBZpA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="C3+iub5w3XgqW3bo7x8KUA==" class="paragraph">
           この Web
-          、あるいはインターネットを壊さないように、改善するためにどうするかをコミュニティのメンバー全体で作られている感覚が筆者にはとてもよいなと感じる。
+          、あるいはインターネットを壊さないように、改善するためにどうするかをコミュニティのメンバー全体で作られている感覚が筆者にはとてもよいなと感じる。<a
+            href="#C3+iub5w3XgqW3bo7x8KUA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
         </p>
       </article>
 
