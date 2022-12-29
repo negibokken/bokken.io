@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。ということらしい。いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。2022年11月24日現在では Android と Desktop 版の Chrome/Chromium で使えるようだ。"
+      content="Prerender2 という機能の実装が Chrome/Chromium で進んでいる。この機能はページのレンダリングを予め行うことでページを高速に閲覧できるようにするための機能だ。この記事ではなぜ Prerender2 なのか、どうすれば適用できるのか、使う際の注意点はなにかを 2022/11/23 時点での情報についてまとめる。最新の情報については、それぞれのPrerender は Rende"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -31,7 +31,7 @@
     <meta property="og:title" content="Prerender2 という機能について" />
     <meta
       property="og:description"
-      content="Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。ということらしい。いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。2022年11月24日現在では Android と Desktop 版の Chrome/Chromium で使えるようだ。"
+      content="Prerender2 という機能の実装が Chrome/Chromium で進んでいる。この機能はページのレンダリングを予め行うことでページを高速に閲覧できるようにするための機能だ。この記事ではなぜ Prerender2 なのか、どうすれば適用できるのか、使う際の注意点はなにかを 2022/11/23 時点での情報についてまとめる。最新の情報については、それぞれのPrerender は Rende"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -1213,6 +1213,12 @@
 
         <div class="blog-top">
           <a href="https://blog.bokken.io">TOP</a>
+        </div>
+
+        <div class="next-article">
+          <a href="https://blog.bokken.io/articles/2022-12-30/about-chips.html">
+            次の記事へ
+          </a>
         </div>
       </div>
     </main>

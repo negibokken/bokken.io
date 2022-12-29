@@ -35,10 +35,10 @@ const renderer = {
             dates = extractDate(text);
             return '';
         }
-        if (summary.length + text.length <= 200) {
-            const t = text.slice();
-            summary += t.replaceAll(htmltagRegexp, '');
-        }
+
+        const t = text.slice(0, Math.max(200 - summary.length, 0));
+        summary += t.replaceAll(htmltagRegexp, '');
+
         const h = hash('md5').update(text).digest('base64')
         return `<p id="${h}" class="paragraph">${text}<a href="#${h}" class="paragraph-anchor">¶</a></p>`;
     },
@@ -74,7 +74,7 @@ class BMarkdown2HTML {
     constructor(markdown, template, option = {}) {
         marked.use({ renderer });
         marked.setOptions({
-            highlight: function (code, lang) {
+            highlight: function(code, lang) {
                 return hljs.highlightAuto(code, [lang]).value;
             },
         });
