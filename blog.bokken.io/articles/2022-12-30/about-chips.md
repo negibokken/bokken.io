@@ -51,15 +51,15 @@ Cookie をトップレベルサイトで分離すると、どういった事が�
 
 下記のようなレスポンスでは `Partitioned` attribute がないため、 3rd Party Cookie はブロックされる。
 
-<img width=600 src="./img/chips_1.png" />
+<img width=800 src="./img/chips_1.png" />
 
 しかし、下記のような `Partitioned` attribute がある場合では 3rd Party Cookie はブロックされず、top level のサイトで Cookie が分離されて保存されることになる(`example.com` の `map.example.text` には `foo=bar`、`example.net` の `map.example.test` には `foo=baz` がそれぞれ別途 Cookie として保存される)。
 
-<img width=600 src="./img/chips_2.png" />
+<img width=800 src="./img/chips_2.png" />
 
 分離されていると、下記のように別のトップレベルサイトからのリクエストに先述したレスポンスで付与された Cookie は送付されず、該当するトップレベルサイトの Cookie が送付される。(`example.com` のフレームにある `map.example.test` には `foo=bar;`、`example.net` のフレームにある `map.example.test` には `foo=baz`)
 
-<img width=600 src="./img/chips_3.png" />
+<img width=800 src="./img/chips_3.png" />
 
 ### どのように Cookie が分離されていることを把握するか
 
