@@ -26,6 +26,17 @@ const SUMMARY_LENGTH = 300;
 const htmltagRegexp = RegExp('<.+?>', 'g');
 let paragraphNumber = 1;
 
+function serialize(value) {
+    return value
+        .toLowerCase()
+        .trim()
+        // remove html tags
+        .replace(/<[!\/a-z].*?>/ig, '')
+        // remove unwanted chars
+        .replace(/[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&*+,./:;<=>?@[\]^`{|}~]/g, '')
+        .replace(/\s/g, '-');
+}
+
 // Custom Renderer
 const renderer = {
     paragraph: (text) => {
@@ -54,7 +65,7 @@ const renderer = {
         return `<p id="${id}" class="paragraph">${text}<a href="#${id}" class="paragraph-anchor">¶</a></p>`;
     },
     heading: (text, level) => {
-        const escapedText = text.slice().toLowerCase().replaceAll(" ", "-");
+        const escapedText = serialize(text.slice());
         if (level == 1) {
             articleTitle = text;
         }
