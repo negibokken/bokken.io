@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Chromium の開発をしているときに、他の人にコードのどの部分かを説明したいことがある。そんなときに GitHub では、Copy GitHub URLただ、Chromium は Chromium Code Search で主に管理されており、Chromiデモは下記である。このプラグインでできることはシンプルで、「ランチャーから、選択した行について Chromium Code Search 上"
+      content="Chromium の開発をしているときに、他の人にコードのどの部分かを説明したいことがある。そんなときに GitHub では、Copy GitHub URLというプラグインで、VS Code で編集しているコードのパーマリンクを取得できるため、このパーマリンクを共有すればよい。ただ、Chromium は Chromium Code Search で主に管理されており、Chromium Code Search のパーマリンクがほしい。今回はそのためのプラグインを作った。デモは下記である。このプラグインでできることはシンプルで、「ランチャーから、選択した行について Chromium Code Sea"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -37,7 +37,7 @@
     />
     <meta
       property="og:description"
-      content="Chromium の開発をしているときに、他の人にコードのどの部分かを説明したいことがある。そんなときに GitHub では、Copy GitHub URLただ、Chromium は Chromium Code Search で主に管理されており、Chromiデモは下記である。このプラグインでできることはシンプルで、「ランチャーから、選択した行について Chromium Code Search 上"
+      content="Chromium の開発をしているときに、他の人にコードのどの部分かを説明したいことがある。そんなときに GitHub では、Copy GitHub URLというプラグインで、VS Code で編集しているコードのパーマリンクを取得できるため、このパーマリンクを共有すればよい。ただ、Chromium は Chromium Code Search で主に管理されており、Chromium Code Search のパーマリンクがほしい。今回はそのためのプラグインを作った。デモは下記である。このプラグインでできることはシンプルで、「ランチャーから、選択した行について Chromium Code Sea"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -122,35 +122,35 @@
         <h2>
           <a name="概要" href="#概要" id="概要"> 概要 </a>
         </h2>
-        <p id="rqIcOfQGFyY0fJgjajXAQQ==" class="paragraph">
+        <p id="paragraph-1" class="paragraph">
           Chromium
           の開発をしているときに、他の人にコードのどの部分かを説明したいことがある。<a
-            href="#rqIcOfQGFyY0fJgjajXAQQ=="
+            href="#paragraph-1"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="p9WOvsBvQzVuLoV+kcu0og==" class="paragraph">
+        <p id="paragraph-2" class="paragraph">
           そんなときに GitHub では、<a
             target="_blank"
-            href="https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url"
             rel="noopener"
+            href="https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url"
             >Copy GitHub URL</a
           >というプラグインで、VS Code
           で編集しているコードのパーマリンクを取得できるため、このパーマリンクを共有すればよい。<a
-            href="#p9WOvsBvQzVuLoV+kcu0og=="
+            href="#paragraph-2"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="y2zq7r/nDpcDkk9Z5w7oKw==" class="paragraph">
+        <p id="paragraph-3" class="paragraph">
           ただ、Chromium は
-          <a target="_blank" href="https://cs.chromium.org/" rel="noopener"
+          <a target="_blank" rel="noopener" href="https://cs.chromium.org/"
             >Chromium Code Search</a
           >
           で主に管理されており、Chromium Code Search
           のパーマリンクがほしい。今回はそのためのプラグインを作った。<a
-            href="#y2zq7r/nDpcDkk9Z5w7oKw=="
+            href="#paragraph-3"
             class="paragraph-anchor"
             >¶</a
           >
@@ -158,31 +158,26 @@
         <h2>
           <a name="デモ" href="#デモ" id="デモ"> デモ </a>
         </h2>
-        <p id="BYw6RUSoLqi+s5FRDZjWOA==" class="paragraph">
-          デモは下記である。<a
-            href="#BYw6RUSoLqi+s5FRDZjWOA=="
-            class="paragraph-anchor"
+        <p id="paragraph-4" class="paragraph">
+          デモは下記である。<a href="#paragraph-4" class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="TLjCa4VuLRBffsf9Cdnkpg==" class="paragraph">
-          <img src="./sample.gif" alt="デモ" /><a
-            href="#TLjCa4VuLRBffsf9Cdnkpg=="
-            class="paragraph-anchor"
-            >¶</a
-          >
+        <p id="paragraph-5" class="paragraph">
+          <a href="./sample.gif" rel="noopener"><img src="./sample.gif" /></a
+          ><a href="#paragraph-5" class="paragraph-anchor">¶</a>
         </p>
-        <p id="lere8lFPadoKadoFWtR87A==" class="paragraph">
+        <p id="paragraph-6" class="paragraph">
           このプラグインでできることはシンプルで、「ランチャーから、選択した行について
           Chromium Code Search 上でのパーマリンクを生成する」だけである。<a
-            href="#lere8lFPadoKadoFWtR87A=="
+            href="#paragraph-6"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="bm9B00rRMMBx5AoAt0ObgQ==" class="paragraph">
+        <p id="paragraph-7" class="paragraph">
           ブランチがきちんと考慮される点や、複数行選択もできることが気に入っているポイントである。<a
-            href="#bm9B00rRMMBx5AoAt0ObgQ=="
+            href="#paragraph-7"
             class="paragraph-anchor"
             >¶</a
           >
@@ -190,38 +185,38 @@
         <h2>
           <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
         </h2>
-        <p id="DnyoW/Wy6yIPayIYMTgqIA==" class="paragraph">
+        <p id="paragraph-8" class="paragraph">
           このパーマリンクを作ることで、crbug や、GSoC のプロポーザルを書く際(<a
             target="_blank"
-            href="https://blog.bokken.io/articles/2022-04-30/apply-google-summer-of-code.html"
             rel="noopener"
+            href="https://blog.bokken.io/articles/2022-04-30/apply-google-summer-of-code.html"
             >前記事</a
           >)にコードの該当箇所を説明するのにとても役に立った。<a
-            href="#DnyoW/Wy6yIPayIYMTgqIA=="
+            href="#paragraph-8"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="2XtV1cglv0Ayt66yk9rzDw==" class="paragraph">
+        <p id="paragraph-9" class="paragraph">
           Chromium
           へのコントリビューションを考えている方がいたらぜひ使ってみてほしい。<a
-            href="#2XtV1cglv0Ayt66yk9rzDw=="
+            href="#paragraph-9"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="tKWz0R6auYJe3hupLWVBBg==" class="paragraph">
+        <p id="paragraph-10" class="paragraph">
           もし不具合があったり、Windows での動作確認ができたら
-          <a target="_blank" href="https://twitter.com/bokken_" rel="noopener"
+          <a target="_blank" rel="noopener" href="https://twitter.com/bokken_"
             >@bokken_</a
           >
           にメンションするか、<a
             target="_blank"
-            href="https://github.com/negibokken/chromium-code-search-permalink-vscode-extension"
             rel="noopener"
+            href="https://github.com/negibokken/chromium-code-search-permalink-vscode-extension"
             >リポジトリ</a
           >の issue に登録してもらえると嬉しい。<a
-            href="#tKWz0R6auYJe3hupLWVBBg=="
+            href="#paragraph-10"
             class="paragraph-anchor"
             >¶</a
           >

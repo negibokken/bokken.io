@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Prerender2 という機能の実装が Chrome/Chromium で進んでいる。この機能はページのレンダリングを予め行うことでページを高速に閲覧できるようにするための機能だ。この記事ではなぜ Prerender2 なのか、どうすれば適用できるのか、使う際の注意点はなにかを 2022/11/23 時点での情報についてまとめる。最新の情報については、それぞれのPrerender は Rende"
+      content="Prerender2 という機能の実装が Chrome/Chromium で進んでいる。この機能はページのレンダリングを予め行うことでページを高速に閲覧できるようにするための機能だ。この記事ではなぜ Prerender2 なのか、どうすれば適用できるのか、使う際の注意点はなにかを 2022/11/23 時点での情報についてまとめる。最新の情報については、それぞれの文書を参照されたい。Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。近年開発が進んでいるのは Prerender2 と"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -31,7 +31,7 @@
     <meta property="og:title" content="Prerender2 という機能について" />
     <meta
       property="og:description"
-      content="Prerender2 という機能の実装が Chrome/Chromium で進んでいる。この機能はページのレンダリングを予め行うことでページを高速に閲覧できるようにするための機能だ。この記事ではなぜ Prerender2 なのか、どうすれば適用できるのか、使う際の注意点はなにかを 2022/11/23 時点での情報についてまとめる。最新の情報については、それぞれのPrerender は Rende"
+      content="Prerender2 という機能の実装が Chrome/Chromium で進んでいる。この機能はページのレンダリングを予め行うことでページを高速に閲覧できるようにするための機能だ。この記事ではなぜ Prerender2 なのか、どうすれば適用できるのか、使う際の注意点はなにかを 2022/11/23 時点での情報についてまとめる。最新の情報については、それぞれの文書を参照されたい。Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。近年開発が進んでいるのは Prerender2 と"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -116,13 +116,13 @@
         <h2>
           <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
         </h2>
-        <p id="RATIKsADWdGbMDPsPp4Gng==" class="paragraph">
+        <p id="paragraph-1" class="paragraph">
           Prerender2 という機能の実装が Chrome/Chromium
           で進んでいる。この機能はページのレンダリングを予め行うことでページを高速に閲覧できるようにするための機能だ。この記事ではなぜ
           Prerender<strong>2</strong>
           なのか、どうすれば適用できるのか、使う際の注意点はなにかを 2022/11/23
           時点での情報についてまとめる。最新の情報については、それぞれの文書を参照されたい。<a
-            href="#RATIKsADWdGbMDPsPp4Gng=="
+            href="#paragraph-1"
             class="paragraph-anchor"
             >¶</a
           >
@@ -135,101 +135,47 @@
           <!-- vim-markdown-toc GFM -->
 
           <ul>
+            <li><a href="#prerender-とは">Prerender とは</a></li>
             <li>
-              <a target="_blank" href="#prerender-とは" rel="noopener"
-                >Prerender とは</a
-              >
-            </li>
-            <li>
-              <a
-                target="_blank"
-                href="#legacy-prerender-とはなにか"
-                rel="noopener"
+              <a href="#legacy-prerender-とはなにか"
                 >Legacy Prerender とはなにか</a
               >
             </li>
             <li>
-              <a target="_blank" href="#prerender2" rel="noopener"
-                >Prerender2</a
-              >
+              <a href="#prerender2">Prerender2</a>
               <ul>
                 <li>
-                  <a
-                    target="_blank"
-                    href="#prerender2-を使う方法"
-                    rel="noopener"
-                    >Prerender2 を使う方法</a
-                  >
+                  <a href="#prerender2-を使う方法">Prerender2 を使う方法</a>
                 </li>
-                <li>
-                  <a target="_blank" href="#feature-detection" rel="noopener"
-                    >feature detection</a
-                  >
-                </li>
+                <li><a href="#feature-detection">feature detection</a></li>
               </ul>
             </li>
             <li>
-              <a
-                target="_blank"
-                href="#prerender2-の検討事項など"
-                rel="noopener"
-                >Prerender2 の検討事項など</a
-              >
+              <a href="#prerender2-の検討事項など">Prerender2 の検討事項など</a>
               <ul>
                 <li>
-                  <a
-                    target="_blank"
-                    href="#privacy-considerations"
-                    rel="noopener"
-                    >Privacy considerations</a
-                  >
+                  <a href="#privacy-considerations">Privacy considerations</a>
                 </li>
                 <li>
-                  <a
-                    target="_blank"
-                    href="#ネットワークリクエストと-cookie-について"
-                    rel="noopener"
+                  <a href="#ネットワークリクエストと-cookie-について"
                     >ネットワークリクエストと Cookie について</a
                   >
                 </li>
+                <li><a href="#http-cache-について">HTTP Cache について</a></li>
                 <li>
-                  <a target="_blank" href="#http-cache-について" rel="noopener"
-                    >HTTP Cache について</a
-                  >
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    href="#link-relprerender-タグの注意点"
-                    rel="noopener"
+                  <a href="#link-relprerender-タグの注意点"
                     ><code>&lt;link rel=prerender&gt;</code> タグの注意点</a
                   >
                 </li>
+                <li><a href="#referrer-policy">Referrer Policy</a></li>
                 <li>
-                  <a target="_blank" href="#referrer-policy" rel="noopener"
-                    >Referrer Policy</a
-                  >
+                  <a href="#target_hint-について">target_hint について</a>
                 </li>
-                <li>
-                  <a target="_blank" href="#target_hint-について" rel="noopener"
-                    >target_hint について</a
-                  >
-                </li>
-                <li>
-                  <a target="_blank" href="#api-の利用の制限" rel="noopener"
-                    >API の利用の制限</a
-                  >
-                </li>
+                <li><a href="#api-の利用の制限">API の利用の制限</a></li>
               </ul>
             </li>
-            <li>
-              <a target="_blank" href="#おわりに" rel="noopener">おわりに</a>
-            </li>
-            <li>
-              <a target="_blank" href="#参考・関連リンク" rel="noopener"
-                >参考・関連リンク</a
-              >
-            </li>
+            <li><a href="#おわりに">おわりに</a></li>
+            <li><a href="#参考・関連リンク">参考・関連リンク</a></li>
           </ul>
           <!-- vim-markdown-toc -->
         </details>
@@ -238,21 +184,19 @@
             Prerender とは
           </a>
         </h2>
-        <p id="1kHoidErMT4gWOBogNTVkQ==" class="paragraph">
+        <p id="paragraph-2" class="paragraph">
           Prerender は Rendering
           を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。<a
-            href="#1kHoidErMT4gWOBogNTVkQ=="
+            href="#paragraph-2"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="sXONxLydgANFziKdR8QjyA==" class="paragraph">
+        <p id="paragraph-3" class="paragraph">
           近年開発が進んでいるのは Prerender2 という機能だ。過去に Prerender
           という機能が実装されていたが、それとは別物になる。この記事では読みやすさのために
           Prerender2 を Prerender2、過去の Prerender を Legacy Prerender
-          と呼称することにする。<a
-            href="#sXONxLydgANFziKdR8QjyA=="
-            class="paragraph-anchor"
+          と呼称することにする。<a href="#paragraph-3" class="paragraph-anchor"
             >¶</a
           >
         </p>
@@ -265,30 +209,30 @@
             Legacy Prerender とはなにか
           </a>
         </h2>
-        <p id="Wg2z7ng89C0XOHAIlJcZ7g==" class="paragraph">
+        <p id="paragraph-4" class="paragraph">
           現在 Legacy Prerender
           は機能としては提供されておらず、取り下げられている。なぜ Legacy
           Prerender は取り下げられたのか。それについては、Prerender の
           <a
             target="_blank"
-            href="https://groups.google.com/a/chromium.org/g/Blink-dev/c/0nSxuuv9bBw"
             rel="noopener"
+            href="https://groups.google.com/a/chromium.org/g/Blink-dev/c/0nSxuuv9bBw"
             >Intent to Deprecate and Remove: Prerender</a
           >
           の投稿に下記のように書かれている。<a
-            href="#Wg2z7ng89C0XOHAIlJcZ7g=="
+            href="#paragraph-4"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="b3zNcTmI/DLdXhsg91uqRw==" class="paragraph">
+          <p id="paragraph-5" class="paragraph">
             Prerender is difficult to maintain and wastes resources compared to
             its performance benefit. More efficient ways to achieve the same
             performance goal are in development, but as they will behave quite
             differently from prerender we need to resolve any unknown external
             dependencies by deprecating prerender cleanly.<a
-              href="#b3zNcTmI/DLdXhsg91uqRw=="
+              href="#paragraph-5"
               class="paragraph-anchor"
               >¶</a
             >
@@ -302,39 +246,37 @@
             prerender に未知の依存を作らないようにする
           </li>
         </ul>
-        <p id="7svh8GS/U5+Wd9nUTahgWA==" class="paragraph">
-          ということらしい。<a
-            href="#7svh8GS/U5+Wd9nUTahgWA=="
-            class="paragraph-anchor"
+        <p id="paragraph-6" class="paragraph">
+          ということらしい。<a href="#paragraph-6" class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="9V1mLxDO73BnFoxIocxG+w==" class="paragraph">
+        <p id="paragraph-7" class="paragraph">
           ここで、メンテナンスの難しさについては、<a
             target="_blank"
-            href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#general-interop-and-compat-concerns"
             rel="noopener"
+            href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#general-interop-and-compat-concerns"
             >WICG/nav-speculation</a
           >
           に少し関連していそうな記載がある。<a
-            href="#9V1mLxDO73BnFoxIocxG+w=="
+            href="#paragraph-7"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="K18MflQgZTW04iDB2q36ew==" class="paragraph">
+          <p id="paragraph-8" class="paragraph">
             Current implementations are also not necessarily compatible with
             storage partitioning, as they were designed before such efforts. So
             there may need to be future backward-incompatible changes to them to
             meet browser teams&#39; new goals around privacy.<a
-              href="#K18MflQgZTW04iDB2q36ew=="
+              href="#paragraph-8"
               class="paragraph-anchor"
               >¶</a
             >
           </p>
         </blockquote>
-        <p id="zpLPs75u6fbBEMHKQJ+EtQ==" class="paragraph">
+        <p id="paragraph-9" class="paragraph">
           現在の実装は storage partitioning
           との互換性が必要ないときに設計されたため、現在のプライバシーゴールに到達していないとのことだ。この記載は
           <code>&lt;link rel=&quot;prerender&quot;&gt;</code>、つまり Legacy
@@ -343,19 +285,19 @@
           Legacy Prerender についても同様なことが予想される。Legacy Prerender が
           <a
             target="_blank"
-            href="https://blog.chromium.org/2011/06/prerendering-in-chrome.html"
             rel="noopener"
+            href="https://blog.chromium.org/2011/06/prerendering-in-chrome.html"
             >2011年にアナウンスされている</a
           >機能であることから、コードが古くなっていて、上記のゴールを達成するためのメンテナンスが難しくなっているのは想像に難くない。<a
-            href="#zpLPs75u6fbBEMHKQJ+EtQ=="
+            href="#paragraph-9"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="CNw4VHi/s9jcqA5lsZGHgA==" class="paragraph">
+        <p id="paragraph-10" class="paragraph">
           いずれにしても Legacy Prerender
           は一度こういった背景で取り下げられた。<a
-            href="#CNw4VHi/s9jcqA5lsZGHgA=="
+            href="#paragraph-10"
             class="paragraph-anchor"
             >¶</a
           >
@@ -365,17 +307,17 @@
             Prerender2
           </a>
         </h2>
-        <p id="RuIGXDezeAeXG0cDyeMwZA==" class="paragraph">
+        <p id="paragraph-11" class="paragraph">
           2017 年に Intent to Deprecate and Remove: Prerender が出てから 4
           年の月日が流れ、2021年 8 月に Prerender2
           の仕様に関する文書が作成された。
           <a
             target="_blank"
-            href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit#heading=h.gfguuhafev5j"
             rel="noopener"
+            href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit#heading=h.gfguuhafev5j"
             >Prerender2 のドキュメント</a
           >には下記のようにある。<a
-            href="#RuIGXDezeAeXG0cDyeMwZA=="
+            href="#paragraph-11"
             class="paragraph-anchor"
             >¶</a
           >
@@ -401,7 +343,7 @@
             </li>
           </ul>
         </blockquote>
-        <p id="LK2dTtJuNWY6TYnIKdxIMg==" class="paragraph">
+        <p id="paragraph-12" class="paragraph">
           過去の Prerender
           を取り下げた当時の問題を今なら解決できるということらしい。 Legacy
           Prerender の実装がなくなったり、リファクタを重ねた結果、Prerender2
@@ -409,18 +351,14 @@
           を見ても、Legacy Prerender の削除や、Refactor、Prerender2
           の実装が行われているのが<a
             target="_blank"
-            href="https://chromium-news.vercel.app/?query=Prerender"
             rel="noopener"
+            href="https://chromium-news.vercel.app/?query=Prerender"
             >伺える</a
-          >。<a href="#LK2dTtJuNWY6TYnIKdxIMg==" class="paragraph-anchor">¶</a>
+          >。<a href="#paragraph-12" class="paragraph-anchor">¶</a>
         </p>
-        <p id="zI9V7ZD0uLuDtdWQAusXLQ==" class="paragraph">
+        <p id="paragraph-13" class="paragraph">
           2022年11月24日現在では Android と Desktop 版の Chrome/Chromium
-          で使えるようだ。<a
-            href="#zI9V7ZD0uLuDtdWQAusXLQ=="
-            class="paragraph-anchor"
-            >¶</a
-          >
+          で使えるようだ。<a href="#paragraph-13" class="paragraph-anchor">¶</a>
         </p>
         <h3>
           <a
@@ -431,23 +369,23 @@
             Prerender2 を使う方法
           </a>
         </h3>
-        <p id="aHW31QpvcqsW0MhZ5klQpw==" class="paragraph">
+        <p id="paragraph-14" class="paragraph">
           ここまで、Prerender2 の歴史について主に触れてきたが、次節からは
           Prerender2 をどのように使うのかを紹介する。<a
-            href="#aHW31QpvcqsW0MhZ5klQpw=="
+            href="#paragraph-14"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="iBT1Zvsw/Ypa2YCyE7TCPA==" class="paragraph">
+        <p id="paragraph-15" class="paragraph">
           Prerender2 の有効化は比較的簡単で
           <a
             target="_blank"
-            href="https://wicg.github.io/nav-speculation/speculation-rules.html"
             rel="noopener"
+            href="https://wicg.github.io/nav-speculation/speculation-rules.html"
             >Speculation Rules</a
           >を用いて行われる。 具体的には次のようになる。<a
-            href="#iBT1Zvsw/Ypa2YCyE7TCPA=="
+            href="#paragraph-15"
             class="paragraph-anchor"
             >¶</a
           >
@@ -456,16 +394,16 @@
 { prerender: [{ source: <span class="hljs-string">'list'</span>, urls: [<span class="hljs-string">'next.html'</span>] }] }
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
-        <p id="xNvXt3ZPX6zcjkG33EsuLw==" class="paragraph">
+        <p id="paragraph-16" class="paragraph">
           簡単な<a
             target="_blank"
-            href="https://x.bokken.io/example-prerender2/"
             rel="noopener"
+            href="https://x.bokken.io/example-prerender2/"
             >デモページ</a
           >を用意した。手元の環境では Chrome Beta の 108.0.5359.48
           で動作を確認できた。 Chrome 107.0.5304.110
           では確認できなかったので動作確認の際にはバージョンに注意していただきたい。<a
-            href="#xNvXt3ZPX6zcjkG33EsuLw=="
+            href="#paragraph-16"
             class="paragraph-anchor"
             >¶</a
           >
@@ -483,19 +421,19 @@
           />
         </div>
 
-        <p id="PFQGq8VwGZfNc9770x+c2A==" class="paragraph">
+        <p id="paragraph-17" class="paragraph">
           内容としては、リンク先のページが大きな画像を表示するサイトで
           Prerender2 を使うかどうかを切り替えられるのだが、Prerender2
           を適用しない場合は遷移後のページでは画像が少し遅れて表示されることが分かる。<a
-            href="#PFQGq8VwGZfNc9770x+c2A=="
+            href="#paragraph-17"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="45uT/M+rOr8+Etgu7pLk3Q==" class="paragraph">
+        <p id="paragraph-18" class="paragraph">
           また、新しいタブで開いたときにも Prerender2
           は働かないので、動作確認の際にリンクをクリックしていただきたい。<a
-            href="#45uT/M+rOr8+Etgu7pLk3Q=="
+            href="#paragraph-18"
             class="paragraph-anchor"
             >¶</a
           >
@@ -509,12 +447,12 @@
             feature detection
           </a>
         </h3>
-        <p id="Y1kx8KESn4HeDNvVQcjTPA==" class="paragraph">
+        <p id="paragraph-19" class="paragraph">
           Prerender2 は Speculation Rules を利用しているため、Prerender2
           を利用するためにはブラウザが Speculation Rules
           をサポートしている必要がある。
           そのための方法としては下記のような形でチェックするようだ。<a
-            href="#Y1kx8KESn4HeDNvVQcjTPA=="
+            href="#paragraph-19"
             class="paragraph-anchor"
             >¶</a
           >
@@ -523,10 +461,10 @@
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Your browser supports speculationrules.'</span>);
 }
 </code></pre>
-        <p id="ywj+cDWI8Za5jv21TEbsiw==" class="paragraph">
+        <p id="paragraph-20" class="paragraph">
           また、Prerender2 でレンダリングされたかどうかは
           <code>document.prerendering</code> を確認するとよい。<a
-            href="#ywj+cDWI8Za5jv21TEbsiw=="
+            href="#paragraph-20"
             class="paragraph-anchor"
             >¶</a
           >
@@ -540,10 +478,10 @@
             Prerender2 の検討事項など
           </a>
         </h2>
-        <p id="NWOuPcdjC4sn1plpXXhlfA==" class="paragraph">
+        <p id="paragraph-21" class="paragraph">
           ここまでで Prerender2 はとても簡単に使える事がわかってきた。
           ただ、プライバシーや細かい動作の挙動について懸念することはたくさんある。そちらについてもドキュメントにかかれていたので紹介する。<a
-            href="#NWOuPcdjC4sn1plpXXhlfA=="
+            href="#paragraph-21"
             class="paragraph-anchor"
             >¶</a
           >
@@ -557,57 +495,55 @@
             Privacy considerations
           </a>
         </h3>
-        <p id="2gkqVwDr9PBMssFNEX1hQw==" class="paragraph">
+        <p id="paragraph-22" class="paragraph">
           まずはじめに紹介するのは Privacy Considerations についてだ。 Privacy
           に関しては下記のように書かれている。<a
-            href="#2gkqVwDr9PBMssFNEX1hQw=="
+            href="#paragraph-22"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="yyX3PrcTu9M43OquoQprjg==" class="paragraph">
+          <p id="paragraph-23" class="paragraph">
             Prerendering normally raises privacy concerns because the user may
             not intend to visit the page being prerendered. The privacy risk is
             smaller in the same-origin case, which is the initial origin
-            trial.<a href="#yyX3PrcTu9M43OquoQprjg==" class="paragraph-anchor"
-              >¶</a
-            >
+            trial.<a href="#paragraph-23" class="paragraph-anchor">¶</a>
           </p>
         </blockquote>
-        <p id="y8Ztpw0cDocoqhaYPPIs9g==" class="paragraph">
+        <p id="paragraph-24" class="paragraph">
           Prerender2
           を使うと、あるページにアクセスしたときユーザが意図せず別のページを訪問することになる。
           ただ、これは same-origin であれば問題がないため、現状の same-origin
           Prerender2 であれば特に問題はないということだ。<a
-            href="#y8Ztpw0cDocoqhaYPPIs9g=="
+            href="#paragraph-24"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="vjNJtBLRyXrhk0LpOLaC+g==" class="paragraph">
+        <p id="paragraph-25" class="paragraph">
           cross-origin の場合については下記のように記載がある。<a
-            href="#vjNJtBLRyXrhk0LpOLaC+g=="
+            href="#paragraph-25"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="9oY86NmAhZjKazK+EVwSEg==" class="paragraph">
+          <p id="paragraph-26" class="paragraph">
             The rest of this section covers the same-origin case. For the
             cross-origin cases, much work is being done as part of proposed web
             standards. See this work at
             <a
               target="_blank"
-              href="https://github.com/jeremyroman/alternate-loading-modes/"
               rel="noopener"
+              href="https://github.com/jeremyroman/alternate-loading-modes/"
               >https://github.com/jeremyroman/alternate-loading-modes/</a
-            ><a href="#9oY86NmAhZjKazK+EVwSEg==" class="paragraph-anchor">¶</a>
+            ><a href="#paragraph-26" class="paragraph-anchor">¶</a>
           </p>
         </blockquote>
-        <p id="oYEvj8hQriN00WV/930Ehw==" class="paragraph">
+        <p id="paragraph-27" class="paragraph">
           cross-origin については今後 Web Standards で議論が進んでいくようだ。<a
-            href="#oYEvj8hQriN00WV/930Ehw=="
+            href="#paragraph-27"
             class="paragraph-anchor"
             >¶</a
           >
@@ -621,20 +557,16 @@
             ネットワークリクエストと Cookie について
           </a>
         </h3>
-        <p id="Tj4aFYLTtVTjO3nqI9bOvg==" class="paragraph">
+        <p id="paragraph-28" class="paragraph">
           ネットワークについて他にも<a
             target="_blank"
-            href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit#bookmark=id.vbnic8jwys3e"
             rel="noopener"
+            href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit#bookmark=id.vbnic8jwys3e"
             >ドキュメント</a
-          >に記載がある。<a
-            href="#Tj4aFYLTtVTjO3nqI9bOvg=="
-            class="paragraph-anchor"
-            >¶</a
-          >
+          >に記載がある。<a href="#paragraph-28" class="paragraph-anchor">¶</a>
         </p>
         <blockquote>
-          <p id="NdO0BctQU3Ctolay2hQtJg==" class="paragraph">
+          <p id="paragraph-29" class="paragraph">
             The plan is for the prerendering page to have mostly unrestricted
             access to network, including having cookies present on the requests.
             This includes for cross-origin subresource requests. While
@@ -645,13 +577,13 @@
             and not cross-origin ones. Nevertheless, the same-origin prerender
             does not give the main page any more power to make cross-origin
             requests than it can already do with an iframe.<a
-              href="#NdO0BctQU3Ctolay2hQtJg=="
+              href="#paragraph-29"
               class="paragraph-anchor"
               >¶</a
             >
           </p>
         </blockquote>
-        <p id="JSTymwlEJFQ6SdhqA4/v3A==" class="paragraph">
+        <p id="paragraph-30" class="paragraph">
           Prerender2 では、ネットワークリクエストの際に Prerender
           されるリクエストに Cookie も付与する。 合わせて、Prerender
           されるドキュメントが cross-origin
@@ -659,37 +591,37 @@
           これはプライバシーに関する懸念として知られているが、Chromium
           では別の作業(おそらく CHIPS 関連の作業？)が進行中のため、それが
           Prerender2 に自動的に適用されることを期待している状態とのことだ。<a
-            href="#JSTymwlEJFQ6SdhqA4/v3A=="
+            href="#paragraph-30"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="g7iG/Ji6AJ2PG1hl7DcsSg==" class="paragraph">
+        <p id="paragraph-31" class="paragraph">
           また、面白いのは cross-origin の iframe については下記にあるように
           load されるのを遅らせるようになっているらしい。<a
-            href="#g7iG/Ji6AJ2PG1hl7DcsSg=="
+            href="#paragraph-31"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="Be0/YmMmlkLALV/vllAiVQ==" class="paragraph">
+          <p id="paragraph-32" class="paragraph">
             One restriction in prerendering is that cross-origin iframes will
             delay loading until activation. This improves privacy and simplifies
             cross-process concerns (there are no out-of-process iframes), but it
             can limit the effectiveness of prerendering if essential content for
             the page is in the iframe.<a
-              href="#Be0/YmMmlkLALV/vllAiVQ=="
+              href="#paragraph-32"
               class="paragraph-anchor"
               >¶</a
             >
           </p>
         </blockquote>
-        <p id="1qvtv1d/y+dO3sgzNAGWow==" class="paragraph">
+        <p id="paragraph-33" class="paragraph">
           これによってセキュリティが向上することができるとのことだ。
           また、筆者自身も Prerender2
           で考えるべきことを減らせるため、とても良い決断のように思う。<a
-            href="#1qvtv1d/y+dO3sgzNAGWow=="
+            href="#paragraph-33"
             class="paragraph-anchor"
             >¶</a
           >
@@ -703,16 +635,16 @@
             HTTP Cache について
           </a>
         </h3>
-        <p id="LVOoO8UEnQ11SDgWbuDScA==" class="paragraph">
+        <p id="paragraph-34" class="paragraph">
           続いては HTTP Cache に関する挙動だ。 HTTP Cache
           の節には下記のように書かれている。<a
-            href="#LVOoO8UEnQ11SDgWbuDScA=="
+            href="#paragraph-34"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="ApNKoWUcSWdQ1hdL9+BCGA==" class="paragraph">
+          <p id="paragraph-35" class="paragraph">
             Prerendering a page will modify the normal HTTP cache as if it were
             a normal navigation. This is the current behavior of
             NoStatePrefetch. However, the long-term goal is for prerendering to
@@ -720,19 +652,19 @@
             top-level navigation or has a timeout on the order of 5 minutes like
             the current prefetch cache. The cross-origin prerendering milestones
             will be blocked on the implementation of this cache.<a
-              href="#ApNKoWUcSWdQ1hdL9+BCGA=="
+              href="#paragraph-35"
               class="paragraph-anchor"
               >¶</a
             >
           </p>
         </blockquote>
-        <p id="Cb9jSSFgi1YCAEZnVWnyXA==" class="paragraph">
+        <p id="paragraph-36" class="paragraph">
           HTTP Cache は Prerender されると通常のリクエストと同様に HTTP Cache
           が更新される。 これは NoState Prefetch
           と同じだが、将来的には分離された一時的な Cache
           を利用するか、PrefetchCache のように 5
           分でタイムアウトするようにすることが目標とのこと。<a
-            href="#Cb9jSSFgi1YCAEZnVWnyXA=="
+            href="#paragraph-36"
             class="paragraph-anchor"
             >¶</a
           >
@@ -746,17 +678,17 @@
             <code>&lt;link rel=prerender&gt;</code> タグの注意点
           </a>
         </h3>
-        <p id="5t38oALFHmhIHHS3wGJK0g==" class="paragraph">
+        <p id="paragraph-37" class="paragraph">
           <code>&lt;link rel=&quot;prerender&quot;&gt;</code> という形では
           NoState Prefetch が働くだけで、Prerender2 はトリガーされない。<a
-            href="#5t38oALFHmhIHHS3wGJK0g=="
+            href="#paragraph-37"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="5mwX7rxhVNo35DrMETW8zA==" class="paragraph">
+        <p id="paragraph-38" class="paragraph">
           これは下記のような理由からだそうだ。<a
-            href="#5mwX7rxhVNo35DrMETW8zA=="
+            href="#paragraph-38"
             class="paragraph-anchor"
             >¶</a
           >
@@ -775,11 +707,11 @@
             がトリガされるのか説明が複雑になる
           </li>
         </ul>
-        <p id="oNDtgJXzpjcJNSIEqquanQ==" class="paragraph">
+        <p id="paragraph-39" class="paragraph">
           ただ、ドキュメントには下記のようにあり、将来的には
           <code>&lt;link rel=&quot;prerender&quot;&gt;</code>
           をサポートする予定なのでいくらか混乱が少なくなりそうだ。<a
-            href="#oNDtgJXzpjcJNSIEqquanQ=="
+            href="#paragraph-39"
             class="paragraph-anchor"
             >¶</a
           >
@@ -795,9 +727,9 @@
               Triggering
             </a>
           </h3>
-          <p id="EPjkcRRaz7D9WBlkoecqlA==" class="paragraph">
+          <p id="paragraph-40" class="paragraph">
             Beyond speculationrules, we may trigger in other cases:<a
-              href="#EPjkcRRaz7D9WBlkoecqlA=="
+              href="#paragraph-40"
               class="paragraph-anchor"
               >¶</a
             >
@@ -815,61 +747,61 @@
             Referrer Policy
           </a>
         </h3>
-        <p id="dUoeQF92kWjGEG89s2WILQ==" class="paragraph">
+        <p id="paragraph-41" class="paragraph">
           Referrer Policy について、Prerender のための navigation request は
           speculation rules を記載されているドキュメントの Referrer Policy
           を尊重するという記載がある。<a
-            href="#dUoeQF92kWjGEG89s2WILQ=="
+            href="#paragraph-41"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="qVfvbuAZ7atEfsD9AKUcpQ==" class="paragraph">
+          <p id="paragraph-42" class="paragraph">
             The prerender navigation request respects the referrer policy of the
             document that uses speculation rules.<a
-              href="#qVfvbuAZ7atEfsD9AKUcpQ=="
+              href="#paragraph-42"
               class="paragraph-anchor"
               >¶</a
             >
           </p>
         </blockquote>
-        <p id="FwGDV13cXKOwIXXAnR4ULQ==" class="paragraph">
+        <p id="paragraph-43" class="paragraph">
           ただし、上記の speculation rules のドキュメントの Referrer Policy は
           Prerender されたドキュメントには伝播されない(つまり、Prerender
           されたあとは Prerender されたあとのドキュメントの Referrer Policy
           に従う)ということだろう。また、Prerender された Referrer Policy
           に従うので覚えておく必要がありそうだ。<a
-            href="#FwGDV13cXKOwIXXAnR4ULQ=="
+            href="#paragraph-43"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="0nj6nj8D1ZdzOx0k8Cwk1Q==" class="paragraph">
+          <p id="paragraph-44" class="paragraph">
             The referrer policy of the triggering document does not propagate to
             the prerendered document itself. Subresources from the prerendered
             document respect the referrer policy of the prerendered document.<a
-              href="#0nj6nj8D1ZdzOx0k8Cwk1Q=="
+              href="#paragraph-44"
               class="paragraph-anchor"
               >¶</a
             >
           </p>
         </blockquote>
-        <p id="GVlHiktfOSP1EzmTswn2vw==" class="paragraph">
+        <p id="paragraph-45" class="paragraph">
           ただし、これは Speculation Rules に
           <code>referrer_policy</code> を記載できるようになる Intent (<a
             target="_blank"
-            href="https://groups.google.com/a/chromium.org/g/blink-dev/c/qzElfWpzWXg"
             rel="noopener"
+            href="https://groups.google.com/a/chromium.org/g/blink-dev/c/qzElfWpzWXg"
             >Intent to Prototype: Speculation rules referrer policy key</a
           >) が出されているので、 Speculation Rules で Referrer Policy
           を上書きできるようにもなりそうだ。(<a
             target="_blank"
-            href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#explicit-referrer-policy"
             rel="noopener"
+            href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#explicit-referrer-policy"
             >WICG/nav-speculation</a
-          >)<a href="#GVlHiktfOSP1EzmTswn2vw==" class="paragraph-anchor">¶</a>
+          >)<a href="#paragraph-45" class="paragraph-anchor">¶</a>
         </p>
         <h3>
           <a
@@ -880,26 +812,22 @@
             target_hint について
           </a>
         </h3>
-        <p id="Dtqdvywb+5FMEqxvr83uDw==" class="paragraph">
+        <p id="paragraph-46" class="paragraph">
           現在デモページの節でも新しいタブで開いた場合には Prerender2
           は起動されないようだ。 この新しいタブで開いた際にも Prerender2
           を有効にする方法として
           <a
             target="_blank"
-            href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#window-name-targeting-hints"
             rel="noopener"
+            href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#window-name-targeting-hints"
             ><code>target_hint</code> の仕様策定</a
-          >が進んでいる。<a
-            href="#Dtqdvywb+5FMEqxvr83uDw=="
-            class="paragraph-anchor"
-            >¶</a
-          >
+          >が進んでいる。<a href="#paragraph-46" class="paragraph-anchor">¶</a>
         </p>
-        <p id="dna5Ns+fiWrInjXaHzG9tQ==" class="paragraph">
+        <p id="paragraph-47" class="paragraph">
           これは下記のように <code>target_hint</code> というプロパティに browser
           context の keyword
           を指定することで、ブラウザにどういったコンテキストでページをレンダリングするかを伝える。<a
-            href="#dna5Ns+fiWrInjXaHzG9tQ=="
+            href="#paragraph-47"
             class="paragraph-anchor"
             >¶</a
           >
@@ -918,49 +846,49 @@
 }
 </code></pre>
         </blockquote>
-        <p id="EqT6FFODIBIi4HhG176AoA==" class="paragraph">
+        <p id="paragraph-48" class="paragraph">
           <code>target_hint</code> に
           <code>_self</code> を指定すると同じタブ、<code>_blank</code>
           を指定すると新しいタブで開くという具合にブラウザにヒントを出すことができる。
           上記のように指定すると、同じタブで開いたとしても新しいタブで開いたとしても
           Prerender2 がトリガされることになる。<a
-            href="#EqT6FFODIBIi4HhG176AoA=="
+            href="#paragraph-48"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="aM0J5mr1vy++Aw5kS1nzsA==" class="paragraph">
+        <p id="paragraph-49" class="paragraph">
           ただし、上記のように 2 つ指定するとリソースを 2
           倍消費することになるため、下記のように可能であれば避けた方が良いという記載がある。<a
-            href="#aM0J5mr1vy++Aw5kS1nzsA=="
+            href="#paragraph-49"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="MNlzkMffHgLdCEHu3vJRkQ==" class="paragraph">
+          <p id="paragraph-50" class="paragraph">
             However, in implementations such as Chromium that need the target
             hint, this will prerender the page twice, and thus use twice as many
             resources. So this is best avoided if possible.<a
-              href="#MNlzkMffHgLdCEHu3vJRkQ=="
+              href="#paragraph-50"
               class="paragraph-anchor"
               >¶</a
             >
           </p>
         </blockquote>
-        <p id="Ienbym2qfW5uIuBGefYBkA==" class="paragraph">
+        <p id="paragraph-51" class="paragraph">
           この target_hint について、現在の実装を確認したが、Chrome Beta の
           108.0.5359.48 であってもまだ動作を確認できなかった。
           <a
             target="_blank"
-            href="https://chromium.googlesource.com/chromium/src/+/df487ceb%5E%21/"
             rel="noopener"
+            href="https://chromium.googlesource.com/chromium/src/+/df487ceb%5E%21/"
             >target_hint に関する CL</a
           >
           は存在するが、まだ browser process
           はこれを使っていないという記載があるためまだ利用できないようだ。
           実装されるのを楽しみに待ちたい。<a
-            href="#Ienbym2qfW5uIuBGefYBkA=="
+            href="#paragraph-51"
             class="paragraph-anchor"
             >¶</a
           >
@@ -974,47 +902,43 @@
             API の利用の制限
           </a>
         </h3>
-        <p id="z8kb2pLA5PUiDbaDoGvm5Q==" class="paragraph">
+        <p id="paragraph-52" class="paragraph">
           Prerender されたコンテンツが利用できる API
           には制限が課されている事がある。<a
-            href="#z8kb2pLA5PUiDbaDoGvm5Q=="
+            href="#paragraph-52"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="pkOe0hJ27RCM8EEedWbsWg==" class="paragraph">
+        <p id="paragraph-53" class="paragraph">
           仕様については
           <a
             target="_blank"
-            href="https://wicg.github.io/nav-speculation/prerendering.html#intrusive-behaviors"
             rel="noopener"
+            href="https://wicg.github.io/nav-speculation/prerendering.html#intrusive-behaviors"
             >Prerendering Revamped</a
           >
-          に記載がある。<a
-            href="#pkOe0hJ27RCM8EEedWbsWg=="
-            class="paragraph-anchor"
-            >¶</a
-          >
+          に記載がある。<a href="#paragraph-53" class="paragraph-anchor">¶</a>
         </p>
-        <p id="tHR6usoMJcSewsitzNjATA==" class="paragraph">
+        <p id="paragraph-54" class="paragraph">
           また、それぞれの API に関する検討は
           <a
             target="_blank"
-            href="https://docs.google.com/document/d/1zY15k_wFTik2EoxBf3_RT7YjYpFMDaeNspy15n0rtww/edit"
             rel="noopener"
+            href="https://docs.google.com/document/d/1zY15k_wFTik2EoxBf3_RT7YjYpFMDaeNspy15n0rtww/edit"
             >Restrictions on prerendered content - Google Docs</a
           >
           や
           <a
             target="_blank"
-            href="https://docs.google.com/spreadsheets/d/1V9Rm_3XACVHexaI4z41xciZxRh6zWrq5mFfSHYrs1XE/edit?usp=sharing"
             rel="noopener"
+            href="https://docs.google.com/spreadsheets/d/1V9Rm_3XACVHexaI4z41xciZxRh6zWrq5mFfSHYrs1XE/edit?usp=sharing"
             >Spread Sheet(public
             を意図しているようだが現在はアクセス権限がない)</a
           >
           にまとめられているので、API
           を使う際にはこちらを見て利用に問題がないか確認した上で利用するのが良いだろう。<a
-            href="#tHR6usoMJcSewsitzNjATA=="
+            href="#paragraph-54"
             class="paragraph-anchor"
             >¶</a
           >
@@ -1022,7 +946,7 @@
         <h2>
           <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
         </h2>
-        <p id="FdZLvhzzlp1He3cGo9T33Q==" class="paragraph">
+        <p id="paragraph-55" class="paragraph">
           今回、実装が進んでいる Prerender2
           について現状や使い方、今後について分かっていることを紹介した。
           Speculation Rules
@@ -1030,33 +954,33 @@
           関連の Commit の多さから苦労が伺える。
           これだけの大仕事を、簡単な使い方にまとめてしまえる Chrome / Chromium
           開発者のみなさんには畏敬の念を感じずにはいられない。<a
-            href="#FdZLvhzzlp1He3cGo9T33Q=="
+            href="#paragraph-55"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="1YxvmKY1lJbhRHmcwe6SdQ==" class="paragraph">
+        <p id="paragraph-56" class="paragraph">
           Prerender2
           はまだまだ開発が進んでいくため、これからも動向を楽しみに待ちたい。<a
-            href="#1YxvmKY1lJbhRHmcwe6SdQ=="
+            href="#paragraph-56"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="dFViMD1krF28FZB+TOaE6Q==" class="paragraph">
+        <p id="paragraph-57" class="paragraph">
           もしも、誤りや追加の情報があれば
           <a
             target="_blank"
-            href="https://github.com/negibokken/bokken.io/issues"
             rel="noopener"
+            href="https://github.com/negibokken/bokken.io/issues"
             >issue</a
           >
           や
-          <a target="_blank" href="https://twitter.com/bokken_" rel="noopener"
+          <a target="_blank" rel="noopener" href="https://twitter.com/bokken_"
             >@bokken_</a
           >
           までいただけると嬉しい。<a
-            href="#dFViMD1krF28FZB+TOaE6Q=="
+            href="#paragraph-57"
             class="paragraph-anchor"
             >¶</a
           >
@@ -1074,56 +998,56 @@
           <li>
             <a
               target="_blank"
-              href="https://docs.google.com/document/d/1EpLshvc9RRW3vswmXsJGrbCkhlFmxDsWfbvgxmYDTfs/edit"
               rel="noopener"
+              href="https://docs.google.com/document/d/1EpLshvc9RRW3vswmXsJGrbCkhlFmxDsWfbvgxmYDTfs/edit"
               >P2D: Prerender2 for Desktop - Google Docs</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://chromestatus.com/feature/5197044678393856"
               rel="noopener"
+              href="https://chromestatus.com/feature/5197044678393856"
               >Prerender2 for Desktop - Chrome Platform Status</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit"
               rel="noopener"
+              href="https://docs.google.com/document/d/1P2VKCLpmnNm_cRAjUeE-bqLL0bslL_zKqiNeCzNom_w/edit"
               >Prerender2 [public] - Google Docs</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://github.com/WICG/nav-speculation/blob/main/triggers.md"
               rel="noopener"
+              href="https://github.com/WICG/nav-speculation/blob/main/triggers.md"
               >nav-speculation/triggers.md at main · WICG/nav-speculation</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://docs.google.com/document/d/1zY15k_wFTik2EoxBf3_RT7YjYpFMDaeNspy15n0rtww/edit"
               rel="noopener"
+              href="https://docs.google.com/document/d/1zY15k_wFTik2EoxBf3_RT7YjYpFMDaeNspy15n0rtww/edit"
               >Restrictions on prerendered content - Google Docs</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://www.w3.org/TR/resource-hints/"
               rel="noopener"
+              href="https://www.w3.org/TR/resource-hints/"
               >Resource Hints</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://blog.araya.dev/posts/2021-08-12/speculation-rules-prefetch.html"
               rel="noopener"
+              href="https://blog.araya.dev/posts/2021-08-12/speculation-rules-prefetch.html"
               >Private Prefetch Proxy と Speculation
               Rulesによるprefetch/prerender</a
             >
@@ -1131,32 +1055,32 @@
           <li>
             <a
               target="_blank"
-              href="https://www.chromium.org/developers/design-documents/prerender/"
               rel="noopener"
+              href="https://www.chromium.org/developers/design-documents/prerender/"
               >Chrome Prerendering</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://blog.chromium.org/2011/06/prerendering-in-chrome.html"
               rel="noopener"
+              href="https://blog.chromium.org/2011/06/prerendering-in-chrome.html"
               >Chromium Blog: Prerendering in Chrome</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://groups.google.com/a/chromium.org/g/Blink-dev/c/0nSxuuv9bBw"
               rel="noopener"
+              href="https://groups.google.com/a/chromium.org/g/Blink-dev/c/0nSxuuv9bBw"
               >Intent to Deprecate and Remove: Prerender</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://html.spec.whatwg.org/multipage/links.html#link-type-prerender"
               rel="noopener"
+              href="https://html.spec.whatwg.org/multipage/links.html#link-type-prerender"
             >
               link-type-prerender | HTML Standard</a
             >
@@ -1164,24 +1088,24 @@
           <li>
             <a
               target="_blank"
-              href="https://docs.google.com/document/d/16VCYGGWau483IMSxODpg5faZny1FJ6vNK2v-BuM5EhU/edit#heading=h.uajrcfabdbg5"
               rel="noopener"
+              href="https://docs.google.com/document/d/16VCYGGWau483IMSxODpg5faZny1FJ6vNK2v-BuM5EhU/edit#heading=h.uajrcfabdbg5"
               >NoState Prefetch - Google ドキュメント</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://developer.chrome.com/blog/nostate-prefetch/"
               rel="noopener"
+              href="https://developer.chrome.com/blog/nostate-prefetch/"
               >Introducing NoState Prefetch - Chrome Developers</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://chromestatus.com/feature/5928321099497472"
               rel="noopener"
+              href="https://chromestatus.com/feature/5928321099497472"
               >No State Prefetch - Chrome Platform Status</a
             >
           </li>

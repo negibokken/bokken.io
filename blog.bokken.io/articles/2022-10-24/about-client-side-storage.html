@@ -10,8 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="前回の Anonymous iframe の記事で、storage について触れた。ブラウザが持つ storage にはどんなものがあるのか気になったので、
-&lt;a target=&#34;_blank&#34; href=&#34;https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_stora"
+      content="前回の Anonymous iframe の記事で、storage について触れた。ブラウザが持つ storage にはどんなものがあるのか気になったので、MDN や Storage Standard を読んでまとめてみる。クライアント Storage は、JavaScript API が提供されていて、クライアントサイド(ブラウザ)上にデータを保存する仕組みのことをいう。MDNにはクライアントサイド Storage は、例えば、サイトの個別の設定（色やフォントなど）、以前訪れたときのサイトの行動(ログイン状態、ショッピングカートなど)、Web サイトのアセット(HTML, JavaScript"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -37,8 +36,7 @@
     />
     <meta
       property="og:description"
-      content="前回の Anonymous iframe の記事で、storage について触れた。ブラウザが持つ storage にはどんなものがあるのか気になったので、
-&lt;a target=&#34;_blank&#34; href=&#34;https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_stora"
+      content="前回の Anonymous iframe の記事で、storage について触れた。ブラウザが持つ storage にはどんなものがあるのか気になったので、MDN や Storage Standard を読んでまとめてみる。クライアント Storage は、JavaScript API が提供されていて、クライアントサイド(ブラウザ)上にデータを保存する仕組みのことをいう。MDNにはクライアントサイド Storage は、例えば、サイトの個別の設定（色やフォントなど）、以前訪れたときのサイトの行動(ログイン状態、ショッピングカートなど)、Web サイトのアセット(HTML, JavaScript"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -123,36 +121,34 @@
         <h2>
           <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
         </h2>
-        <p id="B0JZrvAx7iBuv7+U1C7fnQ==" class="paragraph">
+        <p id="paragraph-1" class="paragraph">
           <a
             target="_blank"
-            href="https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html"
             rel="noopener"
+            href="https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html"
             >前回の Anonymous iframe の記事</a
           >で、storage について触れた。<a
-            href="#B0JZrvAx7iBuv7+U1C7fnQ=="
+            href="#paragraph-1"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="/j7eg8S/dhPg7U3sG7IlFQ==" class="paragraph">
+        <p id="paragraph-2" class="paragraph">
           ブラウザが持つ storage にはどんなものがあるのか気になったので、
           <a
             target="_blank"
-            href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
             rel="noopener"
+            href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
             >MDN</a
           >
           や
           <a
             target="_blank"
-            href="https://storage.spec.whatwg.org/"
             rel="noopener"
+            href="https://storage.spec.whatwg.org/"
             >Storage Standard</a
           >
-          を読んでまとめてみる。<a
-            href="#/j7eg8S/dhPg7U3sG7IlFQ=="
-            class="paragraph-anchor"
+          を読んでまとめてみる。<a href="#paragraph-2" class="paragraph-anchor"
             >¶</a
           >
         </p>
@@ -165,35 +161,33 @@
             クライアント Storage
           </a>
         </h2>
-        <p id="ZX2QyJy9VhtfalKATCSHaw==" class="paragraph">
+        <p id="paragraph-3" class="paragraph">
           クライアント Storage は、JavaScript API
           が提供されていて、クライアントサイド(ブラウザ)上にデータを保存する仕組みのことをいう。<a
-            href="#ZX2QyJy9VhtfalKATCSHaw=="
+            href="#paragraph-3"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="rIK0clD/k14ZM692FJdVfQ==" class="paragraph">
+        <p id="paragraph-4" class="paragraph">
           <a
             target="_blank"
-            href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
             rel="noopener"
+            href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
             >MDN</a
           >
           にはクライアントサイド Storage
           は、例えば、サイトの個別の設定（色やフォントなど）、以前訪れたときのサイトの行動(ログイン状態、ショッピングカートなど)、Web
           サイトのアセット(HTML, JavaScript,
           CSS)、ドキュメントなどを保存するのに使えるとある。<a
-            href="#rIK0clD/k14ZM692FJdVfQ=="
+            href="#paragraph-4"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="G8yZCs/IRsi08Dcc/HFBwg==" class="paragraph">
+        <p id="paragraph-5" class="paragraph">
           MDN で具体的にクライアントサイド Storage と分類されているのは下記の 4
-          種類だ。<a href="#G8yZCs/IRsi08Dcc/HFBwg==" class="paragraph-anchor"
-            >¶</a
-          >
+          種類だ。<a href="#paragraph-5" class="paragraph-anchor">¶</a>
         </p>
         <ul>
           <li>
@@ -207,23 +201,23 @@
           <li>CacheAPI</li>
           <li>ServiceWorker</li>
         </ul>
-        <p id="gAP6zQtYlgQ3MS54dZun2A==" class="paragraph">
+        <p id="paragraph-6" class="paragraph">
           (WebSQL もあるが多くのブラウザやユースケースで deprecated
           になっており、<a
             target="_blank"
-            href="https://www.w3.org/TR/webdatabase/"
             rel="noopener"
+            href="https://www.w3.org/TR/webdatabase/"
             >W3C の Web Application Working Group もメンテナンスをしておらず</a
           >、 Web Storage や Indexed DB の仕様を策定をしているようだ)<a
-            href="#gAP6zQtYlgQ3MS54dZun2A=="
+            href="#paragraph-6"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="F8H7VzdmUiy5+Yqd0uoujg==" class="paragraph">
+        <p id="paragraph-7" class="paragraph">
           クライアントサイド Storage とサーバサイド Storage
           はどちらか一方しか使えないようなものではなく、用途によって併用できる。<a
-            href="#F8H7VzdmUiy5+Yqd0uoujg=="
+            href="#paragraph-7"
             class="paragraph-anchor"
             >¶</a
           >
@@ -233,10 +227,10 @@
             Storage の分類
           </a>
         </h2>
-        <p id="zJkYRfe8BjQwXk5jS3uWxA==" class="paragraph">
+        <p id="paragraph-8" class="paragraph">
           4
           種類あるストレージのうち用途が似ているもので分けると下記のようになる。<a
-            href="#zJkYRfe8BjQwXk5jS3uWxA=="
+            href="#paragraph-8"
             class="paragraph-anchor"
             >¶</a
           >
@@ -245,9 +239,9 @@
           <li>Web Storage と IndexedDB</li>
           <li>Cache API と ServiceWorker</li>
         </ul>
-        <p id="uyYGcrPVm8BgIogJ0yDfHg==" class="paragraph">
+        <p id="paragraph-9" class="paragraph">
           それぞれ、アプリケーションデータを保持するために使うのと、キャッシュとして使うというようにざっくりとした利用用途が分かれている。<a
-            href="#uyYGcrPVm8BgIogJ0yDfHg=="
+            href="#paragraph-9"
             class="paragraph-anchor"
             >¶</a
           >
@@ -261,9 +255,9 @@
             Web Storage と IndexedDB
           </a>
         </h2>
-        <p id="msl8qkvXoNTpejTAIAAUdw==" class="paragraph">
+        <p id="paragraph-10" class="paragraph">
           Web Storage と IndexedDB の違いは<a
-            href="#msl8qkvXoNTpejTAIAAUdw=="
+            href="#paragraph-10"
             class="paragraph-anchor"
             >¶</a
           >
@@ -273,32 +267,30 @@
           <li>データサイズ</li>
           <li>API</li>
         </ul>
-        <p id="CgrVaPzMIgcIONoZwAe9ag==" class="paragraph">
-          にある。<a href="#CgrVaPzMIgcIONoZwAe9ag==" class="paragraph-anchor"
-            >¶</a
-          >
+        <p id="paragraph-11" class="paragraph">
+          にある。<a href="#paragraph-11" class="paragraph-anchor">¶</a>
         </p>
         <h3>
           <a name="WebStorage" href="#WebStorage" id="WebStorage">
             WebStorage
           </a>
         </h3>
-        <p id="tc8ZXAgReJ8qUi0xfReZwg==" class="paragraph">
+        <p id="paragraph-12" class="paragraph">
           Web Storage は sessionStorage と localStorage に分かれる。
           データはオリジンごとに分けて保持され、データの保存期間は、
           sessionStorage はブラウザ(タブ)が閉じられるまで、 localStorage
           はブラウザが閉じられたとしても保持される。保存できるデータサイズはユーザ環境に依存するが、5
           - 10 MB ほどだ。扱えるデータの種別としては string のみである(<a
             target="_blank"
-            href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem"
             rel="noopener"
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem"
             >Storage.setItem() - Web APIs | MDN</a
-          >)。<a href="#tc8ZXAgReJ8qUi0xfReZwg==" class="paragraph-anchor">¶</a>
+          >)。<a href="#paragraph-12" class="paragraph-anchor">¶</a>
         </p>
-        <p id="LmBV/rWHJcV/sHXu0T86DQ==" class="paragraph">
+        <p id="paragraph-13" class="paragraph">
           オブジェクトをセットしても下記のように
           <code>toString()</code> でシリアライズされて保持される。<a
-            href="#LmBV/rWHJcV/sHXu0T86DQ=="
+            href="#paragraph-13"
             class="paragraph-anchor"
             >¶</a
           >
@@ -308,23 +300,23 @@
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.sessionStorage.getItem(<span class="hljs-string">'test'</span>));
 <span class="hljs-comment">// '[object Object]'</span>
 </code></pre>
-        <p id="oMN65W2tzNaMBK6DqxGh0A==" class="paragraph">
+        <p id="paragraph-14" class="paragraph">
           なので、 複雑なデータ構造を保持する場合は
           <code>JSON.stringify()</code> などで別途 string
           にシリアライズする必要がある。<a
-            href="#oMN65W2tzNaMBK6DqxGh0A=="
+            href="#paragraph-14"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="U2a6GBP2hZRxgPQBtdUN7g==" class="paragraph">
+        <p id="paragraph-15" class="paragraph">
           上記の例では、setItem と getItem を使っているが、<a
             target="_blank"
-            href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API"
             rel="noopener"
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API"
             >MDN</a
           >によると、下記のようにいくつかのアクセス方法がある。<a
-            href="#U2a6GBP2hZRxgPQBtdUN7g=="
+            href="#paragraph-15"
             class="paragraph-anchor"
             >¶</a
           >
@@ -333,10 +325,10 @@
 localStorage[<span class="hljs-string">'colorSetting'</span>] = <span class="hljs-string">'#a4509b'</span>;
 localStorage.setItem(<span class="hljs-string">'colorSetting'</span>, <span class="hljs-string">'#a4509b'</span>);
 </code></pre>
-        <p id="NvdgMZmJarMRthHUQPVCsw==" class="paragraph">
+        <p id="paragraph-16" class="paragraph">
           このように Web Storage の API
           は比較的かんたんにデータのセットやゲットができる。<a
-            href="#NvdgMZmJarMRthHUQPVCsw=="
+            href="#paragraph-16"
             class="paragraph-anchor"
             >¶</a
           >
@@ -344,7 +336,7 @@ localStorage.setItem(<span class="hljs-string">'colorSetting'</span>, <span clas
         <h3>
           <a name="IndexedDB" href="#IndexedDB" id="IndexedDB"> IndexedDB </a>
         </h3>
-        <p id="vYAvF2qf/kFP8cgW3p7BeA==" class="paragraph">
+        <p id="paragraph-17" class="paragraph">
           IndexedDB は Web Storage と違って audio や video
           といった複雑なデータでも扱うことができる storage
           だ。トランザクションやインデックスもサポートされており、IndexedDB
@@ -352,15 +344,15 @@ localStorage.setItem(<span class="hljs-string">'colorSetting'</span>, <span clas
           localStorage
           と同様にブラウザを閉じてもデータは保存されている。扱えるデータサイズは10
           MB - 2 GB 程度で、Web Storage と比べると遥かに大きい。<a
-            href="#vYAvF2qf/kFP8cgW3p7BeA=="
+            href="#paragraph-17"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="E7614by3l6qs8AfQuiHyWw==" class="paragraph">
+        <p id="paragraph-18" class="paragraph">
           API は Web Storage
           と違って少し複雑になっている。データベースの利用に必要な手順は下記のとおりだ。<a
-            href="#E7614by3l6qs8AfQuiHyWw=="
+            href="#paragraph-18"
             class="paragraph-anchor"
             >¶</a
           >
@@ -394,9 +386,9 @@ localStorage.setItem(<span class="hljs-string">'colorSetting'</span>, <span clas
             </ol>
           </li>
         </ol>
-        <p id="kkMRXIYnTVqV3BDzZIMgIA==" class="paragraph">
+        <p id="paragraph-19" class="paragraph">
           コードにすると次のようになる。<a
-            href="#kkMRXIYnTVqV3BDzZIMgIA=="
+            href="#paragraph-19"
             class="paragraph-anchor"
             >¶</a
           >
@@ -406,14 +398,14 @@ localStorage.setItem(<span class="hljs-string">'colorSetting'</span>, <span clas
             初期化する
           </a>
         </h4>
-        <p id="q2DQnQAG1zlx7Ul16qBP+w==" class="paragraph">
+        <p id="paragraph-20" class="paragraph">
           <code>window.indexedDB.open(&#39;db&#39;, 1)</code> で DB
           を開くリクエストを送る。リクエストオブジェクトはイベントハンドラを設定できるようになっているので、<code
             >upgradeneeded</code
           >
           や <code>success</code>、<code>error</code>
           といったイベントにハンドラを設定することになる。<a
-            href="#q2DQnQAG1zlx7Ul16qBP+w=="
+            href="#paragraph-20"
             class="paragraph-anchor"
             >¶</a
           >
@@ -442,11 +434,11 @@ request.onsuccess = <span class="hljs-function"><span class="hljs-params">event<
             データを書き込むとき
           </a>
         </h4>
-        <p id="Sz5t/o7JFromi7PqGmVaew==" class="paragraph">
+        <p id="paragraph-21" class="paragraph">
           データを書き込むときは、DB
           を開くリクエストを送る（DBオブジェクトをキャッシュしていない場合）、トランザクションを張る、リクエストに対するイベントをハンドルする、という流れで処理を行う。ここでは
           db はキャッシュされている例を紹介する。<a
-            href="#Sz5t/o7JFromi7PqGmVaew=="
+            href="#paragraph-21"
             class="paragraph-anchor"
             >¶</a
           >
@@ -475,11 +467,11 @@ request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event
             データを読み込むとき
           </a>
         </h4>
-        <p id="SlcuzRHmEmyBtSdw6c6Uhw==" class="paragraph">
+        <p id="paragraph-22" class="paragraph">
           データを読み込むときはほとんどデータを書き込むときと同様で、users への
           transaction
           を張り、読み込みリクエストを送り、リクエストに対するイベントをハンドルするという具合になる。<a
-            href="#SlcuzRHmEmyBtSdw6c6Uhw=="
+            href="#paragraph-22"
             class="paragraph-anchor"
             >¶</a
           >
@@ -500,11 +492,11 @@ request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event
             IndexedDB まとめ
           </a>
         </h3>
-        <p id="VpmEeiAVmeGz+38mE8nTzg==" class="paragraph">
+        <p id="paragraph-23" class="paragraph">
           ここまで見てきたように IndexedDB は Web Storage
           と比べて少し複雑に見える。しかし、トランザクションをサポートしていることや、扱えるデータが多数あること、保存できるデータサイズが
           Web Storage と違うといった点で Web Storage と違った利点がある。<a
-            href="#VpmEeiAVmeGz+38mE8nTzg=="
+            href="#paragraph-23"
             class="paragraph-anchor"
             >¶</a
           >
@@ -518,15 +510,15 @@ request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event
             Cache API と Service Worker
           </a>
         </h2>
-        <p id="xPpM7ev44s+eJdQyy4/g/w==" class="paragraph">
+        <p id="paragraph-24" class="paragraph">
           Web Storage と IndexedDB について見てきたところで、次は Cache API と
           Service Worker について見てみる。<a
-            href="#xPpM7ev44s+eJdQyy4/g/w=="
+            href="#paragraph-24"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="nhoPGcWpHuL4VeSuoGwMuA==" class="paragraph">
+        <p id="paragraph-25" class="paragraph">
           Cache API と Service Worker
           は一言で言うと、キャッシュやプロキシのために組み合わせて使う仕組みで、
           HTTP Request に対して前処理、後処理をしたり HTTP Response
@@ -534,7 +526,7 @@ request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event
           今までアプリケーションデータを保存するための Storage
           を紹介したが、Cache API と Service Worker
           の組み合わせは少し異なる用途の Storage になる。<a
-            href="#nhoPGcWpHuL4VeSuoGwMuA=="
+            href="#paragraph-25"
             class="paragraph-anchor"
             >¶</a
           >
@@ -544,43 +536,43 @@ request.onsuccess = <span class="hljs-function">(<span class="hljs-params">event
             実際の使い方
           </a>
         </h3>
-        <p id="OT0+7ytJcUBbgu+bFbeS7w==" class="paragraph">
+        <p id="paragraph-26" class="paragraph">
           Cache API は HTTP Request に対して HTTP Response
           を保存するための仕組みである。<a
-            href="#OT0+7ytJcUBbgu+bFbeS7w=="
+            href="#paragraph-26"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="el02tLgzxcXgvDxbOb8rNg==" class="paragraph">
+        <p id="paragraph-27" class="paragraph">
           <a
             target="_blank"
-            href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage#offline_asset_storage"
             rel="noopener"
+            href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage#offline_asset_storage"
             >MDN</a
           >
           を参考に Cache API と Serivce Worker は下記のように使う。<a
-            href="#el02tLgzxcXgvDxbOb8rNg=="
+            href="#paragraph-27"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="y2YVjo7RDLlzw2He+7r8Uw==" class="paragraph">
+        <p id="paragraph-28" class="paragraph">
           まず、クライアントサイドで Service Worker
           の登録を行う。ここでは、Service Worker は
           <code>service-worker.js</code> という名前で記載されているとする。<a
-            href="#y2YVjo7RDLlzw2He+7r8Uw=="
+            href="#paragraph-28"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <pre><code class="language-javascript">navigator.serviceWorker.register(<span class="hljs-string">`/path/to/service-worker.js`</span>).
 </code></pre>
-        <p id="P7NOCMzU1onnerTfO8Dq/g==" class="paragraph">
+        <p id="paragraph-29" class="paragraph">
           <code>service-worker.js</code> には下記のように install イベントと
           fetch
           イベントのためのイベントリスナーを設定し、それぞれのイベントのハンドルを行う。<a
-            href="#P7NOCMzU1onnerTfO8Dq/g=="
+            href="#paragraph-29"
             class="paragraph-anchor"
             >¶</a
           >
@@ -603,39 +595,39 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (e) =&gt; {
     )
 })
 </code></pre>
-        <p id="oS/HuxfsPjnYADae2kjFnA==" class="paragraph">
+        <p id="paragraph-30" class="paragraph">
           install でやっていることとしては、 Cache Storage を開くことと、Cache
           する URL を指定することである。 ここで指定された URL のリソースは
           Fetch され、 Cache Storage にキャッシュされることになる。<a
-            href="#oS/HuxfsPjnYADae2kjFnA=="
+            href="#paragraph-30"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="B0ZcSiV7zM9miTh4HzyrYQ==" class="paragraph">
+        <p id="paragraph-31" class="paragraph">
           一点注意することとしては、 Cache API は HTTP
           キャッシュヘッダを見ないという点には注意したい。<a
-            href="#B0ZcSiV7zM9miTh4HzyrYQ=="
+            href="#paragraph-31"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="ER8wze3+bf6482dXxbKe+g==" class="paragraph">
+          <p id="paragraph-32" class="paragraph">
             Note: The caching API doesn&#39;t honor HTTP caching headers.<a
-              href="#ER8wze3+bf6482dXxbKe+g=="
+              href="#paragraph-32"
               class="paragraph-anchor"
               >¶</a
             >
           </p>
-          <p id="yd4wU2jgavXvJtVTAbabgg==" class="paragraph">
+          <p id="paragraph-33" class="paragraph">
             --
             <a
               target="_blank"
-              href="https://developer.mozilla.org/en-US/docs/Web/API/Cache#:~:text=entries%20in%20the-,Cache,-object."
               rel="noopener"
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Cache#:~:text=entries%20in%20the-,Cache,-object."
               >MDN</a
-            ><a href="#yd4wU2jgavXvJtVTAbabgg==" class="paragraph-anchor">¶</a>
+            ><a href="#paragraph-33" class="paragraph-anchor">¶</a>
           </p>
         </blockquote>
         <h2>
@@ -647,37 +639,35 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (e) =&gt; {
             Additional Storage
           </a>
         </h2>
-        <p id="wS2MF5qH5NpKqid2zMRh2A==" class="paragraph">
+        <p id="paragraph-34" class="paragraph">
           Chrome のデベロッパーツールにある Application タブを見ると、Coookie や
           Trust Tokens、Interest Groups といったものも Storage
           のようだ。機会があったらこれらについても触れたい。<a
-            href="#wS2MF5qH5NpKqid2zMRh2A=="
+            href="#paragraph-34"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="/TWANx7pphT1RvceJtCs1g==" class="paragraph">
-          <img src="./img/storage.png" alt="Additional Storage" /><a
-            href="#/TWANx7pphT1RvceJtCs1g=="
-            class="paragraph-anchor"
-            >¶</a
-          >
+        <p id="paragraph-35" class="paragraph">
+          <a href="./img/storage.png" rel="noopener"
+            ><img src="./img/storage.png" /></a
+          ><a href="#paragraph-35" class="paragraph-anchor">¶</a>
         </p>
         <h2>
           <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
         </h2>
-        <p id="FFxIs3Da3dwXglkjueUiTQ==" class="paragraph">
+        <p id="paragraph-36" class="paragraph">
           今回は Client サイドの Storage 4 種類について概観した。<a
-            href="#FFxIs3Da3dwXglkjueUiTQ=="
+            href="#paragraph-36"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="pRUiHRi1MBnhiFK9uxSgjw==" class="paragraph">
+        <p id="paragraph-37" class="paragraph">
           これらの Storage
           の使い分けについて理解することで、適切なユースケースでそれぞれの
           Storage を使っていきたい。<a
-            href="#pRUiHRi1MBnhiFK9uxSgjw=="
+            href="#paragraph-37"
             class="paragraph-anchor"
             >¶</a
           >
@@ -689,64 +679,64 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (e) =&gt; {
           <li>
             <a
               target="_blank"
-              href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
               rel="noopener"
+              href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage"
               >Client-side storage - Learn web development | MDN</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://storage.spec.whatwg.org/"
               rel="noopener"
+              href="https://storage.spec.whatwg.org/"
               >Storage Standard</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://privacycg.github.io/storage-partitioning/"
               rel="noopener"
+              href="https://privacycg.github.io/storage-partitioning/"
               >Client-Side Storage Partitioning | storage-partitioning</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://developer.chrome.com/blog/deps-rems-94/#deprecate-and-remove-websql-in-third-party-contexts"
               rel="noopener"
+              href="https://developer.chrome.com/blog/deps-rems-94/#deprecate-and-remove-websql-in-third-party-contexts"
               >Deprecations and removals in Chrome 94 - Chrome Developers</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API"
               rel="noopener"
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API"
               >Using the Web Storage API - Web APIs | MDN</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://web.dev/storage-for-the-web/"
               rel="noopener"
+              href="https://web.dev/storage-for-the-web/"
               >Storage for the web</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB"
               rel="noopener"
+              href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB"
               >Using IndexedDB - Web APIs | MDN</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://developer.mozilla.org/en-US/docs/Web/API/Cache"
               rel="noopener"
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Cache"
               >Cache - Web APIs | MDN</a
             >
           </li>

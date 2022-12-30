@@ -6,6 +6,7 @@ const hash = require('crypto').createHash;
 let articleTitle = '';
 let tags = '';
 let summary = '';
+let descriptionExist = false;
 let dates = [];
 const extractTags = (text) => {
     const i = text.indexOf('[');
@@ -19,9 +20,11 @@ const extractDate = (text) => {
     return localDates.map((d) => d.trim());
 };
 
-let isIndexBefore = false;
+let isInIndex = false;
+const SUMMARY_LENGTH = 300;
 
 const htmltagRegexp = RegExp('<.+?>', 'g');
+let paragraphNumber = 1;
 
 // Custom Renderer
 const renderer = {
@@ -34,40 +37,57 @@ const renderer = {
         } else if (text.includes('@date:')) {
             dates = extractDate(text);
             return '';
+        } else if (text.includes("@description:")) {
+            descriptionExist = true;
+            summary = text;
+            return '';
         }
 
-        const t = text.slice(0, Math.max(200 - summary.length, 0));
-        summary += t.replaceAll(htmltagRegexp, '');
+        if (!isInIndex) {
+            const copiedText = text.slice().replaceAll(htmltagRegexp, '').replaceAll("\n", "");
+            const t = copiedText.slice(0, Math.max(SUMMARY_LENGTH - summary.length + 1, 0));
+            summary += t;
+        }
 
-        const h = hash('md5').update(text).digest('base64')
-        return `<p id="${h}" class="paragraph">${text}<a href="#${h}" class="paragraph-anchor">¶</a></p>`;
+        const id = `paragraph-${paragraphNumber}`;
+        paragraphNumber += 1;
+        return `<p id="${id}" class="paragraph">${text}<a href="#${id}" class="paragraph-anchor">¶</a></p>`;
     },
     heading: (text, level) => {
-        // const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
         const escapedText = text;
         if (level == 1) {
             articleTitle = text;
         }
         const h = `<h${level}>
-  <a name="${escapedText}" href="#${escapedText}" id="${escapedText}">
-    ${text}
-  </a>
-</h${level}>
-`;
-        if (isIndexBefore) {
-            isIndexBefore = false;
+                      <a name="${escapedText}" href="#${escapedText}" id="${escapedText}">
+                        ${text}
+                      </a>
+                    </h${level}>`;
+        if (isInIndex) {
+            isInIndex = false;
             return `</details>${h}`;
         }
         if (text === '目次' || text == 'もくじ') {
-            isIndexBefore = true;
+            isInIndex = true;
             return `<details><summary>## ${text} (click で開く)</summary>${h}`;
         }
 
         return h;
     },
     link: (href, title, text) => {
-        return `<a target="_blank" href="${href}" rel="noopener">${text}</a>`;
+        return `<a ${isInIndex ? "" : 'target="_blank" rel="noopener"'} href="${href}" >${text}</a>`;
     },
+    image: (src) => {
+        return `<a href="${src}" rel="noopener"><img src="${src}" /></a>`;
+    },
+    listitem: (text) => {
+        if (!isInIndex) {
+            const copiedText = text.slice().replaceAll(htmltagRegexp, '').replaceAll("\n", "");
+            const t = copiedText.slice(0, Math.max(SUMMARY_LENGTH - summary.length + 1, 0));
+            summary += t;
+        }
+        return `<li>${text}</li>`;
+    }
 };
 
 class BMarkdown2HTML {

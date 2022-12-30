@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Progressive Web App (PWA) の勉強がてら https://blog.bokken.io を PWA 化した。本記事では、その内容をまとめておきたい。記事ではインストールを可能にするのみで、コンテンツのキャッシュや push 通知などは行わない。それは blog で対応した際に改めて記事にする。本 blog も PWA 化しているが、別途&lt;a target=&#34;_blank&#34; "
+      content="Progressive Web App (PWA) の勉強がてら https://blog.bokken.io を PWA 化した。本記事では、その内容をまとめておきたい。記事ではインストールを可能にするのみで、コンテンツのキャッシュや push 通知などは行わない。それは blog で対応した際に改めて記事にする。本 blog も PWA 化しているが、別途デモ を用意している。まず簡単に PWA とは何かをおさらいしておく。PWA とはネイティブアプリケーションのようなユーザ体験を Web の技術で実現できる技術である。クロスプラットフォームで提供されているブラウザ上でネイティブライクに動く"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -34,7 +34,7 @@
     />
     <meta
       property="og:description"
-      content="Progressive Web App (PWA) の勉強がてら https://blog.bokken.io を PWA 化した。本記事では、その内容をまとめておきたい。記事ではインストールを可能にするのみで、コンテンツのキャッシュや push 通知などは行わない。それは blog で対応した際に改めて記事にする。本 blog も PWA 化しているが、別途&lt;a target=&#34;_blank&#34; "
+      content="Progressive Web App (PWA) の勉強がてら https://blog.bokken.io を PWA 化した。本記事では、その内容をまとめておきたい。記事ではインストールを可能にするのみで、コンテンツのキャッシュや push 通知などは行わない。それは blog で対応した際に改めて記事にする。本 blog も PWA 化しているが、別途デモ を用意している。まず簡単に PWA とは何かをおさらいしておく。PWA とはネイティブアプリケーションのようなユーザ体験を Web の技術で実現できる技術である。クロスプラットフォームで提供されているブラウザ上でネイティブライクに動く"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -119,10 +119,10 @@
         <h2>
           <a name="概要" href="#概要" id="概要"> 概要 </a>
         </h2>
-        <p id="e0uhecqnyPJz6ZVU6wWUbQ==" class="paragraph">
+        <p id="paragraph-1" class="paragraph">
           Progressive Web App (PWA) の勉強がてら
           <code>https://blog.bokken.io</code> を PWA 化した。<a
-            href="#e0uhecqnyPJz6ZVU6wWUbQ=="
+            href="#paragraph-1"
             class="paragraph-anchor"
             >¶</a
           >
@@ -139,24 +139,22 @@
           >
         </blockquote>
 
-        <p id="ggV0ntTKo5StPVUuh2iUYQ==" class="paragraph">
+        <p id="paragraph-2" class="paragraph">
           本記事では、その内容をまとめておきたい。<a
-            href="#ggV0ntTKo5StPVUuh2iUYQ=="
+            href="#paragraph-2"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="F7rlMoiv6Jja3VWTlbEa8Q==" class="paragraph">
+        <p id="paragraph-3" class="paragraph">
           記事ではインストールを可能にするのみで、コンテンツのキャッシュや push
-          通知などは行わない。<a
-            href="#F7rlMoiv6Jja3VWTlbEa8Q=="
-            class="paragraph-anchor"
+          通知などは行わない。<a href="#paragraph-3" class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="u3BWsdUznbNm4/9UR+i7BA==" class="paragraph">
+        <p id="paragraph-4" class="paragraph">
           それは blog で対応した際に改めて記事にする。<a
-            href="#u3BWsdUznbNm4/9UR+i7BA=="
+            href="#paragraph-4"
             class="paragraph-anchor"
             >¶</a
           >
@@ -167,74 +165,44 @@
             <a name="目次" href="#目次" id="目次"> 目次 </a>
           </h2>
           <ol>
-            <li><a target="_blank" href="#概要" rel="noopener">概要</a></li>
-            <li><a target="_blank" href="#目次" rel="noopener">目次</a></li>
-            <li><a target="_blank" href="#デモ" rel="noopener">デモ</a></li>
+            <li><a href="#概要">概要</a></li>
+            <li><a href="#目次">目次</a></li>
+            <li><a href="#デモ">デモ</a></li>
             <li>
-              <a
-                target="_blank"
-                href="#Progressive-Web-App-PWAとは"
-                rel="noopener"
+              <a href="#Progressive-Web-App-PWAとは"
                 >Progressive Web App (PWA)とは</a
               >
               <ol>
                 <li>
-                  <a
-                    target="_blank"
-                    href="#PWA-に必要なファイル概要"
-                    rel="noopener"
+                  <a href="#PWA-に必要なファイル概要"
                     >PWA に必要なファイル概要</a
                   >
                 </li>
               </ol>
             </li>
+            <li><a href="#Web-App-Manifest">Web App Manifest</a></li>
+            <li><a href="#Service-Workers">Service Workers</a></li>
             <li>
-              <a target="_blank" href="#Web-App-Manifest" rel="noopener"
-                >Web App Manifest</a
-              >
-            </li>
-            <li>
-              <a target="_blank" href="#Service-Workers" rel="noopener"
-                >Service Workers</a
-              >
-            </li>
-            <li>
-              <a target="_blank" href="#必要となるファイル" rel="noopener"
-                >必要となるファイル</a
-              >
+              <a href="#必要となるファイル">必要となるファイル</a>
               <ol>
-                <li>
-                  <a target="_blank" href="#scope-について" rel="noopener"
-                    >scope について</a
-                  >
-                </li>
+                <li><a href="#scope-について">scope について</a></li>
               </ol>
             </li>
-            <li>
-              <a target="_blank" href="#おわりに" rel="noopener">おわりに</a>
-            </li>
-            <li>
-              <a target="_blank" href="#参考リンク" rel="noopener"
-                >参考リンク</a
-              >
-            </li>
+            <li><a href="#おわりに">おわりに</a></li>
+            <li><a href="#参考リンク">参考リンク</a></li>
           </ol>
         </details>
         <h2>
           <a name="デモ" href="#デモ" id="デモ"> デモ </a>
         </h2>
-        <p id="UMsZ2Pf1MUHS0uS46Gru9w==" class="paragraph">
+        <p id="paragraph-5" class="paragraph">
           本 blog も PWA 化しているが、別途<a
             target="_blank"
-            href="https://x.bokken.io/example-pwa/index.html"
             rel="noopener"
+            href="https://x.bokken.io/example-pwa/index.html"
             >デモ</a
           >
-          を用意している。<a
-            href="#UMsZ2Pf1MUHS0uS46Gru9w=="
-            class="paragraph-anchor"
-            >¶</a
-          >
+          を用意している。<a href="#paragraph-5" class="paragraph-anchor">¶</a>
         </p>
         <h2>
           <a
@@ -245,31 +213,31 @@
             Progressive Web App (PWA)とは
           </a>
         </h2>
-        <p id="Xm0JFhiC6THW7tUoDTcLDQ==" class="paragraph">
+        <p id="paragraph-6" class="paragraph">
           まず簡単に PWA とは何かをおさらいしておく。<a
-            href="#Xm0JFhiC6THW7tUoDTcLDQ=="
+            href="#paragraph-6"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="7BmTAzW1DX+RnNKJ+I6X+w==" class="paragraph">
+        <p id="paragraph-7" class="paragraph">
           PWA とはネイティブアプリケーションのようなユーザ体験を Web
           の技術で実現できる技術である。<a
-            href="#7BmTAzW1DX+RnNKJ+I6X+w=="
+            href="#paragraph-7"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="Zoe9A+NGV9cOr+6WXc4f6w==" class="paragraph">
+        <p id="paragraph-8" class="paragraph">
           クロスプラットフォームで提供されているブラウザ上でネイティブライクに動くアプリケーションが提供できれば、少ないコストでユーザ体験を向上させることが期待できる技術である。<a
-            href="#Zoe9A+NGV9cOr+6WXc4f6w=="
+            href="#paragraph-8"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="GTvYoTiLZapuwii3h8LsAA==" class="paragraph">
+        <p id="paragraph-9" class="paragraph">
           要素技術的には下記が関係してくる。<a
-            href="#GTvYoTiLZapuwii3h8LsAA=="
+            href="#paragraph-9"
             class="paragraph-anchor"
             >¶</a
           >
@@ -278,66 +246,66 @@
           <li>
             <a
               target="_blank"
-              href="https://www.w3.org/TR/appmanifest/"
               rel="noopener"
+              href="https://www.w3.org/TR/appmanifest/"
               >Web App Manifest</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://www.w3.org/TR/service-workers/"
               rel="noopener"
+              href="https://www.w3.org/TR/service-workers/"
               >Service Workers 1</a
             >
           </li>
         </ul>
-        <p id="MD6Ou9hFdt6xDGAt5zP9fg==" class="paragraph">
+        <p id="paragraph-10" class="paragraph">
           もう一つ App Shell という概念も紹介されることが多い。<a
-            href="#MD6Ou9hFdt6xDGAt5zP9fg=="
+            href="#paragraph-10"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="2W0YAjOS3DasneCdWKwD0g==" class="paragraph">
+        <p id="paragraph-11" class="paragraph">
           App Shell は PWA
           を実現するときのアーキテクチャの一つであって、最低限必要な技術要素ではない。<a
-            href="#2W0YAjOS3DasneCdWKwD0g=="
+            href="#paragraph-11"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="V5BdC40ymyU7/5c7P5canQ==" class="paragraph">
+        <p id="paragraph-12" class="paragraph">
           Google の App Shell モデルの記事には下記のようにある。<a
-            href="#V5BdC40ymyU7/5c7P5canQ=="
+            href="#paragraph-12"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="v5nZIZCbFWZPBLvyHxDHSQ==" class="paragraph">
+          <p id="paragraph-13" class="paragraph">
             アプリケーション シェル（App Shell）アーキテクチャは、ネイティブ
             アプリのように瞬時に、そして確実にユーザーの画面に読み込める
             Progressive Web App を構築する方法の 1 つです。<a
-              href="#v5nZIZCbFWZPBLvyHxDHSQ=="
+              href="#paragraph-13"
               class="paragraph-anchor"
               >¶</a
             >
           </p>
-          <p id="fpsSAEIo14QthEd/GAGPvw==" class="paragraph">
+          <p id="paragraph-14" class="paragraph">
             --
             <a
               target="_blank"
-              href="https://developers.google.com/web/fundamentals/architecture/app-shell"
               rel="noopener"
+              href="https://developers.google.com/web/fundamentals/architecture/app-shell"
               >App Shell モデル  |  Web  |  Google Developers</a
-            ><a href="#fpsSAEIo14QthEd/GAGPvw==" class="paragraph-anchor">¶</a>
+            ><a href="#paragraph-14" class="paragraph-anchor">¶</a>
           </p>
         </blockquote>
-        <p id="bMniuVvmTcWpHQu+ZRwRsw==" class="paragraph">
+        <p id="paragraph-15" class="paragraph">
           なので、本記事では簡単に Web App Manifest と、Service Worker
           について紹介した上で、PWA 化するときの設定を紹介する。<a
-            href="#bMniuVvmTcWpHQu+ZRwRsw=="
+            href="#paragraph-15"
             class="paragraph-anchor"
             >¶</a
           >
@@ -351,9 +319,9 @@
             PWA に必要なファイル概要
           </a>
         </h3>
-        <p id="Pg5fTucRs5BimGDrjkOFoA==" class="paragraph">
+        <p id="paragraph-16" class="paragraph">
           ひとまずこれらから必要になるファイルは下記である。<a
-            href="#Pg5fTucRs5BimGDrjkOFoA=="
+            href="#paragraph-16"
             class="paragraph-anchor"
             >¶</a
           >
@@ -376,38 +344,38 @@
             Web App Manifest
           </a>
         </h2>
-        <p id="/qO6Mtk2+oc0p9HrL5Th4A==" class="paragraph">
+        <p id="paragraph-17" class="paragraph">
           Web App Manifest とは下記にあるように Web アプリケーションのメタデータ
           (名前、アイコン、リンクなど)を表すファイルである。<a
-            href="#/qO6Mtk2+oc0p9HrL5Th4A=="
+            href="#paragraph-17"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <blockquote>
-          <p id="meu5UY4P4tHhxyeGbptAxQ==" class="paragraph">
+          <p id="paragraph-18" class="paragraph">
             centralized place to put metadata associated with a web application.
             This metadata includes, but is not limited to, the web
             application&#39;s name, links to icons, as well as the preferred URL
             to open when a user launches the web application.<a
-              href="#meu5UY4P4tHhxyeGbptAxQ=="
+              href="#paragraph-18"
               class="paragraph-anchor"
               >¶</a
             >
           </p>
-          <p id="LmkmdyRLB8f2Zki7FySDtw==" class="paragraph">
+          <p id="paragraph-19" class="paragraph">
             --
             <a
               target="_blank"
-              href="https://w3c.github.io/manifest/"
               rel="noopener"
+              href="https://w3c.github.io/manifest/"
               >Web App Manifest</a
-            ><a href="#LmkmdyRLB8f2Zki7FySDtw==" class="paragraph-anchor">¶</a>
+            ><a href="#paragraph-19" class="paragraph-anchor">¶</a>
           </p>
         </blockquote>
-        <p id="hjkaTTKGFIUrl4xt6JXm2g==" class="paragraph">
+        <p id="paragraph-20" class="paragraph">
           例えば下記のようなデータである。<a
-            href="#hjkaTTKGFIUrl4xt6JXm2g=="
+            href="#paragraph-20"
             class="paragraph-anchor"
             >¶</a
           >
@@ -430,15 +398,15 @@
   <span class="hljs-attr">"theme_color"</span>: <span class="hljs-string">"#00a3af"</span>
 }
 </code></pre>
-        <p id="a5QEA0mL317xiCJ/3CHMMw==" class="paragraph">
+        <p id="paragraph-21" class="paragraph">
           このファイル名で指定する icon ファイル (icon.svg)
           は別途用意しておく必要がある。(ない場合は動かない)<a
-            href="#a5QEA0mL317xiCJ/3CHMMw=="
+            href="#paragraph-21"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="uHz4ZfHYesAkdidCrAN7/Q==" class="paragraph">
+        <p id="paragraph-22" class="paragraph">
           この Web App Manifest ファイルの名前は
           <code>manifest.webmanifest</code> でもよいし、<code
             >manifest.json</code
@@ -446,15 +414,15 @@
           でもよい。あるいは他のファイル名などであればサーバ側で
           <code>ContentType: application/manifest+json</code>
           で返せばブラウザが解釈できる。<a
-            href="#uHz4ZfHYesAkdidCrAN7/Q=="
+            href="#paragraph-22"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="2hQaHGyoFhZ0j1RwsvTXzw==" class="paragraph">
+        <p id="paragraph-23" class="paragraph">
           そして、html ファイルから下記のように読み込むことでブラウザに Web
           ページのメタ情報を伝えることができる。<a
-            href="#2hQaHGyoFhZ0j1RwsvTXzw=="
+            href="#paragraph-23"
             class="paragraph-anchor"
             >¶</a
           >
@@ -470,33 +438,33 @@
             Service Workers
           </a>
         </h2>
-        <p id="nH3YBOHf4wvWnA171aEYUw==" class="paragraph">
+        <p id="paragraph-24" class="paragraph">
           Service Worker というのは
           <a
             target="_blank"
-            href="https://www.w3.org/TR/workers/"
             rel="noopener"
+            href="https://www.w3.org/TR/workers/"
             >Web Worker</a
           >
           の一種である。 Service Worker はブラウザの JavaScript
           からインストールされてバックグラウンドで動作する。<a
-            href="#nH3YBOHf4wvWnA171aEYUw=="
+            href="#paragraph-24"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="gyP1zpLjSABEjj8OXxEYgg==" class="paragraph">
+        <p id="paragraph-25" class="paragraph">
           この Service Worker
           はプッシュ通知やプロキシ、バックグラウンドでの同期などで利用されているのを見かける技術である。<a
-            href="#gyP1zpLjSABEjj8OXxEYgg=="
+            href="#paragraph-25"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="7vOSNIpC+01DGVXLicMGwQ==" class="paragraph">
+        <p id="paragraph-26" class="paragraph">
           PWA 化するために Service Worker の JS ファイルとしては下記のような
           Event Listener を登録しておく。(下記はログを表示するだけである)<a
-            href="#7vOSNIpC+01DGVXLicMGwQ=="
+            href="#paragraph-26"
             class="paragraph-anchor"
             >¶</a
           >
@@ -513,21 +481,19 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
   <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'fetch event occurred'</span>);
 });
 </code></pre>
-        <p id="rT2KsjCY8qOrqarx7e7aYg==" class="paragraph">
+        <p id="paragraph-27" class="paragraph">
           中でも fetch に対する <code>addEventListener</code> がないと「Page
           does not work offline」 と表示されてインストールができない。最低限
           <code>fetch</code> に対する addEventListener を追加する必要がある。<a
-            href="#rT2KsjCY8qOrqarx7e7aYg=="
+            href="#paragraph-27"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="t8OeZIH0OA8WDfFn90ZHhw==" class="paragraph">
+        <p id="paragraph-28" class="paragraph">
           このファイルを <code>sw.js</code> として保存しておき、下記のように
           html のページから <code>sw.js</code> を ブラウザに Service Worker
-          として登録できる。<a
-            href="#t8OeZIH0OA8WDfFn90ZHhw=="
-            class="paragraph-anchor"
+          として登録できる。<a href="#paragraph-28" class="paragraph-anchor"
             >¶</a
           >
         </p>
@@ -556,27 +522,25 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
             必要となるファイル
           </a>
         </h2>
-        <p id="tGkhv5IgIVuak6UrjhKNUg==" class="paragraph">
+        <p id="paragraph-29" class="paragraph">
           上記の説明を合わせると下記のようなファイル群が必要である。<a
-            href="#tGkhv5IgIVuak6UrjhKNUg=="
+            href="#paragraph-29"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <ol>
           <li>
-            <p id="7flyrSDLCGnDuxT0O6+eew==" class="paragraph">
-              icon ファイル<a
-                href="#7flyrSDLCGnDuxT0O6+eew=="
-                class="paragraph-anchor"
+            <p id="paragraph-30" class="paragraph">
+              icon ファイル<a href="#paragraph-30" class="paragraph-anchor"
                 >¶</a
               >
             </p>
           </li>
           <li>
-            <p id="bqg64ec6hqoOnO/RbNwWWw==" class="paragraph">
+            <p id="paragraph-31" class="paragraph">
               Web App Manifest ファイル<a
-                href="#bqg64ec6hqoOnO/RbNwWWw=="
+                href="#paragraph-31"
                 class="paragraph-anchor"
                 >¶</a
               >
@@ -601,9 +565,9 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
 </code></pre>
           </li>
           <li>
-            <p id="Om2QA4niNpQE9VE+bM0QTQ==" class="paragraph">
+            <p id="paragraph-32" class="paragraph">
               html ファイルと Service Worker を登録するための JavaScript<a
-                href="#Om2QA4niNpQE9VE+bM0QTQ=="
+                href="#paragraph-32"
                 class="paragraph-anchor"
                 >¶</a
               >
@@ -642,9 +606,9 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
 </code></pre>
           </li>
           <li>
-            <p id="+vDb1w88JYYlsbZMMOIRNQ==" class="paragraph">
+            <p id="paragraph-33" class="paragraph">
               Service Worker のファイル<a
-                href="#+vDb1w88JYYlsbZMMOIRNQ=="
+                href="#paragraph-33"
                 class="paragraph-anchor"
                 >¶</a
               >
@@ -663,9 +627,9 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
 </code></pre>
           </li>
         </ol>
-        <p id="hvPY6KyLJAeMy7S6MCC2zw==" class="paragraph">
+        <p id="paragraph-34" class="paragraph">
           これらのファイルを配信するだけで、PWA 化することができる。<a
-            href="#hvPY6KyLJAeMy7S6MCC2zw=="
+            href="#paragraph-34"
             class="paragraph-anchor"
             >¶</a
           >
@@ -675,40 +639,40 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
             scope について
           </a>
         </h3>
-        <p id="IYejviWSORWnGPyU+kIbLQ==" class="paragraph">
+        <p id="paragraph-35" class="paragraph">
           <code>manifest.json</code> や Service Worker 登録のタイミングで
           <code>scope</code>
           を指定するが、これは少しハマる可能性のあるポイントである。<a
-            href="#IYejviWSORWnGPyU+kIbLQ=="
+            href="#paragraph-35"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="z4nCFzTzlIFU0HxewsS+Zg==" class="paragraph">
+        <p id="paragraph-36" class="paragraph">
           要は PWA
           化したアプリケーションがどこのページを提供するのかを表現する。この
           scope 内を Application
           化するとイメージできる。ここで指定した範囲のリクエストなどは fetch
           イベント発生時にフックされて、オフラインのキャッシュを返したり、独自の処理を挟むことができる。<a
-            href="#z4nCFzTzlIFU0HxewsS+Zg=="
+            href="#paragraph-36"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="gdRZ3qpW52Eh9YFodaKIiQ==" class="paragraph">
+        <p id="paragraph-37" class="paragraph">
           scope については Chrome の開発者である
-          <a target="_blank" href="https://twitter.com/nhiroki_" rel="noopener"
+          <a target="_blank" rel="noopener" href="https://twitter.com/nhiroki_"
             >@nhiroki_</a
           >
           さんの
           <a
             target="_blank"
-            href="https://qiita.com/nhiroki/items/eb16b802101153352bba"
             rel="noopener"
+            href="https://qiita.com/nhiroki/items/eb16b802101153352bba"
             >ServiceWorker のスコープとページコントロールについて - Qiita</a
           >
           の記事がとてもわかり易いので参照していただきたい。<a
-            href="#gdRZ3qpW52Eh9YFodaKIiQ=="
+            href="#paragraph-37"
             class="paragraph-anchor"
             >¶</a
           >
@@ -716,46 +680,46 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
         <h2>
           <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
         </h2>
-        <p id="QE9oUii73IOVxWHlnuVFXQ==" class="paragraph">
+        <p id="paragraph-38" class="paragraph">
           Progressive Web App (PWA) 化に必要最低限の内容を紹介した。<a
-            href="#QE9oUii73IOVxWHlnuVFXQ=="
+            href="#paragraph-38"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="7AWu3A3jiRToCIZQUYriDA==" class="paragraph">
+        <p id="paragraph-39" class="paragraph">
           これ以外にも
           <code>sw.js</code>
           を改良することで、インストール時やアクティベート時に処理を挟んだり、コンテンツのキャッシュをしておき
           fetch
           時にプロキシ処理を挟むことでオフラインでアクセスできるようになったりする。<a
-            href="#7AWu3A3jiRToCIZQUYriDA=="
+            href="#paragraph-39"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="5gkr5JlSWunESwWBYHVH9g==" class="paragraph">
+        <p id="paragraph-40" class="paragraph">
           本ブログも機会があれが PWA
           化し、そこで得た知見についてはまた記事にしたいと思う。<a
-            href="#5gkr5JlSWunESwWBYHVH9g=="
+            href="#paragraph-40"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="Z6pPPg1IiZWhIcg0FKm9pw==" class="paragraph">
+        <p id="paragraph-41" class="paragraph">
           もしも不足している内容や間違っている内容があれば
           <a
             target="_blank"
-            href="https://github.com/negibokken/bokken.io/issues"
             rel="noopener"
+            href="https://github.com/negibokken/bokken.io/issues"
             >issue</a
           >
           か Twitter アカウント
-          <a target="_blank" href="https://twitter.com/bokken_" rel="noopener"
+          <a target="_blank" rel="noopener" href="https://twitter.com/bokken_"
             >@bokken_</a
           >
           まで連絡をいただけると嬉しい。<a
-            href="#Z6pPPg1IiZWhIcg0FKm9pw=="
+            href="#paragraph-41"
             class="paragraph-anchor"
             >¶</a
           >
@@ -769,16 +733,16 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
           <li>
             <a
               target="_blank"
-              href="https://web.dev/what-are-pwas/"
               rel="noopener"
+              href="https://web.dev/what-are-pwas/"
               >What are Progressive Web Apps?</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers"
               rel="noopener"
+              href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers"
               >Making PWAs work offline with Service workers - Progressive web
               apps (PWAs) | MDN</a
             >
@@ -786,46 +750,46 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
           <li>
             <a
               target="_blank"
-              href="https://developers.google.com/web/ilt/pwa/introduction-to-service-worker"
               rel="noopener"
+              href="https://developers.google.com/web/ilt/pwa/introduction-to-service-worker"
               >Introduction to Service Worker  |  Web  |  Google Developers</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://web.dev/pwa-checklist/"
               rel="noopener"
+              href="https://web.dev/pwa-checklist/"
               >What makes a good Progressive Web App?</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps"
               rel="noopener"
+              href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps"
               >Progressive web apps (PWAs) | MDN</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://www.w3.org/TR/service-workers/"
               rel="noopener"
+              href="https://www.w3.org/TR/service-workers/"
               >Service Workers 1</a
             >
           </li>
           <li>
             <a
               target="_blank"
-              href="https://developers.google.com/web/fundamentals/primers/service-workers?hl=en"
               rel="noopener"
+              href="https://developers.google.com/web/fundamentals/primers/service-workers?hl=en"
               >Service Workers: an Introduction  |  Web Fundamentals</a
             >
             <a
               target="_blank"
-              href="https://developers.google.com/web/fundamentals/primers/service-workers?hl=ja"
               rel="noopener"
+              href="https://developers.google.com/web/fundamentals/primers/service-workers?hl=ja"
               >Service Worker の紹介  |  Web Fundamentals  |  Google
               Developers</a
             >
@@ -833,8 +797,8 @@ self.addEventListener(<span class="hljs-string">'fetch'</span>, (event) =&gt; {
           <li>
             <a
               target="_blank"
-              href="https://qiita.com/nhiroki/items/eb16b802101153352bba"
               rel="noopener"
+              href="https://qiita.com/nhiroki/items/eb16b802101153352bba"
               >ServiceWorker のスコープとページコントロールについて - Qiita</a
             >
           </li>
