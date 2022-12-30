@@ -10,7 +10,7 @@ Prerender2 という機能の実装が Chrome/Chromium で進んでいる。こ�
 
 ## もくじ
 
-<!-- vim-markdown-toc GFM -->
+<!-- vim-markdown-toc Marked -->
 
 * [Prerender とは](#prerender-とは)
 * [Legacy Prerender とはなにか](#legacy-prerender-とはなにか)
@@ -21,7 +21,7 @@ Prerender2 という機能の実装が Chrome/Chromium で進んでいる。こ�
     * [Privacy considerations](#privacy-considerations)
     * [ネットワークリクエストと Cookie について](#ネットワークリクエストと-cookie-について)
     * [HTTP Cache について](#http-cache-について)
-    * [`<link rel=prerender>` タグの注意点](#link-relprerender-タグの注意点)
+    * [`<link rel=prerender>` タグの注意点](#`<link-rel=prerender>`-タグの注意点)
     * [Referrer Policy](#referrer-policy)
     * [target_hint について](#target_hint-について)
     * [API の利用の制限](#api-の利用の制限)

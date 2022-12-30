@@ -15,10 +15,10 @@
 
 ## もくじ
 
-<!-- vim-markdown-toc GFM -->
+<!-- vim-markdown-toc Marked -->
 
-* [CHIPS (Cookies Having Independent Partitioned State)](#chips-cookies-having-independent-partitioned-state)
-    * [トップレベルサイトで分離されるとは？](#トップレベルサイトで分離されるとは)
+* [CHIPS (Cookies Having Independent Partitioned State)](#chips-(cookies-having-independent-partitioned-state))
+    * [トップレベルサイトで分離されるとは？](#トップレベルサイトで分離されるとは？)
     * [どのように Cookie が分離されていることを把握するか](#どのように-cookie-が分離されていることを把握するか)
 * [簡単なデモ](#簡単なデモ)
     * [デモ動画](#デモ動画)

@@ -18,17 +18,20 @@ Progressive Web App (PWA) の勉強がてら `https://blog.bokken.io` を PWA �
 
 ## 目次
 
-1. [概要](#概要)
-2. [目次](#目次)
-3. [デモ](#デモ)
-4. [Progressive Web App (PWA)とは](#Progressive-Web-App-PWAとは)
-   1. [PWA に必要なファイル概要](#PWA-に必要なファイル概要)
-5. [Web App Manifest](#Web-App-Manifest)
-6. [Service Workers](#Service-Workers)
-7. [必要となるファイル](#必要となるファイル)
-   1. [scope について](#scope-について)
-8. [おわりに](#おわりに)
-9. [参考リンク](#参考リンク)
+
+<!-- vim-markdown-toc Marked -->
+
+* [デモ](#デモ)
+* [Progressive Web App (PWA)とは](#progressive-web-app-(pwa)とは)
+    * [PWA に必要なファイル概要](#pwa-に必要なファイル概要)
+* [Web App Manifest](#web-app-manifest)
+* [Service Workers](#service-workers)
+* [必要となるファイル](#必要となるファイル)
+    * [scope について](#scope-について)
+* [おわりに](#おわりに)
+* [参考リンク](#参考リンク)
+
+<!-- vim-markdown-toc -->
 
 ## デモ
 
