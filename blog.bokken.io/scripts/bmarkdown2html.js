@@ -75,7 +75,7 @@ const renderer = {
         return h;
     },
     link: (href, title, text) => {
-        return `<a ${isInIndex ? "" : 'target="_blank" rel="noopener"'} href="${isInIndex ? "aaa" + href : href}" >${text}</a>`;
+        return `<a ${isInIndex ? "" : 'target="_blank" rel="noopener"'} href="${href}" >${text}</a>`;
     },
     image: (src) => {
         return `<a href="${src}" rel="noopener"><img src="${src}" /></a>`;
