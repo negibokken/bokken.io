@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2022-11-24T06:03:55.903Z</updated>
+  <updated>2022-12-30T08:04:49.967Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -272,6 +272,17 @@
     <summary
       type="html"
     >Prerender は Rendering を予め行い、ユーザのリンククリック時にあらかじめレンダリングされた結果を表示することで、閲覧体験を向上させる機能といえる。いずれにしても Legacy Prerender は一度こういった背景で取り下げられた。ここまで、Prerender2 の歴史について主に触れてきたが、次節からは Prerender2 をどのように使うのかを紹介する。</summary>
+  </entry>
+  
+  <entry>
+    <title
+    >サードパーティ Cookie をブロックする制限を緩和する CHIPS という仕様について</title>
+    <link href="https://blog.bokken.io/articles/2022-12-30/about-chips.html" />
+    <id>https://blog.bokken.io/articles/2022-12-30/about-chips.html</id>
+    <updated>2022-12-30T08:04:49.967Z</updated>
+    <summary
+      type="html"
+    >3rd Party Cookie をブロックする制限を緩和するための仕様である CHIPS が策定されている。近年、ユーザの Privacy の向上を目的として 3rd Party Cookie をブロックする流れがある。cross site でユーザトラッキングを提供する多くのツールは 3rd Party Cookie を使っているため、3rd Party Cookie をブロックすることで解決</summary>
   </entry>
   
 </feed>

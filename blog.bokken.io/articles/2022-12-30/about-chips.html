@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>
+      サードパーティ Cookie をブロックする制限を緩和する CHIPS
+      という仕様について | blog.bokken.io
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="3rd Party Cookie をブロックする制限を緩和するための仕様である CHIPS が策定されている。近年、ユーザの Privacy の向上を目的として 3rd Party Cookie をブロックする流れがある。cross site でユーザトラッキングを提供する多くのツールは 3rd Party Cookie を使っているため、3rd Party Cookie をブロックすることで解決"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="author" href="humans.txt" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2022-12-30/about-chips.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="サードパーティ Cookie をブロックする制限を緩和する CHIPS という仕様について"
+    />
+    <meta
+      property="og:description"
+      content="3rd Party Cookie をブロックする制限を緩和するための仕様である CHIPS が策定されている。近年、ユーザの Privacy の向上を目的として 3rd Party Cookie をブロックする流れがある。cross site でユーザトラッキングを提供する多くのツールは 3rd Party Cookie を使っているため、3rd Party Cookie をブロックすることで解決"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io">bokken.io</a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a href="https://blog.bokken.io/articles/2022-12-30/about-chips.html"
+          >サードパーティ Cookie をブロックする制限を緩和する CHIPS
+          という仕様について</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2022-12-30</dd>
+          <dt>更新日</dt>
+          <dd>2022-12-30</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            Web, Privacy, Security, Cookie
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="サードパーティ Cookie をブロックする制限を緩和する CHIPS という仕様について"
+            href="#サードパーティ Cookie をブロックする制限を緩和する CHIPS という仕様について"
+            id="サードパーティ Cookie をブロックする制限を緩和する CHIPS という仕様について"
+          >
+            サードパーティ Cookie をブロックする制限を緩和する CHIPS
+            という仕様について
+          </a>
+        </h1>
+        <h2>
+          <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
+        </h2>
+        <p id="P+EhuweTivE+N+UVO3JmBQ==" class="paragraph">
+          3rd Party Cookie をブロックする制限を緩和するための仕様である CHIPS
+          が策定されている。<a
+            href="#P+EhuweTivE+N+UVO3JmBQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="cTINJ3UdEckr5pwQJ8GO3g==" class="paragraph">
+          近年、ユーザの Privacy の向上を目的として 3rd Party Cookie
+          をブロックする流れがある。cross site
+          でユーザトラッキングを提供する多くのツールは 3rd Party Cookie
+          を使っているため、3rd Party Cookie
+          をブロックすることで解決しようとするものだ。すでにいくつかのブラウザではこういった動きが見られる(<a
+            target="_blank"
+            href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop"
+            rel="noopener"
+            >Firefox</a
+          >)。<a href="#cTINJ3UdEckr5pwQJ8GO3g==" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="AQ/JbT4aQwq/TnyRCnmotg==" class="paragraph">
+          しかし、一部のサイトでは 3rd Party Cookie
+          が有効に使われているケースもある。こういったケースで、Privacy
+          の問題を解決しつつ、3rd Party Cookie
+          を利用できるようにするための仕様が
+          <a
+            target="_blank"
+            href="https://github.com/privacycg/CHIPS"
+            rel="noopener"
+            >CHIPS (Cookies Having Independent Partitioned State)</a
+          >
+          だ。 本記事ではこの CHIPS
+          について、なぜ必要なのか、どうやって有効にするのかなどを 2022/12/30
+          時点の情報でまとめる。<a
+            href="#AQ/JbT4aQwq/TnyRCnmotg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <details>
+          <summary>## もくじ (click で開く)</summary>
+          <h2>
+            <a name="もくじ" href="#もくじ" id="もくじ"> もくじ </a>
+          </h2>
+          <!-- vim-markdown-toc GFM -->
+
+          <ul>
+            <li>
+              <a
+                target="_blank"
+                href="#chips-cookies-having-independent-partitioned-state"
+                rel="noopener"
+                >CHIPS (Cookies Having Independent Partitioned State)</a
+              >
+              <ul>
+                <li>
+                  <a
+                    target="_blank"
+                    href="#トップレベルサイトで分離されるとは"
+                    rel="noopener"
+                    >トップレベルサイトで分離されるとは？</a
+                  >
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    href="#どのように-cookie-が分離されていることを把握するか"
+                    rel="noopener"
+                    >どのように Cookie が分離されていることを把握するか</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a target="_blank" href="#簡単なデモ" rel="noopener"
+                >簡単なデモ</a
+              >
+              <ul>
+                <li>
+                  <a target="_blank" href="#デモ動画" rel="noopener"
+                    >デモ動画</a
+                  >
+                </li>
+                <li>
+                  <a target="_blank" href="#その他のシナリオ" rel="noopener"
+                    >その他のシナリオ</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                target="_blank"
+                href="#各ブラウザベンダのこれまでの動き"
+                rel="noopener"
+                >各ブラウザベンダのこれまでの動き</a
+              >
+            </li>
+            <li>
+              <a target="_blank" href="#おわりに" rel="noopener">おわりに</a>
+            </li>
+            <li>
+              <a target="_blank" href="#参考・関連リンク" rel="noopener"
+                >参考・関連リンク</a
+              >
+            </li>
+          </ul>
+          <!-- vim-markdown-toc -->
+        </details>
+        <h2>
+          <a
+            name="CHIPS (Cookies Having Independent Partitioned State)"
+            href="#CHIPS (Cookies Having Independent Partitioned State)"
+            id="CHIPS (Cookies Having Independent Partitioned State)"
+          >
+            CHIPS (Cookies Having Independent Partitioned State)
+          </a>
+        </h2>
+        <p id="ciFddn2NG/ADCtyTi7ofAA==" class="paragraph">
+          <a
+            target="_blank"
+            href="https://blog.chromium.org/2020/01/building-more-private-web-path-towards.html"
+            rel="noopener"
+            >Chromium チームからのアナウンス</a
+          >がある通り、今後、3rd Party Cookie
+          はデフォルトでブロックされるようになることが予想される。<a
+            target="_blank"
+            href="https://github.com/privacycg/CHIPS"
+            rel="noopener"
+            >CHIPS (Cookies Having Independent Partitioned State)</a
+          >
+          は、その 3rd Party Cookie を Opt-in
+          形式で使えるようにするための仕様だ。<a
+            href="#ciFddn2NG/ADCtyTi7ofAA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="vBzYgkCw2ZVRpvHOIPF2Yw==" class="paragraph">
+          これを Opt-in する方法は簡単で 下記のように
+          <code>Set-Cookie</code> ヘッダに <code>Partitioned</code> attribute
+          をつけるだけである。<a
+            href="#vBzYgkCw2ZVRpvHOIPF2Yw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-http"><span class="hljs-attribute">Set-Cookie</span>: __Host-locationid=187; SameSite=None; Secure; HttpOnly; Path=/; Partitioned;
+</code></pre>
+        <p id="xFL/SZNgSdFXDcJkKLlqqw==" class="paragraph">
+          これらの対応は 3rd Party
+          の埋め込まれる側のサイトが対応しなければいけない点に注意する。<a
+            href="#xFL/SZNgSdFXDcJkKLlqqw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="L5pAktSu/c+e3FB9+bbMoQ==" class="paragraph">
+          <code>Partitioned</code> attribute をつけることで、3rd Party Cookie
+          についてはトップレベルサイトで Cookie
+          を分離する代わりに、ブロックされなくなる。<a
+            href="#L5pAktSu/c+e3FB9+bbMoQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="トップレベルサイトで分離されるとは？"
+            href="#トップレベルサイトで分離されるとは？"
+            id="トップレベルサイトで分離されるとは？"
+          >
+            トップレベルサイトで分離されるとは？
+          </a>
+        </h3>
+        <p id="Ru50nxWiAFxtjBAp6SxW4A==" class="paragraph">
+          Cookie をトップレベルサイトで分離すると、どういった事が起こるのか？<a
+            href="#Ru50nxWiAFxtjBAp6SxW4A=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="qQ1YWG/eMwjTejJgJjDVgg==" class="paragraph">
+          現状、Cookie は hostname かドメイン名を key として Cookie
+          ストレージを分離していた。CHIPS では、 トップレベル URL のsite (schema
+          とドメイン) と Cookie 送付先の site の両方を使った double key
+          を利用する。<a
+            href="#qQ1YWG/eMwjTejJgJjDVgg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="VfxB6DjetprjOqDjejI8CQ==" class="paragraph">
+          下記のようなレスポンスでは <code>Partitioned</code> attribute
+          がないため、 3rd Party Cookie はブロックされる。<a
+            href="#VfxB6DjetprjOqDjejI8CQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <img width="600" src="./img/chips_1.png" />
+
+        <p id="E3c2BIj5+FujC63CmonUuQ==" class="paragraph">
+          しかし、下記のような <code>Partitioned</code> attribute がある場合では
+          3rd Party Cookie はブロックされず、top level のサイトで Cookie
+          が分離されて保存されることになる(<code>example.com</code> の
+          <code>map.example.text</code> には <code>foo=bar</code>、<code
+            >example.net</code
+          >
+          の <code>map.example.test</code> には
+          <code>foo=baz</code> がそれぞれ別途 Cookie として保存される)。<a
+            href="#E3c2BIj5+FujC63CmonUuQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <img width="600" src="./img/chips_2.png" />
+
+        <p id="0h1eSStqzxL+j0yVxDUbPw==" class="paragraph">
+          分離されていると、下記のように別のトップレベルサイトからのリクエストに先述したレスポンスで付与された
+          Cookie は送付されず、該当するトップレベルサイトの Cookie
+          が送付される。(<code>example.com</code> のフレームにある
+          <code>map.example.test</code> には <code>foo=bar;</code>、<code
+            >example.net</code
+          >
+          のフレームにある <code>map.example.test</code> には
+          <code>foo=baz</code>)<a
+            href="#0h1eSStqzxL+j0yVxDUbPw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <img width="600" src="./img/chips_3.png" />
+
+        <h3>
+          <a
+            name="どのように Cookie が分離されていることを把握するか"
+            href="#どのように Cookie が分離されていることを把握するか"
+            id="どのように Cookie が分離されていることを把握するか"
+          >
+            どのように Cookie が分離されていることを把握するか
+          </a>
+        </h3>
+        <p id="4N11eN5HDy8vPQqQkhVwaw==" class="paragraph">
+          保存された Cookie
+          がトップレベルサイトで分離して保存されているかどうかを確認するためには、リクエストヘッダを確認すればよい。<a
+            href="#4N11eN5HDy8vPQqQkhVwaw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="STb6zIzGR/PE51P4RKXWfA==" class="paragraph">
+          分離して保持されている Cookie については下記のようにリクエストヘッダに
+          <code>Sec-CH-Partitioned-Cookies: ?0</code> が付与される。<a
+            href="#STb6zIzGR/PE51P4RKXWfA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code>Sec-CH-Partitioned-Cookies: ?0
+Cookie: __Host-name=value
+</code></pre>
+        <h2>
+          <a name="簡単なデモ" href="#簡単なデモ" id="簡単なデモ">
+            簡単なデモ
+          </a>
+        </h2>
+        <p id="UQSdbCpfbUPKi3urD0XROQ==" class="paragraph">
+          <a
+            target="_blank"
+            href="https://github.com/privacycg/CHIPS#third-party-store-finder-service"
+            rel="noopener"
+            >Third-party store-finder service</a
+          >
+          を参考にして CHIPS に関わるデモを用意した。動作については Chrome
+          のバージョン <code>108.0.5359.124</code> で
+          <code>chrome://flags/#partitioned-cookies</code> と
+          <code>chrome://flags/#partitioned-cookies-bypass-origin-trial</code>
+          を有効にした状態の
+          <strong>シークレットウィンドウ</strong> で確認している。<a
+            href="#UQSdbCpfbUPKi3urD0XROQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="pn+nMlakR8xgGVutAVUdkw==" class="paragraph">
+          内容としては、ショップ系サイトに組み込むことができる map
+          ツールを模したデモだ。<a
+            href="#pn+nMlakR8xgGVutAVUdkw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              href="https://x.bokken.io/example-chips/index.html"
+              rel="noopener"
+              >CHIPS example (x.bokken.io)</a
+            >: Partitioned 属性を付与しており、ブロックされない。
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://negibokken.github.io/exp/example-of-chips/"
+              rel="noopener"
+              >CHIPS example (negibokken.github.io)</a
+            >: Partitioned
+            属性を付与しており、ブロックされない。かつ、上記のサイトとは Cookie
+            が共有されない
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://exp.bokken.dev/example-of-chips/"
+              rel="noopener"
+              >CHIPS example (exp.bokken.dev)</a
+            >: Partitioned 属性を付与しないため、Cookie
+            がブロックされる(初期位置から動かない)
+          </li>
+        </ul>
+        <p id="0TbqUwsfkP3KnuqwSy/ffw==" class="paragraph">
+          もしも挙動がおかしい場合は今一度フラグが設定されているか、シークレットウィンドウを使っているかを確認し、Cookie
+          を削除してから試していただきたい。<a
+            href="#0TbqUwsfkP3KnuqwSy/ffw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a name="デモ動画" href="#デモ動画" id="デモ動画"> デモ動画 </a>
+        </h3>
+        <p id="DHeGWKfWQLKqu1TSu7agCA==" class="paragraph">
+          上記のデモを筆者の環境で動かしたデモ動画を下記に掲載する。<a
+            href="#DHeGWKfWQLKqu1TSu7agCA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <img width="600" src="./img/chips_example_2x.gif" />
+
+        <p id="jDjtxR+B0F1Ne3qAxsXcuw==" class="paragraph">
+          この動画ではまず <code>x.bokken.io</code> にあるサイトから Simple Map
+          App の位置情報をカーソルで更新する(赤い色が真ん中に)。 次に Simple Map
+          App を利用している別のサイトである
+          <code>negibokken.github.io</code> にて、同様に Simple Mapp App
+          を確認すると、初期位置である左上に赤い印がある。ここで
+          <code>negibokken.github.io</code>
+          で位置情報を更新する(右下まで)が、もともとの
+          <code>x.bokken.io</code> では位置情報は更新されていない。 また、最後の
+          <code>exp.bokken.dev</code> では同様に Simple Map App
+          を読み込んでいるが、 Cookie に <code>Partitioned</code> 属性がないため
+          Cookie がブロックされて位置情報が初期位置から変わらない。<a
+            href="#jDjtxR+B0F1Ne3qAxsXcuw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="j277SGEuSQFVOIdQhoZqbg==" class="paragraph">
+          このようにトップサイトごとに Cookie
+          が分離されることで異なるサイト間では情報を共有しないようになる。<a
+            href="#j277SGEuSQFVOIdQhoZqbg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="pbTp0QumGYhGqILLkEgzIA==" class="paragraph">
+          同じサイトを再訪問した際には情報が保持されているため、ユーザ体験を維持できる。<a
+            href="#pbTp0QumGYhGqILLkEgzIA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="その他のシナリオ"
+            href="#その他のシナリオ"
+            id="その他のシナリオ"
+          >
+            その他のシナリオ
+          </a>
+        </h3>
+        <p id="uxhHhVMRf+VFktBVTHPD7A==" class="paragraph">
+          今回は
+          <a
+            target="_blank"
+            href="https://github.com/privacycg/CHIPS#third-party-store-finder-service"
+            rel="noopener"
+            >Third-party store-finder service</a
+          >
+          に沿って紹介したが、その他、サポート用の組み込みチャット、ロードバランサによる
+          Cookie
+          の利用などのシナリオが掲載されいてる。その他のシナリオについては
+          <a
+            target="_blank"
+            href="https://github.com/privacycg/CHIPS#key-scenarios"
+            rel="noopener"
+            >Key Scenario</a
+          >
+          を参照されたい。<a
+            href="#uxhHhVMRf+VFktBVTHPD7A=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="各ブラウザベンダのこれまでの動き"
+            href="#各ブラウザベンダのこれまでの動き"
+            id="各ブラウザベンダのこれまでの動き"
+          >
+            各ブラウザベンダのこれまでの動き
+          </a>
+        </h2>
+        <p id="Eu223NLC7SL0ZgrG/rRzAA==" class="paragraph">
+          これまで Firefox や Safari は独自の仕組みで Cookie を分離し、ユーザの
+          Privacy を保護してきた。<a
+            href="#Eu223NLC7SL0ZgrG/rRzAA=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="dOAv24uqzU54RAQ4w70mpw==" class="paragraph">
+          Firefox では
+          <a
+            target="_blank"
+            href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop"
+            rel="noopener"
+            >ETP Strict mode</a
+          >
+          という機能によってデフォルトで Cookie をトップサイトごとに分離したり、
+          Safari では<a
+            target="_blank"
+            href="https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/"
+            rel="noopener"
+            >ヒューリスティックな手法による分離</a
+          >手法を試し、最終的にはデフォルトで 3rd Party Cookie
+          をブロックするようになった。<a
+            href="#dOAv24uqzU54RAQ4w70mpw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="rd5xLWa85LvF7yuukm0+fg==" class="paragraph">
+          一方、デフォルトで分離をしたり、ブロックするということは、これまで動いていたサイトを壊してしまう可能性がある。CHIPS
+          関連でいうと、例えば、<a
+            target="_blank"
+            href="https://github.com/privacycg/CHIPS#key-scenarios"
+            rel="noopener"
+            >Key Scenario</a
+          >
+          に記載されているようなケースだ。
+          <a
+            target="_blank"
+            href="https://developer.chrome.com/blog/smooshgate"
+            rel="noopener"
+            >SmooshGate の事例</a
+          >に見るように、 Web
+          は後方互換性を大事にしているため、後方互換性を壊すような変更は受け入れがたいことがある。<a
+            href="#rd5xLWa85LvF7yuukm0+fg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="CMgOxuqXANoeHuvIbx/vkQ==" class="paragraph">
+          ユーザの Privacy を守ることも大事だが、Web
+          の互換性やエコシステムを破壊しないためにもゆるやかで地道な活動が必要である。Chromium
+          Blog には下記のように、「3rd Party Cookie
+          の制限を緩和する方法を提供してから 3rd Party Cookie
+          を廃止する。しかしこれは我々だけではできない。エコシステムによる協力が不可欠である」、「現在の広告つきの
+          Web サイトのモデルを損なうことは、fingerprinting
+          などのような不透明な技術への誘導になりかねず、それはユーザの Privacy
+          を損なうことになる。だからコミュニティとしてうまくやる必要があるし、うまくやれる」と。<a
+            href="#CMgOxuqXANoeHuvIbx/vkQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <blockquote>
+          <p id="3sIucKF48E8rslgk6ooESQ==" class="paragraph">
+            Once these approaches have addressed the needs of users, publishers,
+            and advertisers, and we have developed the tools to mitigate
+            workarounds, we plan to phase out support for third-party cookies in
+            Chrome. Our intention is to do this within two years. But we cannot
+            get there alone, and that’s why we need the ecosystem to engage on
+            these proposals.<a
+              href="#3sIucKF48E8rslgk6ooESQ=="
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="4RaWRk3tx8uvdmm/9WqA2A==" class="paragraph">
+            ---
+            <a
+              target="_blank"
+              href="https://blog.chromium.org/2020/01/building-more-private-web-path-towards.html#:~:text=Once%20these%20approaches,on%20these%20proposals."
+              rel="noopener"
+              >Building a more private web: A path towards making third party
+              cookies obsolete</a
+            ><a href="#4RaWRk3tx8uvdmm/9WqA2A==" class="paragraph-anchor">¶</a>
+          </p>
+          <p id="oXxEwx1/PJ9E0vJVjKR5Bw==" class="paragraph">
+            By undermining the business model of many ad-supported websites,
+            blunt approaches to cookies encourage the use of opaque techniques
+            such as fingerprinting (an invasive workaround to replace cookies),
+            which can actually reduce user privacy and control. We believe that
+            we as a community can, and must, do better.<a
+              href="#oXxEwx1/PJ9E0vJVjKR5Bw=="
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="GXuVq7ShsAgDAyyzwgiM+Q==" class="paragraph">
+            ---
+            <a
+              target="_blank"
+              href="https://blog.chromium.org/2020/01/building-more-private-web-path-towards.html#:~:text=By%20undermining%20the,must%2C%20do%20better."
+              rel="noopener"
+              >Building a more private web: A path towards making third party
+              cookies obsolete</a
+            ><a href="#GXuVq7ShsAgDAyyzwgiM+Q==" class="paragraph-anchor">¶</a>
+          </p>
+        </blockquote>
+        <p id="YPiw+KLLaaqmgiGqWGWjDQ==" class="paragraph">
+          これは、3rd Party Cookie の廃止によって壊れる Web
+          サイトを生まないためには埋め込み側や埋め込まれる側の対応が必須であり、協力が必要であることを訴えているものである。そして、Web
+          という世界を壊さないことや、コミュニティを重視する姿勢が見て取れる。<a
+            href="#YPiw+KLLaaqmgiGqWGWjDQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="hwuUHhlwYWZXwIG8b58F8Q==" class="paragraph">
+          2020年1月14日に記載されたこの記事の中には、Chrome チームはこれを 2
+          年以内に実現したいという記載がある。しかし、2022年12月30日現在ではまだ
+          3rd Party Cookie の廃止は実現に至っていない。COVIT-19
+          による影響があったことも関係してるが、この計画を慎重に進めていることが伺える。<a
+            href="#hwuUHhlwYWZXwIG8b58F8Q=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
+        </h2>
+        <p id="3LOnC8YNYY2q8wuDlzvQBQ==" class="paragraph">
+          今回、現在仕様が策定されている CHIPS という仕様や 3rd Party Cookie
+          の流れについてまとめた。 3rd Party Cookie
+          は一概に悪とは言えず、ユースケースを考えればユーザにとって非常に有益な技術である。
+          CHIPS 関連ドキュメントを読んでそのことが理解できた。また、Web
+          を発展させていくためにはエコシステム全体の協力や、忍耐が必要なことを知れた。
+          対応されている方々には頭が下がる思いである。<a
+            href="#3LOnC8YNYY2q8wuDlzvQBQ=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="hSMZWLU6Q4CVuCKbhnurjw==" class="paragraph">
+          CHIPS については、<a
+            target="_blank"
+            href="https://groups.google.com/a/chromium.org/g/blink-dev/c/JNOQvsTxecI/m/WfsTjR89AwA"
+            rel="noopener"
+            >Intent to Ship</a
+          >
+          が出されているため、近いうちに機能がリリースされるものと思われる。また次の発表を待ちたい。<a
+            href="#hSMZWLU6Q4CVuCKbhnurjw=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="AOrZWkmNEHpjxfs6nx+Hzg==" class="paragraph">
+          もしも、この記事についてコメントや誤りがあれば、
+          <a target="_blank" href="https://twitter.com/bokken_" rel="noopener"
+            >@bokken_</a
+          >
+          か、<a
+            target="_blank"
+            href="https://github.com/negibokken/bokken.io/issues"
+            rel="noopener"
+            >issue</a
+          >
+          までいただけると嬉しい。<a
+            href="#AOrZWkmNEHpjxfs6nx+Hzg=="
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="参考・関連リンク"
+            href="#参考・関連リンク"
+            id="参考・関連リンク"
+          >
+            参考・関連リンク
+          </a>
+        </h2>
+        <ol>
+          <li>
+            <a
+              target="_blank"
+              href="https://github.com/privacycg/CHIPS"
+              rel="noopener"
+              >privacycg/CHIPS: A proposal for a cookie attribute to partition
+              cross-site cookies by top-level site</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://developer.chrome.com/en/docs/privacy-sandbox/chips/"
+              rel="noopener"
+              >Cookies Having Independent Partitioned State (CHIPS) - Chrome
+              Developers</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://developer.chrome.com/en/blog/chips-origin-trial/"
+              rel="noopener"
+              >Cookies Having Independent Partitioned State (CHIPS) origin trial
+              - Chrome Developers</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop"
+              rel="noopener"
+              >Enhanced Tracking Protection in Firefox for desktop | Firefox
+              Help</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-android"
+              rel="noopener"
+              >Enhanced Tracking Protection in Firefox for Android | Firefox for
+              Android Help</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://developer.chrome.com/blog/smooshgate/"
+              rel="noopener"
+              >SmooshGate FAQ - Chrome Developers</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://blog.jxck.io/entries/2020-02-25/end-of-idyllic-cookie.html"
+              rel="noopener"
+              >牧歌的 Cookie の終焉 | blog.jxck.io</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://github.com/WICG/first-party-sets"
+              rel="noopener"
+              >WICG/first-party-sets</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://groups.google.com/a/chromium.org/g/blink-dev/c/hvMJ33kqHRo/m/3diUOI0uAQAJ"
+              rel="noopener"
+              >Intent to Prototype: Cookies Having Independent Partitioned State
+              (CHIPS)</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://groups.google.com/a/chromium.org/g/blink-dev/c/_dJFNJpf91U/m/OXzFi_6wAwAJ?utm_medium=email&utm_source=footer"
+              rel="noopener"
+              >Intent to Experiment: Cookies Having Independent Partitioned
+              State (CHIPS)</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://groups.google.com/a/chromium.org/g/blink-dev/c/JNOQvsTxecI/m/WfsTjR89AwA"
+              rel="noopener"
+              >Intent to Ship: Cookies Having Independent Partitioned State
+              (CHIPS)</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://blog.chromium.org/2020/01/building-more-private-web-path-towards.html"
+              rel="noopener"
+              >Chromium Blog: Building a more private web: A path towards making
+              third party cookies obsolete</a
+            >
+          </li>
+        </ol>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+
+      <div>
+        Subscribe via <a href="https://blog.bokken.io/feeds/atom.xml">RSS</a>
+      </div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a
+            href="https://blog.bokken.io/articles/2022-11-24/about-prerender2.html"
+          >
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
+
