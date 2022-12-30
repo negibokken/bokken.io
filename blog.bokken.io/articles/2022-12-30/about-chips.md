@@ -8,7 +8,7 @@
 
 3rd Party Cookie をブロックする制限を緩和するための仕様である CHIPS が策定されている。
 
-近年、ユーザの Privacy の向上を目的として 3rd Party Cookie をブロックする流れがある。cross site でユーザトラッキングを提供する多くのツールは 3rd Party Cookie を使っているため、3rd Party Cookie をブロックすることで解決しようとするものだ。すでにいくつかのブラウザではこういった動きが見られる([Firefox](https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop))。
+近年、ユーザの Privacy の向上を目的として 3rd Party Cookie をブロックする流れがある。cross site でユーザトラッキングを提供する多くのツールは 3rd Party Cookie を使っているため、3rd Party Cookie をブロックすることで解決しようとするものだ。すでにいくつかのブラウザではこういった動きが見られる([Firefox](https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop), [Safari](https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/))。
 
 しかし、一部のサイトでは 3rd Party Cookie が有効に使われているケースもある。こういったケースで、Privacy の問題を解決しつつ、3rd Party Cookie を利用できるようにするための仕様が [CHIPS (Cookies Having Independent Partitioned State)](https://github.com/privacycg/CHIPS) だ。 本記事ではこの CHIPS について、なぜ必要なのか、どうやって有効にするのかなどを 2022/12/30 時点の情報でまとめる。
 

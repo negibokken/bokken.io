@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="筆者は VS Code で GitHub の permalink をコピーできる拡張機能をよく使っている。この拡張機能は一部のエンコードが必要な URL についてはサポートされていない。例えば、下記のような pathname を持つファイルは正しい URL をコピーできない。今回はこの URL がどのように生成されているのか調べてみることにした。早く知りたい人向けに結論を書く。GitHub の p"
+      content="筆者は VS Code で GitHub の permalink をコピーできる拡張機能をよく使っている。この拡張機能は一部のエンコードが必要な URL についてはサポートされていない。例えば、下記のような pathname を持つファイルは正しい URL をコピーできない。今回はこの URL がどのように生成されているのか調べてみることにした。早く知りたい人向けに結論を書く。GitHub の permalink は 次のような形式になっているhttps://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?qu"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -34,7 +34,7 @@
     />
     <meta
       property="og:description"
-      content="筆者は VS Code で GitHub の permalink をコピーできる拡張機能をよく使っている。この拡張機能は一部のエンコードが必要な URL についてはサポートされていない。例えば、下記のような pathname を持つファイルは正しい URL をコピーできない。今回はこの URL がどのように生成されているのか調べてみることにした。早く知りたい人向けに結論を書く。GitHub の p"
+      content="筆者は VS Code で GitHub の permalink をコピーできる拡張機能をよく使っている。この拡張機能は一部のエンコードが必要な URL についてはサポートされていない。例えば、下記のような pathname を持つファイルは正しい URL をコピーできない。今回はこの URL がどのように生成されているのか調べてみることにした。早く知りたい人向けに結論を書く。GitHub の permalink は 次のような形式になっているhttps://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?qu"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -119,40 +119,36 @@
         <h2>
           <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
         </h2>
-        <p id="XGHvJXcOWMFAGR8dheveGw==" class="paragraph">
+        <p id="paragraph-1" class="paragraph">
           筆者は VS Code で
           <a
             target="_blank"
-            href="https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url"
             rel="noopener"
+            href="https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url"
             >GitHub の permalink をコピーできる拡張機能</a
-          >をよく使っている。<a
-            href="#XGHvJXcOWMFAGR8dheveGw=="
-            class="paragraph-anchor"
+          >をよく使っている。<a href="#paragraph-1" class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="2AIx4PquI5G/EnreoD9GuA==" class="paragraph">
+        <p id="paragraph-2" class="paragraph">
           この拡張機能は一部のエンコードが必要な URL
           についてはサポートされていない。<a
-            href="#2AIx4PquI5G/EnreoD9GuA=="
+            href="#paragraph-2"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="yJIw+DZObjmnicboVhxe9g==" class="paragraph">
+        <p id="paragraph-3" class="paragraph">
           例えば、下記のような pathname を持つファイルは正しい URL
-          をコピーできない。<a
-            href="#yJIw+DZObjmnicboVhxe9g=="
-            class="paragraph-anchor"
+          をコピーできない。<a href="#paragraph-3" class="paragraph-anchor"
             >¶</a
           >
         </p>
         <pre><code class="language-text">/@foo/[bar]/a !"#$%&amp;'()*+,-.:;&lt;=&gt;?@[\]^`{|}~.txt
 </code></pre>
-        <p id="MVZAgFkZ+fmHqWCVZkmPDQ==" class="paragraph">
+        <p id="paragraph-4" class="paragraph">
           今回はこの URL がどのように生成されているのか調べてみることにした。<a
-            href="#MVZAgFkZ+fmHqWCVZkmPDQ=="
+            href="#paragraph-4"
             class="paragraph-anchor"
             >¶</a
           >
@@ -160,18 +156,18 @@
         <h2>
           <a name="TL;DR" href="#TL;DR" id="TL;DR"> TL;DR </a>
         </h2>
-        <p id="SBDUgVDADJcj+kExGYevwg==" class="paragraph">
+        <p id="paragraph-5" class="paragraph">
           早く知りたい人向けに結論を書く。<a
-            href="#SBDUgVDADJcj+kExGYevwg=="
+            href="#paragraph-5"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <ul>
           <li>
-            <p id="aaYvvnWM9Xv6quKlKMf67A==" class="paragraph">
+            <p id="paragraph-6" class="paragraph">
               GitHub の permalink は 次のような形式になっている<a
-                href="#aaYvvnWM9Xv6quKlKMf67A=="
+                href="#paragraph-6"
                 class="paragraph-anchor"
                 >¶</a
               >
@@ -185,17 +181,17 @@
             </ul>
           </li>
           <li>
-            <p id="0WMqwYyxpRWqDLfPOYZoEQ==" class="paragraph">
+            <p id="paragraph-7" class="paragraph">
               上記 URL のうちクエリパラメータ以前の URL について
               <a
                 target="_blank"
-                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI"
                 rel="noopener"
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI"
                 ><code>encodeURI</code></a
               >
               を実行し、<code>#</code> を <code>%23</code> に、<code>?</code> を
               <code>%3F</code> に置換する<a
-                href="#0WMqwYyxpRWqDLfPOYZoEQ=="
+                href="#paragraph-7"
                 class="paragraph-anchor"
                 >¶</a
               >
@@ -204,19 +200,15 @@
 </code></pre>
           </li>
           <li>
-            <p id="ILfr6n0BX2aZctX6kSZOWA==" class="paragraph">
+            <p id="paragraph-8" class="paragraph">
               最後にクエリパラメータとフラグメントとエンコード後の URL
-              と結合する<a
-                href="#ILfr6n0BX2aZctX6kSZOWA=="
-                class="paragraph-anchor"
-                >¶</a
-              >
+              と結合する<a href="#paragraph-8" class="paragraph-anchor">¶</a>
             </p>
           </li>
         </ul>
-        <p id="2hTiKBk92gNKASRoLkc5Eg==" class="paragraph">
+        <p id="paragraph-9" class="paragraph">
           この調査結果に至るまでの過程について次の節で述べる。<a
-            href="#2hTiKBk92gNKASRoLkc5Eg=="
+            href="#paragraph-9"
             class="paragraph-anchor"
             >¶</a
           >
@@ -224,53 +216,53 @@
         <h2>
           <a name="調査" href="#調査" id="調査"> 調査 </a>
         </h2>
-        <p id="MFUGgI4SxpbdX9BEQh0g5A==" class="paragraph">
+        <p id="paragraph-10" class="paragraph">
           まず、GitHub の permalink の基本的な形式は下記のようになっている。<a
-            href="#MFUGgI4SxpbdX9BEQh0g5A=="
+            href="#paragraph-10"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <pre><code class="language-text">https://github.com/${owner}/${repository}/${commit_hash}/blob/${path_name}?query=test#L11
 </code></pre>
-        <p id="vOoB0DyCDGzsLkCR1ucHLw==" class="paragraph">
+        <p id="paragraph-11" class="paragraph">
           調査をする過程で<a
             target="_blank"
-            href="https://github.com/negibokken/github-url-test"
             rel="noopener"
+            href="https://github.com/negibokken/github-url-test"
             >github-url-test</a
           >
           というリポジトリを作って確認をしていた。そして、GitHub の URL
           は少し奇妙な規則でURL エンコードされていることに気づいた。よくある
           encodeURI や encodeURIComponent を単独で利用した場合にエンコードされる
           URL とは異なる URL になる。<a
-            href="#vOoB0DyCDGzsLkCR1ucHLw=="
+            href="#paragraph-11"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="88SOAp+7tZEDFigaDsi4ug==" class="paragraph">
+        <p id="paragraph-12" class="paragraph">
           例えば、 ファイル名にある <code>#</code> は
           パーセントエンコードされるが、<code>!</code> や
           <code>&amp;</code> 、<code>&#39;</code>
           といった記号はパーセントエンコードされないといった具合だ。<a
-            href="#88SOAp+7tZEDFigaDsi4ug=="
+            href="#paragraph-12"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="Tf9EPH9Qxhplc9EnYwDTHw==" class="paragraph">
+        <p id="paragraph-13" class="paragraph">
           前述したファイルのパスは下記のようにエンコードされる。<a
-            href="#Tf9EPH9Qxhplc9EnYwDTHw=="
+            href="#paragraph-13"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <pre><code class="language-text">/@foo/%5Bbar%5D/a%20!%22%23$%25&amp;'()*+,-.:;%3C=%3E%3F@%5B%5C%5D%5E%60%7B%7C%7D~.txt
 </code></pre>
-        <p id="0aFyumHRAacFZXMR5K+CWQ==" class="paragraph">
+        <p id="paragraph-14" class="paragraph">
           各記号とそれがどのようにエンコードされるのかをまとめたのが下記の表だ。<a
-            href="#0aFyumHRAacFZXMR5K+CWQ=="
+            href="#paragraph-14"
             class="paragraph-anchor"
             >¶</a
           >
@@ -479,31 +471,31 @@
             </tr>
           </tbody>
         </table>
-        <p id="9K4MeyI3jQMXTvQYu6C/NQ==" class="paragraph">
+        <p id="paragraph-15" class="paragraph">
           但し、URL 末尾に行番号を表すときに付与されるフラグメントの
           <code>#</code> や、クエリパラメータを表す
           <code>?</code> はエンコードされない。 合わせて
           <code>/</code> がファイル名としては使えなかったので、
           <code>/</code> のままとしている。<a
-            href="#9K4MeyI3jQMXTvQYu6C/NQ=="
+            href="#paragraph-15"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="iI3BL15+QuDDog4H+wbTow==" class="paragraph">
+        <p id="paragraph-16" class="paragraph">
           上記の表を見てみると、おおむね encodeURI
           でエンコードされる内容と同じである。
           異なっているのは、<code>#</code>、<code>?</code> のみである。<a
-            href="#iI3BL15+QuDDog4H+wbTow=="
+            href="#paragraph-16"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="4TyGDlx2SLR3NTATaU6UtQ==" class="paragraph">
+        <p id="paragraph-17" class="paragraph">
           これは、<code>#</code> や
           <code>?</code>
           がフラグメントやクエリパラメータとして特別な意味を持っているため、ファイル名で使えないためだと考えられる。<a
-            href="#4TyGDlx2SLR3NTATaU6UtQ=="
+            href="#paragraph-17"
             class="paragraph-anchor"
             >¶</a
           >
@@ -513,30 +505,30 @@
             エンコード処理
           </a>
         </h2>
-        <p id="3BFn9HTQr5HCgY1W63K19w==" class="paragraph">
+        <p id="paragraph-18" class="paragraph">
           これらのことから、エンコード前の GitHub の URL を permalink
           の形式にする処理としては下記のようになるだろう。<a
-            href="#3BFn9HTQr5HCgY1W63K19w=="
+            href="#paragraph-18"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
         <pre><code class="language-javascript"><span class="hljs-keyword">const</span> encoded = <span class="hljs-built_in">encodeURI</span>(url).replace(<span class="hljs-string">'#'</span>, <span class="hljs-string">'%23'</span>).replace(<span class="hljs-string">'?'</span>, <span class="hljs-string">'%3F'</span>)
 </code></pre>
-        <p id="KUESnr9jA038pAR8OdZOWQ==" class="paragraph">
+        <p id="paragraph-19" class="paragraph">
           ただし、クエリパラメータや、URL フラグメントがある場合は分離した上で
           url として渡す必要がある。<a
-            href="#KUESnr9jA038pAR8OdZOWQ=="
+            href="#paragraph-19"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="ORMkUWuOFTLJMZWA6MB5oQ==" class="paragraph">
+        <p id="paragraph-20" class="paragraph">
           なお、GitHub 上のページ遷移で表示されるリンクと permalink
           の生成とでエンコードされる URL は違うようである。例えば
           <code>@</code> は、permalink 上ではエンコードされないが、GitHub
           上のリンクの遷移では <code>%40</code> にエンコードされる。<a
-            href="#ORMkUWuOFTLJMZWA6MB5oQ=="
+            href="#paragraph-20"
             class="paragraph-anchor"
             >¶</a
           >
@@ -544,37 +536,37 @@
         <h2>
           <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
         </h2>
-        <p id="g+aUdluKFxU4fVYl+GnFHw==" class="paragraph">
+        <p id="paragraph-21" class="paragraph">
           分かってしまうと簡単な規則でパーマリンクが実現されていることが分かった。<a
-            href="#g+aUdluKFxU4fVYl+GnFHw=="
+            href="#paragraph-21"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="nPJ4qVPHhsrx9gh93qzryA==" class="paragraph">
+        <p id="paragraph-22" class="paragraph">
           普段からお世話になっている
           <a
             target="_blank"
-            href="https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url"
             rel="noopener"
+            href="https://marketplace.visualstudio.com/items?itemName=mattlott.copy-github-url"
             >GitHub の permalink をコピーできる拡張機能</a
           >
           にも fix する PR を送ろうと思う。<a
-            href="#nPJ4qVPHhsrx9gh93qzryA=="
+            href="#paragraph-22"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="1P6kHgEOcbXMZlZqa+Mq1A==" class="paragraph">
+        <p id="paragraph-23" class="paragraph">
           もしも誤りや、他の permalink
           生成の規則とも同一であることが分かった場合は、<a
             target="_blank"
-            href="https://twitter.com/bokken_"
             rel="noopener"
+            href="https://twitter.com/bokken_"
             >@bokken_</a
           >
           までお知らせしてもらえると嬉しい。<a
-            href="#1P6kHgEOcbXMZlZqa+Mq1A=="
+            href="#paragraph-23"
             class="paragraph-anchor"
             >¶</a
           >
