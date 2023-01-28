@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2023-01-28T00:03:09.126Z</updated>
+  <updated>2023-01-29T00:58:07.612Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -297,6 +297,20 @@
     <summary
       type="html"
     >リクエストのコンテキストをサーバ側に伝えることで、サーバ側でリクエストが危険なものかを判別するための Fetch Metadata Request Headers という仕様がある。今回、このヘッダがどういったものなのかについて Fetch Metadata Request Headers を読んだり、周辺のドキュメントを読んでまとめる。Sec-Fetch- はクライアント側では特に何も設定する必要はなく、サポートされていればブラウザによってリクエストに自動でヘッダに付与されサーバに送付されるサーバは送られてきた Fetch Metadata をもとに CSRF などの、攻撃の可能性があるリクエ</summary>
+  </entry>
+  
+  <entry>
+    <title
+    >不正なリクエストを弾くために使える Fetch Metadata という仕様について</title>
+    <link
+      href="https://blog.bokken.io/articles/2023-01-29/about-fetch-metadata.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2023-01-29/about-fetch-metadata.html</id>
+    <updated>2023-01-29T00:58:07.612Z</updated>
+    <summary
+      type="html"
+    >リクエストのコンテキストをサーバ側に伝えることで、サーバ側でリクエストが危険なものかを判別するための Fetch Metadata Request Headers という仕様がある。今回、このヘッダがどういったものなのかについて Fetch Metadata Request Headers を読んだり、周辺のドキュメントを読んでまとめる。Fetch Metadata ヘッダはクライアント側では特に何も設定する必要はなく、サポートされていればブラウザによってリクエストに自動的にヘッダに付与されサーバに送付されるサーバは送られてきた Fetch Metadata をもとに CSRF などの、攻撃の可</summary>
   </entry>
   
 </feed>

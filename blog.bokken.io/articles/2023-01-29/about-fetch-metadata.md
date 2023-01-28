@@ -2,7 +2,7 @@
 
 @tags: [Web, App, Sec]
 
-@date: [2023-01-28, 2023-01-28]
+@date: [2023-01-29, 2023-01-29]
 
 ## はじめに
 
@@ -12,7 +12,7 @@
 
 * Fetch Metadata ヘッダはクライアント側では特に何も設定する必要はなく、サポートされていればブラウザによってリクエストに自動的にヘッダに付与されサーバに送付される
 * サーバは送られてきた Fetch Metadata をもとに CSRF などの、攻撃の可能性があるリクエストを弾く事ができる
-* 2023/01/28 現在で、 Chromium 系のブラウザと Firefox でサポートされている。 Safari ではもうじきサポートされそう
+* 2023/01/29 現在で、 Chromium 系のブラウザと Firefox でサポートされている。 Safari ではもうじきサポートされそう
 * `Sec-` prefixed なのは、[forbidden header name](https://fetch.spec.whatwg.org/#forbidden-request-header) として、JavaScript から変更できないヘッダにするため
 
 ## Fetch Metadata とは
