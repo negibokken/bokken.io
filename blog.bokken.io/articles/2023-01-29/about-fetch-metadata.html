@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>
+      不正なリクエストを弾くために使える Fetch Metadata という仕様について |
+      blog.bokken.io
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="リクエストのコンテキストをサーバ側に伝えることで、サーバ側でリクエストが危険なものかを判別するための Fetch Metadata Request Headers という仕様がある。今回、このヘッダがどういったものなのかについて Fetch Metadata Request Headers を読んだり、周辺のドキュメントを読んでまとめる。Fetch Metadata ヘッダはクライアント側では特に何も設定する必要はなく、サポートされていればブラウザによってリクエストに自動的にヘッダに付与されサーバに送付されるサーバは送られてきた Fetch Metadata をもとに CSRF などの、攻撃の可"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="author" href="humans.txt" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2023-01-29/about-fetch-metadata.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="不正なリクエストを弾くために使える Fetch Metadata という仕様について"
+    />
+    <meta
+      property="og:description"
+      content="リクエストのコンテキストをサーバ側に伝えることで、サーバ側でリクエストが危険なものかを判別するための Fetch Metadata Request Headers という仕様がある。今回、このヘッダがどういったものなのかについて Fetch Metadata Request Headers を読んだり、周辺のドキュメントを読んでまとめる。Fetch Metadata ヘッダはクライアント側では特に何も設定する必要はなく、サポートされていればブラウザによってリクエストに自動的にヘッダに付与されサーバに送付されるサーバは送られてきた Fetch Metadata をもとに CSRF などの、攻撃の可"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+    <script defer src="/assets/js/img-viewer.js"></script>
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io">bokken.io</a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2023-01-29/about-fetch-metadata.html"
+          >不正なリクエストを弾くために使える Fetch Metadata
+          という仕様について</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2023-01-29</dd>
+          <dt>更新日</dt>
+          <dd>2023-01-29</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            Web, App, Sec
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="不正なリクエストを弾くために使える-fetch-metadata-という仕様について"
+            href="#不正なリクエストを弾くために使える-fetch-metadata-という仕様について"
+            id="不正なリクエストを弾くために使える-fetch-metadata-という仕様について"
+          >
+            不正なリクエストを弾くために使える Fetch Metadata という仕様について
+          </a>
+        </h1>
+        <h2>
+          <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
+        </h2>
+        <p id="paragraph-1" class="paragraph">
+          リクエストのコンテキストをサーバ側に伝えることで、サーバ側でリクエストが危険なものかを判別するための
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://www.w3.org/TR/fetch-metadata/"
+            >Fetch Metadata Request Headers</a
+          >
+          という仕様がある。今回、このヘッダがどういったものなのかについて
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://www.w3.org/TR/fetch-metadata/"
+            >Fetch Metadata Request Headers</a
+          >
+          を読んだり、周辺のドキュメントを読んでまとめる。<a
+            href="#paragraph-1"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="tldr" href="#tldr" id="tldr"> TL;DR </a>
+        </h2>
+        <ul>
+          <li>
+            Fetch Metadata
+            ヘッダはクライアント側では特に何も設定する必要はなく、サポートされていればブラウザによってリクエストに自動的にヘッダに付与されサーバに送付される
+          </li>
+          <li>
+            サーバは送られてきた Fetch Metadata をもとに CSRF
+            などの、攻撃の可能性があるリクエストを弾く事ができる
+          </li>
+          <li>
+            2023/01/29 現在で、 Chromium 系のブラウザと Firefox
+            でサポートされている。 Safari ではもうじきサポートされそう
+          </li>
+          <li>
+            <code>Sec-</code> prefixed なのは、<a
+              target="_blank"
+              rel="noopener"
+              href="https://fetch.spec.whatwg.org/#forbidden-request-header"
+              >forbidden header name</a
+            >
+            として、JavaScript から変更できないヘッダにするため
+          </li>
+        </ul>
+        <h2>
+          <a
+            name="fetch-metadata-とは"
+            href="#fetch-metadata-とは"
+            id="fetch-metadata-とは"
+          >
+            Fetch Metadata とは
+          </a>
+        </h2>
+        <p id="paragraph-2" class="paragraph">
+          Fetch Metadata
+          とは、怪しいリクエストを弾くポリシーを構築するために利用できるヘッダであるといえる。<a
+            href="#paragraph-2"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-3" class="paragraph">
+          例えば、<a
+            target="_blank"
+            rel="noopener"
+            href="https://portswigger.net/web-security/csrf"
+            >CSRF</a
+          >
+          や
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://portswigger.net/research/json-hijacking-for-the-modern-web"
+            >XSSI</a
+          >、<a
+            target="_blank"
+            rel="noopener"
+            href="https://xsleaks.dev/docs/attacks/xs-search/"
+            >cross-site search</a
+          >
+          やその他の
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://owasp.org/www-pdf-archive/2018-02-05-AhmadAshraff.pdf"
+            >timing attack</a
+          >
+          などの攻撃を受けたときに、サーバ側はリクエストのコンテキストがわからないため、不正なリクエストかを判別できず、リクエストに対するレスポンスを生成せざるを得ない。<a
+            href="#paragraph-3"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-4" class="paragraph">
+          特に timing attack
+          のように、実行時間の長さを情報として利用されて攻撃を受けてしまう場合は、レスポンスを生成するための処理を実行すること自体が攻撃者の情報源になり得る。<a
+            href="#paragraph-4"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-5" class="paragraph">
+          いずれの攻撃にしても、ある程度リクエストのコンテキストが分かれば防ぐことができる。<a
+            href="#paragraph-5"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-6" class="paragraph">
+          ここで、コンテキストというのはリクエストの状況のことを指している。例えば、cross-site
+          からのリクエストでユーザ情報の削除などは行われない、銀行にあるすべてのお金を送金するというリクエストが、<code
+            >&lt;img&gt;</code
+          >
+          タグから発行されることはないといった具合だ。(もちろんサービスの特性によってはこれらのリクエストが問題ないこともあるかもしれない)<a
+            href="#paragraph-6"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-7" class="paragraph">
+          こういった明らかに怪しいリクエストを予め防ぐために、ブラウザが付与する
+          Fetch Metadata を利用できる。<a
+            href="#paragraph-7"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="fetch-metadata-関連のヘッダ"
+            href="#fetch-metadata-関連のヘッダ"
+            id="fetch-metadata-関連のヘッダ"
+          >
+            Fetch Metadata 関連のヘッダ
+          </a>
+        </h2>
+        <p id="paragraph-8" class="paragraph">
+          では、どういったヘッダが送られてくるのか？ Fetch Metadata
+          には下記のヘッダがある。<a
+            href="#paragraph-8"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ul>
+          <li><code>Sec-Fetch-Dest</code></li>
+          <li><code>Sec-Fetch-Mode</code></li>
+          <li><code>Sec-Fetch-Site</code></li>
+          <li><code>Sec-Fetch-User</code></li>
+        </ul>
+        <p id="paragraph-9" class="paragraph">
+          それぞれどういったヘッダかについて紹介する。<a
+            href="#paragraph-9"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a name="sec-fetch-dest" href="#sec-fetch-dest" id="sec-fetch-dest">
+            <code>Sec-Fetch-Dest</code>
+          </a>
+        </h3>
+        <p id="paragraph-10" class="paragraph">
+          <code>Sec-Fetch-Dest</code>
+          リクエストがどこで発されたのかを表す文字列が入る。<a
+            href="#paragraph-10"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-11" class="paragraph">
+          有効な <code>Sec-Fetch-Dest</code> は &quot;audio&quot;,
+          &quot;audioworklet&quot;, &quot;document&quot;, &quot;embed&quot;,
+          &quot;empty&quot;, &quot;font&quot;, &quot;frame&quot;,
+          &quot;iframe&quot;, &quot;image&quot;, &quot;manifest&quot;,
+          &quot;object&quot;, &quot;paintworklet&quot;, &quot;report&quot;,
+          &quot;script&quot;, &quot;serviceworker&quot;,
+          &quot;sharedworker&quot;, &quot;style&quot;, &quot;track&quot;,
+          &quot;video&quot;, &quot;worker&quot;, &quot;xslt&quot; である。<a
+            href="#paragraph-11"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-12" class="paragraph">
+          この destination 自体は
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://fetch.spec.whatwg.org/#concept-request-destination"
+            >Fetch Standard</a
+          >
+          で定義されている。<a href="#paragraph-12" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-13" class="paragraph">
+          <code>Sec-Fetch-Dest</code> を利用することで、<code
+            >Sec-Fetch-Dest: image</code
+          >
+          の場合には img
+          タグで利用するためのリクエストである事がわかる。そのため、先程の例にあった
+          「img
+          タグからの預金残高をすべて送金する」というリクエストが不正であることが分かっていれば、このリクエストを弾くことができる。<a
+            href="#paragraph-13"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a name="sec-fetch-mode" href="#sec-fetch-mode" id="sec-fetch-mode">
+            <code>Sec-Fetch-Mode</code>
+          </a>
+        </h3>
+        <p id="paragraph-14" class="paragraph">
+          <code>Sec-Fetch-Mode</code> は request 時の mode を表している。<a
+            href="#paragraph-14"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-15" class="paragraph">
+          有効な <code>Sec-Fetch-Mode</code> は &quot;cors&quot;,
+          &quot;navigate&quot;, &quot;no-cors&quot;, &quot;same-origin&quot;,
+          &quot;websocket&quot; である。<a
+            href="#paragraph-15"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-16" class="paragraph">
+          この mode については destination と同様に
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://fetch.spec.whatwg.org/#concept-request-mode"
+            >Fetch Standard</a
+          >
+          で定義されている。<a href="#paragraph-16" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-17" class="paragraph">
+          この mode は、例えば、<code>Sec-Fetch-Mode: navigation</code>
+          のリクエストが <code>Sec-Fetch-Dest</code> が
+          <code>&lt;object&gt;</code> や
+          <code>&lt;embed&gt;</code> で発行されていたら、（もし embed や object
+          で利用されることがないのが明らかであれば)弾くために使える。<a
+            href="#paragraph-17"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a name="sec-fetch-site" href="#sec-fetch-site" id="sec-fetch-site">
+            <code>Sec-Fetch-Site</code>
+          </a>
+        </h3>
+        <p id="paragraph-18" class="paragraph">
+          <code>Sec-Fetch-Site</code>
+          はリクエスト先とリクエスト元がどういう関係のサイトかを表している。<a
+            href="#paragraph-18"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-19" class="paragraph">
+          有効な <code>Sec-Fetch-Site</code> は &quot;cross-site&quot;,
+          &quot;same-origin&quot;, &quot;same-site&quot;, &quot;none&quot;
+          である。<a href="#paragraph-19" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-20" class="paragraph">
+          none
+          はユーザ起因の操作(URLバーにURLを入力して遷移する、ブックマークからサイトにアクセスするなど)によってリクエストが発生したときに設定される。<a
+            href="#paragraph-20"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-21" class="paragraph">
+          <code>Sec-Fetch-Site</code> は、例えば cross-site なリクエストが画像や
+          favicon
+          といったサブリソースに限定されることが分かっている場合にはサブリソース以外へのリクエストの場合は弾く、といった具合に使うことができるだろう。<a
+            href="#paragraph-21"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a name="sec-fetch-user" href="#sec-fetch-user" id="sec-fetch-user">
+            <code>Sec-Fetch-User</code>
+          </a>
+        </h3>
+        <p id="paragraph-22" class="paragraph">
+          <code>Sec-Fetch-User</code> の value は boolean (<code>?0</code> か
+          <code>?1</code>) で表現されている。<a
+            href="#paragraph-22"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-23" class="paragraph">
+          navigation request のときのみ付与され、また true
+          のときのみ送付される。<a href="#paragraph-23" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-24" class="paragraph">
+          このヘッダはユーザ操作による navigation リクエストか、<code
+            >window.location</code
+          >
+          が JavaScript で変更されたときや、form の送信時の navigation
+          リクエストとを区別できる。<a
+            href="#paragraph-24"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="どのようにしてリクエストを防ぐのか"
+            href="#どのようにしてリクエストを防ぐのか"
+            id="どのようにしてリクエストを防ぐのか"
+          >
+            どのようにしてリクエストを防ぐのか
+          </a>
+        </h2>
+        <p id="paragraph-25" class="paragraph">
+          では、これらのヘッダをつかってどのようにリクエストを防ぐのか。<a
+            href="#paragraph-25"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-26" class="paragraph">
+          基本的にはヘッダの組み合わせで弾くロジックを組み込むことになる。<a
+            href="#paragraph-26"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-27" class="paragraph">
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://web.dev/fetch-metadata/#implementing-a-resource-isolation-policy"
+            >web.dev</a
+          >
+          では、サーバサイドでミドルウェアのロジックを記載する例を紹介している。
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://www.npmjs.com/package/fetch-metadata"
+            >fetch-metadata - npm</a
+          >のように、ライブラリを利用する手もあるだろう。<a
+            href="#paragraph-27"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-28" class="paragraph">
+          また、仕様にはリバースプロキシや CDN
+          レイヤーでブロックできそうだというコメントがある。そのうちクラウドベンダがそういった機能をリリースするかもしれない。<a
+            href="#paragraph-28"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-29" class="paragraph">
+          いずれにしても、自分たちが提供するエンドポイントへのリクエストがどういった条件では不正なのか？を整理する必要があるため、効果的に適用するためには、CSP
+          のように少し手間を要する。<a
+            href="#paragraph-29"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="sec-fetch-系ヘッダのサポート状況"
+            href="#sec-fetch-系ヘッダのサポート状況"
+            id="sec-fetch-系ヘッダのサポート状況"
+          >
+            <code>Sec-Fetch</code> 系ヘッダのサポート状況
+          </a>
+        </h2>
+        <p id="paragraph-30" class="paragraph">
+          <code>Sec-Fetch</code> 系ヘッダは下図のように Chromium 系のブラウザや
+          Firefox ではサポートされており、Safari はまだサポートされていない。<a
+            href="#paragraph-30"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-31" class="paragraph">
+          <a href="./img/sec-fetch-support.png" rel="noopener"
+            ><img src="./img/sec-fetch-support.png" /></a
+          ><a href="#paragraph-31" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-32" class="paragraph">
+          ただ、<a
+            target="_blank"
+            rel="noopener"
+            href="https://webkit.org/blog/13639/release-notes-for-safari-technology-preview-160/"
+            >Safari Technology Preview 160 のブログ</a
+          >を見ると、160 の<a
+            target="_blank"
+            rel="noopener"
+            href="https://github.com/WebKit/WebKit/compare/ec9adcfcd3db270348a5b7a95cdf500bdccbf088...5ec07d1125db2d13bd0cde752cf580d87d7ff9f7"
+            >コミット範囲</a
+          >
+          に
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://github.com/WebKit/WebKit/commit/cb60df93ab8cb5be5252409d0f934a0b5fabe082"
+            >Enable FetchMetadata のコミット</a
+          >
+          が含まれている。もう時期リリースされることになるだろう。<a
+            href="#paragraph-32"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
+        </h2>
+        <p id="paragraph-33" class="paragraph">
+          今回、もうじき主要ブラウザベンダで実装されそうな Fetch Metadata
+          について紹介した。<a href="#paragraph-33" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-34" class="paragraph">
+          Fetch Metadata
+          はリクエストのコンテキストをサーバ側に伝えるというシンプルな仕様であるが、不正なリクエストの判別に必要な情報が整理され、標準化されたという点で画期的だったと言えるのではないか。<a
+            href="#paragraph-34"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-35" class="paragraph">
+          不正なリクエストを弾くためのポリシーを決めるのには、自分たちのサービスのエンドポイントの整理が必要ではある。<a
+            href="#paragraph-35"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-36" class="paragraph">
+          導入にはまだ及び腰であれば、ヘッダのログを残しておくことで怪しいリクエストに気づくことができる。ルール設定が難しい場合はまずはログからはじめてみるのが良いかも知れない。<a
+            href="#paragraph-36"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-37" class="paragraph">
+          もしも、間違いがあったりコメントがあったら
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://github.com/negibokken/bokken.io/issues"
+            >GitHub の issue</a
+          >
+          か
+          <a target="_blank" rel="noopener" href="https://twitter.com/bokken_"
+            >@bokken_</a
+          >
+          までいただけると嬉しい。<a
+            href="#paragraph-37"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <details>
+          <summary>
+            付録: `Sec-` prefixed ヘッダの `Sec-` がついている理由
+          </summary>
+
+          <h3>
+            <a
+              name="sec--prefixed-ヘッダの-sec--がついている理由"
+              href="#sec--prefixed-ヘッダの-sec--がついている理由"
+              id="sec--prefixed-ヘッダの-sec--がついている理由"
+            >
+              <code>Sec-</code> prefixed ヘッダの
+              <code>Sec-</code> がついている理由
+            </a>
+          </h3>
+          <p id="paragraph-38" class="paragraph">
+            現状では、 <code>Sec-Fetch</code> や <code>Sec-CH-UA</code> などの
+            prefix が存在している。<a
+              href="#paragraph-38"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="paragraph-39" class="paragraph">
+            それぞれ、<code>Sec-Fetch</code> は
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://www.w3.org/TR/fetch-metadata/"
+              >Fetch Metadata Request Headers</a
+            >、<code>Sec-CH-UA</code> は
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://wicg.github.io/ua-client-hints/"
+              >User-Agent Client Hints</a
+            >
+            で定義されている。<a href="#paragraph-39" class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="paragraph-40" class="paragraph">
+            この <code>Sec-</code> prefix については、その答えは
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://www.w3.org/TR/fetch-metadata/#sec-prefix"
+              >Fetch Metadata Request Headers</a
+            >
+            に下記のように記載されている。<a
+              href="#paragraph-40"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <blockquote>
+            <p id="paragraph-41" class="paragraph">
+              Each of the headers defined in this document is prefixed with
+              Sec-, which makes them all
+              <a
+                target="_blank"
+                rel="noopener"
+                href="https://fetch.spec.whatwg.org/#forbidden-header-name"
+                >forbidden header names</a
+              >, and therefore unmodifiable from JavaScript. This will prevent
+              malicious websites from convincing user agents to send forged
+              metadata along with requests, which should give sites a bit more
+              confidence in their ability to respond reasonably to the
+              advertised information.<a
+                href="#paragraph-41"
+                class="paragraph-anchor"
+                >¶</a
+              >
+            </p>
+            <p id="paragraph-42" class="paragraph">
+              ---
+              <a
+                target="_blank"
+                rel="noopener"
+                href="https://www.w3.org/TR/fetch-metadata/#sec-prefix"
+                >Fetch Metadata Request Headers</a
+              ><a href="#paragraph-42" class="paragraph-anchor">¶</a>
+            </p>
+          </blockquote>
+          <p id="paragraph-43" class="paragraph">
+            つまり、 <code>Sec-</code> prefixed な理由は、
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://fetch.spec.whatwg.org"
+              >Fetch Standard</a
+            >
+            で定義されている forbidden header name にして JavaScript
+            から変更できないようにするためとのこと。こうすることで malicious
+            なサイトがヘッダを JavaScript で偽装してくることを防げる。<a
+              href="#paragraph-43"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="paragraph-44" class="paragraph">
+            引用元の
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://fetch.spec.whatwg.org/#forbidden-request-header"
+              >Fetch Standard</a
+            >
+            にも下記のように記載されている。<a
+              href="#paragraph-44"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <blockquote>
+            <p id="paragraph-45" class="paragraph">
+              These are forbidden so the user agent remains in full control over
+              them.<a href="#paragraph-45" class="paragraph-anchor">¶</a>
+            </p>
+            <p id="paragraph-46" class="paragraph">
+              Header names starting with <code>Sec-</code> are reserved to allow
+              new headers to be minted that are safe from APIs using fetch that
+              allow control over headers by developers, such as XMLHttpRequest.
+              <a
+                target="_blank"
+                rel="noopener"
+                href="https://fetch.spec.whatwg.org/#biblio-xhr"
+                >XHR</a
+              ><a href="#paragraph-46" class="paragraph-anchor">¶</a>
+            </p>
+            <p id="paragraph-47" class="paragraph">
+              ---
+              <a
+                target="_blank"
+                rel="noopener"
+                href="https://fetch.spec.whatwg.org/#forbidden-request-header"
+                >Fetch Standard</a
+              ><a href="#paragraph-47" class="paragraph-anchor">¶</a>
+            </p>
+          </blockquote>
+          <p id="paragraph-48" class="paragraph">
+            Header の仕様 (<a
+              target="_blank"
+              rel="noopener"
+              href="https://fetch.spec.whatwg.org/#headers-class"
+              >5.1. Headers class - Fetch Standard</a
+            >) に、 header の validate に関する定義があるが、forbidden
+            reqeust-header の場合は無効と判定される。Header class
+            のメソッドのうち変更が発生するメソッドでは validation
+            のステップがあるため、forbidden
+            な場合は処理が中断されるようになっている。<a
+              href="#paragraph-48"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="paragraph-49" class="paragraph">
+            こうすることで、ヘッダが変更されないことを保証するようだ。<a
+              href="#paragraph-49"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+        </details>
+
+        <h2>
+          <a name="参考リンク" href="#参考リンク" id="参考リンク">
+            参考リンク
+          </a>
+        </h2>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://www.w3.org/TR/fetch-metadata/"
+              >Fetch Metadata Request Headers</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://fetch.spec.whatwg.org"
+              >Fetch Standard</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://wicg.github.io/ua-client-hints/"
+              >User-Agent Client Hints</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://web.dev/fetch-metadata/"
+              >Protect your resources from web attacks with Fetch Metadata</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://asnokaze.hatenablog.com/entry/2019/02/15/013557"
+              >Fetch Metadataリクエストヘッダについて (Sec-Fetch-*) - ASnoKaze
+              blog</a
+            >
+          </li>
+        </ul>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+
+      <div>
+        Subscribe via <a href="https://blog.bokken.io/feeds/atom.xml">RSS</a>
+      </div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a href="https://blog.bokken.io/articles/2022-12-30/about-chips.html">
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
+
