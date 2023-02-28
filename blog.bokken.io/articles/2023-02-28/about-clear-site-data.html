@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>
+      クライアントの Cookie などのデータを削除する Clear Site Data
+      という仕様について | blog.bokken.io
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Clear-Site-Data というクライアントサイドのデータを削除するための仕様がある。提案自体は2015年頃からある仕様だが、最近 Safari の Beta Release にリリースされ、もうすぐ主要ブラウザで実装が出揃う形になる。この記事では、Clear Site Data とはどういう仕様なのかをまとめる。Web アプリケーションでは、オフライン時にも利用できるようにリソース (データ) をキャッシュしたり、パフォーマンスを高めるため、 local マシンにリソース (データ) を保持することがある。また、サービスをログインするのに Cookie にセッション情報 (データ) を保"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="author" href="humans.txt" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2023-02-28/about-clear-site-data.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="クライアントの Cookie などのデータを削除する Clear Site Data という仕様について"
+    />
+    <meta
+      property="og:description"
+      content="Clear-Site-Data というクライアントサイドのデータを削除するための仕様がある。提案自体は2015年頃からある仕様だが、最近 Safari の Beta Release にリリースされ、もうすぐ主要ブラウザで実装が出揃う形になる。この記事では、Clear Site Data とはどういう仕様なのかをまとめる。Web アプリケーションでは、オフライン時にも利用できるようにリソース (データ) をキャッシュしたり、パフォーマンスを高めるため、 local マシンにリソース (データ) を保持することがある。また、サービスをログインするのに Cookie にセッション情報 (データ) を保"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+    <script defer src="/assets/js/img-viewer.js"></script>
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io">bokken.io</a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2023-02-28/about-clear-site-data.html"
+          >クライアントの Cookie などのデータを削除する Clear Site Data
+          という仕様について</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2023-02-28</dd>
+          <dt>更新日</dt>
+          <dd>2023-02-28</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            Clear-Site-Data, storage, Cookie
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="クライアントの-cookie-などのデータを削除する-clear-site-data-という仕様について"
+            href="#クライアントの-cookie-などのデータを削除する-clear-site-data-という仕様について"
+            id="クライアントの-cookie-などのデータを削除する-clear-site-data-という仕様について"
+          >
+            クライアントの Cookie などのデータを削除する Clear Site Data
+            という仕様について
+          </a>
+        </h1>
+        <h2>
+          <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
+        </h2>
+        <p id="paragraph-1" class="paragraph">
+          Clear-Site-Data というクライアントサイドのデータを削除するための<a
+            target="_blank"
+            rel="noopener"
+            href="https://w3c.github.io/webappsec-clear-site-data/"
+            >仕様</a
+          >がある。提案自体は2015年頃からある仕様だが、<a
+            target="_blank"
+            rel="noopener"
+            href="https://developer.apple.com/documentation/safari-release-notes/safari-16_4-release-notes#HTTP"
+            >最近 Safari の Beta Release にリリースされ</a
+          >、もうすぐ主要ブラウザで実装が出揃う形になる。<a
+            href="#paragraph-1"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-2" class="paragraph">
+          この記事では、Clear Site Data とはどういう仕様なのかをまとめる。<a
+            href="#paragraph-2"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="clear-site-data-とは"
+            href="#clear-site-data-とは"
+            id="clear-site-data-とは"
+          >
+            Clear Site Data とは
+          </a>
+        </h2>
+        <p id="paragraph-3" class="paragraph">
+          Web アプリケーションでは、オフライン時にも利用できるようにリソース
+          (データ) をキャッシュしたり、パフォーマンスを高めるため、 local
+          マシンにリソース (データ)
+          を保持することがある。また、サービスをログインするのに Cookie
+          にセッション情報 (データ) を保持したりする。<a
+            href="#paragraph-3"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-4" class="paragraph">
+          これらの保存されたデータについて、不要になった場合には削除したくなるケースがある。
+          例えば、キャッシュしている内容が古くなってしまっているときや、ログアウトをしたとき、アカウントを削除したときなどだ。また、脆弱性のあるバージョンの
+          Web サービスの ブラウザキャッシュや HTTP cache
+          が消されたことを確実にしたいケースなどがあるだろう。<a
+            href="#paragraph-4"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-5" class="paragraph">
+          API が提供されている storage や、HttpOnly がついていない Cookieは
+          JavaScript で消せる。ただし、HttpOnly がついている Cookie や
+          ブラウザキャッシュ、HTTP cache は削除するのが困難だ。<a
+            href="#paragraph-5"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-6" class="paragraph">
+          これらの削除を Web
+          アプリケーション開発者が、効率よく実施できるようにするためのヘッダが
+          <code>Clear-Site-Data</code> だ。<a
+            href="#paragraph-6"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="clear-site-data-ヘッダ"
+            href="#clear-site-data-ヘッダ"
+            id="clear-site-data-ヘッダ"
+          >
+            Clear-Site-Data ヘッダ
+          </a>
+        </h2>
+        <p id="paragraph-7" class="paragraph">
+          <code>Clear-Site-Data</code> は HTTP Response によって指定する。<a
+            href="#paragraph-7"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-8" class="paragraph">
+          現状、このヘッダに指定できるのは、 &quot;cache&quot;,
+          &quot;cookies&quot;, &quot;storage&quot;,
+          &quot;executionContexts&quot;, &quot;*&quot; の
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://w3c.github.io/webappsec-clear-site-data/#header"
+            >5 種類が指定可能</a
+          >だ。<a href="#paragraph-8" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-9" class="paragraph">
+          指定する際には下記のように指定する。<a
+            href="#paragraph-9"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-http"># wildcard
+Clear-Site-Data: &quot;*&quot;
+
+# Cookie, storage
+Clear-Site-Data: &quot;cookies&quot;, &quot;storage&quot;
+</code></pre>
+        <p id="paragraph-10" class="paragraph">
+          例えば、ログアウトをしたいとなったときは下記のようにリクエストを送って、レスポンスヘッダに
+          <code>Clear-Site-Data</code> を指定して Cookie
+          を削除することになるだろう。<a
+            href="#paragraph-10"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <img alt="Clear Site Data example" src="./img/logout.png" width="700" />
+
+        <h3>
+          <a
+            name="それぞれの値が削除する対象"
+            href="#それぞれの値が削除する対象"
+            id="それぞれの値が削除する対象"
+          >
+            それぞれの値が削除する対象
+          </a>
+        </h3>
+        <p id="paragraph-11" class="paragraph">
+          ではこの cache, cookies
+          などの指定がどういったものを削除するのか、仕様に記載されている範囲でまとめる。
+          ブラウザの実装はそれぞれ異なっていたり、そもそもサポートされていなかったりするので、実際に使用する前には挙動を確認していただきたい。<a
+            href="#paragraph-11"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h4>
+          <a name="cache" href="#cache" id="cache"> cache </a>
+        </h4>
+        <p id="paragraph-12" class="paragraph">
+          cache に含まれるものとしては下記のものがあるようだ。<a
+            href="#paragraph-12"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ul>
+          <li>HTTP キャッシュ</li>
+          <li>ブラウザキャッシュ</li>
+          <li>prerendered page</li>
+          <li>script cache</li>
+          <li>shared cache</li>
+          <li>など</li>
+        </ul>
+        <p id="paragraph-13" class="paragraph">
+          詳しくは
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://w3c.github.io/webappsec-clear-site-data/#clear-dom"
+            >4.2.5. Clear DOM-accessible storage for origin | Clear Site Data</a
+          >
+          の &quot;cache&quot; の部分にある。<a
+            href="#paragraph-13"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h4>
+          <a name="cookies" href="#cookies" id="cookies"> cookies </a>
+        </h4>
+        <p id="paragraph-14" class="paragraph">
+          cookies はその名の通り Cookie のみで、response URL に紐づく Cookie
+          が削除される。<a href="#paragraph-14" class="paragraph-anchor">¶</a>
+        </p>
+        <h4>
+          <a name="storage" href="#storage" id="storage"> storage </a>
+        </h4>
+        <p id="paragraph-15" class="paragraph">
+          storage というと localStorage や sessionStorage
+          はもちろん、その他にも下記のような storage
+          も含めて削除されるようだ。<a
+            href="#paragraph-15"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ul>
+          <li>localStorage</li>
+          <li>sessionStorage</li>
+          <li>IndexedDB</li>
+          <li>Service Worker Registration</li>
+          <li>AppCache (deprecated)</li>
+          <li>WebSQL</li>
+          <li>FileSystem API</li>
+          <li>Plugin Data</li>
+        </ul>
+        <p id="paragraph-16" class="paragraph">
+          詳しくは
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://w3c.github.io/webappsec-clear-site-data/#clear-dom"
+            >4.2.5. Clear DOM-accessible storage for origin | Clear Site Data</a
+          >
+          の &quot;storage&quot; の部分にある。<a
+            href="#paragraph-16"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h4>
+          <a
+            name="executioncontexts"
+            href="#executioncontexts"
+            id="executioncontexts"
+          >
+            executionContexts
+          </a>
+        </h4>
+        <p id="paragraph-17" class="paragraph">
+          executionContexts
+          は、ブラウザの実行コンテキストを削除してリロードする。これは
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://w3c.github.io/webappsec-clear-site-data/#clear-dom"
+            >4.2.5. Clear DOM-accessible storage for origin | Clear Site Data</a
+          >
+          にある例を見ると、<code>https://example.com/clear</code>
+          へのリクエストに対して、<code>Clear-Site-Data: executionContext</code>
+          があったときに、コンテキストを削除してリロードするとある。<a
+            href="#paragraph-17"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="clear-site-data-の各値のサポート状況"
+            href="#clear-site-data-の各値のサポート状況"
+            id="clear-site-data-の各値のサポート状況"
+          >
+            Clear-Site-Data の各値のサポート状況
+          </a>
+        </h2>
+        <p id="paragraph-18" class="paragraph">
+          だが、それぞれサポート状況にはばらつきがあるようだ。Safari
+          は次のリリースですべてのディレクティブがサポートされる形になりそうだ。<a
+            href="#paragraph-18"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th align="center"></th>
+              <th align="center">cache</th>
+              <th align="center">cookies</th>
+              <th align="center">storage</th>
+              <th align="center">executionContexts</th>
+              <th align="center">*</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="center">Chrome</td>
+              <td align="center">o</td>
+              <td align="center">o</td>
+              <td align="center">o</td>
+              <td align="center">x</td>
+              <td align="center">o</td>
+            </tr>
+            <tr>
+              <td align="center">Firefox</td>
+              <td align="center">△(※1)</td>
+              <td align="center">o</td>
+              <td align="center">o</td>
+              <td align="center">x</td>
+              <td align="center">o</td>
+            </tr>
+            <tr>
+              <td align="center">Safari (※2)</td>
+              <td align="center">o</td>
+              <td align="center">o</td>
+              <td align="center">o</td>
+              <td align="center">o</td>
+              <td align="center">o</td>
+            </tr>
+          </tbody>
+        </table>
+        <p id="paragraph-19" class="paragraph">
+          ※1: 設定により有効化する必要がある。<a
+            href="#paragraph-19"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-20" class="paragraph">
+          ※2: Release 164 (Safari 16.4, WebKit 18616.1.2)<a
+            href="#paragraph-20"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="デモサイト" href="#デモサイト" id="デモサイト">
+            デモサイト
+          </a>
+        </h2>
+        <p id="paragraph-21" class="paragraph">
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://x.bokken.io/example-clear-site-data/index.html"
+            >簡単なデモサイト</a
+          >を用意した。 sessionStorage と localStorage と Cookie
+          を用意し、Clear-Site-Data つきの response
+          を返すエンドポイントにリクエストして挙動を確認するというものだ。以下のように、cookie
+          や storage が削除されている様子がみられる。<a
+            href="#paragraph-21"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <img width="700" src="./img/clear-site-data.gif" />
+
+        <p id="paragraph-22" class="paragraph">
+          cache については一部 asset が memory cache
+          から使われていたのだが、これが memory cache
+          から使われなくなるという挙動を確認している。<a
+            href="#paragraph-22"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-23" class="paragraph">
+          また Safari では executionContexts
+          によって、ブラウザのリロードが発生することを確認できている。<a
+            href="#paragraph-23"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="各ブラウザベンダによるサポートの歴史"
+            href="#各ブラウザベンダによるサポートの歴史"
+            id="各ブラウザベンダによるサポートの歴史"
+          >
+            各ブラウザベンダによるサポートの歴史
+          </a>
+        </h2>
+        <p id="paragraph-24" class="paragraph">
+          Clear Site Data のドラフトの
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://github.com/w3c/webappsec-clear-site-data/commit/4c69380519642aa764a8d89ed16a884bb1d75b01"
+            >commit</a
+          >
+          を見ると、Clear Site Data のドラフト自体は
+          2015年6月22日に始まっている。<a
+            href="#paragraph-24"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-25" class="paragraph">
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://caniuse.com/?search=clear%20site%20data"
+            >Clear-Site-Data のサポート状況</a
+          >を見ると、Chrome と Firefox
+          では比較的昔からサポートされていたようだ。<a
+            href="#paragraph-25"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-26" class="paragraph">
+          Safari
+          が今までサポートしていなかったのには何かしら懸念があるのかと思い、<a
+            target="_blank"
+            rel="noopener"
+            href="https://bugs.webkit.org/show_bug.cgi?id=203215"
+            >issue</a
+          >
+          や、<a
+            target="_blank"
+            rel="noopener"
+            href="https://lists.webkit.org/pipermail/webkit-dev/"
+            >メールのアーカイブ</a
+          >を探してみたが、別段サポートに対してネガティブなコメントがあった様子は見受けられなかった。なので、急にサポートされなくなるといった危険はなさそうだ。<a
+            href="#paragraph-26"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="注意点" href="#注意点" id="注意点"> 注意点 </a>
+        </h2>
+        <p id="paragraph-27" class="paragraph">
+          仕様の
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://w3c.github.io/webappsec-clear-site-data/#remnants"
+            >6.2. Remnants of data on disk.</a
+          >
+          に記載があるが、<code>Clear-Site-Data</code>
+          を使う際には、データの完全な削除が約束されるわけではないことに注意したい。<a
+            href="#paragraph-27"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-28" class="paragraph">
+          例えばなんらかの理由でブラウザがクラッシュしたり、コンピュータが途中でシャットダウンしてしまったら、データがディスクから中途半端に削除されることもありえる。またブラウザの実装の不備でデータがディスクに残ってしまうこともありある。これらの点には注意して
+          <code>Clear-Site-Data</code> を利用したい。<a
+            href="#paragraph-28"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
+        </h2>
+        <p id="paragraph-29" class="paragraph">
+          今回、主要なブラウザに実装されそうな Clear Site Data
+          という仕様についてまとめた。<a
+            href="#paragraph-29"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-30" class="paragraph">
+          ログアウトやアカウント削除時には
+          <code>Clear-Site-Data</code>
+          が使えると便利そうだ。特にアカウント削除の際、ブラウザに下手な情報を残さないようにするのは
+          Web アプリケーション開発者としては心がけておきたい。<a
+            href="#paragraph-30"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-31" class="paragraph">
+          根本原因は異なるが、<a
+            target="_blank"
+            rel="noopener"
+            href="https://devblog.thebase.in/entry/2022/04/13/114714#:~:text=%E3%81%A8%E3%81%84%E3%81%86%E3%81%93%E3%81%A8%E3%81%A7%E3%81%99%E3%80%82-,%E3%81%9D%E3%82%82%E3%81%9D%E3%82%82%E3%81%AA%E3%81%9C%E5%90%8C%E3%81%98key%E3%81%AECookie%E3%81%8C%E4%BA%8C%E7%A8%AE%E9%A1%9E%E3%81%A7%E3%81%8D%E3%81%A6%E3%81%97%E3%81%BE%E3%81%86%E3%81%AE%E3%81%8B,-THEBASE%20%E3%81%AECookie"
+            >BASE のインシデント発生時</a
+          >にも Cookie
+          が削除されずに困ってしまったケースが見受けられた。こういった、いざというときにも、<code
+            >Clear-Site-Data</code
+          >
+          が使えるかもしれない。<a href="#paragraph-31" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-32" class="paragraph">
+          ブラウザキャッシュや HTTP Cache
+          の削除については、全ブラウザがデフォルトで使えるわけではないので、ユーザ側のよくわからないキャッシュのせいでおかしな挙動をしてしまうケースにはまだしばらく悩まされることになりそうだ。<a
+            href="#paragraph-32"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-33" class="paragraph">
+          とはいえ、今までクライアントのストレージをサーバ側で簡単に削除する方法自体がなかったことを考えると大きな進歩のように感じる。今後のサポート拡大を待ちたい。<a
+            href="#paragraph-33"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-34" class="paragraph">
+          もしも、誤りや追加の情報があれば
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://github.com/negibokken/bokken.io/issues"
+            >issue</a
+          >
+          や
+          <a target="_blank" rel="noopener" href="https://twitter.com/bokken_"
+            >@bokken_</a
+          >
+          までいただけると嬉しい。<a
+            href="#paragraph-34"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="参考資料・リンク"
+            href="#参考資料・リンク"
+            id="参考資料・リンク"
+          >
+            参考資料・リンク
+          </a>
+        </h2>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://w3c.github.io/webappsec-clear-site-data/"
+              >Clear Site Data</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://bugs.webkit.org/show_bug.cgi?id=203215"
+              >203215 – Implement support for the Clear-Site-Data HTTP header</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Clear-Site-Data"
+              >Clear-Site-Data - HTTP | MDN</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://blog.jxck.io/entries/2018-07-24/clear-site-data.html"
+              >Clear-Site-Data Header | blog.jxck.io</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://asnokaze.hatenablog.com/entry/2018/07/24/020517"
+              >Clear-Site-Dataヘッダでブラウザに記憶されているデータを消す -
+              ASnoKaze blog</a
+            >
+          </li>
+        </ul>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+
+      <div>
+        Subscribe via <a href="https://blog.bokken.io/feeds/atom.xml">RSS</a>
+      </div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a
+            href="https://blog.bokken.io/articles/2023-01-29/about-fetch-metadata.html"
+          >
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
+

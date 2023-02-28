@@ -44,7 +44,7 @@ services:
         source: nginx/.
         target:  /etc/nginx
 
-  app.bokken_io:
-    image: app.bokken.io
-    ports:
-      - '3000:3000'
+          # app.bokken_io:
+          #   image: app.bokken.io
+          #   ports:
+          #     - '3000:3000'

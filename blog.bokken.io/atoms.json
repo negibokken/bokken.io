@@ -1,7 +1,7 @@
 {
   "title": "blog.bokken.io",
   "uri": "https://blog.bokken.io",
-  "updatedAt": "2023-01-29T00:58:07.612Z",
+  "updatedAt": "2023-02-27T14:04:46.323Z",
   "id": "2b743fd8-f4e8-4b94-8866-269347b3fbab",
   "articles": [
     {
@@ -164,6 +164,13 @@
       "uuid": "ca8e70ad-d972-437b-9328-088965442dd4",
       "updatedAt": "2023-01-29T00:58:07.612Z",
       "summary": "リクエストのコンテキストをサーバ側に伝えることで、サーバ側でリクエストが危険なものかを判別するための Fetch Metadata Request Headers という仕様がある。今回、このヘッダがどういったものなのかについて Fetch Metadata Request Headers を読んだり、周辺のドキュメントを読んでまとめる。Fetch Metadata ヘッダはクライアント側では特に何も設定する必要はなく、サポートされていればブラウザによってリクエストに自動的にヘッダに付与されサーバに送付されるサーバは送られてきた Fetch Metadata をもとに CSRF などの、攻撃の可"
+    },
+    {
+      "title": "クライアントサイドの Cookie などのデータを消去するための Clear Site Data という仕様について",
+      "uri": "https://blog.bokken.io/articles/2023-02-28/about-clear-site-data.html",
+      "uuid": "367f9501-a7a8-4395-9dac-c758469bdefe",
+      "updatedAt": "2023-02-27T14:04:46.323Z",
+      "summary": "Clear-Site-Data というクライアントサイドのデータを削除するためのヘッダがある。最近 Safari の Beta Release にリリースされ、もうすぐ主要ブラウザベンダで実装が出揃う形になる。この記事では、Clear Site Data とはどういう仕様なのかをまとめる。Web アプリケーションでは、オフライン時にも利用できるようにリソース (データ) をキャッシュしたり、パフォーマンスを高めるため、 local マシンにリソース (データ) を保持することがある。また、サービスをログインするのに Cookie にセッション情報 (データ) を保持したりする。これらの保存された"
     }
   ]
 }
