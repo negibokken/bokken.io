@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2023-02-27T14:04:46.323Z</updated>
+  <updated>2023-03-31T10:48:06.856Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -325,6 +325,18 @@
     <summary
       type="html"
     >Clear-Site-Data というクライアントサイドのデータを削除するためのヘッダがある。最近 Safari の Beta Release にリリースされ、もうすぐ主要ブラウザベンダで実装が出揃う形になる。この記事では、Clear Site Data とはどういう仕様なのかをまとめる。Web アプリケーションでは、オフライン時にも利用できるようにリソース (データ) をキャッシュしたり、パフォーマンスを高めるため、 local マシンにリソース (データ) を保持することがある。また、サービスをログインするのに Cookie にセッション情報 (データ) を保持したりする。これらの保存された</summary>
+  </entry>
+  
+  <entry>
+    <title>IETF 116 Yokohama に参加しました</title>
+    <link
+      href="https://blog.bokken.io/articles/2023-03-31/my-first-ietf.html"
+    />
+    <id>https://blog.bokken.io/articles/2023-03-31/my-first-ietf.html</id>
+    <updated>2023-03-31T10:48:06.856Z</updated>
+    <summary
+      type="html"
+    >IETF 116 Yokohama に参加した。 私としてははじめての IETF 参加だった。今後の参加者たちの参考にどういった体験だったのか記録として残しておきたい。私は普段 Web フロントエンドの開発をしているため、プロトコル関連の実装をしている訳ではない。なので IETF で議論されされている内容に関して専門家ではない。趣味で少し HTTP/3 や QUIC を勉強している程度である。そういった人物が行った場合にどうだったのかが記載されている。インターネットの最前線を見られたことに感動したドラフトは読んだ方が楽しめる読まなくても雰囲気は分かるが内容は分からない未予習者には BoF がおす</summary>
   </entry>
   
 </feed>
