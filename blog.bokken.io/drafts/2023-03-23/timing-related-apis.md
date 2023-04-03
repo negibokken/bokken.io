@@ -1,10 +1,19 @@
-# アプリケーションのパフォーマンスを計測するためのタイミング関係の API について
+# Web サイトのパフォーマンスを計測するためのタイミング関係の API について
 
 @tags: [Browser, Timing API, Performance]
 
 @date: [2023-03-23, 2023-03-23]
 
-## テンプレート用ファイル
+## はじめに
+
+Web サイトのパフォーマンス
+
+ユーザ体験を向上させるのはもちろん。
+Google は Core Web Vitals を検索エンジン上で考慮すると述べている。
+
+このことから Web サイトのパフォーマンスを把握するのは非常に重要であるといえる。
+
+##
 
 1. [User Timing API](https://www.w3.org/TR/user-timing/)
 1. [Navigation Timing API](https://www.w3.org/TR/navigation-timing-2/)
@@ -15,8 +24,9 @@
 1. [Performance Timeline](https://www.w3.org/TR/performance-timeline/)
 1. Long Task API
 1. Server Timing
+1. [Timing Entry Names Registry](https://w3c.github.io/timing-entrytypes-registry/)
 
-2 によると、現状 Performance 関連のエントリには 11種類の type が存在している。 element(PerformanceElementTiming), event(PerformanceEventTiming), first-input(PerformanceEventTiming), largest-contentful-paint(LargestContentfulPaint), longtask(PerformanceLongTaskTiming), mark(PerformanceMark), measure(PerformanceMeasure), navigation(PerformanceNavigationTiming), paint(PerofmrnacePaintTiming), resource(PerformanceResourceTiming), taskattribution(PerformanceAttributionTiming)
+ [Timing Entry Names Registry](https://w3c.github.io/timing-entrytypes-registry/) によると、現状 Performance 関連のエントリには下記の 11種類の type が存在している。
 
 |entryType Identifiedr | Interface Type | Chrome | Firefox | Safari |
 |:-:|:- | :-:|:-:|:-:|
@@ -31,6 +41,14 @@
 | first-input | [PerformanceEventTiming](https://www.w3.org/TR/event-timing/#performanceeventtiming) | o | o | x |
 | layout-shift | [LayoutShift](https://wicg.github.io/layout-instability/#layoutshift) | o | x | x |
 | largest-contentful-paint | [LargestContentfulPaint](https://www.w3.org/TR/largest-contentful-paint/#largestcontentfulpaint) | o | x | x |
+
+ただし、2021 年 2 月から更新がされていない。2023年4月現在では Chrome には 3 つエントリが追加されているようだ。
+それは DevTools の console で `PerformanceObserver.supportedEntryTypes` を実行すると確認できる。
+
+```
+PerformanceObserver.supportedEntryTypes
+> (14) ['back-forward-cache-restoration', 'element', 'event', 'first-input', 'largest-contentful-paint', 'layout-shift', 'longtask', 'mark', 'measure', 'navigation', 'paint', 'resource', 'soft-navigation', 'visibility-state']
+```
 
 ## memo
 
@@ -50,19 +68,24 @@ back-forward-cache-restoration, soft-navigation, visibility-state について
     - https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
     - https://webplatform.github.io/docs/dom/Document/visibilityState/
 
+## デモ
+
+現在ブラウザがサポートしている entry の一覧とその情報を取得する簡単なデモ環境を用意した。
+
 ## 対応状況
 
 ### W3C 上のどの状態か
 
 ### 主要3ブラウザの実装状況
 
+### Intent はどういう常態化
+
+## その他
+
+これまで紹介した API は比較的簡単に timing 情報を取得できる。
+その他にも Chromium ベースのブラウザの場合は `${browse識別子}://tracing/` にアクセスすることで、より詳細なパフォーマンスの情報を取得できる。こちらはよりブラウザの詳細な実行状況を取得できるため情報量は多い。
+
 ## 参考資料・リンク
 
 1. [Web Performance Working Group](https://www.w3.org/webperf/)
 2. [PerformanceEntry.entryType - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/entryType)
-
-まず、パフォーマンス系の API にどういった種類のものがあるのか？
-それぞれの関係はなにか？
-例えば、navigation 関係のものと、resource 周りのもの、Timing 周りのもの、など色々あるけど、これらはどういった関係で整理されているんだろうか。
-何が漏れていなくて何が漏れているんだろう。現状何が足りていないんだろうか。
-もしかして RUM とかで手動で頑張って mark をセットして計測しているところを？？
