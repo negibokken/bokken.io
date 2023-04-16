@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="bokken.io" />
+    <link rel="author" href="humans.txt" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-83287008-4");
+    </script>
+    <title>Exp | bokken.io</title>
+
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta property="og:url" content="https://x.bokken.io" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="x.bokken.io" />
+    <meta property="og:description" content="bokken tech web" />
+    <meta property="og:site_name" content="x.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+
+    <link rel="preload" href="/assets/img/web.svg" as="image" />
+    <link rel=stylesheet type=text/css href=/assets/css/main.css />
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supportedEntries = PerformanceObserver.supportedEntryTypes;
+            const suppportedEntryDOM = document.querySelector('#supported-entries');
+            const numOfSupportedEntiresDOM = document.querySelector('#number-of-supported-entries');
+            numOfSupportedEntiresDOM.innerText = supportedEntries.length;
+            const $ul = document.createElement('ul');
+            supportedEntries.forEach((e) => {
+              const $li = document.createElement('li');
+              const $input = document.createElement('input');
+              $input.setAttribute('type', 'checkbox');
+              $input.setAttribute('id', `ckb-${e}`);
+              $input.setAttribute('value', e);
+              $input.setAttribute('name', e);
+              $li.appendChild($input);
+
+              const $label = document.createElement('label');
+              $label.setAttribute("id", `label-${e}`);
+              $label.setAttribute("for", "ckb-${e}");
+              $label.innerText = e;
+
+              $li.appendChild($label);
+              $ul.appendChild($li);
+            });
+            suppportedEntryDOM.appendChild($ul);
+            const observer = new PerformanceObserver((entryList) => {
+                for(const entry of entryList.getEntries()) {
+                    console.log('registered: ', entry.entryType, entry);
+                    const $checkbox = document.querySelector(`#ckb-${entry.entryType}`);
+                    if($checkbox.getAttribute("checked")) {
+                        continue;
+                    }
+                    $checkbox.setAttribute("checked", true);
+                    const $label = document.querySelector(`#label-${entry.entryType}`);
+                    $label.innerText = `${$label.innerText}: ${entry.startTime}`;
+                }
+            }).observe({entryTypes: supportedEntries, buffered: true});
+        });
+    </script>
+    <script type="module">
+        // Long task
+        function sleep(t) {
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(), t);
+            });
+        }
+        let sum = 0;
+        for (let i = 0; i < 10000; i++) {
+            await sleep(1);
+        }
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <a href="https://bokken.io"><h1>bokken.io</h1></a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://x.bokken.io">Exp</a></li>
+    </ul>
+
+    <main>
+        <h2>Performance Entries</h2>
+        <p>This site shows the supported performance entries.</p>
+        <p>Supported entries are followings (your browser supports <output id="number-of-supported-entries"></output> type of entries): </p>
+        <div id="supported-entries"></div>
+        <br />
+        <img src="https://bokken.io/assets/img/icon.png"/>
+        <button><a href="immediately-close.html" target="_blank" rel="noopener noreferrer" >click me</a></button>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
