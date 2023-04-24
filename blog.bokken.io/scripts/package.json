@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "ejs": "^3.1.5",
+    "ejs": "^3.1.7",
     "highlightjs": "^9.16.2",
     "marked": "^2.0.0",
     "prettier": "^2.1.1",
