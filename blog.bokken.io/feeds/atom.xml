@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2023-03-31T10:48:06.856Z</updated>
+  <updated>2023-04-30T13:39:19.214Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -337,6 +337,19 @@
     <summary
       type="html"
     >IETF 116 Yokohama に参加した。 私としてははじめての IETF 参加だった。今後の参加者たちの参考にどういった体験だったのか記録として残しておきたい。私は普段 Web フロントエンドの開発をしているため、プロトコル関連の実装をしている訳ではない。なので IETF で議論されされている内容に関して専門家ではない。趣味で少し HTTP/3 や QUIC を勉強している程度である。そういった人物が行った場合にどうだったのかが記載されている。インターネットの最前線を見られたことに感動したドラフトは読んだ方が楽しめる読まなくても雰囲気は分かるが内容は分からない未予習者には BoF がおす</summary>
+  </entry>
+  
+  <entry>
+    <title
+    >Web サイトのパフォーマンスを計測するためのタイミング関係の API について</title>
+    <link
+      href="https://blog.bokken.io/articles/2023-04-30/timing-related-apis.html"
+    />
+    <id>https://blog.bokken.io/articles/2023-04-30/timing-related-apis.html</id>
+    <updated>2023-04-30T13:39:19.214Z</updated>
+    <summary
+      type="html"
+    >Web サイトのパフォーマンスを計測するための API がいくつか提供されている。ユーザ体験を向上させるのはもちろん。Google は Core Web Vitals を検索エンジン上で考慮すると述べている。高精度のい時間情報が必要。ただ、高精度の時間の情報は脆弱性にもなり得る。Spectre や Meltdown。このことから Web サイトのパフォーマンスを把握するのは非常に重要であるといえる。Performance Observer が定義されている。こちらの Performance Observer に計測したいメトリクスを定義することで、そのメトリクスを Observe して知らせてく</summary>
   </entry>
   
 </feed>
