@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="bokken.io" />
+    <link rel="author" href="humans.txt" />
+    <!--
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-83287008-4");
+    </script>
+    -->
+    <title>Exp | bokken.io</title>
+
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta property="og:url" content="https://x.bokken.io" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="x.bokken.io" />
+    <meta property="og:description" content="bokken tech web" />
+    <meta property="og:site_name" content="x.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+
+    <link rel="preload" href="/assets/img/web.svg" as="image" />
+    <link rel=stylesheet type=text/css href=/assets/css/main.css />
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supportedEntries = PerformanceObserver.supportedEntryTypes;
+            const suppportedEntryDOM = document.querySelector('#supported-entries');
+            const numOfSupportedEntiresDOM = document.querySelector('#number-of-supported-entries');
+            numOfSupportedEntiresDOM.innerText = supportedEntries.length;
+            const $ul = document.createElement('ul');
+            supportedEntries.forEach((e) => {
+              const $li = document.createElement('li');
+              const $input = document.createElement('input');
+              $input.setAttribute('type', 'checkbox');
+              $input.setAttribute('id', `ckb-${e}`);
+              $input.setAttribute('value', e);
+              $input.setAttribute('name', e);
+              $li.appendChild($input);
+
+              const $label = document.createElement('label');
+              $label.setAttribute("id", `label-${e}`);
+              $label.setAttribute("for", "ckb-${e}");
+              $label.innerText = e;
+
+              $li.appendChild($label);
+              $ul.appendChild($li);
+            });
+            suppportedEntryDOM.appendChild($ul);
+            const observer = new PerformanceObserver((entryList) => {
+                console.log('=== list ===')
+                for(const entry of entryList.getEntries()) {
+                    console.log('registered: ', entry.entryType, entry);
+                    const $checkbox = document.querySelector(`#ckb-${entry.entryType}`);
+                    if($checkbox.getAttribute("checked")) {
+                        continue;
+                    }
+                    $checkbox.setAttribute("checked", true);
+                    const $label = document.querySelector(`#label-${entry.entryType}`);
+                    $label.innerText = `${$label.innerText}: ${entry.startTime}`;
+                }
+            }).observe({entryTypes: supportedEntries});
+
+            // To trigger layout shift
+            setTimeout(() => {
+              const d = document.querySelector("#rectangle");
+              d.style = "background-color: gray; height: 50px; width: 150px";
+            }, 3000);
+        });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const box = document.querySelector("#box-wrapper")
+        box.setAttribute("style", "overflow-wrap: normal;")
+        // Long task
+        performance.mark("long-task-start");
+        for (let i = 0; i < 20000; i++) {
+          const element = document.createElement("span");
+          element.innerText = ".";
+          element.setAttribute("style", "height: 5px; width: 5px;")
+          box.appendChild(element);
+        }
+        performance.mark("long-task-end");
+        const measured = performance.measure("long-task-start", "long-task-end");
+        console.log("measured: ", measured.duration);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const page = document.querySelector("#page");
+        const go = document.querySelector("#go");
+        const back = document.querySelector("#back");
+
+        back.addEventListener("click", () => {
+          window.history.replaceState("back", "", "/example-performance-entry/index.html")
+          page.innerText = "Hello";
+        });
+        go.addEventListener("click", () => {
+          window.history.replaceState("go", "", "/example-performance-entry/foo")
+          page.innerText = "World";
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <a href="https://bokken.io"><h1>bokken.io</h1></a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://x.bokken.io">Exp</a></li>
+    </ul>
+
+    <main>
+        <h2>Performance Entries</h2>
+        <p>This site shows the supported performance entries.</p>
+        <p>Supported entries are followings (your browser supports <output id="number-of-supported-entries"></output> type of entries): </p>
+        <p>You can see the detail log of the entries.</p>
+
+        <div id="supported-entries"></div>
+
+        <div id="rectangle" elementtiming="rectangle">for layout shift</div>
+
+        <a href="/example-performance-entry/for-backforwawrd-cache.html">link for empty page (for back-forward-cache)</a>
+
+        <br />
+        <br />
+
+        <div style="display: flex">
+          <img src="https://bokken.io/assets/img/icon.png" elementtiming="icon"/>
+          <div style="width: 100px; height: 150px;"><p>Drag icon over to right red rectangle.<br/>-></p></div>
+          <div style="width: 150px; height: 150px; background-color: red;"></div>
+        </div>
+        <br />
+        <button><a href="immediately-close.html" target="_blank" rel="noopener noreferrer" >click me</a></button>
+        <br />
+        <p>After clicking the button, new page is opened in new tab to modify visibility state and the tab is automatically closed.</p>
+
+        <div style="background-color: #a6a6a6; border: 1px solid;">
+          <button id="back"><-</button>
+          <button id="go">-></button>
+
+          <div id="page" style="width: 100%; height: 300px; background-color: white;"></div>
+        </div>
+
+        <div style="width: 100%; height: 10px; background-color: gray;"></div>
+        <div id="box-wrapper"></div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
