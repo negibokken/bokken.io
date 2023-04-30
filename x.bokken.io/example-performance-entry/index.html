@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="bokken.io" />
     <link rel="author" href="humans.txt" />
+    <!--
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"
@@ -19,6 +20,7 @@
       gtag("js", new Date());
       gtag("config", "UA-83287008-4");
     </script>
+    -->
     <title>Exp | bokken.io</title>
 
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -66,6 +68,7 @@
             });
             suppportedEntryDOM.appendChild($ul);
             const observer = new PerformanceObserver((entryList) => {
+                console.log('=== list ===')
                 for(const entry of entryList.getEntries()) {
                     console.log('registered: ', entry.entryType, entry);
                     const $checkbox = document.querySelector(`#ckb-${entry.entryType}`);
@@ -76,20 +79,48 @@
                     const $label = document.querySelector(`#label-${entry.entryType}`);
                     $label.innerText = `${$label.innerText}: ${entry.startTime}`;
                 }
-            }).observe({entryTypes: supportedEntries, buffered: true});
+            }).observe({entryTypes: supportedEntries});
+
+            // To trigger layout shift
+            setTimeout(() => {
+              const d = document.querySelector("#rectangle");
+              d.style = "background-color: gray; height: 50px; width: 150px";
+            }, 3000);
         });
     </script>
-    <script type="module">
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const box = document.querySelector("#box-wrapper")
+        box.setAttribute("style", "overflow-wrap: normal;")
         // Long task
-        function sleep(t) {
-            return new Promise((resolve) => {
-                setTimeout(() => resolve(), t);
-            });
+        performance.mark("long-task-start");
+        for (let i = 0; i < 20000; i++) {
+          const element = document.createElement("span");
+          element.innerText = ".";
+          element.setAttribute("style", "height: 5px; width: 5px;")
+          box.appendChild(element);
         }
-        let sum = 0;
-        for (let i = 0; i < 10000; i++) {
-            await sleep(1);
-        }
+        performance.mark("long-task-end");
+        const measured = performance.measure("long-task-start", "long-task-end");
+        console.log("measured: ", measured.duration);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const page = document.querySelector("#page");
+        const go = document.querySelector("#go");
+        const back = document.querySelector("#back");
+
+        back.addEventListener("click", () => {
+          window.history.replaceState("back", "", "/example-performance-entry/index.html")
+          page.innerText = "Hello";
+        });
+        go.addEventListener("click", () => {
+          window.history.replaceState("go", "", "/example-performance-entry/foo")
+          page.innerText = "World";
+        });
+      });
     </script>
   </head>
 
@@ -113,10 +144,36 @@
         <h2>Performance Entries</h2>
         <p>This site shows the supported performance entries.</p>
         <p>Supported entries are followings (your browser supports <output id="number-of-supported-entries"></output> type of entries): </p>
+        <p>You can see the detail log of the entries.</p>
+
         <div id="supported-entries"></div>
+
+        <div id="rectangle" elementtiming="rectangle">for layout shift</div>
+
+        <a href="/example-performance-entry/for-backforwawrd-cache.html">link for empty page (for back-forward-cache)</a>
+
         <br />
-        <img src="https://bokken.io/assets/img/icon.png"/>
+        <br />
+
+        <div style="display: flex">
+          <img src="https://bokken.io/assets/img/icon.png" elementtiming="icon"/>
+          <div style="width: 100px; height: 150px;"><p>Drag icon over to right red rectangle.<br/>-></p></div>
+          <div style="width: 150px; height: 150px; background-color: red;"></div>
+        </div>
+        <br />
         <button><a href="immediately-close.html" target="_blank" rel="noopener noreferrer" >click me</a></button>
+        <br />
+        <p>After clicking the button, new page is opened in new tab to modify visibility state and the tab is automatically closed.</p>
+
+        <div style="background-color: #a6a6a6; border: 1px solid;">
+          <button id="back"><-</button>
+          <button id="go">-></button>
+
+          <div id="page" style="width: 100%; height: 300px; background-color: white;"></div>
+        </div>
+
+        <div style="width: 100%; height: 10px; background-color: gray;"></div>
+        <div id="box-wrapper"></div>
     </main>
 
     <footer>
