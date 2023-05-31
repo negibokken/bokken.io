@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2023-04-30T13:39:19.214Z</updated>
+  <updated>2023-05-31T05:57:18.452Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -350,6 +350,20 @@
     <summary
       type="html"
     >Web サイトのパフォーマンスを計測するための API がいくつか提供されている。ユーザ体験を向上させるのはもちろん。Google は Core Web Vitals を検索エンジン上で考慮すると述べている。高精度のい時間情報が必要。ただ、高精度の時間の情報は脆弱性にもなり得る。Spectre や Meltdown。このことから Web サイトのパフォーマンスを把握するのは非常に重要であるといえる。Performance Observer が定義されている。こちらの Performance Observer に計測したいメトリクスを定義することで、そのメトリクスを Observe して知らせてく</summary>
+  </entry>
+  
+  <entry>
+    <title
+    >パスワード変更用のURLを明示すためのwell-known URL for Changing Passwordsという仕様について</title>
+    <link
+      href="https://blog.bokken.io/articles/2023-05-31/about-well-known-change-password.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2023-05-31/about-well-known-change-password.html</id>
+    <updated>2023-05-31T05:57:18.452Z</updated>
+    <summary
+      type="html"
+    >パスワード変更のためのURLを示すための、A Well-Known URL for Changing Passwords という仕様が存在する。この仕様は主にクライアントサイドのパスワード管理ツールで使われる想定の仕様だ。本記事ではこの仕様がどういうものか、どういった利点があるのかについてまとめる。パスワード管理ツールはクロスサイトでのパスワードの再利用を防いだり、オートフィルをしてユーザビリティを高めてくれる良いツールだ。 ブラウザにもパスワード管理ツールが搭載されていたり、有名どころでは1PasswordやBitwardenのようなツールがある。これらのツールの中にはパスワードの強度を教えて</summary>
   </entry>
   
 </feed>
