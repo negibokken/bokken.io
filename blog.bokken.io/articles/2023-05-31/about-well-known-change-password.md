@@ -2,7 +2,7 @@
 
 @tags: [well-known, appsec]
 
-@date: [2023-05-31, 2023-05-31]
+@date: [2023-05-31, 2023-06-02]
 
 ## はじめに
 
@@ -22,9 +22,9 @@
 
 ## Well-Known URL for Changing Passwordsとは
 
-具体的に、[A Well-Known URL for Changing Passwords](https://w3c.github.io/webappsec-change-password-url/)で実施することは`/.well-known/change-password`をserveして、リダイレクトするだけである。
+具体的に、[A Well-Known URL for Changing Passwords](https://w3c.github.io/webappsec-change-password-url/)で実施することは`/.well-known/change-password`をserveして、パスワード変更画面のURLにリダイレクトするだけである。
 
-あるいは、`<meta http-equiv="refresh" content="0;url=https://example.com/settings/password">` のようなmetaタグをserveする形でも良いようだ。
+あるいは、`<meta http-equiv="refresh" content="0;url=https://example.com/settings/password">` のような、`http-equiv="refresh"`とパスワード変更画面のURLをcontentに持つmetaタグをserveする形でも良いようだ。
 
 URLへのリクエストを実際のパスワード変更画面へリダイレクトする際には302,303,307を使うことが推奨されている。
 
