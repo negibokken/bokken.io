@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2023-05-31T05:57:18.452Z</updated>
+  <updated>2023-06-30T14:49:09.403Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -364,6 +364,20 @@
     <summary
       type="html"
     >パスワード変更のためのURLを示すための、A Well-Known URL for Changing Passwords という仕様が存在する。この仕様は主にクライアントサイドのパスワード管理ツールで使われる想定の仕様だ。本記事ではこの仕様がどういうものか、どういった利点があるのかについてまとめる。パスワード管理ツールはクロスサイトでのパスワードの再利用を防いだり、オートフィルをしてユーザビリティを高めてくれる良いツールだ。 ブラウザにもパスワード管理ツールが搭載されていたり、有名どころでは1PasswordやBitwardenのようなツールがある。これらのツールの中にはパスワードの強度を教えて</summary>
+  </entry>
+  
+  <entry>
+    <title
+    >Prerender2 のキャッシュを更新し続けるためのヘルパーと HTTP Cache を合わせて活用する方法</title>
+    <link
+      href="https://blog.bokken.io/articles/2023-06-30/about-prerender2-refreshment.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2023-06-30/about-prerender2-refreshment.html</id>
+    <updated>2023-06-30T14:49:09.403Z</updated>
+    <summary
+      type="html"
+    >本記事ではPrerender2で事前描画したページを更新し続けるときに、少しだけ便利なヘルパーを作ったので、Prerender2の挙動とあわせて紹介する。Prerender2 という機能が Chrome/Chromium で実装されている。この Prerender2 という機能は、リンク先のページを事前描画する機能である。リンク先への遷移が一瞬で完了するため、高速な閲覧体験をユーザに提供できる機能だ。Prerender2 によって、例えば非常に重い画像が複数あるページであっても(事前描画が終わっていれば)一瞬で表示される。その簡単なデモが次の例だ。最初のデモでは Prerender2を使わずに重</summary>
   </entry>
   
 </feed>
