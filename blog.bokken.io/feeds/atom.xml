@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2023-06-30T14:49:09.403Z</updated>
+  <updated>2023-07-31T12:32:11.383Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -378,6 +378,19 @@
     <summary
       type="html"
     >本記事ではPrerender2で事前描画したページを更新し続けるときに、少しだけ便利なヘルパーを作ったので、Prerender2の挙動とあわせて紹介する。Prerender2 という機能が Chrome/Chromium で実装されている。この Prerender2 という機能は、リンク先のページを事前描画する機能である。リンク先への遷移が一瞬で完了するため、高速な閲覧体験をユーザに提供できる機能だ。Prerender2 によって、例えば非常に重い画像が複数あるページであっても(事前描画が終わっていれば)一瞬で表示される。その簡単なデモが次の例だ。最初のデモでは Prerender2を使わずに重</summary>
+  </entry>
+  
+  <entry>
+    <title>ブラウザの Storage Partitioning について</title>
+    <link
+      href="https://blog.bokken.io/articles/2023-07-31/about-storage-partitioning.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2023-07-31/about-storage-partitioning.html</id>
+    <updated>2023-07-31T12:32:11.383Z</updated>
+    <summary
+      type="html"
+    >ブラウザは様々なストレージや内部状態を持っている。例えば、Cookieなどがわかりやすい例だろう。 この内部状態を元にoriginと通信をするが、セキュリティやプライバシーの観点から、この内部状態は許可されていない異なる origin へ漏れないようにしなければいけない。では、実際にどういったストレージや内部状態を持っていて、それをどのように漏洩しないようにしているのか。この記事では、W3C の Privacy Community Group で検討されている Client-Side Storage Partitioning で検討されている内容について紹介して、それを概観する。各種ストレージや</summary>
   </entry>
   
 </feed>
