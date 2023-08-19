@@ -1,0 +1,8 @@
+# My security address
+Contact: mailto:bokken.ro+security@gmail.com
+
+# My canonical of the security.txt
+Canonical: https://www.bokken.io/.well-known/security.txt
+
+# About languages
+Preferred-Languages: en, ja
