@@ -25,6 +25,9 @@ const SUMMARY_LENGTH = 300;
 
 const htmltagRegexp = RegExp('<.+?>', 'g');
 let paragraphNumber = 1;
+const notation = RegExp('\[\^.+?\]', 'g');
+const notationContent = RegExp('^\[\^.+?\]', 'g');
+let notationNext = false;
 
 function serialize(value) {
     return value
@@ -52,6 +55,15 @@ const renderer = {
             descriptionExist = true;
             summary = text;
             return '';
+        }
+
+        // if (text.includes("[^")) {
+        //     console.log(`paragraph: ${text}`)
+        // }
+
+        if (notationNext) {
+            console.log('notationContentNext: ', text);
+            notationNext = false;
         }
 
         if (!isInIndex) {
@@ -86,6 +98,15 @@ const renderer = {
         return h;
     },
     link: (href, title, text) => {
+        console.log(`title: ${title}, text: ${text}`);
+        if (notationContent.test(title)) {
+            console.log('notationContent: ', text);
+            notationNext = true;
+            return ''
+        } else if (notation.test(title)) {
+            console.log('notation: ', text);
+            return ''
+        }
         return `<a ${isInIndex ? "" : 'target="_blank" rel="noopener"'} href="${href}" >${text}</a>`;
     },
     image: (src) => {
