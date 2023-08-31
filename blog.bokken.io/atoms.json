@@ -1,7 +1,7 @@
 {
   "title": "blog.bokken.io",
   "uri": "https://blog.bokken.io",
-  "updatedAt": "2023-07-31T12:32:11.383Z",
+  "updatedAt": "2023-08-31T13:55:43.111Z",
   "id": "2b743fd8-f4e8-4b94-8866-269347b3fbab",
   "articles": [
     {
@@ -206,6 +206,13 @@
       "uuid": "ac4340c1-bf52-4442-a834-e05256706406",
       "updatedAt": "2023-07-31T12:32:11.383Z",
       "summary": "ブラウザは様々なストレージや内部状態を持っている。例えば、Cookieなどがわかりやすい例だろう。 この内部状態を元にoriginと通信をするが、セキュリティやプライバシーの観点から、この内部状態は許可されていない異なる origin へ漏れないようにしなければいけない。では、実際にどういったストレージや内部状態を持っていて、それをどのように漏洩しないようにしているのか。この記事では、W3C の Privacy Community Group で検討されている Client-Side Storage Partitioning で検討されている内容について紹介して、それを概観する。各種ストレージや"
+    },
+    {
+      "title": "Web 好きにはたまらない Weaving The Web を読んで",
+      "uri": "https://blog.bokken.io/articles/2023-08-31/about-weaving-the-web.html",
+      "uuid": "6f49b4d4-3211-4004-9b95-19a549f3741c",
+      "updatedAt": "2023-08-31T13:55:43.111Z",
+      "summary": "とあるきっかけでずっと積んでしまっていた「Weaving the Web: The Original Design and Ultimate Destiny of the World Wide Web」(以下、Weaving the Web) を読んだ。読んだ内容を忘れないように備忘録として書き留めておく。「Weaving the Web」はひとことで言うなら、Web 好きにはたまらない本だ。著者は Tim Berners-Lee 氏と Mark Fischetti 氏で、この本には Web の発明者である Tim Berners-Lee 氏と World Wide Web の歴史について事細か"
     }
   ]
 }
