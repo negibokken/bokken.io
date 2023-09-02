@@ -80,7 +80,7 @@ const renderer = {
         }
         if (text === '目次' || text == 'もくじ') {
             isInIndex = true;
-            return `<details><summary>## ${text} (click で開く)</summary>${h}`;
+            return `<h${level}>${text}</h${level}><details><summary>(click で開く)</summary>`;
         }
 
         return h;
