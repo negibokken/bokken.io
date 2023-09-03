@@ -29,13 +29,13 @@ services:
         source: /var/log/nginx
         target: ${PWD}/var/log/nginx
       - type: bind
-        source: www.bokken.io/.
+        source: sites/www.bokken.io/.
         target:  /usr/share/nginx/html/www.bokken.io/
       - type: bind
-        source: blog.bokken.io/.
+        source: sites/blog.bokken.io/.
         target:  /usr/share/nginx/html/blog.bokken.io/
       - type: bind
-        source: x.bokken.io/.
+        source: sites/x.bokken.io/.
         target:  /usr/share/nginx/html/x.bokken.io/
       - type: bind
         source: assets/.

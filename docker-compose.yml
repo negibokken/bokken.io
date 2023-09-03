@@ -13,16 +13,8 @@ services:
       - bokken.io
       - app.bokken.io
     environment:
-      # NG
-      # DOMAINS: 'localhost -> http://bokken.io:80, www.localhost -> http://www.bokken.io:80, blog.localhost -> http://blog.bokken.io:80, career.localhost -> http://career.bokken.io:80, x.localhost -> http://x.bokken.io:80'
-      # DOMAINS: 'localhost -> http://bokken.io, www.localhost -> http://bokken.io, blog.localhost -> http://blog.bokken.io, career.localhost -> http://bokken.io, x.localhost -> http://bokken.io'
-      # DOMAINS: 'localhost -> http://bokken.io, blog.localhost -> http://bokken.io, career.localhot -> http://bokken.io, x.localhost -> http://x.localhost'
-      # DOMAINS: 'localhost -> http://localhost:80, www.localhost -> http://www.localhost:80, blog.localhost -> http://blog.localhost:80, career.localhost -> http://career.localhost:80, x.localhost -> http://x.localhost:80'
-      # OK
-      # DOMAINS: 'localhost -> http://bokken.io, career.localhost -> http://bokken.io, blog.localhost -> http://bokken.io, x.localhost -> http://bokken.io'
       DOMAINS: 'bokken.io -> http://bokken.io, www.bokken.io -> http://bokken.io, blog.bokken.io -> http://bokken.io, x.bokken.io -> http://bokken.io, app.bokken.io -> http://app.bokken.io:3000'
       STAGE: production
-      # STAGE: local
       ERROR_LOG: default
       ACCESS_LOG: default
     volumes:
