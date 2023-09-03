@@ -38,10 +38,10 @@ services:
         source: sites/x.bokken.io/.
         target:  /usr/share/nginx/html/x.bokken.io/
       - type: bind
-        source: assets/.
+        source: sites/assets/.
         target:  /usr/share/nginx/html/assets/
       - type: bind
-        source: nginx/.
+        source: sites/nginx/.
         target:  /etc/nginx
 
           # app.bokken_io:
