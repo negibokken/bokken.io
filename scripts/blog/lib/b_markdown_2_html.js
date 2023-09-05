@@ -3,11 +3,17 @@ const ejs = require('ejs');
 const hljs = require('highlightjs');
 const hash = require('crypto').createHash;
 
+const SUMMARY_LENGTH = 300;
+const HTML_TAG_REGEXP = RegExp('<.+?>', 'g');
+
 let articleTitle = '';
 let tags = '';
 let summary = '';
 let descriptionExist = false;
 let dates = [];
+let isInIndex = false;
+let paragraphNumber = 1;
+
 const extractTags = (text) => {
     const i = text.indexOf('[');
     const j = text.indexOf(']');
@@ -19,12 +25,6 @@ const extractDate = (text) => {
     let localDates = text.substring(i + 1, j).split(',');
     return localDates.map((d) => d.trim());
 };
-
-let isInIndex = false;
-const SUMMARY_LENGTH = 300;
-
-const htmltagRegexp = RegExp('<.+?>', 'g');
-let paragraphNumber = 1;
 
 function serialize(value) {
     return value
@@ -55,7 +55,7 @@ const renderer = {
         }
 
         if (!isInIndex) {
-            const copiedText = text.slice().replaceAll(htmltagRegexp, '').replaceAll("\n", "");
+            const copiedText = text.slice().replaceAll(HTML_TAG_REGEXP, '').replaceAll("\n", "");
             const t = copiedText.slice(0, Math.max(SUMMARY_LENGTH - summary.length + 1, 0));
             summary += t;
         }
@@ -93,7 +93,7 @@ const renderer = {
     },
     listitem: (text) => {
         if (!isInIndex) {
-            const copiedText = text.slice().replaceAll(htmltagRegexp, '').replaceAll("\n", "");
+            const copiedText = text.slice().replaceAll(HTML_TAG_REGEXP, '').replaceAll("\n", "");
             const t = copiedText.slice(0, Math.max(SUMMARY_LENGTH - summary.length + 1, 0));
             summary += t;
         }
@@ -136,6 +136,15 @@ class BMarkdown2HTML {
         try {
             if (!this.template) return;
             this.content = await ejs.renderFile(this.template, this.data);
+
+            articleTitle = '';
+            tags = '';
+            summary = '';
+            descriptionExist = false;
+            dates = [];
+            isInIndex = false;
+            paragraphNumber = 1;
+
         } catch (e) {
             console.error(e);
             process.exit(1);
