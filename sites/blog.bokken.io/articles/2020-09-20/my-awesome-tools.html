@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>生産性アップのための一工夫 | blog.bokken.io</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。要点は下記である。何度も繰り返すコマンドはスクリプトにコミットしてしまわないように .gitignore に追加ファイル単位で追加するのではなくディレクトリ単位で .gitignore して PATH を追加プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。例えば DB の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。テストは開発中何度も実行するので、これらのコマンドを何度も実行するとなると少し手間である。また、コマンドが長くなる"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="author" href="humans.txt" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="生産性アップのための一工夫" />
+    <meta
+      property="og:description"
+      content="最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。要点は下記である。何度も繰り返すコマンドはスクリプトにコミットしてしまわないように .gitignore に追加ファイル単位で追加するのではなくディレクトリ単位で .gitignore して PATH を追加プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。例えば DB の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。テストは開発中何度も実行するので、これらのコマンドを何度も実行するとなると少し手間である。また、コマンドが長くなる"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+    <script defer src="/assets/js/img-viewer.js"></script>
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io">bokken.io</a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html"
+          >生産性アップのための一工夫</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2020-09-20</dd>
+          <dt>更新日</dt>
+          <dd>2020-09-20</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            生産性, プログラミング
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="生産性アップのための一工夫"
+            href="#生産性アップのための一工夫"
+            id="生産性アップのための一工夫"
+          >
+            生産性アップのための一工夫
+          </a>
+        </h1>
+        <h2>
+          <a name="概要" href="#概要" id="概要"> 概要 </a>
+        </h2>
+        <p id="paragraph-1" class="paragraph">
+          最近生産性アップのためにやっていてよかったなと思うことがあったので紹介したい。<a
+            href="#paragraph-1"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-2" class="paragraph">
+          要点は下記である。<a href="#paragraph-2" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ul>
+          <li>何度も繰り返すコマンドはスクリプトに</li>
+          <li>コミットしてしまわないように .gitignore に追加</li>
+          <li>
+            ファイル単位で追加するのではなくディレクトリ単位で .gitignore して
+            PATH を追加
+          </li>
+        </ul>
+        <h2>
+          <a name="背景" href="#背景" id="背景"> 背景 </a>
+        </h2>
+        <p id="paragraph-3" class="paragraph">
+          プロジェクト内での開発において、特定のコマンド列による操作を繰り返すことがよくある。<a
+            href="#paragraph-3"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-4" class="paragraph">
+          例えば DB
+          の初期データのインサート、テストコマンドの実行などである。コマンド列にすると下記のようなコマンドである。<a
+            href="#paragraph-4"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-shell">yarn db-data-insert
+yarn test some-test
+</code></pre>
+        <p id="paragraph-5" class="paragraph">
+          テストは開発中何度も実行するので、これらのコマンドを何度も実行するとなると少し手間である。また、コマンドが長くなるとなおさらだ。<a
+            href="#paragraph-5"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-6" class="paragraph">
+          何度も実行するとなると、これらのコマンドをシェルスクリプトにまとめてしまうのがよい。例えば下記のようにだ。<a
+            href="#paragraph-6"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
+yarn db-data-insert
+yarn test some-test
+</code></pre>
+        <p id="paragraph-7" class="paragraph">
+          しかしこのままでは、git
+          で管理されているプロジェクトの場合、このファイルをコミットしないように気をつけなければいけない。<a
+            href="#paragraph-7"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="簡潔な方法" href="#簡潔な方法" id="簡潔な方法">
+            簡潔な方法
+          </a>
+        </h2>
+        <p id="paragraph-8" class="paragraph">
+          一つの方法としては
+          <code>.gitignore</code>
+          に書く方法がある。しかし、これではプロジェクトの
+          <code>.gitignore</code> に個人のスクリプト名が入ってしまう。<a
+            href="#paragraph-8"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-9" class="paragraph">
+          そこで <code>~/.gitconfig</code> に下記のように設定を追加し、<a
+            href="#paragraph-9"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-gitconfig">[core]
+  excludeSfile = ~/.gitignore.global
+</code></pre>
+        <p id="paragraph-10" class="paragraph">
+          <code>~/.gitignore.global</code>
+          に自分自身のスクリプトのファイル名を追加すると自分の特定の操作をコミットせずに保持できる。<a
+            href="#paragraph-10"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-sh">my-script
+</code></pre>
+        <p id="paragraph-11" class="paragraph">
+          ひとまず、これだけでも特定の連続したコマンド列の操作を、コミットせずに好き勝手に追加できる。<a
+            href="#paragraph-11"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="簡潔な方法の問題点"
+            href="#簡潔な方法の問題点"
+            id="簡潔な方法の問題点"
+          >
+            簡潔な方法の問題点
+          </a>
+        </h2>
+        <p id="paragraph-12" class="paragraph">
+          しかし、このままでは新たなコマンドを追加するごとに、
+          <code>~/.gitignore.global</code> を更新しなければいけない。<a
+            href="#paragraph-12"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-13" class="paragraph">
+          例えば下記のようにだ。<a href="#paragraph-13" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-sh">my-script1
+my-script2
+my-script3
+<span class="hljs-comment"># ...</span>
+</code></pre>
+        <p id="paragraph-14" class="paragraph">
+          これでは少し手間である。<a
+            href="#paragraph-14"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="簡潔な方法の改善"
+            href="#簡潔な方法の改善"
+            id="簡潔な方法の改善"
+          >
+            簡潔な方法の改善
+          </a>
+        </h2>
+        <p id="paragraph-15" class="paragraph">
+          何度も <code>~/.gitignore.global</code> を更新しないために、<code
+            >~/.gitignore.global</code
+          >
+          にディレクトリを追加してしまえばよい。<a
+            href="#paragraph-15"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-sh">my-awesome-tools
+</code></pre>
+        <p id="paragraph-16" class="paragraph">
+          こうしてやると、
+          <code>my-awesome-tools</code> ディレクトリやそれ以下のファイルは
+          ignore される。<a href="#paragraph-16" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-17" class="paragraph">
+          つまり、 <code>my-awesome-tools</code> に
+          <code>my-script1</code
+          >、<code>my-script2</code>、<code>my-script3</code>...、と追加してやればよい。<a
+            href="#paragraph-17"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-sh">$ ls my-awesome-tools
+my-scripts1 my-scripts2 my-scripts3
+</code></pre>
+        <p id="paragraph-18" class="paragraph">
+          こうすると、
+          <code>./my-awesome-tools/my-script1</code>
+          とするとスクリプトを実行することができる。<a
+            href="#paragraph-18"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="発展" href="#発展" id="発展"> 発展 </a>
+        </h2>
+        <p id="paragraph-19" class="paragraph">
+          ただし、このままでは、毎回
+          <code>./my-awesome-tools</code>
+          と入力しなければいけない。これも少し手間である。<a
+            href="#paragraph-19"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-20" class="paragraph">
+          できれば、<code>my-script1</code> と書くだけで実行したい。<a
+            href="#paragraph-20"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-21" class="paragraph">
+          その場合、自身の <code>~/.zshrc</code> や
+          <code>~/.bashrc</code> に下記の一行を追加して、<code
+            >my-awesome-tools</code
+          >
+          に <code>PATH</code> を通してやればよい。<a
+            href="#paragraph-21"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-sh"><span class="hljs-built_in">export</span> PATH=./my-awesome-tools:<span class="hljs-variable">$PATH</span>
+</code></pre>
+        <p id="paragraph-22" class="paragraph">
+          すると、自分のプロジェクトのルートで、<code>my-script1</code>
+          と打ち込むとコマンドが実行できる。<a
+            href="#paragraph-22"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-23" class="paragraph">
+          ディレクトリ構成としては、下記のようになるイメージである。<a
+            href="#paragraph-23"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code>% tree .
+.
+├── README.md
+├── my-awesome-tools
+│   ├── my-script1
+│   ├── my-script2
+│   └── my-script3
+└── src
+    └── main.js
+    ...
+</code></pre>
+        <p id="paragraph-24" class="paragraph">
+          一点注意として、プロジェクトのルートではない
+          <code>src</code> ディレクトリなどでは
+          <code>my-script?</code> は実行できない。<a
+            href="#paragraph-24"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-25" class="paragraph">
+          これは <code>PATH</code> が通っているのは
+          <code>./my-awesome-tools</code>
+          だけで、プロジェクトのルートにいるときのみ、<code
+            >${プロジェクトのルート}/my-awesome-tools</code
+          >
+          で参照できるからである。<a
+            href="#paragraph-25"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="まとめ" href="#まとめ" id="まとめ"> まとめ </a>
+        </h2>
+        <p id="paragraph-26" class="paragraph">
+          ここまで、コミットするほどではないが、何度も実行するコマンドをスクリプト化し、誤ってプロジェクトに追加することなく作成する方法を紹介した。<a
+            href="#paragraph-26"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-27" class="paragraph">
+          最初にも述べたが要点は下記である。<a
+            href="#paragraph-27"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ul>
+          <li>何度も繰り返すコマンドはスクリプトに</li>
+          <li>コミットしてしまわないように .gitignore に追加</li>
+          <li>
+            ファイル単位で追加するのではなくディレクトリ単位で .gitignore して
+            PATH を追加
+          </li>
+        </ul>
+        <p id="paragraph-28" class="paragraph">
+          また引き続き何か良い方法が見つかれば紹介していきたい。<a
+            href="#paragraph-28"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+
+      <div>
+        Subscribe via <a href="https://blog.bokken.io/feeds/atom.xml">RSS</a>
+      </div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a href="https://blog.bokken.io/articles/2020-09-06/hello-world.html">
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+
+        <div class="next-article">
+          <a
+            href="https://blog.bokken.io/articles/2020-09-30/html-parser-good-story.html"
+          >
+            次の記事へ
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://blog.bokken.io</loc>
+    <lastmod />
+    <changefreq>weekly</changefreq>
+    <id />
+    <priority>1.0</priority>
+  </url>
+
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2020-09-06/hello-world.html</loc>
+    <lastmod>2020-09-06</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2020-09-20/my-awesome-tools.html</loc>
+    <lastmod>2020-09-20</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2020-09-30/html-parser-good-story.html</loc>
+    <lastmod>2020-09-30</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2020-10-05/privacy-policy-note.html</loc>
+    <lastmod>2020-10-05</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2020-10-26/how-to-develop-minimal-pwa-app.html</loc>
+    <lastmod>2020-10-26</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2021-02-28/how-to-build-chromium.html</loc>
+    <lastmod>2021-02-28</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2021-12-30/lookback-2021.html</loc>
+    <lastmod>2021-12-30</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2022-01-01/a-clean-commit-message.html</loc>
+    <lastmod>2022-01-01</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2022-02-28/investigate-chromium-cors-header-parse-failure.html</loc>
+    <lastmod>2022-02-28</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2022-03-31/whats-new-2022-03.html</loc>
+    <lastmod>2022-03-31</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2022-04-30/apply-google-summer-of-code.html</loc>
+    <lastmod>2022-04-30</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2022-05-21/vscode-extension-chromium-code-search-permalink.html</loc>
+    <lastmod>2022-05-21</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2022-06-30/http-rfc-publication-study.html</loc>
+    <lastmod>2022-06-30</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2022-07-31/research-on-github-permalink.html</loc>
+    <lastmod>2022-07-31</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2022-08-31/chromium-commits.html</loc>
+    <lastmod>2022-08-31</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2022-09-27/about-anonymous-iframe.html</loc>
+    <lastmod>2022-09-27</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2022-10-24/about-client-side-storage.html</loc>
+    <lastmod>2022-10-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2022-11-24/about-prerender2.html</loc>
+    <lastmod>2022-11-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2022-12-30/about-chips.html</loc>
+    <lastmod>2022-12-30</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2023-01-29/about-fetch-metadata.html</loc>
+    <lastmod>2023-01-29</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2023-02-28/about-clear-site-data.html</loc>
+    <lastmod>2023-02-28</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.bokken.io/articles/2023-03-31/my-first-ietf.html</loc>
+    <lastmod>2023-03-31</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2023-04-30/timing-related-apis.html</loc>
+    <lastmod>2023-04-30</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2023-05-31/about-well-known-change-password.html</loc>
+    <lastmod>2023-05-31</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2023-06-30/about-prerender2-refreshment.html</loc>
+    <lastmod>2023-06-30</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2023-07-31/about-storage-partitioning.html</loc>
+    <lastmod>2023-07-31</lastmod>
+  </url>
+  
+  <url>
+    <loc
+    >https://blog.bokken.io/articles/2023-08-31/about-weaving-the-web.html</loc>
+    <lastmod>2023-08-31</lastmod>
+  </url>
+  
+</urlset>

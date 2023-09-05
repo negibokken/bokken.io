@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>
+      HTTP RFC Publication Study で HTTP/3 について発表しました | blog.bokken.io
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="HTTP RFC Publication Studyに発表者として参加した。その際に使った資料はこちらで公開している。詳細はここのJxck さんのブログ で触れられているが、HTTP/3 も QPACK も全然わからなかったので結構前から準備をしていた。優秀な bokken だけが、言い出したときからコツコツ準備していたが、それ以外は本当に 3 日で準備したので、前日の夜チャットで「誰だよこんなこと言い出したの」といった怒号が飛び交うなか資料を作るあのヒリヒリ感は、なんか久々だった。実は １ RFC 10 分 だと思っていたのに、1 人 10 分だと 3 日前に分かって、結局慌てふためいていたの"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="author" href="humans.txt" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2022-06-30/http-rfc-publication-study.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="HTTP RFC Publication Study で HTTP/3 について発表しました"
+    />
+    <meta
+      property="og:description"
+      content="HTTP RFC Publication Studyに発表者として参加した。その際に使った資料はこちらで公開している。詳細はここのJxck さんのブログ で触れられているが、HTTP/3 も QPACK も全然わからなかったので結構前から準備をしていた。優秀な bokken だけが、言い出したときからコツコツ準備していたが、それ以外は本当に 3 日で準備したので、前日の夜チャットで「誰だよこんなこと言い出したの」といった怒号が飛び交うなか資料を作るあのヒリヒリ感は、なんか久々だった。実は １ RFC 10 分 だと思っていたのに、1 人 10 分だと 3 日前に分かって、結局慌てふためいていたの"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+    <script defer src="/assets/js/img-viewer.js"></script>
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io">bokken.io</a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2022-06-30/http-rfc-publication-study.html"
+          >HTTP RFC Publication Study で HTTP/3 について発表しました</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2022-06-30</dd>
+          <dt>更新日</dt>
+          <dd>2022-06-30</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            HTTP/3, RFC
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="http-rfc-publication-study-で-http3-について発表しました"
+            href="#http-rfc-publication-study-で-http3-について発表しました"
+            id="http-rfc-publication-study-で-http3-について発表しました"
+          >
+            HTTP RFC Publication Study で HTTP/3 について発表しました
+          </a>
+        </h1>
+        <h2>
+          <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
+        </h2>
+        <p id="paragraph-1" class="paragraph">
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://web-study.connpass.com/event/250730/"
+            >HTTP RFC Publication Study</a
+          >に発表者として参加した。<a
+            href="#paragraph-1"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-2" class="paragraph">
+          その際に使った資料は<a
+            target="_blank"
+            rel="noopener"
+            href="https://docs.google.com/presentation/d/1_4LZNXbPHdQ48-UnFWtHkJ4JaTQ2hsP695hZePUcb0c/edit?usp=sharing"
+            >こちら</a
+          >で公開している。<a href="#paragraph-2" class="paragraph-anchor">¶</a>
+        </p>
+        <iframe
+          src="https://docs.google.com/presentation/d/e/2PACX-1vQJJG6Yq1HtN0Yq146b-ektkfm2DBs7oni9-5Zi24PMqryXe00jQE5LInT6NqrTBRkfUEUl1LpBgaL5/embed?start=false&loop=true&delayms=3000"
+          frameborder="0"
+          width="960"
+          height="569"
+          allowfullscreen="true"
+          mozallowfullscreen="true"
+          webkitallowfullscreen="true"
+        ></iframe>
+
+        <p id="paragraph-3" class="paragraph">
+          詳細はここの
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://blog.jxck.io/entries/2022-06-16/HTTP-RFCs.html#http-rfc-publication-study"
+            >Jxck さんのブログ</a
+          >
+          で触れられているが、HTTP/3 も QPACK
+          も全然わからなかったので結構前から準備をしていた。<a
+            href="#paragraph-3"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <blockquote>
+          <p id="paragraph-4" class="paragraph">
+            優秀な bokken
+            だけが、言い出したときからコツコツ準備していたが、それ以外は本当に 3
+            日で準備したので、前日の夜チャットで「誰だよこんなこと言い出したの」といった怒号が飛び交うなか資料を作るあのヒリヒリ感は、なんか久々だった。<a
+              href="#paragraph-4"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+        </blockquote>
+        <p id="paragraph-5" class="paragraph">
+          実は １ RFC 10 分 だと思っていたのに、1 人 10 分だと 3
+          日前に分かって、結局慌てふためいていたのはここだけの秘密にしておきたい。<a
+            href="#paragraph-5"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-6" class="paragraph">
+          他の発表者は 3
+          日で他の人に説明できるレベルで仕上げていて流石だった。<a
+            href="#paragraph-6"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
+        </h2>
+        <p id="paragraph-7" class="paragraph">
+          発表が終わるまでは気が気でなかったが、なんとか無事に紹介できた。<a
+            href="#paragraph-7"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-8" class="paragraph">
+          個人的に発表してよかった点としては、下記の HTTP/3 と QPACK
+          の資料の投下ツイートにあの
+          <a target="_blank" rel="noopener" href="https://twitter.com/kazuho"
+            >Kazuho Oku さん</a
+          >
+          からいいねをもらえたこと。家宝にしたい。<a
+            href="#paragraph-8"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <blockquote class="twitter-tweet">
+          <p lang="ja" dir="ltr">
+            HTTP/3 と
+            QPACK、とても早口になるかもしれないので今日の資料を投下しておきます<a
+              href="https://t.co/5ISPlNXggi"
+              >https://t.co/5ISPlNXggi</a
+            ><a
+              href="https://twitter.com/hashtag/http_rfc_study?src=hash&amp;ref_src=twsrc%5Etfw"
+              >#http_rfc_study</a
+            >
+          </p>
+          &mdash; bokken✏ (@bokken_)
+          <a
+            href="https://twitter.com/bokken_/status/1534875207579860992?ref_src=twsrc%5Etfw"
+            >June 9, 2022</a
+          >
+        </blockquote>
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charset="utf-8"
+        ></script>
+
+        <p id="paragraph-9" class="paragraph">
+          <a href="./like_from_oku_san.png" rel="noopener"
+            ><img src="./like_from_oku_san.png" /></a
+          ><a href="#paragraph-9" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-10" class="paragraph">
+          また、社内でも同様の発表をする機会をもらって HTTP/3 や QPACK
+          について伝えることができたので、そこもとてもよかった。<a
+            href="#paragraph-10"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-11" class="paragraph">
+          対外的な発表はあまりやってこなかったのだがとても楽しかった。こういう機会があったらまたぜひ発表していきたい。<a
+            href="#paragraph-11"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+
+      <div>
+        Subscribe via <a href="https://blog.bokken.io/feeds/atom.xml">RSS</a>
+      </div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a
+            href="https://blog.bokken.io/articles/2022-05-21/vscode-extension-chromium-code-search-permalink.html"
+          >
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+
+        <div class="next-article">
+          <a
+            href="https://blog.bokken.io/articles/2022-07-31/research-on-github-permalink.html"
+          >
+            次の記事へ
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>

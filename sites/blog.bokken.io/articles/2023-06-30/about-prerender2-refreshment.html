@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>
+      Prerender2 のキャッシュを更新し続けるためのヘルパーと HTTP Cache
+      を合わせて活用する方法 | blog.bokken.io
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="本記事ではPrerender2で事前描画したページを更新し続けるときに、少しだけ便利なヘルパーを作ったので、Prerender2の挙動とあわせて紹介する。Prerender2 という機能が Chrome/Chromium で実装されている。この Prerender2 という機能は、リンク先のページを事前描画する機能である。リンク先への遷移が一瞬で完了するため、高速な閲覧体験をユーザに提供できる機能だ。Prerender2 によって、例えば非常に重い画像が複数あるページであっても(事前描画が終わっていれば)一瞬で表示される。その簡単なデモが次の例だ。最初のデモでは Prerender2を使わずに重"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="author" href="humans.txt" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2023-06-30/about-prerender2-refreshment.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Prerender2 のキャッシュを更新し続けるためのヘルパーと HTTP Cache を合わせて活用する方法"
+    />
+    <meta
+      property="og:description"
+      content="本記事ではPrerender2で事前描画したページを更新し続けるときに、少しだけ便利なヘルパーを作ったので、Prerender2の挙動とあわせて紹介する。Prerender2 という機能が Chrome/Chromium で実装されている。この Prerender2 という機能は、リンク先のページを事前描画する機能である。リンク先への遷移が一瞬で完了するため、高速な閲覧体験をユーザに提供できる機能だ。Prerender2 によって、例えば非常に重い画像が複数あるページであっても(事前描画が終わっていれば)一瞬で表示される。その簡単なデモが次の例だ。最初のデモでは Prerender2を使わずに重"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+    <script defer src="/assets/js/img-viewer.js"></script>
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io">bokken.io</a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2023-06-30/about-prerender2-refreshment.html"
+          >Prerender2 のキャッシュを更新し続けるためのヘルパーと HTTP Cache
+          を合わせて活用する方法</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2023-06-30</dd>
+          <dt>更新日</dt>
+          <dd>2023-06-30</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            Prerender2, tips
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="prerender2-のキャッシュを更新し続けるためのヘルパーと-http-cache-を合わせて活用する方法"
+            href="#prerender2-のキャッシュを更新し続けるためのヘルパーと-http-cache-を合わせて活用する方法"
+            id="prerender2-のキャッシュを更新し続けるためのヘルパーと-http-cache-を合わせて活用する方法"
+          >
+            Prerender2 のキャッシュを更新し続けるためのヘルパーと HTTP Cache
+            を合わせて活用する方法
+          </a>
+        </h1>
+        <h2>
+          <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
+        </h2>
+        <p id="paragraph-1" class="paragraph">
+          本記事ではPrerender2で事前描画したページを更新し続けるときに、少しだけ便利なヘルパーを作ったので、Prerender2の挙動とあわせて紹介する。<a
+            href="#paragraph-1"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="prerender2-とは"
+            href="#prerender2-とは"
+            id="prerender2-とは"
+          >
+            Prerender2 とは
+          </a>
+        </h2>
+        <p id="paragraph-2" class="paragraph">
+          Prerender2 という機能が Chrome/Chromium で実装されている。この
+          Prerender2
+          という機能は、リンク先のページを事前描画する機能である。リンク先への遷移が一瞬で完了するため、高速な閲覧体験をユーザに提供できる機能だ。<a
+            href="#paragraph-2"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-3" class="paragraph">
+          Prerender2
+          によって、例えば非常に重い画像が複数あるページであっても(事前描画が終わっていれば)一瞬で表示される。その簡単なデモが次の例だ。<a
+            href="#paragraph-3"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <div style="display: flex">
+          <img width="350px" src="./img/prerender2-off.gif" />
+          <img width="350px" src="./img/prerender2-on.gif" />
+        </div>
+
+        <p id="paragraph-4" class="paragraph">
+          最初のデモでは
+          Prerender2を使わずに重い画像を複数掲載しているページにアクセスしている。黒い画像がすべて表示されるのに時間がかかるのが見て取れる。2
+          つめのデモではPrerender2を使って、遷移先のページを事前描画している。そのため、黒い画像群が一瞬で表示されている。<a
+            href="#paragraph-4"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-5" class="paragraph">
+          細かい仕様などは、<a
+            target="_blank"
+            rel="noopener"
+            href="https://developer.chrome.com/blog/prerender-pages/"
+            >web.dev</a
+          >の記事を参照していただきたいのと、
+          本blogでも一度紹介したことがあるため、<a
+            target="_blank"
+            rel="noopener"
+            href="https://blog.bokken.io/articles/2022-11-24/about-prerender2.html"
+            >こちらの記事</a
+          >を参照していただきたい。<a
+            href="#paragraph-5"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="prerender2-の使いどころ"
+            href="#prerender2-の使いどころ"
+            id="prerender2-の使いどころ"
+          >
+            Prerender2 の使いどころ
+          </a>
+        </h3>
+        <p id="paragraph-6" class="paragraph">
+          Prerender2が効果を発揮しそうなページとしては下記のようなところがある。<a
+            href="#paragraph-6"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ul>
+          <li>デモのような非常に重い画像を含むようなページ</li>
+          <li>メインスレッドで重い処理をする必要があるページ</li>
+          <li>そもそもパフォーマンスを考慮できておらず遅いページ</li>
+        </ul>
+        <p id="paragraph-7" class="paragraph">
+          また、課金・購読に関係したページも早く表示されることによって離脱率が下がる傾向にあるため、これらのページにも使えるだろう。<a
+            href="#paragraph-7"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="prerender2-の注意点"
+            href="#prerender2-の注意点"
+            id="prerender2-の注意点"
+          >
+            Prerender2 の注意点
+          </a>
+        </h3>
+        <p id="paragraph-8" class="paragraph">
+          ただし、Prerender2を使うと
+          CPU、メモリ、ネットワーク帯域幅、データ通信容量などユーザのリソースを消費してしまうため、ありとあらゆるリンク先を
+          Prerender するわけにはいかない。どのページを Prerender するかは
+          <a target="_blank" rel="noopener" href="https://twitter.com/nhiroki_"
+            >@nhiroki</a
+          >
+          さんの記事(「<a
+            target="_blank"
+            rel="noopener"
+            href="https://nhiroki.jp/2023/02/13/metrics-for-prerendering"
+            >Speculation Rules API
+            によるプリレンダリングのためのメトリクス設計</a
+          >」)を参考に、Prerender2 の Hit Rate
+          などのメトリクスを確認して、本当にPrerender2を使うべき場所なのか？を見定める必要がある。<a
+            href="#paragraph-8"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="prerender2-のキャンセル"
+            href="#prerender2-のキャンセル"
+            id="prerender2-のキャンセル"
+          >
+            Prerender2 のキャンセル
+          </a>
+        </h2>
+        <p id="paragraph-9" class="paragraph">
+          さて、ようやく本記事の主題だが、Prerender2 による事前描画は
+          Speculation Rules を削除することでキャンセルできる。例えば下記のように
+          DOM を削除することで、事前描画されたページは破棄される。<a
+            href="#paragraph-9"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-javascript"><span class="hljs-keyword">const</span> script = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'script[type="speculationrules"]'</span>);
+script.parentNode.removeChild(script);
+</code></pre>
+        <p id="paragraph-10" class="paragraph">
+          ここで、<a
+            target="_blank"
+            rel="noopener"
+            href="https://developer.chrome.com/blog/prerender-pages/"
+            >web.dev</a
+          >
+          には、キャンセルが必要なページに対してはPrerender2
+          を使わないことが推奨されている。一方で、ページの表示を高速化したいがキャンセルもしたい一定のユースケースは存在していると考えている。<a
+            href="#paragraph-10"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="prerender2をキャンセルしたくなるユースケース"
+            href="#prerender2をキャンセルしたくなるユースケース"
+            id="prerender2をキャンセルしたくなるユースケース"
+          >
+            Prerender2をキャンセルしたくなるユースケース
+          </a>
+        </h2>
+        <p id="paragraph-11" class="paragraph">
+          例えば、web.dev にはメディアサイトやブログの最新記事を Prerender2
+          の対象にする<a
+            target="_blank"
+            rel="noopener"
+            href="https://developer.chrome.com/blog/prerender-pages/#cancelling-speculation-rules:~:text=Statically%20included%20in%20the%20page%27s%20HTML.%20For%20example%20a%20news%20media%20site%2C%20or%20a%20blog%20may%20prerender%20the%20newest%20article%2C%20if%20that%20is%20often%20the%20next%20navigation%20for%20a%20large%20proportion%20of%20users."
+            >例が紹介</a
+          >されている。<a href="#paragraph-11" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-12" class="paragraph">
+          しかし、これらのサイトでは、記事が修正されるようなこともある。また、時間経過とともに記事の内容が変化していくような記事もあるだろう。その他、課金・購読に関するページの料金体系に変更があったときなどは古い料金体系表が表示されてしまうこともある。<a
+            href="#paragraph-12"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-13" class="paragraph">
+          このように大部分は Prerender2
+          で高速化できる可能性があるが、古いページが表示されてしまい困ってしまうこともある。<a
+            href="#paragraph-13"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-14" class="paragraph">
+          こういったケースではまず Prerender2
+          以外の方法で高速化することを考えるべきだが、この記事ではそういった最適化が終わってもなお高速化したいケースを考える。<a
+            href="#paragraph-14"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="今回のユースケースの問題"
+            href="#今回のユースケースの問題"
+            id="今回のユースケースの問題"
+          >
+            今回のユースケースの問題
+          </a>
+        </h2>
+        <p id="paragraph-15" class="paragraph">
+          今回の問題は、遷移先のページが古くなってしまっていることが問題だと考えられる。そうなると今回の問題に対しては下記のような解決方法がありそうだ。<a
+            href="#paragraph-15"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ul>
+          <li>定期的に更新する</li>
+          <li>遷移先のページに更新があったときにリフレッシュする</li>
+        </ul>
+        <p id="paragraph-16" class="paragraph">
+          それぞれ順番に解決方法を考える。<a
+            href="#paragraph-16"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="定期的に更新する"
+            href="#定期的に更新する"
+            id="定期的に更新する"
+          >
+            定期的に更新する
+          </a>
+        </h3>
+        <p id="paragraph-17" class="paragraph">
+          定期的に Speculation Rules を削除して、新しく Speculation Rules を
+          append
+          することで事前描画をやりなおし、定期的に遷移先ページを更新できる。<a
+            href="#paragraph-17"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-18" class="paragraph">
+          例えば5秒ごとに Speculation Rules
+          を更新する場合、コードにすると例えば下記のようになる。<a
+            href="#paragraph-18"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code class="language-javascript">&lt;script&gt;
+setInterval(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-comment">// 現在の Speculation Rules を取得 (ひとつしかないことを過程)</span>
+    <span class="hljs-keyword">const</span> current = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'script[type="speculationrules"]'</span>);
+
+    <span class="hljs-comment">// 新しく Speculation Rules 用の script を作成する</span>
+    <span class="hljs-keyword">const</span> rule = current.textContent;
+    <span class="hljs-keyword">const</span> attributes = current.attributes;
+    <span class="hljs-keyword">const</span> newScript = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'script'</span>);
+    script.setAttribute(<span class="hljs-string">"type"</span>, <span class="hljs-string">"speculationrules"</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">const</span> attribute <span class="hljs-keyword">of</span> attributes) {
+        script.setAttribute(attribute.name, attribute.value);
+    }
+    newScript.textContent = rule;
+
+    <span class="hljs-comment">// 古い Speculation Rules を削除する</span>
+    <span class="hljs-keyword">const</span> parent = current.parentNode;
+    parent.removeChild(current);
+
+    <span class="hljs-comment">// 10ms 後 (これは仮置き) に新しい Speculation Rules を append する</span>
+    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> { parent.appendChild(script); }, <span class="hljs-number">1</span> * <span class="hljs-number">10</span>)
+
+    current= newScript;
+}, <span class="hljs-number">5</span> * <span class="hljs-number">1000</span>);
+<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+</code></pre>
+        <p id="paragraph-19" class="paragraph">
+          ここで、scriptを新しく作り直しているのは、同じDOMの場合はPrerender2が再度実行されなかったためだ。おそらく同じ参照を持つDOMでは再実行されないようになっているのだろう。<a
+            href="#paragraph-19"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-20" class="paragraph">
+          上記のような script を使えば、定期的にSpeculation
+          Rulesを更新し、遷移先のページの内容も定期的に更新できる。<a
+            href="#paragraph-20"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="定期的に更新するためのヘルパー"
+            href="#定期的に更新するためのヘルパー"
+            id="定期的に更新するためのヘルパー"
+          >
+            定期的に更新するためのヘルパー
+          </a>
+        </h3>
+        <p id="paragraph-21" class="paragraph">
+          これを簡単にするための
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://github.com/negibokken/prerender2-refresh-helper"
+            >ヘルパー</a
+          >
+          を用意したので使ってみてほしい。<a
+            href="#paragraph-21"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-22" class="paragraph">
+          使い方としては、下記のように script を読み込み、<code
+            >speculationrules</code
+          >
+          に
+          <code>data-prerender-refresh=&quot;${seconds}&quot;</code>
+          と書くだけだ。<a href="#paragraph-22" class="paragraph-anchor">¶</a>
+        </p>
+        <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.jsdelivr.net/gh/negibokken/prerender2-refresh-helper@0.0.2/dist/index.js"</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"speculationrules"</span> <span class="hljs-attr">data-prerender-refresh</span>=<span class="hljs-string">"5"</span>&gt;</span><span class="actionscript">
+{
+  <span class="hljs-string">"prerender"</span>: [
+    {
+      <span class="hljs-string">"source"</span>: <span class="hljs-string">"list"</span>,
+      <span class="hljs-string">"urls"</span>: [<span class="hljs-string">"page.html"</span>]
+    }
+  ]
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+        <p id="paragraph-23" class="paragraph">
+          こうすることで、<code>${seconds}</code> 間隔で Speculation Rules
+          を更新してくれる。<a href="#paragraph-23" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="http-cache-を活用して更新があったときのみキャッシュを更新する"
+            href="#http-cache-を活用して更新があったときのみキャッシュを更新する"
+            id="http-cache-を活用して更新があったときのみキャッシュを更新する"
+          >
+            HTTP Cache を活用して更新があったときのみキャッシュを更新する
+          </a>
+        </h3>
+        <p id="paragraph-24" class="paragraph">
+          さて、話がそれてしまったが、定期的に Prerender2
+          で事前描画されるページを更新する方法をさらに最適化することを考える。<a
+            href="#paragraph-24"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-25" class="paragraph">
+          Prerender2 で事前描画する際には、HTTP Cache を尊重してくれる。
+          例えば、<code>pageA.html</code> に
+          <code>Cache-Control: max-age=3600;</code
+          >が指定されており、既に取得済みであるとする。すると、3600
+          秒間はそのキャッシュを利用して事前描画してくれる (<code>Expires</code>
+          による指定でも同様の挙動になる。)。<a
+            href="#paragraph-25"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-26" class="paragraph">
+          そのため、定期的に事前描画を走らせていても、<code
+            >Cache-Control: max-age=n;</code
+          >
+          が設定されていて Cache
+          が有効な場合はブラウザのキャッシュが利用されるためサーバへの負荷にはならない。<a
+            href="#paragraph-26"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-27" class="paragraph">
+          また、レスポンスに <code>Last-Modified</code> や
+          <code>ETag</code> を指定しつつ、クライアントから
+          <code>If-Modified-Since</code> や
+          <code>If-None-Match</code>
+          を用いたコンディショナルリクエストによって再検証する。そうすることでリソースに更新があったときだけ、リソースが返却されるようになるため、クライアントとサーバの負荷を最低限にできる。<a
+            href="#paragraph-27"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="http-cache-を活用する際の注意"
+            href="#http-cache-を活用する際の注意"
+            id="http-cache-を活用する際の注意"
+          >
+            HTTP Cache を活用する際の注意
+          </a>
+        </h3>
+        <p id="paragraph-28" class="paragraph">
+          Prerender2による事前描画が行われたページはキャッシュの有効期限が切れたとしてもページ自身は破棄されない。
+          そのため、意図しないページが描画される可能性がある。<strong
+            >HTTP Cache と Prerender2 は異なるライフサイクルを持つ</strong
+          >ことに注意して活用を検討してみるとよいだろう。<a
+            href="#paragraph-28"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
+        </h2>
+        <p id="paragraph-29" class="paragraph">
+          今回、Prerender2
+          で事前描画したページが古くなってしまったときに対応する方法について検討してその対応方法を紹介した。<a
+            href="#paragraph-29"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-30" class="paragraph">
+          今回紹介したライブラリを使えば比較的かんたんに Prerender2
+          で事前描画したページを新しい状態に保ち続けることができる。もしも活用できるようであれば利用してほしい。<a
+            href="#paragraph-30"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-31" class="paragraph">
+          また、このライブラリを使うだけではなく、HTTP Cache
+          と合わせて使うことでさらに最適化できるのでそれと合わせて検討してみていただきたい。<a
+            href="#paragraph-31"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-32" class="paragraph">
+          もしも、誤りや補足の情報があれば
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://github.com/negibokken/bokken.io/issues"
+            >issue</a
+          >
+          や
+          <a target="_blank" rel="noopener" href="https://twitter.com/bokken_"
+            >@bokken_</a
+          >
+          までいただけると嬉しい。<a
+            href="#paragraph-32"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="参考リンク" href="#参考リンク" id="参考リンク">
+            参考リンク
+          </a>
+        </h2>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://developer.chrome.com/blog/prerender-pages/"
+              >Prerender pages in Chrome for instant page navigations - Chrome
+              Developers</a
+            >
+          </li>
+        </ul>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+
+      <div>
+        Subscribe via <a href="https://blog.bokken.io/feeds/atom.xml">RSS</a>
+      </div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a
+            href="https://blog.bokken.io/articles/2023-05-31/about-well-known-change-password.html"
+          >
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+
+        <div class="next-article">
+          <a
+            href="https://blog.bokken.io/articles/2023-07-31/about-storage-partitioning.html"
+          >
+            次の記事へ
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>

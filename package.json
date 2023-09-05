@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "@prettier/plugin-xml": "^0.12.0",
+    "ejs": "^3.1.5",
+    "glob": "^10.3.4",
+    "highlightjs": "^9.16.2",
+    "marked": "^2.0.0",
+    "prettier": "^2.1.1",
+    "uuid": "^8.3.0"
+  },
+  "scripts": {
+    "start": "node scripts/blog/blog-gen.js",
+    "build:all": "yarn build:sites && yarn build:blog:articles && yarn build:blog:index && yarn build:blog:sitemap && yarn build:blog:atom",
+    "build:sites": "node scripts/blog/site-gen.js",
+    "build:blog:index": "node scripts/blog/blog-index-gen.js ./sites/blog.bokken.io/articles ./scripts/blog/templates/blog-index.ejs ./sites/blog.bokken.io/index.html",
+    "build:blog:article": "node scripts/blog/blog-gen.js scripts/blog/templates/blog-article.ejs",
+    "build:blog:article:dev": "node scripts/blog/blog-gen.js scripts/blog/templates/blog-article.dev.ejs",
+    "build:blog:articles": "node scripts/blog/articles-gen.js",
+    "build:blog:sitemap": "node scripts/blog/sitemap-gen.js ./sites/blog.bokken.io/articles ./sites/blog.bokken.io/sitemap.xml",
+    "build:blog:atom": "node scripts/blog/atom-gen.js ./sites/blog.bokken.io/articles ./sites/blog.bokken.io/atoms.json"
+  }
+}

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="blog.bokken.io" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-83287008-4");
+    </script>
+    <script
+      type="text/javascript"
+      src="/assets/js/register-service-worker.js"
+    ></script>
+    <title>blog | bokken.io</title>
+
+    <link rel="shortcut icon" href="assets/img/favicon.ico" />
+    <link rel="author" href="humans.txt" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta property="og:url" content="https://blog.bokken.io" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="blog.bokken.io" />
+    <meta property="og:description" content="bokken tech weblog" />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <link rel="preload" href="assets/img/web.svg" as="image" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+  </head>
+
+  <body>
+    <header>
+      <a href="https://bokken.io"><h1>bokken.io</h1></a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+    </ul>
+
+    <main>
+      <section>
+        <h2>Articles</h2>
+
+        <h3>2023</h3>
+        <ul>
+          <li>
+            2023-08-31
+            <a href="./articles/2023-08-31/about-weaving-the-web.html">
+              <span class="article-title">
+                Web 好きにはたまらない Weaving The Web を読んで
+              </span>
+            </a>
+            <span class="tags">[Web]</span>
+          </li>
+
+          <li>
+            2023-07-31
+            <a href="./articles/2023-07-31/about-storage-partitioning.html">
+              <span class="article-title">
+                ブラウザの Storage Partitioning について
+              </span>
+            </a>
+            <span class="tags">[browser, storage, privacy]</span>
+          </li>
+
+          <li>
+            2023-06-30
+            <a href="./articles/2023-06-30/about-prerender2-refreshment.html">
+              <span class="article-title">
+                Prerender2 のキャッシュを更新し続けるためのヘルパーと HTTP Cache
+                を合わせて活用する方法
+              </span>
+            </a>
+            <span class="tags">[Prerender2, tips]</span>
+          </li>
+
+          <li>
+            2023-05-31
+            <a
+              href="./articles/2023-05-31/about-well-known-change-password.html"
+            >
+              <span class="article-title">
+                パスワード変更用のURLを明示すためのwell-known URL for Changing
+                Passwordsという仕様について
+              </span>
+            </a>
+            <span class="tags">[well-known, appsec]</span>
+          </li>
+
+          <li>
+            2023-04-30
+            <a href="./articles/2023-04-30/timing-related-apis.html">
+              <span class="article-title">
+                Web サイトのパフォーマンスを計測するためのタイミング関係の API
+                について
+              </span>
+            </a>
+            <span class="tags">[Browser, Timing API, Performance]</span>
+          </li>
+
+          <li>
+            2023-03-31
+            <a href="./articles/2023-03-31/my-first-ietf.html">
+              <span class="article-title">
+                IETF 116 Yokohama に参加しました
+              </span>
+            </a>
+            <span class="tags">[IETF, draft]</span>
+          </li>
+
+          <li>
+            2023-02-28
+            <a href="./articles/2023-02-28/about-clear-site-data.html">
+              <span class="article-title">
+                クライアントの Cookie などのデータを削除する Clear Site Data
+                という仕様について
+              </span>
+            </a>
+            <span class="tags">[Clear-Site-Data, storage, Cookie]</span>
+          </li>
+
+          <li>
+            2023-01-29
+            <a href="./articles/2023-01-29/about-fetch-metadata.html">
+              <span class="article-title">
+                不正なリクエストを弾くために使える Fetch Metadata
+                という仕様について
+              </span>
+            </a>
+            <span class="tags">[Web, App, Sec]</span>
+          </li>
+        </ul>
+
+        <h3>2022</h3>
+        <ul>
+          <li>
+            2022-12-30
+            <a href="./articles/2022-12-30/about-chips.html">
+              <span class="article-title">
+                サードパーティ Cookie をブロックする制限を緩和する CHIPS
+                という仕様について
+              </span>
+            </a>
+            <span class="tags">[Web, Privacy, Security, Cookie]</span>
+          </li>
+
+          <li>
+            2022-11-24
+            <a href="./articles/2022-11-24/about-prerender2.html">
+              <span class="article-title"> Prerender2 という機能について </span>
+            </a>
+            <span class="tags">[Web, browser, Prerender2]</span>
+          </li>
+
+          <li>
+            2022-10-24
+            <a href="./articles/2022-10-24/about-client-side-storage.html">
+              <span class="article-title">
+                ブラウザのクライアントサイド storage についてまとめる
+              </span>
+            </a>
+            <span class="tags">[browser, storage]</span>
+          </li>
+
+          <li>
+            2022-09-27
+            <a href="./articles/2022-09-27/about-anonymous-iframe.html">
+              <span class="article-title"> Anonymous iframe とは </span>
+            </a>
+            <span class="tags">[iframe, spec, COEP, CORP]</span>
+          </li>
+
+          <li>
+            2022-08-30
+            <a href="./articles/2022-08-31/chromium-commits.html">
+              <span class="article-title">
+                Chromium のコミットを検索できるサイトを作った
+              </span>
+            </a>
+            <span class="tags">[Chromium, commits]</span>
+          </li>
+
+          <li>
+            2022-07-31
+            <a href="./articles/2022-07-31/research-on-github-permalink.html">
+              <span class="article-title">
+                GitHub permalink の URL の仕様について
+              </span>
+            </a>
+            <span class="tags">[GitHub, permalink]</span>
+          </li>
+
+          <li>
+            2022-06-30
+            <a href="./articles/2022-06-30/http-rfc-publication-study.html">
+              <span class="article-title">
+                HTTP RFC Publication Study で HTTP/3 について発表しました
+              </span>
+            </a>
+            <span class="tags">[HTTP/3, RFC]</span>
+          </li>
+
+          <li>
+            2022-05-21
+            <a
+              href="./articles/2022-05-21/vscode-extension-chromium-code-search-permalink.html"
+            >
+              <span class="article-title">
+                Chromium の開発時に便利な Visual Studio Code の機能拡張を作った
+              </span>
+            </a>
+            <span class="tags">[Chromium, Visual Studio Code]</span>
+          </li>
+
+          <li>
+            2022-04-30
+            <a href="./articles/2022-04-30/apply-google-summer-of-code.html">
+              <span class="article-title">
+                働いているけど Google Summer of Code (GSoC) に応募した
+              </span>
+            </a>
+            <span class="tags">[Google Summer of Code, GSoC]</span>
+          </li>
+
+          <li>
+            2022-03-31
+            <a href="./articles/2022-03-31/whats-new-2022-03.html">
+              <span class="article-title"> Web 標準を読む会 </span>
+            </a>
+            <span class="tags">[Web 標準, 近況]</span>
+          </li>
+
+          <li>
+            2022-02-28
+            <a
+              href="./articles/2022-02-28/investigate-chromium-cors-header-parse-failure.html"
+            >
+              <span class="article-title">
+                Chromium のバグを直しているときに知った HTTP ヘッダ関連の Web
+                標準の読み方
+              </span>
+            </a>
+            <span class="tags">[Chromium, Web 標準, Fetch]</span>
+          </li>
+
+          <li>
+            2022-01-01
+            <a href="./articles/2022-01-01/a-clean-commit-message.html">
+              <span class="article-title">
+                きれいなコミットメッセージとは
+              </span>
+            </a>
+            <span class="tags">[commit-message]</span>
+          </li>
+        </ul>
+
+        <h3>2021</h3>
+        <ul>
+          <li>
+            2021-12-30
+            <a href="./articles/2021-12-30/lookback-2021.html">
+              <span class="article-title"> 2021年の振り返り </span>
+            </a>
+            <span class="tags">[lookback]</span>
+          </li>
+
+          <li>
+            2021-02-28
+            <a href="./articles/2021-02-28/how-to-build-chromium.html">
+              <span class="article-title">
+                Chromium をビルド・テストする方法とその実行時間の備忘録
+              </span>
+            </a>
+            <span class="tags">[browser, Chromium]</span>
+          </li>
+        </ul>
+
+        <h3>2020</h3>
+        <ul>
+          <li>
+            2020-10-26
+            <a href="./articles/2020-10-26/how-to-develop-minimal-pwa-app.html">
+              <span class="article-title">
+                Progressive Web App 化する最低限の設定
+              </span>
+            </a>
+            <span class="tags">[Web, PWA, App Manifest, Service Worker]</span>
+          </li>
+
+          <li>
+            2020-10-11
+            <a href="./articles/2020-10-05/privacy-policy-note.html">
+              <span class="article-title">
+                Web サイトとして記載しておくべきプライバシーポリシーは何か
+              </span>
+            </a>
+            <span class="tags">[web, privacy]</span>
+          </li>
+
+          <li>
+            2020-10-02
+            <a href="./articles/2020-09-30/html-parser-good-story.html">
+              <span class="article-title">
+                HTML parser を書いてるときに出会った Web 標準仕様の話
+              </span>
+            </a>
+            <span class="tags">[html, tag, parser, Web 仕様]</span>
+          </li>
+
+          <li>
+            2020-09-20
+            <a href="./articles/2020-09-20/my-awesome-tools.html">
+              <span class="article-title"> 生産性アップのための一工夫 </span>
+            </a>
+            <span class="tags">[生産性, プログラミング]</span>
+          </li>
+
+          <li>
+            2020-09-06
+            <a href="./articles/2020-09-06/hello-world.html">
+              <span class="article-title"> Weblog をはじめる </span>
+            </a>
+            <span class="tags">[web, blog]</span>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
