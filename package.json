@@ -15,8 +15,12 @@
     "build:blog:index": "node scripts/blog/blog-index-gen.js ./sites/blog.bokken.io/articles ./scripts/blog/templates/blog-index.ejs ./sites/blog.bokken.io/index.html",
     "build:blog:article": "node scripts/blog/blog-gen.js scripts/blog/templates/blog-article.ejs",
     "build:blog:article:dev": "node scripts/blog/blog-gen.js scripts/blog/templates/blog-article.dev.ejs",
+    "build:blog:article:watch": "node scripts/blog/blog-gen-watch.js scripts/blog/templates/blog-article.dev.ejs",
     "build:blog:articles": "node scripts/blog/articles-gen.js",
     "build:blog:sitemap": "node scripts/blog/sitemap-gen.js ./sites/blog.bokken.io/articles ./sites/blog.bokken.io/sitemap.xml",
     "build:blog:atom": "node scripts/blog/atom-gen.js ./sites/blog.bokken.io/articles ./sites/blog.bokken.io/atoms.json"
+  },
+  "devDependencies": {
+    "node-watch": "^0.7.4"
   }
 }
