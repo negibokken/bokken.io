@@ -19,7 +19,7 @@ html {
   height: 100%;
   max-width: 100vw;
   color: #333;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 body {
@@ -185,6 +185,13 @@ main {
   padding: 0 1em 8.5em 2em;
 }
 
+@media screen and (max-width: 480px) {
+    main{
+        padding: 0 1rem 8.5em 1rem;
+    }
+}
+
+
 dt::after {
   content: ':';
 }
@@ -249,7 +256,7 @@ article > p {
 
   display: block;
   margin-block-start: 1em;
-  margin-block-end: 1em;
+  margin-block-end: 2rem;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
 }
@@ -276,7 +283,7 @@ article code {
 article img {
   margin-top: 10px;
   margin-bottom: 10px;
-  max-width: 800px;
+  max-width: min(80vw, 800px);
 }
 
 p code {
@@ -298,10 +305,22 @@ article > blockquote {
 main > article > ol,
 main > article > ul {
   margin: 20px 0 25px 10px;
+  padding-inline-start: 20px;
+}
+
+@media screen and (max-width: 480px) {
+    main > article > ol,
+    main > article > ul {
+      margin: 20px 0 25px 10px;
+      padding-inline-start: 0rem;
+    }
+    ul {
+      padding-inline-start: 2rem;
+    }
 }
 
 article li {
-  margin: 5px 0;
+  margin: 0.7rem 0;
   display: list-item;
   text-align: -webkit-match-parent;
 }
