@@ -166,7 +166,7 @@ h6 > a::before {
 
 /* disable ▶ mark
 /* Chrome、Safari以外 */
-summary {
+summary.index {
   display: block;
   cursor: pointer;
   padding: 12px 30px 12px 15px;
@@ -177,8 +177,44 @@ summary {
 }
 
 /* Chrome、Safari */
-summary::-webkit-details-marker {
+summary.index::-webkit-details-marker {
   display: none;
+}
+
+summary.column {
+    cursor: pointer;
+    outline: 0;
+    padding: 0.7em 0.7em 0.7em 0.9em;
+    border: 1px solid #eeeeee33;
+    border-radius: 5px;
+    background: #fffafa;
+}
+
+details.column {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    cursor: pointer;
+}
+
+details[open] summary.column {
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+  box-shadow: none;
+  border-bottom: none;
+  background: #fffafa;
+}
+
+/* Chrome、Safari */
+summary.column::-webkit-details-marker {
+  display: list-item;
+}
+
+div.column-content {
+    border: 1px solid #5c93bb33;
+    border-radius: 0 0 5px 5px;
+    background: #fff;
+    padding: 0.5em 0.9em;
 }
 
 main {

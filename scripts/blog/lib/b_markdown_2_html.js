@@ -12,6 +12,7 @@ let summary = '';
 let descriptionExist = false;
 let dates = [];
 let isInIndex = false;
+let isInColumn = false;
 let paragraphNumber = 1;
 
 const extractTags = (text) => {
@@ -78,9 +79,17 @@ const renderer = {
             isInIndex = false;
             return `</details>${h}`;
         }
+        if (isInColumn) {
+            isInColumn = false;
+            return `</div></details>${h}`;
+        }
         if (text === '目次' || text == 'もくじ') {
             isInIndex = true;
-            return `<h${level}>${text}</h${level}><details><summary>(click で開く)</summary>`;
+            return `<h${level}>${text}</h${level}><details class="index"><summary>(click で開く)</summary>`;
+        }
+        if (text.includes("コラム:")) {
+            isInColumn = true;
+            return `<details class="column"><summary class="column">${text}</summary><div class="column-content">`;
         }
 
         return h;
