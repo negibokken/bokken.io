@@ -6,9 +6,8 @@
 
 ## はじめに
 
-この記事では、「[Post-Spectre Web Development](https://www.w3.org/TR/post-spectre-webdev/)」 というドキュメントを元に、Spectre 以後の Web 開発において、必要なセキュリティ関連の仕組みやヘッダの設定と、Spectre 以後に新しく策定されたヘッダや仕組みについてまとめる。
-
-ボトムアップに説明が続くため、セキュリティヘッダの設定とその理由のみを見たい場合は<a href="#post-spectre-%E9%96%8B%E7%99%BA%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E9%96%A2%E9%80%A3%E3%81%AE%E3%83%98%E3%83%83%E3%83%80%E3%81%AE%E8%A8%AD%E5%AE%9A">こちらの節</a>を参照して頂きたい。
+この記事では、「[Post-Spectre Web Development](https://www.w3.org/TR/post-spectre-webdev/)」 というドキュメントを元に、Spectre 以後の Web 開発において必要なセキュリティ関連の仕組みやヘッダの設定についてまとめる。
+また、「[Post-Spectre Web Development](https://www.w3.org/TR/post-spectre-webdev/)」が公開されてから新たに追加された仕組みについても合わせて紹介し、ヘッダを設定できるようにする。
 
 ## もくじ
 
@@ -49,23 +48,34 @@
 
 Spectre は Web の脅威モデルをすっかり変えてしまった。そのように言われてから 5 年ほど経った。
 
-これまでは Same Origin Policy と呼ばれる、Origin ごとにリソースの認可を制御することでリソースを守ろうとしてきた。しかし、Spectre によって**同一プロセスのメモリ上にデータが展開されるだけで危険**な状態になってしまった。
 
-Web は他のオリジンのリソースをドキュメントに読み込んでコンテンツを作ることができる。その性質上、同一のプロセスのメモリ上にデータを保持する実装となっていることが多かった。
+これまで Web ブラウザは Same-Origin Policy という、Origin ごとにリソースの認可を制御する仕組みによってユーザのリソースを守ろうとしてきた。しかし、Spectre によって**同一プロセスのメモリ上にデータが展開されるだけで危険**な状態になってしまった。
 
-Spectre は CPU の脆弱性を利用した攻撃なため、「CPU ベンダが修正を施して Spectre を再現できなくなったときに Web は元に戻るのか」、というとそうではない。
+Web サイトでは他のオリジンのリソースをドキュメントに組み込んでコンテンツを作ることができる。Web ブラウザのアーキテクチャによっては、異なるオリジンのコンテンツを同一プロセスのメモリ上に展開する実装となっていることもあった。
+そのため、ある悪意のあるサイトが、センシティブな情報を持つログイン済みのサイトを読み込んで、センシティブな情報を奪取することが可能であった。
 
-Spectre 以外であっても、同一プロセス上のメモリを読む攻撃が見つかるかもしれない。Spectre は Web の脅威モデルをすっかり変えて、不可逆のものにしてしまった。つまり、Spectre を期に追加された様々なセキュリティ関連のヘッダや、HTML タグの属性を無視して過ごすことはできない。
+この Web の特徴から、Web ブラウザは Spectre の影響を大きく受けてしまい、その影響は今もなお続いている。
+
+Spectre は CPU の脆弱性を利用した攻撃なため、「CPU ベンダが脆弱性の修正を施して Spectre を再現できなくなったときに Web は元に戻るのか」、というとそうではない。
+Spectre 以外であっても、同一プロセス上のメモリを読む攻撃が見つかる可能性は依然としてある。**Spectre (の発見)は Web の脅威モデルをすっかり変えて、不可逆のものにしてしまった**。つまり、Spectre を期に追加された様々なセキュリティ関連のヘッダや、HTML タグの属性を無視して過ごすことはできない。
+
+本記事では、そのセキュリティ周りのヘッダがなぜ必要なのかをまとめて、実際に適用できるようになることを目指す。
 
 ## セキュリティ関連の仕組みやヘッダ
 
-Spectre 以後、ブラウザがドキュメントを読み込み、そのドキュメント内にある cross-origin のリソースを読み込むのには一層の注意が払われるようになった。
-
 ブラウザがドキュメントを読み込み、cross-origin のリソースを読み込む可能性がある部分は下記のようなところがある。
+
+Site Isolation、CORB/ORB はそもそもの設定、
+オプトインで CORP と COOP と COEP が追加されている。
+あと他にもある。
 
 ![cross-origin なリソースを読み込む可能性のある例](./img/cross-origin.png)
 
 これらのすべてについて、意図せず cross-origin にリソースが読み込まれるのを防がなければいけない。
+
+そもそもすべてのコンテンツを別プロセスで読み込んでレンダラで結合するだけにすれば良いとする説もある。
+しかし、その場合には、プロセスを大量に生成することになり、メモリなどのリソースを大量に消費してしまう。
+また、IPC や Mojo といったプロセス間通信を多用することになる。プロセス間通信は比較的遅いため、この方法はあまり現実的ではないのが現状だ。
 
 ### Spectre 以前から存在するセキュリティ関連の仕組み・ヘッダ
 
@@ -322,3 +332,16 @@ Spectre などの同じプロセスのメモリを読み込む攻撃はブラウ
 * [Origin 解体新書](https://zenn.dev/jxck/books/origin-anatomia)
 * [Spectre の脅威とウェブサイトが設定すべきヘッダーについて](https://blog.agektmr.com/2021/11/browser-security.html)
 * [Out-of-Process iframes (OOPIFs)](https://www.chromium.org/developers/design-documents/oop-iframes/)
+* [Chromium Blog: Mitigating Side-Channel Attacks](https://blog.chromium.org/2021/03/mitigating-side-channel-attacks.html)
+* [Site Isolation](https://www.chromium.org/Home/chromium-security/site-isolation/)
+[Site Isolation Design Document](https://www.chromium.org/developers/design-documents/site-isolation/#requirements)
+* [Chromium Docs - Process Model and Site Isolation](https://chromium.googlesource.com/chromium/src/+/main/docs/process_model_and_site_isolation.md)
+* [Google Online Security Blog: A Spectre proof-of-concept for a Spectre-proof web](https://security.googleblog.com/2021/03/a-spectre-proof-of-concept-for-spectre.html)
+* [Chromium Docs - Process Model and Site Isolation](https://chromium.googlesource.com/chromium/src/+/main/docs/process_model_and_site_isolation.md)
+* [Site Isolation for web developers - Chrome for Developers](https://developer.chrome.com/blog/site-isolation/)
+
+Improving extension security with out-of-process iframes - May 2017
+Mitigating Spectre with Site Isolation in Chrome - July 2018
+Improving Site Isolation for Stronger Browser Security / Recent Site Isolation improvements - October 2019
+Mitigating Side-Channel Attacks / A Spectre proof-of-concept for a Spectre-proof web - March 2021
+Protecting more with Site Isolation / Privacy and performance, working together in Chrome - July 2021
