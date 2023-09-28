@@ -85,7 +85,7 @@ const renderer = {
         }
         if (text === '目次' || text == 'もくじ') {
             isInIndex = true;
-            return `<h${level}>${text}</h${level}><details class="index"><summary>(click で開く)</summary>`;
+            return `<h${level}>${text}</h${level}><details class="index"><summary class="index">(click で開く)</summary>`;
         }
         if (text.includes("コラム:")) {
             isInColumn = true;
