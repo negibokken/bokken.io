@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2023-08-31T13:55:43.111Z</updated>
+  <updated>2023-09-30T12:44:23.902Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -404,6 +404,19 @@
     <summary
       type="html"
     >とあるきっかけでずっと積んでしまっていた「Weaving the Web: The Original Design and Ultimate Destiny of the World Wide Web」(以下、Weaving the Web) を読んだ。読んだ内容を忘れないように備忘録として書き留めておく。「Weaving the Web」はひとことで言うなら、Web 好きにはたまらない本だ。著者は Tim Berners-Lee 氏と Mark Fischetti 氏で、この本には Web の発明者である Tim Berners-Lee 氏と World Wide Web の歴史について事細か</summary>
+  </entry>
+  
+  <entry>
+    <title>Software Design 10 月号に HTTP/3 の記事を寄稿しました</title>
+    <link
+      href="https://blog.bokken.io/articles/2023-09-30/software-design-2023-10.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2023-09-30/software-design-2023-10.html</id>
+    <updated>2023-09-30T12:44:23.902Z</updated>
+    <summary
+      type="html"
+    >Software Design 2023 年 10 月号の HTTP/3 の特集の第一章に寄稿する機会を頂きました。https://gihyo.jp/magazine/SD/archive/2023/202310第一章の内容は、HTTP の歴史と HTTP/3 の特徴についてまとめたものになっています。今回、執筆にあたって、調べれば調べるほど HTTP についてまとめたいことが湧いてきてしまって、前回の記事で紹介した『Weaving The Web』を読んだり、インターネットの資料を読み漁ったりしました。手前味噌ではありますが、短いページに HTTP の歴史と HTTP/3 の特徴を詰め込むこと</summary>
   </entry>
   
 </feed>
