@@ -5,13 +5,13 @@
   >
     <meta charset="utf-8" />
     <title>
-      Post Spectre 時代の Web のセキュリティについて - Post-Spectre Web
-      Development とは | blog.bokken.io
+      Post Spectre 時代の Web のセキュリティの仕組みについて振り返る |
+      blog.bokken.io
     </title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="この記事では、「Post-Spectre Web Development」 というドキュメントを元に、Spectre 以後の Web 開発において必要なセキュリティ関連の仕組みやヘッダの設定についてまとめる。また、「Post-Spectre Web Development」が公開されてから新たに追加された仕組みについても合わせて紹介し、ヘッダを設定できるようにする。Spectre は Web の脅威モデルをすっかり変えてしまった。そのように言われてから 5 年ほど経った。(ココもう少し表現の仕方がありそう)これまで Web ブラウザは Same-Origin Policy (SOP) という、O"
+      content="この記事では、「Post-Spectre Web Development」 というドキュメントを元に、Spectre 以後の Web 開発において必要なセキュリティ関連の仕組みやヘッダの設定についてまとめる。また、「Post-Spectre Web Development」が公開されてから新たに追加された仕組みについても合わせて紹介する。Spectre は Web の脅威モデルをすっかり変えてしまった。そのように言われてから 5 年ほど経った。(ココもう少し表現の仕方がありそう)これまで Web ブラウザは Same-Origin Policy (SOP) という、Origin ごとにリソースの"
     />
     <meta name="author" content="bokken" />
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
@@ -33,11 +33,11 @@
     <meta property="og:type" content="article" />
     <meta
       property="og:title"
-      content="Post Spectre 時代の Web のセキュリティについて - Post-Spectre Web Development とは"
+      content="Post Spectre 時代の Web のセキュリティの仕組みについて振り返る"
     />
     <meta
       property="og:description"
-      content="この記事では、「Post-Spectre Web Development」 というドキュメントを元に、Spectre 以後の Web 開発において必要なセキュリティ関連の仕組みやヘッダの設定についてまとめる。また、「Post-Spectre Web Development」が公開されてから新たに追加された仕組みについても合わせて紹介し、ヘッダを設定できるようにする。Spectre は Web の脅威モデルをすっかり変えてしまった。そのように言われてから 5 年ほど経った。(ココもう少し表現の仕方がありそう)これまで Web ブラウザは Same-Origin Policy (SOP) という、O"
+      content="この記事では、「Post-Spectre Web Development」 というドキュメントを元に、Spectre 以後の Web 開発において必要なセキュリティ関連の仕組みやヘッダの設定についてまとめる。また、「Post-Spectre Web Development」が公開されてから新たに追加された仕組みについても合わせて紹介する。Spectre は Web の脅威モデルをすっかり変えてしまった。そのように言われてから 5 年ほど経った。(ココもう少し表現の仕方がありそう)これまで Web ブラウザは Same-Origin Policy (SOP) という、Origin ごとにリソースの"
     />
     <meta property="og:site_name" content="blog.bokken.io" />
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
@@ -79,8 +79,7 @@
       <li>
         <a
           href="https://blog.bokken.io/articles/2023-09-30/about-post-spectre.html"
-          >Post Spectre 時代の Web のセキュリティについて - Post-Spectre Web
-          Development とは</a
+          >Post Spectre 時代の Web のセキュリティの仕組みについて振り返る</a
         >
       </li>
     </ul>
@@ -106,12 +105,11 @@
         </div>
         <h1>
           <a
-            name="post-spectre-時代の-web-のセキュリティについて---post-spectre-web-development-とは"
-            href="#post-spectre-時代の-web-のセキュリティについて---post-spectre-web-development-とは"
-            id="post-spectre-時代の-web-のセキュリティについて---post-spectre-web-development-とは"
+            name="post-spectre-時代の-web-のセキュリティの仕組みについて振り返る"
+            href="#post-spectre-時代の-web-のセキュリティの仕組みについて振り返る"
+            id="post-spectre-時代の-web-のセキュリティの仕組みについて振り返る"
           >
-            Post Spectre 時代の Web のセキュリティについて - Post-Spectre Web
-            Development とは
+            Post Spectre 時代の Web のセキュリティの仕組みについて振り返る
           </a>
         </h1>
         <h2>
@@ -130,7 +128,7 @@
             rel="noopener"
             href="https://www.w3.org/TR/post-spectre-webdev/"
             >Post-Spectre Web Development</a
-          >」が公開されてから新たに追加された仕組みについても合わせて紹介し、ヘッダを設定できるようにする。<a
+          >」が公開されてから新たに追加された仕組みについても合わせて紹介する。<a
             href="#paragraph-1"
             class="paragraph-anchor"
             >¶</a
@@ -148,8 +146,51 @@
               >
             </li>
             <li>
-              <a href="#cross-origin-な読み込みが発生する箇所"
-                >Cross-Origin な読み込みが発生する箇所</a
+              <a href="#spectre-への対策と-web-の形"
+                >Spectre への対策と Web の形</a
+              >
+              <ul>
+                <li>
+                  <a href="#コラム:-same-origin-は安全か？"
+                    >コラム: same-origin は安全か？</a
+                  >
+                </li>
+                <li>
+                  <a href="#cross-origin-な読み込みが発生するケース"
+                    >Cross-Origin な読み込みが発生するケース</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#cross-origin-isolated-とは"
+                >Cross-Origin Isolated とは</a
+              >
+              <ul>
+                <li>
+                  <a
+                    href="#spectre-以後に登場したセキュリティ関連の仕組み・ヘッダ"
+                    >Spectre 以後に登場したセキュリティ関連の仕組み・ヘッダ</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="#1.-window-の参照への対応---cross-origin-opener-policy-(coop)"
+                >1. window の参照への対応 - Cross-Origin Opener Policy (COOP)</a
+              >
+            </li>
+            <li>
+              <a
+                href="#提供するリソースの保護---cross-origin-resource-policy-(corp)"
+                >提供するリソースの保護 - Cross-Origin Resource Policy (CORP)</a
+              >
+            </li>
+            <li>
+              <a
+                href="#読み込むリソースの保護---cross-origin-embedder-policy-(coep)"
+                >読み込むリソースの保護 - Cross-Origin Embedder Policy (COEP)</a
               >
             </li>
             <li>
@@ -161,34 +202,6 @@
                   <a
                     href="#spectre-以前から存在するセキュリティ関連の仕組み・ヘッダ"
                     >Spectre 以前から存在するセキュリティ関連の仕組み・ヘッダ</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#spectre-以後に登場したセキュリティ関連の仕組み・ヘッダ"
-                    >Spectre 以後に登場したセキュリティ関連の仕組み・ヘッダ</a
-                  >
-                </li>
-                <li>
-                  <a href="#cross-origin-opener-policy-(coop)"
-                    >Cross Origin Opener Policy (COOP)</a
-                  >
-                </li>
-                <li>
-                  <a href="#cross-origin-resource-policy-(corp)"
-                    >Cross Origin Resource Policy (CORP)</a
-                  >
-                </li>
-                <li>
-                  <a href="#cross-origin-embedder-policy-(coep)"
-                    >Cross Origin Embedder Policy (COEP)</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#cross-origin-read-blocking-(corb)-/-opaque-response-blocking-(orb)"
-                    >Cross Origin Read Blocking (CORB) / Opaque Response
-                    Blocking (ORB)</a
                   >
                 </li>
               </ul>
@@ -357,7 +370,7 @@
           >
         </p>
         <p id="paragraph-7" class="paragraph">
-          本記事では、そのセキュリティ周りのヘッダがなぜ必要なのかをまとめて、実際に適用できるようになることを目指す。<a
+          本記事では、そのセキュリティ周りの仕組みがなぜ必要なのかをまとめる。<a
             href="#paragraph-7"
             class="paragraph-anchor"
             >¶</a
@@ -365,23 +378,132 @@
         </p>
         <h2>
           <a
-            name="cross-origin-な読み込みが発生する箇所"
-            href="#cross-origin-な読み込みが発生する箇所"
-            id="cross-origin-な読み込みが発生する箇所"
+            name="spectre-への対策と-web-の形"
+            href="#spectre-への対策と-web-の形"
+            id="spectre-への対策と-web-の形"
           >
-            Cross-Origin な読み込みが発生する箇所
+            Spectre への対策と Web の形
           </a>
         </h2>
         <p id="paragraph-8" class="paragraph">
-          ブラウザが Cross-Origin なリソースを読み込んだり、 Cross-Origin
-          なサイトと通信できるようになるケースについて整理すると、下記のようなケースが存在する。<a
+          Web において、Spectre
+          のようなサイドチャネル攻撃への対策としては、攻撃者が制御できるプロセス下に攻撃
+          (窃取) されてはまずい情報を置かないようにすればよい。<a
             href="#paragraph-8"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
+        <p id="paragraph-9" class="paragraph">
+          その際に次の 2 種類の立場が考えられる。<a
+            href="#paragraph-9"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
         <ol>
-          <li>window.open で新しい URL を開いたとき (window の参照)</li>
+          <li>
+            自分自身のサイトやリソースを信用できない origin に読み込ませない
+          </li>
+          <li>
+            自分自身のサイトからの窃取を防ぐために不用意に cross-origin
+            の情報を読み込まない
+          </li>
+        </ol>
+        <p id="paragraph-10" class="paragraph">
+          基本的には、same-origin
+          なサイト同士のリソースのやり取りについては問題がないものとして考えられている。<a
+            href="#paragraph-10"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-11" class="paragraph">
+          Web
+          において同一プロセスのメモリ上にデータが展開される恐れがあるのはどういったケースがあるのか、次項から紹介する。<a
+            href="#paragraph-11"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <details class="column">
+          <summary class="column">コラム: same-origin は安全か？</summary>
+          <div class="column-content">
+            <p id="paragraph-12" class="paragraph">
+              same-origin でももちろん安全ではないケースもある。<a
+                href="#paragraph-12"
+                class="paragraph-anchor"
+                >¶</a
+              >
+            </p>
+            <p id="paragraph-13" class="paragraph">
+              例えば、<a
+                target="_blank"
+                rel="noopener"
+                href="https://example.com"
+                >https://example.com</a
+              >
+              という origin が、利用者 Alice, Bob にそれぞれ
+              <a target="_blank" rel="noopener" href="https://example.com/alice"
+                >https://example.com/alice</a
+              >
+              、<a target="_blank" rel="noopener" href="https://example.com/bob"
+                >https://example.com/bob</a
+              >
+              といったようにそれぞれのサイトを
+              <a target="_blank" rel="noopener" href="https://example.com"
+                >https://example.com</a
+              >
+              という origin で提供しているケースを考える。このように同一の
+              origin で異なるサイト提供者が自由にコンテンツ(HTML, JavaScript,
+              CSS)を提供できる場合には安全ではない。<a
+                href="#paragraph-13"
+                class="paragraph-anchor"
+                >¶</a
+              >
+            </p>
+            <p id="paragraph-14" class="paragraph">
+              Alice と Bob が同一の origin
+              でコンテンツを提供しているため、ブラウザの Same-Origin Policy
+              による保護が効かない。 例えば、Bob が作ったサイトで Alice
+              の作ったサイトの情報を JavaScript などで取得できる状況にある。<a
+                href="#paragraph-14"
+                class="paragraph-anchor"
+                >¶</a
+              >
+            </p>
+            <p id="paragraph-15" class="paragraph">
+              これは、アーキテクチャ上間違った選択のために安全でないサービスが運用できる例だが、このように
+              same-origin
+              だからといって必ずしも安全とは言えない。ただ、これだけ情報がそういった設計がされることは無いだろう。この記事では基本的に
+              Same-Origin Policy
+              による保護を前提としたリソースが提供されていることを前提に進める。<a
+                href="#paragraph-15"
+                class="paragraph-anchor"
+                >¶</a
+              >
+            </p>
+          </div>
+        </details>
+        <h3>
+          <a
+            name="cross-origin-な読み込みが発生するケース"
+            href="#cross-origin-な読み込みが発生するケース"
+            id="cross-origin-な読み込みが発生するケース"
+          >
+            Cross-Origin な読み込みが発生するケース
+          </a>
+        </h3>
+        <p id="paragraph-16" class="paragraph">
+          ブラウザが Cross-Origin なリソースを読み込んだり、 Cross-Origin
+          なサイトと通信できるようになるケースについて整理すると、下記のようなケースが存在する。<a
+            href="#paragraph-16"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ol>
+          <li>window.open で新しい URL を開いたとき (window、opener の参照)</li>
           <li>
             frame, iframe, embed, object 他、frame
             でドキュメントやその他リソースを読み込んだとき (frame の参照など)
@@ -393,45 +515,256 @@
           </li>
           <li>xhr, fetch などのフェッチリクエストを実行するとき</li>
         </ol>
-        <p id="paragraph-9" class="paragraph">
+        <p id="paragraph-17" class="paragraph">
           図にすると次のようになっている。<a
-            href="#paragraph-9"
+            href="#paragraph-17"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-10" class="paragraph">
+        <p id="paragraph-18" class="paragraph">
           <a href="./img/cross-origin.png" rel="noopener"
             ><img src="./img/cross-origin.png" /></a
-          ><a href="#paragraph-10" class="paragraph-anchor">¶</a>
+          ><a href="#paragraph-18" class="paragraph-anchor">¶</a>
         </p>
-        <p id="paragraph-11" class="paragraph">
+        <p id="paragraph-19" class="paragraph">
           このそれぞれのケースで Cross-Origin
           なリソースを読み込むケースがあり、Cross-Origin
           の際には必要に応じてプロセスを分離することを考えなければいけない。必要に応じてというのが、難しいところだ。<a
-            href="#paragraph-11"
+            href="#paragraph-19"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-12" class="paragraph">
+        <p id="paragraph-20" class="paragraph">
           そもそも、同一プロセスのメモリに読み込まれることが問題なら、ブラウザがデフォルトでCross-Origin
           なリソースを読み込む際には自動的にプロセスを分離してしまえばいいと思うかもしれない。
           しかし、それはリソースと互換性の観点から難しい。Web
           サイトには無数のCross-Origin
           なリソースが読み込まれる可能性があり、そのリソースのためにプロセスを生成してメモリを消費すると大量のリソースが消費されてしまう。
-          また、ブラウザが Cross-Origin のリソースを分離して、iframe
-          などと完全に通信できないようにしてしまうと、iframe
-          を使ったシングルサインオンなどの機能が壊れてしまうことになる。<a
-            href="#paragraph-12"
+          また、ブラウザが Cross-Origin のリソースを勝手に分離して、window や
+          iframe などと完全に通信できないようにしてしまうと、window や iframe
+          を使ったシングルサインオンやペイメントなどの機能が壊れてしまうことになる。<a
+            href="#paragraph-20"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-13" class="paragraph">
+        <p id="paragraph-21" class="paragraph">
           そのため、少なくとも現状ではユーザ（サイトオーナー）が自分自身のサイトやリソースをどのように扱ってほしいか、ブラウザに伝える必要がある。
           ただし、今後、ブラウザがリスクに応じてデフォルトで分離することも検討が進んでいる。このことについては後の節で紹介する。<a
-            href="#paragraph-13"
+            href="#paragraph-21"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="cross-origin-isolated-とは"
+            href="#cross-origin-isolated-とは"
+            id="cross-origin-isolated-とは"
+          >
+            Cross-Origin Isolated とは
+          </a>
+        </h2>
+        <p id="paragraph-22" class="paragraph">
+          Cross-Origin Isolated とは、その名の通り、Cross-Origin
+          と分離されている状態のことを指す。<a
+            href="#paragraph-22"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-23" class="paragraph">
+          Out-of-Process iframe といった仕組みでプロセスを分離する。<a
+            href="#paragraph-23"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="spectre-以後に登場したセキュリティ関連の仕組み・ヘッダ"
+            href="#spectre-以後に登場したセキュリティ関連の仕組み・ヘッダ"
+            id="spectre-以後に登場したセキュリティ関連の仕組み・ヘッダ"
+          >
+            Spectre 以後に登場したセキュリティ関連の仕組み・ヘッダ
+          </a>
+        </h3>
+        <p id="paragraph-24" class="paragraph">
+          Spectre
+          以後に登場したセキュリティ関連の仕組み・ヘッダは下記のようなものがある。<a
+            href="#paragraph-24"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ul>
+          <li>Cross Origin Opener Policy (COOP)</li>
+          <li>Cross Origin Resource Policy (CORP)</li>
+          <li>Cross Origin Embedder Policy (COEP)</li>
+          <li>
+            Cross Origin Read Blocking (CORB) / Opaque Response Blocking (ORB)
+          </li>
+        </ul>
+        <h2>
+          <a
+            name="1-window-の参照への対応---cross-origin-opener-policy-(coop)"
+            href="#1-window-の参照への対応---cross-origin-opener-policy-(coop)"
+            id="1-window-の参照への対応---cross-origin-opener-policy-(coop)"
+          >
+            1. window の参照への対応 - Cross-Origin Opener Policy (COOP)
+          </a>
+        </h2>
+        <p id="paragraph-25" class="paragraph">
+          ブラウザではあるサイトを開いたときに関連しているドキュメントの読み込みをブラウジングコンテキストという形で保持している。同一のブラウジングコンテキスト内にあるものは同一のプロセスに保持され、参照や(readonly
+          でなければ)変更が可能になっている。例えば、サイト上のドキュメントや、サイト上で開いた
+          window や、iframe などのフレームを保持している。また、postMessage
+          によるデータ通信も可能だ。COOP
+          は、自分のサイトをこのブラウジングコンテキストでどのように扱ってほしいかを指示するためのものだ。<a
+            href="#paragraph-25"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-26" class="paragraph">
+          COOPには、現状、<code>unsafe-none</code>、<code>same-origin</code>、<code>same-origin-allow-popups</code>、<code
+            >restrict-properties</code
+          >
+          (策定中)がある。<a href="#paragraph-26" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-27" class="paragraph">
+          例えば、unsafe-none
+          は現状のデフォルト設定だ。このディレクティブが指定されたときには、cross-origin
+          からの読み込み時にもコンテキストは分離されない。<a
+            href="#paragraph-27"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-28" class="paragraph">
+          例えば、次のように利用するだろう。<a
+            href="#paragraph-28"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code>
+</code></pre>
+        <p id="paragraph-29" class="paragraph">
+          same-origin を指定すると、Cross-Site
+          から読み込まれて場合にサイトとのコンテキストを分離し、同じプロセスに読み込まれないようにする。また、same-origin
+          を指定した場合は、自分自身が window.open で開いたドキュメントが
+          cross-site の場合にもコンテキストが分離される。<a
+            href="#paragraph-29"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-30" class="paragraph">
+          下記のような読み込みがエラーになる。<a
+            href="#paragraph-30"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <pre><code>
+</code></pre>
+        <p id="paragraph-31" class="paragraph">
+          same-origin-allow-popups では、自分自身が window.open
+          で開いた場合にはコンテキストを保持する。自分自身は same-origin
+          からしか読み込まれたくないが、ポップアップによるシングルサインオンを提供したい場合には有効だろう。ただし、これはシングルサインオンのためのサイトが
+          unsafe-none で提供されている必要がある。<a
+            href="#paragraph-31"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-32" class="paragraph">
+          この場合、シングルサインオンのためのサイトがSiteIsolation
+          な状態ではなくなってしまう。<a
+            href="#paragraph-32"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-33" class="paragraph">
+          これを防ぐために今議論が進んているのが COOP strict-properties
+          だ。これは、ポップアップを利用したシングルサインオンや、ペイメントの機能が
+          window.postMessage や、 window.clsed
+          といった限られた機能のみしか使わないことから、この限られた機能のみを提供することで
+          SiteIsolation
+          な状態にしようというものだ。これが進めば、シングルサインオンやペイメントのサイトも安全にサービスを提供できるようになる。<a
+            href="#paragraph-33"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="提供するリソースの保護---cross-origin-resource-policy-(corp)"
+            href="#提供するリソースの保護---cross-origin-resource-policy-(corp)"
+            id="提供するリソースの保護---cross-origin-resource-policy-(corp)"
+          >
+            提供するリソースの保護 - Cross-Origin Resource Policy (CORP)
+          </a>
+        </h2>
+        <h2>
+          <a
+            name="読み込むリソースの保護---cross-origin-embedder-policy-(coep)"
+            href="#読み込むリソースの保護---cross-origin-embedder-policy-(coep)"
+            id="読み込むリソースの保護---cross-origin-embedder-policy-(coep)"
+          >
+            読み込むリソースの保護 - Cross-Origin Embedder Policy (COEP)
+          </a>
+        </h2>
+        <p id="paragraph-34" class="paragraph">
+          COEP とは、読み込むリソースが cross-origin
+          で読み込んでも良いものか確認するか、あるいはセンシティブな情報を取得しないようにブラウザに指示するための仕組みである。例えば、COEP
+          のヘッダバリューには下記のようなディレクティブがある。<a
+            href="#paragraph-34"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ol>
+          <li>unsafe-none</li>
+          <li>require-corp</li>
+          <li>credentialless (策定中)</li>
+        </ol>
+        <p id="paragraph-35" class="paragraph">
+          これらのディレクティブのうち、 unsafe-none
+          がデフォルト値で、ブラウザは従来通りリソースについて何も確認しない。<a
+            href="#paragraph-35"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-36" class="paragraph">
+          require-corp は、読み込むリソースが<a
+            href="#paragraph-36"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-37" class="paragraph">
+          crossoriginをつける<a href="#paragraph-37" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-38" class="paragraph">
+          COEP では、自分が読み込むリソースについては CORS を要求するか、public
+          に読み込んでも問題ないリソースのみに限定して、不用意にセンシティブなリソースを読み込まないようにする対応であるといえそ<a
+            href="#paragraph-38"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-39" class="paragraph">
+          credentialless というのは、リソースの取得時に Basic
+          認証や、Cookie、クライアント証明書といったクレデンシャルをリクエストに付与しないようブラウザに要求するディレクティブである。
+          外部リソースであっても、これらのクレデンシャルを付与しなければユーザ依存のコンテンツ（センシティブな情報）が表示されないためである（クエリパラメータはどうなるんだろ？たまについてるよね）。<a
+            href="#paragraph-39"
             class="paragraph-anchor"
             >¶</a
           >
@@ -445,28 +778,28 @@
             セキュリティ関連のヘッダ、仕組み
           </a>
         </h2>
-        <p id="paragraph-14" class="paragraph">
+        <p id="paragraph-40" class="paragraph">
           Site Isolation、CORB/ORB はそもそもの設定、 オプトインで CORP と COOP
           と COEP が追加されている。 あと他にもある。<a
-            href="#paragraph-14"
+            href="#paragraph-40"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-15" class="paragraph">
+        <p id="paragraph-41" class="paragraph">
           これらのすべてについて、意図せず cross-origin
           にリソースが読み込まれるのを防がなければいけない。<a
-            href="#paragraph-15"
+            href="#paragraph-41"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-16" class="paragraph">
+        <p id="paragraph-42" class="paragraph">
           そもそもすべてのコンテンツを別プロセスで読み込んでレンダラで結合するだけにすれば良いとする説もある。
           しかし、その場合には、プロセスを大量に生成することになり、メモリなどのリソースを大量に消費してしまう。
           また、IPC や Mojo
           といったプロセス間通信を多用することになる。プロセス間通信は比較的遅いため、この方法はあまり現実的ではないのが現状だ。<a
-            href="#paragraph-16"
+            href="#paragraph-42"
             class="paragraph-anchor"
             >¶</a
           >
@@ -480,9 +813,9 @@
             Spectre 以前から存在するセキュリティ関連の仕組み・ヘッダ
           </a>
         </h3>
-        <p id="paragraph-17" class="paragraph">
+        <p id="paragraph-43" class="paragraph">
           Spectre 以前からも、下記のような仕組みやヘッダが存在している。<a
-            href="#paragraph-17"
+            href="#paragraph-43"
             class="paragraph-anchor"
             >¶</a
           >
@@ -570,133 +903,6 @@
             </ul>
           </li>
         </ul>
-        <p id="paragraph-18" class="paragraph">
-          これらは Spectre
-          以後も有効な仕組み・ヘッダである。これらの仕組みやヘッダで防げているのは次の図の部分である。<a
-            href="#paragraph-18"
-            class="paragraph-anchor"
-            >¶</a
-          >
-        </p>
-        <p id="paragraph-19" class="paragraph">
-          <a href="https://placehold.jp/300x300.jpg" rel="noopener"
-            ><img src="https://placehold.jp/300x300.jpg" /></a
-          ><a href="#paragraph-19" class="paragraph-anchor">¶</a>
-        </p>
-        <p id="paragraph-20" class="paragraph">
-          しかし、これらの仕組みやヘッダだけではカバーできなかった範囲がある。それを次節のような仕組みやヘッダで守るようになった。<a
-            href="#paragraph-20"
-            class="paragraph-anchor"
-            >¶</a
-          >
-        </p>
-        <h3>
-          <a
-            name="spectre-以後に登場したセキュリティ関連の仕組み・ヘッダ"
-            href="#spectre-以後に登場したセキュリティ関連の仕組み・ヘッダ"
-            id="spectre-以後に登場したセキュリティ関連の仕組み・ヘッダ"
-          >
-            Spectre 以後に登場したセキュリティ関連の仕組み・ヘッダ
-          </a>
-        </h3>
-        <p id="paragraph-21" class="paragraph">
-          Spectre
-          以後に登場したセキュリティ関連の仕組み・ヘッダは下記のようなものがある。<a
-            href="#paragraph-21"
-            class="paragraph-anchor"
-            >¶</a
-          >
-        </p>
-        <ul>
-          <li>Cross Origin Opener Policy (COOP)</li>
-          <li>Cross Origin Resource Policy (CORP)</li>
-          <li>Cross Origin Embedder Policy (COEP)</li>
-          <li>
-            Cross Origin Read Blocking (CORB) / Opaque Response Blocking (ORB)
-          </li>
-        </ul>
-        <p id="paragraph-22" class="paragraph">
-          それぞれについて簡単に説明する。<a
-            href="#paragraph-22"
-            class="paragraph-anchor"
-            >¶</a
-          >
-        </p>
-        <h3>
-          <a
-            name="cross-origin-opener-policy-(coop)"
-            href="#cross-origin-opener-policy-(coop)"
-            id="cross-origin-opener-policy-(coop)"
-          >
-            Cross Origin Opener Policy (COOP)
-          </a>
-        </h3>
-        <p id="paragraph-23" class="paragraph">
-          <a href="https://placehold.jp/300x300.jpg" rel="noopener"
-            ><img src="https://placehold.jp/300x300.jpg" /></a
-          ><a href="#paragraph-23" class="paragraph-anchor">¶</a>
-        </p>
-        <p id="paragraph-24" class="paragraph">
-          <font color="red">Openerの話</font> Opener の話。<a
-            href="#paragraph-24"
-            class="paragraph-anchor"
-            >¶</a
-          >
-        </p>
-        <h3>
-          <a
-            name="cross-origin-resource-policy-(corp)"
-            href="#cross-origin-resource-policy-(corp)"
-            id="cross-origin-resource-policy-(corp)"
-          >
-            Cross Origin Resource Policy (CORP)
-          </a>
-        </h3>
-        <p id="paragraph-25" class="paragraph">
-          <font color="red">Resourceの話</font
-          ><a href="#paragraph-25" class="paragraph-anchor">¶</a>
-        </p>
-        <p id="paragraph-26" class="paragraph">
-          <a href="https://placehold.jp/300x300.jpg" rel="noopener"
-            ><img src="https://placehold.jp/300x300.jpg" /></a
-          ><a href="#paragraph-26" class="paragraph-anchor">¶</a>
-        </p>
-        <h3>
-          <a
-            name="cross-origin-embedder-policy-(coep)"
-            href="#cross-origin-embedder-policy-(coep)"
-            id="cross-origin-embedder-policy-(coep)"
-          >
-            Cross Origin Embedder Policy (COEP)
-          </a>
-        </h3>
-        <p id="paragraph-27" class="paragraph">
-          <font color="red">COEPの話</font
-          ><a href="#paragraph-27" class="paragraph-anchor">¶</a>
-        </p>
-        <p id="paragraph-28" class="paragraph">
-          <a href="https://placehold.jp/300x300.jpg" rel="noopener"
-            ><img src="https://placehold.jp/300x300.jpg" /></a
-          ><a href="#paragraph-28" class="paragraph-anchor">¶</a>
-        </p>
-        <h3>
-          <a
-            name="cross-origin-read-blocking-(corb)--opaque-response-blocking-(orb)"
-            href="#cross-origin-read-blocking-(corb)--opaque-response-blocking-(orb)"
-            id="cross-origin-read-blocking-(corb)--opaque-response-blocking-(orb)"
-          >
-            Cross Origin Read Blocking (CORB) / Opaque Response Blocking (ORB)
-          </a>
-        </h3>
-        <p id="paragraph-29" class="paragraph">
-          <font color="red">MIME-base のチェックによる信頼性の向上。</font
-          ><a href="#paragraph-29" class="paragraph-anchor">¶</a>
-        </p>
-        <p id="paragraph-30" class="paragraph">
-          <a href="https://placehold.jp/300x300.jpg" rel="noopener"
-            ><img src="https://placehold.jp/300x300.jpg" /></a
-          ><a href="#paragraph-30" class="paragraph-anchor">¶</a>
-        </p>
         <h2>
           <a
             name="post-spectre-開発におけるセキュリティ関連のヘッダの設定"
@@ -706,16 +912,16 @@
             Post-Spectre 開発におけるセキュリティ関連のヘッダの設定
           </a>
         </h2>
-        <p id="paragraph-31" class="paragraph">
+        <p id="paragraph-44" class="paragraph">
           これまで紹介してきた Spectre
           以後に開発されたヘッダや仕組みを使うことで、同じメモリに意図しない
           cross-origin のリソースが読み込まれることは回避できるようになった。<a
-            href="#paragraph-31"
+            href="#paragraph-44"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-32" class="paragraph">
+        <p id="paragraph-45" class="paragraph">
           この節では具体的な設定値を
           <a
             target="_blank"
@@ -724,12 +930,12 @@
             >Post-Spectre Web Development</a
           >
           に書いてあるものを参照して概観する。<a
-            href="#paragraph-32"
+            href="#paragraph-45"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-33" class="paragraph">
+        <p id="paragraph-46" class="paragraph">
           「<a
             target="_blank"
             rel="noopener"
@@ -737,7 +943,7 @@
             >Post-Spectre Web Development</a
           >
           」には下記のように分けて考えてヘッダを設定すべきというように解説がある(見分けやすくするために採番)。<a
-            href="#paragraph-33"
+            href="#paragraph-46"
             class="paragraph-anchor"
             >¶</a
           >
@@ -782,9 +988,9 @@
             </ul>
           </li>
         </ul>
-        <p id="paragraph-34" class="paragraph">
+        <p id="paragraph-47" class="paragraph">
           これまでのヘッダの説明を踏まえて順番に見ていく。<a
-            href="#paragraph-34"
+            href="#paragraph-47"
             class="paragraph-anchor"
             >¶</a
           >
@@ -794,9 +1000,9 @@
             A. サブリソース
           </a>
         </h3>
-        <p id="paragraph-35" class="paragraph">
+        <p id="paragraph-48" class="paragraph">
           サブリソースには、大きく静的サブリソースと動的サブリソースがある。次節からそれぞれ紹介する。<a
-            href="#paragraph-35"
+            href="#paragraph-48"
             class="paragraph-anchor"
             >¶</a
           >
@@ -827,11 +1033,11 @@
             A.2. 動的サブリソース
           </a>
         </h4>
-        <p id="paragraph-36" class="paragraph">
+        <p id="paragraph-49" class="paragraph">
           動的サブリソースには、「アプリケーションの内部レスポンス」、「パーソナライズされた
           cross-origin で使われるリソース」、「cross-origin に no-cors
           で読み込むリソース」の 3 つがある。それぞれ紹介する。<a
-            href="#paragraph-36"
+            href="#paragraph-49"
             class="paragraph-anchor"
             >¶</a
           >
@@ -894,12 +1100,12 @@
             B. ドキュメント
           </a>
         </h3>
-        <p id="paragraph-37" class="paragraph">
+        <p id="paragraph-50" class="paragraph">
           ドキュメントには「Fully-Isolated なドキュメント」、「cross-origin の
           window から開かれるドキュメント」、「cross-origin の opener
           から開かれるドキュメント」の 3
           種類のケースがある。それぞれ紹介する。<a
-            href="#paragraph-37"
+            href="#paragraph-50"
             class="paragraph-anchor"
             >¶</a
           >
@@ -943,14 +1149,14 @@
             B.3. cross-origin の opener から開かれるドキュメント
           </a>
         </h4>
-        <p id="paragraph-38" class="paragraph">
+        <p id="paragraph-51" class="paragraph">
           cross-origin の opener
           から開かれるドキュメントとしては、「cross-origin
           のポップアップで開かれるドキュメント」、「cross-origin の frame
           に読み込まれるドキュメント」、「cross-origin のポップアップと frame
           の両方をサポートするドキュメント」の 3
           ケースがある。それぞれ紹介する。<a
-            href="#paragraph-38"
+            href="#paragraph-51"
             class="paragraph-anchor"
             >¶</a
           >
@@ -1019,49 +1225,49 @@
             Chromeチームによる意思決定
           </a>
         </h3>
-        <p id="paragraph-39" class="paragraph">
+        <p id="paragraph-52" class="paragraph">
           開発者たちは、ユーザのデータを守ることと、Web
           の互換性を守ることを考えてどういった対応が必要か検討したようだ。 「<a
             target="_blank"
             rel="noopener"
             href="https://docs.google.com/document/d/1dnUjxfGWnvhQEIyCZb0F2LmCZ9gio6ogu2rhMGqi6gY/edit#heading=h.9ccugcg4ngnq"
             >Long-Term Web Browser Mitigations for Spectre - Google Docs</a
-          >」に記載がある。<a href="#paragraph-39" class="paragraph-anchor"
+          >」に記載がある。<a href="#paragraph-52" class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-40" class="paragraph">
+        <p id="paragraph-53" class="paragraph">
           <font color="red">ここの記載を熱くする</font
-          ><a href="#paragraph-40" class="paragraph-anchor">¶</a>
+          ><a href="#paragraph-53" class="paragraph-anchor">¶</a>
         </p>
         <h3>
           <a name="credentialless" href="#credentialless" id="credentialless">
             credentialless
           </a>
         </h3>
-        <p id="paragraph-41" class="paragraph">
+        <p id="paragraph-54" class="paragraph">
           credentialless という文言を聞いたことがあるかもしれない。
           credentialless
           という名前がついているものは、クロスオリジンのリソースを読み込むときには、Cookie
           など(追加)の credential を送らないようにするものだ。たとえば、iframe
           credentialless がそれにあたる。<a
-            href="#paragraph-41"
+            href="#paragraph-54"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-42" class="paragraph">
+        <p id="paragraph-55" class="paragraph">
           Cookie
           を利用して取得するリソースはプライベートなリソースの可能性が高い。credentialless
           な要素は意図しないドキュメントにプライベートな情報が読み込まれるのを防ぐことができる。<a
-            href="#paragraph-42"
+            href="#paragraph-55"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-43" class="paragraph">
+        <p id="paragraph-56" class="paragraph">
           <font color="red">ここの記載を熱くする</font
-          ><a href="#paragraph-43" class="paragraph-anchor">¶</a>
+          ><a href="#paragraph-56" class="paragraph-anchor">¶</a>
         </p>
         <h3>
           <a
@@ -1072,35 +1278,35 @@
             デフォルトの挙動をどうするのか
           </a>
         </h3>
-        <p id="paragraph-44" class="paragraph">
+        <p id="paragraph-57" class="paragraph">
           これまでのヘッダを設定していなければ Spectre
           による攻撃の対象となり得る。設定していなければ<a
-            href="#paragraph-44"
+            href="#paragraph-57"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-45" class="paragraph">
+        <p id="paragraph-58" class="paragraph">
           Spectre などの同じプロセスのメモリを読み込む攻撃はブラウザベンダと Web
           コミュニティの努力で防ぐ方法が確立しつつある。しかし、依然としてセキュリティ関連のヘッダ設定を済ませていないサイトが多くあるのも事実である。<a
-            href="#paragraph-45"
+            href="#paragraph-58"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-46" class="paragraph">
+        <p id="paragraph-59" class="paragraph">
           ブラウザがデフォルトの挙動を変更できれば良いのだが、Web
           の互換性を守るためには慎重になる必要があるようだ(もしかしたら実現できないかもしれない)。<a
-            href="#paragraph-46"
+            href="#paragraph-59"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-47" class="paragraph">
+        <p id="paragraph-60" class="paragraph">
           <font color="red">ここの記載を熱くする</font
-          ><a href="#paragraph-47" class="paragraph-anchor">¶</a>
+          ><a href="#paragraph-60" class="paragraph-anchor">¶</a>
         </p>
-        <p id="paragraph-48" class="paragraph">
+        <p id="paragraph-61" class="paragraph">
           Mike West 氏の発表がある。
           <a
             target="_blank"
@@ -1110,7 +1316,7 @@
           >
           TPAC でも、Credentialless iframe
           をデフォルトの挙動にしようという提案について議論もされている(少なくとも今はデフォルトにはならないようだ)。<a
-            href="#paragraph-48"
+            href="#paragraph-61"
             class="paragraph-anchor"
             >¶</a
           >
@@ -1118,41 +1324,41 @@
         <h2>
           <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
         </h2>
-        <p id="paragraph-49" class="paragraph">
+        <p id="paragraph-62" class="paragraph">
           今回、Spectre
           以後に登場したセキュリティ関連のヘッダや仕組みについて紹介した。<a
-            href="#paragraph-49"
+            href="#paragraph-62"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-50" class="paragraph">
+        <p id="paragraph-63" class="paragraph">
           ブラウザベンダの活躍を待つだけなく、<strong
             >Web
             のコミュニティのそれぞれができることを少しずつでもやっていくとよさそうだ。具体的には、今回のセキュリティヘッダの設定だ</strong
           >。読み込まれるドキュメントやサブリソースにヘッダが設定されることで、意図して共有している/していないのか、あるいは共有していないのかが分かる。リソースオーナーが読み込みを拒否して壊れるサイトがあっても、それは仕方がないと判断できる。<a
-            href="#paragraph-50"
+            href="#paragraph-63"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-51" class="paragraph">
+        <p id="paragraph-64" class="paragraph">
           セキュリティヘッダの設定が十分に行き渡り、意図せず互換性が崩れるリスクが十分に下がれば、ブラウザのデフォルトの挙動を変更することができる。<strong
             >デフォルトで安全な Web
             の実現はセキュリティヘッダの設定が難しいユーザ層が、安心して Web
             というコミュニティに参加できるようにするためには必要</strong
-          >なことのように思う。<a href="#paragraph-51" class="paragraph-anchor"
+          >なことのように思う。<a href="#paragraph-64" class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-52" class="paragraph">
+        <p id="paragraph-65" class="paragraph">
           この記事を読んで少し自分のサイトの設定を見直して見るきっかけになればと思っている。<a
-            href="#paragraph-52"
+            href="#paragraph-65"
             class="paragraph-anchor"
             >¶</a
           >
         </p>
-        <p id="paragraph-53" class="paragraph">
+        <p id="paragraph-66" class="paragraph">
           もしも、誤りや補足の情報があれば
           <a
             target="_blank"
@@ -1165,7 +1371,7 @@
             >@bokken_</a
           >
           までいただけると嬉しい。<a
-            href="#paragraph-53"
+            href="#paragraph-66"
             class="paragraph-anchor"
             >¶</a
           >
@@ -1294,7 +1500,7 @@
             >
           </li>
         </ul>
-        <p id="paragraph-54" class="paragraph">
+        <p id="paragraph-67" class="paragraph">
           Improving extension security with out-of-process iframes - May 2017
           Mitigating Spectre with Site Isolation in Chrome - July 2018 Improving
           Site Isolation for Stronger Browser Security / Recent Site Isolation
@@ -1302,7 +1508,7 @@
           Spectre proof-of-concept for a Spectre-proof web - March 2021
           Protecting more with Site Isolation / Privacy and performance, working
           together in Chrome - July 2021<a
-            href="#paragraph-54"
+            href="#paragraph-67"
             class="paragraph-anchor"
             >¶</a
           >

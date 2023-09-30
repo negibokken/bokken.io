@@ -1,4 +1,4 @@
-# Post Spectre 時代の Web のセキュリティについて - Post-Spectre Web Development とは
+# Post Spectre 時代の Web のセキュリティの仕組みについて振り返る
 
 @tags: [security, spectre]
 
@@ -7,21 +7,23 @@
 ## はじめに
 
 この記事では、「[Post-Spectre Web Development](https://www.w3.org/TR/post-spectre-webdev/)」 というドキュメントを元に、Spectre 以後の Web 開発において必要なセキュリティ関連の仕組みやヘッダの設定についてまとめる。
-また、「[Post-Spectre Web Development](https://www.w3.org/TR/post-spectre-webdev/)」が公開されてから新たに追加された仕組みについても合わせて紹介し、ヘッダを設定できるようにする。
+また、「[Post-Spectre Web Development](https://www.w3.org/TR/post-spectre-webdev/)」が公開されてから新たに追加された仕組みについても合わせて紹介する。
 
 ## もくじ
 
 <!-- vim-markdown-toc Marked -->
 
 * [Spectre によって変わった Web](#spectre-によって変わった-web)
-* [Cross-Origin な読み込みが発生する箇所](#cross-origin-な読み込みが発生する箇所)
+* [Spectre への対策と Web の形](#spectre-への対策と-web-の形)
+    * [コラム: same-origin は安全か？](#コラム:-same-origin-は安全か？)
+    * [Cross-Origin な読み込みが発生するケース](#cross-origin-な読み込みが発生するケース)
+* [Cross-Origin Isolated とは](#cross-origin-isolated-とは)
+    * [Spectre 以後に登場したセキュリティ関連の仕組み・ヘッダ](#spectre-以後に登場したセキュリティ関連の仕組み・ヘッダ)
+* [1. window の参照への対応 - Cross-Origin Opener Policy (COOP)](#1.-window-の参照への対応---cross-origin-opener-policy-(coop))
+* [提供するリソースの保護 - Cross-Origin Resource Policy (CORP)](#提供するリソースの保護---cross-origin-resource-policy-(corp))
+* [読み込むリソースの保護 - Cross-Origin Embedder Policy (COEP)](#読み込むリソースの保護---cross-origin-embedder-policy-(coep))
 * [セキュリティ関連のヘッダ、仕組み](#セキュリティ関連のヘッダ、仕組み)
     * [Spectre 以前から存在するセキュリティ関連の仕組み・ヘッダ](#spectre-以前から存在するセキュリティ関連の仕組み・ヘッダ)
-    * [Spectre 以後に登場したセキュリティ関連の仕組み・ヘッダ](#spectre-以後に登場したセキュリティ関連の仕組み・ヘッダ)
-    * [Cross Origin Opener Policy (COOP)](#cross-origin-opener-policy-(coop))
-    * [Cross Origin Resource Policy (CORP)](#cross-origin-resource-policy-(corp))
-    * [Cross Origin Embedder Policy (COEP)](#cross-origin-embedder-policy-(coep))
-    * [Cross Origin Read Blocking (CORB) / Opaque Response Blocking (ORB)](#cross-origin-read-blocking-(corb)-/-opaque-response-blocking-(orb))
 * [Post-Spectre 開発におけるセキュリティ関連のヘッダの設定](#post-spectre-開発におけるセキュリティ関連のヘッダの設定)
     * [A. サブリソース](#a.-サブリソース)
         * [A.1. 静的サブリソース](#a.1.-静的サブリソース)
@@ -60,13 +62,37 @@ Web サイトでは他のオリジンのリソースをドキュメントに組�
 Spectre は CPU の脆弱性を利用した攻撃なため、「CPU ベンダが脆弱性の修正を施して Spectre を再現できなくなったときに Web は元に戻るのか」、というとそうではない。
 Spectre 以外であっても、同一プロセス上のメモリを読む攻撃が見つかる可能性は依然としてある。**Spectre (の発見) は Web の脅威モデルをすっかり変えて、不可逆のものにしてしまった**。つまり、Spectre を期に追加された様々なセキュリティ関連のヘッダや、HTML タグの属性を無視して過ごすことはできない。
 
-本記事では、そのセキュリティ周りのヘッダがなぜ必要なのかをまとめて、実際に適用できるようになることを目指す。
+本記事では、そのセキュリティ周りの仕組みがなぜ必要なのかをまとめる。
 
-## Cross-Origin な読み込みが発生する箇所
+## Spectre への対策と Web の形
+
+Web において、Spectre のようなサイドチャネル攻撃への対策としては、攻撃者が制御できるプロセス下に攻撃 (窃取) されてはまずい情報を置かないようにすればよい。
+
+その際に次の 2 種類の立場が考えられる。
+
+1. 自分自身のサイトやリソースを信用できない origin に読み込ませない
+2. 自分自身のサイトからの窃取を防ぐために不用意に cross-origin の情報を読み込まない
+
+基本的には、same-origin なサイト同士のリソースのやり取りについては問題がないものとして考えられている。
+
+Web において同一プロセスのメモリ上にデータが展開される恐れがあるのはどういったケースがあるのか、次項から紹介する。
+
+### コラム: same-origin は安全か？
+
+same-origin でももちろん安全ではないケースもある。
+
+例えば、https://example.com という origin が、利用者 Alice, Bob にそれぞれ https://example.com/alice 、https://example.com/bob といったようにそれぞれのサイトを https://example.com という origin で提供しているケースを考える。このように同一の origin で異なるサイト提供者が自由にコンテンツ(HTML, JavaScript, CSS)を提供できる場合には安全ではない。
+
+Alice と Bob が同一の origin でコンテンツを提供しているため、ブラウザの Same-Origin Policy による保護が効かない。
+例えば、Bob が作ったサイトで Alice の作ったサイトの情報を JavaScript などで取得できる状況にある。
+
+これは、アーキテクチャ上間違った選択のために安全でないサービスが運用できる例だが、このように same-origin だからといって必ずしも安全とは言えない。ただ、これだけ情報がそういった設計がされることは無いだろう。この記事では基本的に Same-Origin Policy による保護を前提としたリソースが提供されていることを前提に進める。
+
+### Cross-Origin な読み込みが発生するケース
 
 ブラウザが Cross-Origin なリソースを読み込んだり、 Cross-Origin なサイトと通信できるようになるケースについて整理すると、下記のようなケースが存在する。
 
-1. window.open で新しい URL を開いたとき (window の参照)
+1. window.open で新しい URL を開いたとき (window、opener の参照)
 1. frame, iframe, embed, object 他、frame でドキュメントやその他リソースを読み込んだとき (frame の参照など)
 1. サブリソースのうち script の読み込み
 1. サブリソースのうち img, css, video などの script 以外のサブリソースの読み込み
@@ -80,10 +106,73 @@ Spectre 以外であっても、同一プロセス上のメモリを読む攻撃
 
 そもそも、同一プロセスのメモリに読み込まれることが問題なら、ブラウザがデフォルトでCross-Origin なリソースを読み込む際には自動的にプロセスを分離してしまえばいいと思うかもしれない。
 しかし、それはリソースと互換性の観点から難しい。Web サイトには無数のCross-Origin なリソースが読み込まれる可能性があり、そのリソースのためにプロセスを生成してメモリを消費すると大量のリソースが消費されてしまう。
-また、ブラウザが Cross-Origin のリソースを分離して、iframe などと完全に通信できないようにしてしまうと、iframe を使ったシングルサインオンなどの機能が壊れてしまうことになる。
+また、ブラウザが Cross-Origin のリソースを勝手に分離して、window や iframe などと完全に通信できないようにしてしまうと、window や iframe を使ったシングルサインオンやペイメントなどの機能が壊れてしまうことになる。
 
 そのため、少なくとも現状ではユーザ（サイトオーナー）が自分自身のサイトやリソースをどのように扱ってほしいか、ブラウザに伝える必要がある。
 ただし、今後、ブラウザがリスクに応じてデフォルトで分離することも検討が進んでいる。このことについては後の節で紹介する。
+
+## Cross-Origin Isolated とは
+
+Cross-Origin Isolated とは、その名の通り、Cross-Origin と分離されている状態のことを指す。
+
+Out-of-Process iframe といった仕組みでプロセスを分離する。
+
+### Spectre 以後に登場したセキュリティ関連の仕組み・ヘッダ
+
+Spectre 以後に登場したセキュリティ関連の仕組み・ヘッダは下記のようなものがある。
+
+* Cross Origin Opener Policy (COOP)
+* Cross Origin Resource Policy (CORP)
+* Cross Origin Embedder Policy (COEP)
+* Cross Origin Read Blocking (CORB) / Opaque Response Blocking (ORB)
+
+## 1. window の参照への対応 - Cross-Origin Opener Policy (COOP)
+
+ブラウザではあるサイトを開いたときに関連しているドキュメントの読み込みをブラウジングコンテキストという形で保持している。同一のブラウジングコンテキスト内にあるものは同一のプロセスに保持され、参照や(readonly でなければ)変更が可能になっている。例えば、サイト上のドキュメントや、サイト上で開いた window や、iframe などのフレームを保持している。また、postMessage によるデータ通信も可能だ。COOP は、自分のサイトをこのブラウジングコンテキストでどのように扱ってほしいかを指示するためのものだ。
+
+COOPには、現状、`unsafe-none`、`same-origin`、`same-origin-allow-popups`、`restrict-properties` (策定中)がある。
+
+例えば、unsafe-none は現状のデフォルト設定だ。このディレクティブが指定されたときには、cross-origin からの読み込み時にもコンテキストは分離されない。
+
+例えば、次のように利用するだろう。
+
+```
+```
+
+same-origin を指定すると、Cross-Site から読み込まれて場合にサイトとのコンテキストを分離し、同じプロセスに読み込まれないようにする。また、same-origin を指定した場合は、自分自身が window.open で開いたドキュメントが cross-site の場合にもコンテキストが分離される。
+
+下記のような読み込みがエラーになる。
+
+```
+```
+
+same-origin-allow-popups  では、自分自身が window.open で開いた場合にはコンテキストを保持する。自分自身は same-origin からしか読み込まれたくないが、ポップアップによるシングルサインオンを提供したい場合には有効だろう。ただし、これはシングルサインオンのためのサイトが unsafe-none で提供されている必要がある。
+
+この場合、シングルサインオンのためのサイトがSiteIsolation な状態ではなくなってしまう。
+
+これを防ぐために今議論が進んているのが COOP strict-properties だ。これは、ポップアップを利用したシングルサインオンや、ペイメントの機能が window.postMessage や、 window.clsed といった限られた機能のみしか使わないことから、この限られた機能のみを提供することで SiteIsolation な状態にしようというものだ。これが進めば、シングルサインオンやペイメントのサイトも安全にサービスを提供できるようになる。
+
+## 提供するリソースの保護 - Cross-Origin Resource Policy (CORP)
+
+## 読み込むリソースの保護 - Cross-Origin Embedder Policy (COEP)
+
+
+COEP とは、読み込むリソースが cross-origin で読み込んでも良いものか確認するか、あるいはセンシティブな情報を取得しないようにブラウザに指示するための仕組みである。例えば、COEP のヘッダバリューには下記のようなディレクティブがある。
+
+1. unsafe-none
+2. require-corp
+3. credentialless (策定中) 
+
+これらのディレクティブのうち、 unsafe-none がデフォルト値で、ブラウザは従来通りリソースについて何も確認しない。
+
+require-corp は、読み込むリソースが
+
+crossoriginをつける
+
+COEP では、自分が読み込むリソースについては CORS  を要求するか、public に読み込んでも問題ないリソースのみに限定して、不用意にセンシティブなリソースを読み込まないようにする対応であるといえそ
+
+credentialless というのは、リソースの取得時に Basic 認証や、Cookie、クライアント証明書といったクレデンシャルをリクエストに付与しないようブラウザに要求するディレクティブである。
+外部リソースであっても、これらのクレデンシャルを付与しなければユーザ依存のコンテンツ（センシティブな情報）が表示されないためである（クエリパラメータはどうなるんだろ？たまについてるよね）。
 
 ## セキュリティ関連のヘッダ、仕組み
 
@@ -114,50 +203,6 @@ Spectre 以前からも、下記のような仕組みやヘッダが存在して
     * X-Frame-Options の値としては `DENY` か `SAMEORIGIN` を指定できる。`ALLOW-FROM <origin>` も存在していたが、現在では使われておらず、代わりに Content-Security-Policy の frame-ancestors を使う
     * Click ジャッキングを防ぐことができる他、意図しない cross-origin に frame として読み込まれることを防ぐことができる
         * [Out-of-Process iframes (OOPIFs)](https://www.chromium.org/developers/design-documents/oop-iframes/) といった frame のプロセスを分離する仕組みが無いブラウザの場合、同一プロセスのメモリに展開されるので攻撃対象になる危険性があるため、指定によって危険性を低減できる
-
-これらは Spectre 以後も有効な仕組み・ヘッダである。これらの仕組みやヘッダで防げているのは次の図の部分である。
-
-![cross-origin なリソースを読み込む可能性のある例](https://placehold.jp/300x300.jpg)
-
-しかし、これらの仕組みやヘッダだけではカバーできなかった範囲がある。それを次節のような仕組みやヘッダで守るようになった。
-
-### Spectre 以後に登場したセキュリティ関連の仕組み・ヘッダ
-
-Spectre 以後に登場したセキュリティ関連の仕組み・ヘッダは下記のようなものがある。
-
-* Cross Origin Opener Policy (COOP)
-* Cross Origin Resource Policy (CORP)
-* Cross Origin Embedder Policy (COEP)
-* Cross Origin Read Blocking (CORB) / Opaque Response Blocking (ORB)
-
-それぞれについて簡単に説明する。
-
-### Cross Origin Opener Policy (COOP)
-
-![cross-origin なリソースを読み込む可能性のある例](https://placehold.jp/300x300.jpg)
-
-<font color="red">Openerの話</font>
-Opener の話。
-
-
-### Cross Origin Resource Policy (CORP)
-
-<font color="red">Resourceの話</font>
-
-![cross-origin なリソースを読み込む可能性のある例](https://placehold.jp/300x300.jpg)
-
-### Cross Origin Embedder Policy (COEP)
-
-<font color="red">COEPの話</font>
-
-![cross-origin なリソースを読み込む可能性のある例](https://placehold.jp/300x300.jpg)
-
-
-### Cross Origin Read Blocking (CORB) / Opaque Response Blocking (ORB)
-
-<font color="red">MIME-base のチェックによる信頼性の向上。</font>
-
-![cross-origin なリソースを読み込む可能性のある例](https://placehold.jp/300x300.jpg)
 
 ## Post-Spectre 開発におけるセキュリティ関連のヘッダの設定
 
