@@ -292,7 +292,7 @@ article > p {
 
   display: block;
   margin-block-start: 1em;
-  margin-block-end: 2rem;
+  margin-block-end: 1.5rem;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
 }
@@ -356,7 +356,7 @@ main > article > ul {
 }
 
 article li {
-  margin: 0.7rem 0;
+  margin: 0.4rem 0;
   display: list-item;
   text-align: -webkit-match-parent;
 }
