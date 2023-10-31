@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2023-09-30T12:44:23.902Z</updated>
+  <updated>2023-10-31T12:49:04.763Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -417,6 +417,20 @@
     <summary
       type="html"
     >Software Design 2023 年 10 月号の HTTP/3 の特集の第一章に寄稿する機会を頂きました。https://gihyo.jp/magazine/SD/archive/2023/202310第一章の内容は、HTTP の歴史と HTTP/3 の特徴についてまとめたものになっています。今回、執筆にあたって、調べれば調べるほど HTTP についてまとめたいことが湧いてきてしまって、前回の記事で紹介した『Weaving The Web』を読んだり、インターネットの資料を読み漁ったりしました。手前味噌ではありますが、短いページに HTTP の歴史と HTTP/3 の特徴を詰め込むこと</summary>
+  </entry>
+  
+  <entry>
+    <title
+    >サードパーティ Cookie の制限を緩和する Related Website Sets (First-Party Sets) という仕様について</title>
+    <link
+      href="https://blog.bokken.io/articles/2023-10-31/about-related-website-sets.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2023-10-31/about-related-website-sets.html</id>
+    <updated>2023-10-31T12:49:04.763Z</updated>
+    <summary
+      type="html"
+    >現在 Web ブラウザでは、プライバシーの観点から、サードパーティ Cookie をブロックする流れがある。しかし、Web コンテンツプロバイダーは複数のドメインでコンテンツを提供していて Cookie を共有したいことがある。例えば、アプリケーションごとにドメインを分けるケースだったり、アセットのためにドメインを分けているが Cookie を メインのサイトと共有したいケースがあるだろう。そういった異なるドメイン間において、サードパーティ Cookie を許可できるのが Related Website Sets (First-Party Sets)という仕様だ。もともとは、First-Part</summary>
   </entry>
   
 </feed>
