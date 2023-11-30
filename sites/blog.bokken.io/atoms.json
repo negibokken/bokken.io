@@ -1,7 +1,7 @@
 {
   "title": "blog.bokken.io",
   "uri": "https://blog.bokken.io",
-  "updatedAt": "2023-10-31T12:49:04.763Z",
+  "updatedAt": "2023-11-30T01:17:25.768Z",
   "id": "2b743fd8-f4e8-4b94-8866-269347b3fbab",
   "articles": [
     {
@@ -227,6 +227,13 @@
       "uuid": "cfc24ae1-c050-40c0-b33c-f9e99d232c2f",
       "updatedAt": "2023-10-31T12:49:04.763Z",
       "summary": "現在 Web ブラウザでは、プライバシーの観点から、サードパーティ Cookie をブロックする流れがある。しかし、Web コンテンツプロバイダーは複数のドメインでコンテンツを提供していて Cookie を共有したいことがある。例えば、アプリケーションごとにドメインを分けるケースだったり、アセットのためにドメインを分けているが Cookie を メインのサイトと共有したいケースがあるだろう。そういった異なるドメイン間において、サードパーティ Cookie を許可できるのが Related Website Sets (First-Party Sets)という仕様だ。もともとは、First-Part"
+    },
+    {
+      "title": "Chromium の Expires: 0 の取り扱いを修正したときに学んだこと",
+      "uri": "https://blog.bokken.io/articles/2023-11-30/about-http-expires-0.html",
+      "uuid": "c1690986-e0c0-4de7-8668-a6f9fe51d241",
+      "updatedAt": "2023-11-30T01:17:25.768Z",
+      "summary": "ことのはじまりは https://crbug.com/853508 を見つけたことだった。この bug は HTTP Caching に関わる話で、Expires: 0 がレスポンスに付与されていた際には、ブラウザはこのキャッシュを expired なものとして扱わなければいけないというものだった。A cache recipient MUST interpret invalid date formats, especially the value &quot;0&quot;, as representing a time in the past (i.e., &quot;already expi"
     }
   ]
 }
