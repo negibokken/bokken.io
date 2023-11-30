@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>
+      Chromium の Expires: 0 の取り扱いを修正したときに学んだこと |
+      blog.bokken.io
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="ことのはじまりは https://crbug.com/853508 を見つけたことだった。この bug は HTTP Caching に関わる話で、Expires: 0 がレスポンスに付与されていた際には、ブラウザはこのキャッシュを expired なものとして扱わなければいけないというものだった。A cache recipient MUST interpret invalid date formats, especially the value &amp;quot;0&amp;quot;, as representing a time in the past (i.e., &amp;quot;already expi"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="author" href="humans.txt" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2023-11-30/about-http-expires-0.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Chromium の Expires: 0 の取り扱いを修正したときに学んだこと"
+    />
+    <meta
+      property="og:description"
+      content="ことのはじまりは https://crbug.com/853508 を見つけたことだった。この bug は HTTP Caching に関わる話で、Expires: 0 がレスポンスに付与されていた際には、ブラウザはこのキャッシュを expired なものとして扱わなければいけないというものだった。A cache recipient MUST interpret invalid date formats, especially the value &amp;quot;0&amp;quot;, as representing a time in the past (i.e., &amp;quot;already expi"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+    <script defer src="/assets/js/img-viewer.js"></script>
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io">bokken.io</a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2023-11-30/about-http-expires-0.html"
+          >Chromium の Expires: 0 の取り扱いを修正したときに学んだこと</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2023-11-30</dd>
+          <dt>更新日</dt>
+          <dd>2023-11-30</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            chromium
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="chromium-の-expires-0-の取り扱いを修正したときに学んだこと"
+            href="#chromium-の-expires-0-の取り扱いを修正したときに学んだこと"
+            id="chromium-の-expires-0-の取り扱いを修正したときに学んだこと"
+          >
+            Chromium の Expires: 0 の取り扱いを修正したときに学んだこと
+          </a>
+        </h1>
+        <h2>
+          <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
+        </h2>
+        <p id="paragraph-1" class="paragraph">
+          ことのはじまりは
+          <a target="_blank" rel="noopener" href="https://crbug.com/853508"
+            >https://crbug.com/853508</a
+          >
+          を見つけたことだった。<a href="#paragraph-1" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-2" class="paragraph">
+          この bug は HTTP Caching に関わる話で、<code>Expires: 0</code>
+          がレスポンスに付与されていた際には、ブラウザはこのキャッシュを expired
+          なものとして扱わなければいけないというものだった。<a
+            href="#paragraph-2"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <blockquote>
+          <p id="paragraph-3" class="paragraph">
+            A cache recipient MUST interpret invalid date formats, especially
+            the value &quot;0&quot;, as representing a time in the past (i.e.,
+            &quot;already expired&quot;)<a
+              href="#paragraph-3"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="paragraph-4" class="paragraph">
+            ---
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://www.rfc-editor.org/rfc/rfc9111.html#field.expires"
+              >https://www.rfc-editor.org/rfc/rfc9111.html#field.expires</a
+            ><a href="#paragraph-4" class="paragraph-anchor">¶</a>
+          </p>
+        </blockquote>
+        <h2>
+          <a
+            name="面白くて大変だったこと"
+            href="#面白くて大変だったこと"
+            id="面白くて大変だったこと"
+          >
+            面白くて大変だったこと
+          </a>
+        </h2>
+        <p id="paragraph-5" class="paragraph">
+          結局、問題箇所の特定と修正などですべて合わせるとトラッキングしていた時間を見ると
+          60 時間ぐらいかかっていた。一日 1, 2 時間費やして 1.5 ヶ月〜 2
+          ヶ月ぐらい取り組んでいたように思う。<a
+            href="#paragraph-5"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-6" class="paragraph">
+          一番大変だったのは問題箇所の特定だった。エディタの検索機能や、デバッガを駆使して、どこで
+          Expires を取り扱っているのか調べていく必要があったのだが、Chromium
+          は規模が大きく探すのが大変だった。ただ、問題箇所を探す上で、リソースやキャッシュを取扱うコードがどこにどんな形であるのか知っていくのはとても楽しかった。<a
+            href="#paragraph-6"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-7" class="paragraph">
+          問題が解決できたときもすごく楽しいのだが、原因を特定するために自由にコードを見て回っているのも発見があって楽しい。自分は標準化されていたり、オープンな仕様がどう実装されていくのかに興味関心があるのだと思う。<a
+            href="#paragraph-7"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-8" class="paragraph">
+          もしも、同じような興味関心を持っている人は Chromium
+          はまさにそれなのでおすすめである(しかも大きすぎて終わりが見えない)。<a
+            href="#paragraph-8"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="レビューを通して学んだブラウザ開発者の動き"
+            href="#レビューを通して学んだブラウザ開発者の動き"
+            id="レビューを通して学んだブラウザ開発者の動き"
+          >
+            レビューを通して学んだブラウザ開発者の動き
+          </a>
+        </h2>
+        <p id="paragraph-9" class="paragraph">
+          この変更については、toyoshim さん、hayato さん、ricea
+          さんに見ていただいた (ありがとうございました!)。<a
+            href="#paragraph-9"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-10" class="paragraph">
+          レビューを通して直接コメントをもらったところと、その他にも気づいたことがあったので、忘れないために記載しておく。主には次の通りだ。<a
+            href="#paragraph-10"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ol>
+          <li>
+            ユニットテストだけでなく Web Platform Test も修正する必要がある
+          </li>
+          <li>変更をフラグ下に入れるのはいつだって有効な手段</li>
+          <li>
+            Intent to Ship か、PSA (Public Service Announcement)
+            で開発者に知らせる必要がある
+          </li>
+        </ol>
+        <p id="paragraph-11" class="paragraph">
+          順番に紹介していく。<a href="#paragraph-11" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="1-ユニットテストだけでなく-web-platform-test-も修正する必要がある"
+            href="#1-ユニットテストだけでなく-web-platform-test-も修正する必要がある"
+            id="1-ユニットテストだけでなく-web-platform-test-も修正する必要がある"
+          >
+            1. ユニットテストだけでなく Web Platform Test も修正する必要がある
+          </a>
+        </h3>
+        <p id="paragraph-12" class="paragraph">
+          これはユニットテストだけで動作が担保できない変更であったこともあるのだが、ブラウザ共通の処理であったことも関係がある。
+          今回の変更は RFC
+          の仕様をもとに実施している。そのため、この仕様はブラウザ共通である。そのため、Web
+          Platform Test
+          という形で各ブラウザが仕様をテストできるようにした方がよい。このように、ブラウザ間で協力して開発をしている様子がよくわかった。<a
+            href="#paragraph-12"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="2-変更をフラグ下に入れるのはいつだって有効な手段"
+            href="#2-変更をフラグ下に入れるのはいつだって有効な手段"
+            id="2-変更をフラグ下に入れるのはいつだって有効な手段"
+          >
+            2. 変更をフラグ下に入れるのはいつだって有効な手段
+          </a>
+        </h3>
+        <p id="paragraph-13" class="paragraph">
+          今回の修正は比較的軽微な変更なので、フラグを使わずそのまま修正を出すと思っていた。
+          しかし、30
+          億以上のユーザがいる状況では、なにかがあったときに影響が大きい。変更については細心の注意を払わなければいけない。
+          フラグを使うと少し記述量が増えるのだが、そのちょっとした工夫で 30
+          億以上のユーザが安全に使えるなら十分にリターンがある(もちろんすべてをフラグ下に入れているわけではないが)。<a
+            href="#paragraph-13"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h3>
+          <a
+            name="3-intent-to-ship-か、psa-(public-service-announcement)-で開発者に知らせる必要がある"
+            href="#3-intent-to-ship-か、psa-(public-service-announcement)-で開発者に知らせる必要がある"
+            id="3-intent-to-ship-か、psa-(public-service-announcement)-で開発者に知らせる必要がある"
+          >
+            3. Intent to Ship か、PSA (Public Service Announcement)
+            で開発者に知らせる必要がある
+          </a>
+        </h3>
+        <p id="paragraph-14" class="paragraph">
+          今回の修正はユーザや Web
+          開発者の目に触れる変更だった。そういった変更の際には、(ものによるが)
+          blink-dev に Intent to Ship や PSA (Public Service Announcement)
+          という形で知らせる必要がある。<a
+            href="#paragraph-14"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-15" class="paragraph">
+          急に挙動が変わってしまうとユーザや、特に Web
+          開発者は驚く可能性がある。そういったところに十分に気をつけているようであった。また、当時、お知らせの内容はブラウザ開発者への情報共有だと思っていたのだが、それだけではなく
+          Web 開発者に向けて知らせる必要があることも今回のことで学んだ。<a
+            href="#paragraph-15"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-16" class="paragraph">
+          また、Web
+          開発者がどういう事象を見つけたときに、どういう対応が必要かも書いておくことで、時間を削減できることにも気づいた。<a
+            href="#paragraph-16"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-17" class="paragraph">
+          実際にコメントとして追加した方がよいと教えてもらったのは以下の文言だ。<a
+            href="#paragraph-17"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <blockquote>
+          <p id="paragraph-18" class="paragraph">
+            In almost all cases no action from web developers is required.
+            However, if you see an unwanted increase in 304 Not Modified
+            responses in your server logs or unwanted cache miss, you may wish
+            to check the Expires: header that your server is sending using
+            DevTools.<a href="#paragraph-18" class="paragraph-anchor">¶</a>
+          </p>
+        </blockquote>
+        <p id="paragraph-19" class="paragraph">
+          この文言には<a href="#paragraph-19" class="paragraph-anchor">¶</a>
+        </p>
+        <ul>
+          <li>だいたいのケースではアクションは要らないこと</li>
+          <li>
+            304 Not Modified が増えたり、キャッシュミスが起こっていたら Expires
+            ヘッダをチェックしてみてね
+          </li>
+        </ul>
+        <p id="paragraph-20" class="paragraph">
+          ということが書かれている。<a
+            href="#paragraph-20"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-21" class="paragraph">
+          このように Web
+          開発者へ最大限配慮してブラウザ開発が行われていることを学んだ。<a
+            href="#paragraph-21"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
+        </h2>
+        <p id="paragraph-22" class="paragraph">
+          今回、Chromium の bug
+          の修正に取り組んで、そこから学んだことを紹介した。
+          ブラウザ開発をしている上で特殊なこともあれば、ビジネスマナーと共通しているようなところもあった。<a
+            href="#paragraph-22"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-23" class="paragraph">
+          今後もブラウザ開発者としての姿勢を身に着けていきたいと思った経験だった。<a
+            href="#paragraph-23"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+
+      <div>
+        Subscribe via <a href="https://blog.bokken.io/feeds/atom.xml">RSS</a>
+      </div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a
+            href="https://blog.bokken.io/articles/2023-10-31/about-related-website-sets.html"
+          >
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
