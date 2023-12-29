@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2023-11-30T01:17:25.768Z</updated>
+  <updated>2023-12-29T04:28:02.870Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -444,6 +444,18 @@
     <summary
       type="html"
     >ことのはじまりは https://crbug.com/853508 を見つけたことだった。この bug は HTTP Caching に関わる話で、Expires: 0 がレスポンスに付与されていた際には、ブラウザはこのキャッシュを expired なものとして扱わなければいけないというものだった。A cache recipient MUST interpret invalid date formats, especially the value &amp;quot;0&amp;quot;, as representing a time in the past (i.e., &amp;quot;already expi</summary>
+  </entry>
+  
+  <entry>
+    <title>2023年の振り返り</title>
+    <link
+      href="https://blog.bokken.io/articles/2023-12-29/lookback-2023.html"
+    />
+    <id>https://blog.bokken.io/articles/2023-12-29/lookback-2023.html</id>
+    <updated>2023-12-29T04:28:02.870Z</updated>
+    <summary
+      type="html"
+    >今年ももう終わってしまうので、今年にあったことで印象的だったことを振り返る。今年もなんとか毎月ブログ記事を毎月出せた。すべて月末に偏っているのは、普通に時間がかかるのと、ある程度記事を温めているからというのもあるが、締め切り駆動にあってるからというのもある。来年は月初に出して月末はゆうゆうと過ごしたい。ブログ記事を毎月書いた今年もなんとか毎月ブログ記事を毎月出せた。すべて月末に偏っているのは、普通に時間がかかるのと、ある程度記事を温めているからというのもあるが、締め切り駆動にあってるからというのもある。来年は月初に出して月末はゆうゆうと過ごしたい。今年もChromiumにパッチを送れた。合わせて</summary>
   </entry>
   
 </feed>
