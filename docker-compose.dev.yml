@@ -6,10 +6,10 @@ services:
       - '80:80'
       - '443:443'
     links:
-      - 'bokken.io'
+      - 'bokken_io'
     restart: always
     depends_on:
-      - bokken.io
+      - bokken_io
     environment:
       DOMAINS: 'bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io, app.bokken.io -> http://bokken_io:3000'
       # DOMAINS: 'localhost -> http://bokken_io, www.localhost -> http://bokken_io, blog.localhost -> http://bokken_io, x.localhost -> http://bokken_io, app.localhost -> http://bokken_io:3000'
