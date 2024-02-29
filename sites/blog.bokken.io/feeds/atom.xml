@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2024-01-31T10:16:04.433Z</updated>
+  <updated>2024-02-29T12:53:37.093Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -470,6 +470,19 @@
     <summary
       type="html"
     >今回、Chromeとブラウザ好きが幸いして、Software Design誌にて「あなたの知らないChromeの世界」の連載をさせていただくことになりました。連載の回数は6回〜12回程度とあまりしっかりきまっていないのですが、Chromeを中心にブラウザの話をお伝えできればと思っています。Software Designは、設計やアーキテクチャ、言語やクラウドの利用方法といった実務ですぐに役立つような記事が多い中で、果たして実務に役に立たないChromeやブラウザの歴史や、細かい中身の話が面白いと思ってもらえるのか少し不安はありますが、頑張って最後まで連載を終えられるように頑張っていきたいと思いま</summary>
+  </entry>
+  
+  <entry>
+    <title>Chromiumのビルドオプションの備忘録</title>
+    <link
+      href="https://blog.bokken.io/articles/2024-02-29/chromium-build-option.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2024-02-29/chromium-build-option.html</id>
+    <updated>2024-02-29T12:53:37.093Z</updated>
+    <summary
+      type="html"
+    >以前の記事でChromiumのビルドをする際のコマンドを備忘録のためにまとめた。基本的にはデフォルトの設定を使っているのだが、デバッガと併用して使う場合には別途設定ファイルを変更して利用する必要があるため、その内容についてまとめる。現状、デフォルトビルドの際には次のようなオプションを使用している。これでも最低限、動作確認やテストの実行などはできる。デフォルトの動作の確認以外にもデバッガを使いたいときがある。そういったときに上記の設定だとブレイクポイントが飛び飛びで止まってしまい期待する動作をしてくれない。その際はデバッグビルドの際には次の設定を使用している。差分はis_debugとsymbol_</summary>
   </entry>
   
 </feed>
