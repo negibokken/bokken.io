@@ -7,7 +7,7 @@
   />
   <title>blog.bokken.io</title>
   <link href="https://blog.bokken.io" />
-  <updated>2024-02-29T12:53:37.093Z</updated>
+  <updated>2024-03-30T15:27:08.583Z</updated>
   <author>
     <name>bokken</name>
   </author>
@@ -483,6 +483,19 @@
     <summary
       type="html"
     >以前の記事でChromiumのビルドをする際のコマンドを備忘録のためにまとめた。基本的にはデフォルトの設定を使っているのだが、デバッガと併用して使う場合には別途設定ファイルを変更して利用する必要があるため、その内容についてまとめる。現状、デフォルトビルドの際には次のようなオプションを使用している。これでも最低限、動作確認やテストの実行などはできる。デフォルトの動作の確認以外にもデバッガを使いたいときがある。そういったときに上記の設定だとブレイクポイントが飛び飛びで止まってしまい期待する動作をしてくれない。その際はデバッグビルドの際には次の設定を使用している。差分はis_debugとsymbol_</summary>
+  </entry>
+  
+  <entry>
+    <title>Chromiumのコミットを検索するサービスを停止します</title>
+    <link
+      href="https://blog.bokken.io/articles/2024-03-31/deprecate-chromium-news.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2024-03-31/deprecate-chromium-news.html</id>
+    <updated>2024-03-30T15:27:08.583Z</updated>
+    <summary
+      type="html"
+    >ずいぶん昔に「Chromium のコミットを検索できるサイトを作った」という記事を書きましたが、そのサービスを一度停止します。理由としてはそのサービスでは内部的にPlanetScaleを使っており、無料で使えるHobby Planが2024年4月8日以降に使えなくなってしまうためです。今後もしかしたら他の技術構成で再開するかもしれないし、再開しないかもしれません。もしも使って頂いていた方がいたら申し訳ありません。今後もなにか新しいサービスを作った際にはお知らせしようと思います。</summary>
   </entry>
   
 </feed>
