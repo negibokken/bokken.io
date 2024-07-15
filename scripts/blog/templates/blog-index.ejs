@@ -44,18 +44,26 @@
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
 
     <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
-    <link rel="preload" href="assets/img/web.svg" as="image" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <script type="speculationrules">
     {
         "prerender": [
-          {"where": {"and": [
-             {"href_matches": "/*"},
-             {"not": {"selector_matches": ".no-prerender"}}
-           ]},
+          {
+            "where": {
+                "and": [
+                    {"href_matches": "/*"},
+                    {"not": {"selector_matches": ".no-prerender"}}
+                ],
+            },
            "eagerness": "conservative"
+          },
+          {
+            "where": {
+                "and": {"selector_matches": ".use-prerender"}}
+            },
+           "eagerness": "moderate"
           }
-        ]
+        ],
     }
     </script>
   </head>
@@ -80,20 +88,27 @@
     <main>
       <section>
         <h2>Articles</h2>
-        <% let years = articles.map(a=>a.date.substring(0,4)); %> <% years =
-        [... new Set(years)].sort().reverse() %> <% years.forEach((year) => { %>
+        <% let years = articles.map(a=>a.date.substring(0,4)); %>
+        <% let articleIdx = 0; %>
+        <% years = [... new Set(years)].sort().reverse() %>
+        <% years.forEach((year) => { %>
         <h3><%= year %></h3>
         <ul>
-          <% articles.filter((article)=>
-          article.date.includes(year)).forEach((article) => { %>
+          <% const filteredArticles = articles.filter((article) => article.date.includes(year)); %>
+          <% for(let idx = 0; idx < filteredArticles.length; idx+=1) { %>
+          <% const article = filteredArticles[idx]; %>
           <li>
             <%= article.date %>
-            <a href="<%= article.filepath %>">
+            <a href="<%= article.filepath %>"
+                <% if (articleIdx++ < 3) { %>
+                class=".use-prerender"
+                <% } %>
+            >
               <span class="article-title"> <%=article.title%> </span>
             </a>
             <span class="tags">[<%= article.tags.join(", "); %>]</span>
           </li>
-          <% }); %>
+          <% } %>
         </ul>
         <% }); %>
       </section>
