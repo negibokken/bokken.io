@@ -46,25 +46,33 @@
     <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <script type="speculationrules">
-    {
-        "prerender": [
-          {
-            "where": {
-                "and": [
-                    {"href_matches": "/*"},
-                    {"not": {"selector_matches": ".no-prerender"}}
-                ],
-            },
-           "eagerness": "conservative"
+      "prerender": [
+        {
+          "source": "document",
+          "where": {
+            "and": [
+              {
+                "href_matches": "/*"
+              },
+              {
+                "not": {
+                  "selector_matches": ".no-prerender"
+                }
+              }
+            ]
           },
-          {
-            "where": {
-                "and": {"selector_matches": ".use-prerender"}}
-            },
-           "eagerness": "moderate"
-          }
-        ],
-    }
+          "eagerness": "moderate"
+        }
+        {
+          "source": "document",
+          "where": {
+            "and": {
+                "selector_matches": ".use-prerender"
+            }
+          },
+          "eagerness": "moderate"
+        }
+      ]
     </script>
   </head>
 
