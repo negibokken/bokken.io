@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>
+      「あなたの知らないChromeの世界」の連載終了によせて | blog.bokken.io
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="今月のSoftware Design 2024年11月号で、以前に紹介した「あなたの知らないChromeの世界」の連載が無事に終了しました。至らない点もあったかもしれませんが、無事に連載を終えることができてほっとしています。読んでくださった方がいたら、ありがとうございました。「あなたの知らないChromeの世界」では次のトピックについて紹介しました。「Google Chromeの登場」, Software Design 2024年2月号「Chromiumとは」, Software Design 2024年3月号「レンダリングエンジンのしくみとBlink」, Software Design 202"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="author" href="humans.txt" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      href="https://blog.bokken.io/feeds/atom.xml"
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2024-10-18/unknown-chrome-world.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="「あなたの知らないChromeの世界」の連載終了によせて"
+    />
+    <meta
+      property="og:description"
+      content="今月のSoftware Design 2024年11月号で、以前に紹介した「あなたの知らないChromeの世界」の連載が無事に終了しました。至らない点もあったかもしれませんが、無事に連載を終えることができてほっとしています。読んでくださった方がいたら、ありがとうございました。「あなたの知らないChromeの世界」では次のトピックについて紹介しました。「Google Chromeの登場」, Software Design 2024年2月号「Chromiumとは」, Software Design 2024年3月号「レンダリングエンジンのしくみとBlink」, Software Design 202"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+    <script defer src="/assets/js/img-viewer.js"></script>
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io">bokken.io</a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2024-10-18/unknown-chrome-world.html"
+          >「あなたの知らないChromeの世界」の連載終了によせて</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2024-10-18</dd>
+          <dt>更新日</dt>
+          <dd>2024-10-18</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            chromium, Software Design, 執筆
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="「あなたの知らないchromeの世界」の連載終了によせて"
+            href="#「あなたの知らないchromeの世界」の連載終了によせて"
+            id="「あなたの知らないchromeの世界」の連載終了によせて"
+          >
+            「あなたの知らないChromeの世界」の連載終了によせて
+          </a>
+        </h1>
+        <p id="paragraph-1" class="paragraph">
+          <a href="./img/software_design_magazines.jpg" rel="noopener"
+            ><img src="./img/software_design_magazines.jpg" /></a
+          ><a href="#paragraph-1" class="paragraph-anchor">¶</a>
+        </p>
+        <h2>
+          <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
+        </h2>
+        <p id="paragraph-2" class="paragraph">
+          今月の<a
+            target="_blank"
+            rel="noopener"
+            href="https://gihyo.jp/magazine/SD/archive/2024/202411"
+            >Software Design 2024年11月号</a
+          >で、<a
+            target="_blank"
+            rel="noopener"
+            href="/articles/2024-01-31/software-design-2024-02.html"
+            >以前に紹介した「あなたの知らないChromeの世界」の連載</a
+          >が無事に終了しました。
+          至らない点もあったかもしれませんが、無事に連載を終えることができてほっとしています。
+          読んでくださった方がいたら、ありがとうございました。<a
+            href="#paragraph-2"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="連載中紹介したトピック"
+            href="#連載中紹介したトピック"
+            id="連載中紹介したトピック"
+          >
+            連載中紹介したトピック
+          </a>
+        </h2>
+        <p id="paragraph-3" class="paragraph">
+          「あなたの知らないChromeの世界」では次のトピックについて紹介しました。<a
+            href="#paragraph-3"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <ol>
+          <li>
+            「Google Chromeの登場」,
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://gihyo.jp/magazine/SD/archive/2024/202402"
+              >Software Design 2024年2月号</a
+            >
+          </li>
+          <li>
+            「Chromiumとは」,
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://gihyo.jp/magazine/SD/archive/2024/202403"
+              >Software Design 2024年3月号</a
+            >
+          </li>
+          <li>
+            「レンダリングエンジンのしくみとBlink」,
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://gihyo.jp/magazine/SD/archive/2024/202404"
+              >Software Design 2024年4月号</a
+            >
+          </li>
+          <li>
+            「JavaScriptエンジンのしくみとV8」,
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://gihyo.jp/magazine/SD/archive/2024/202405"
+              >Software Design 2024年5月号</a
+            >
+          </li>
+          <li>
+            「Progressive Web Appのしくみ」,
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://gihyo.jp/magazine/SD/archive/2024/202406"
+              >Software Design 2024年6月号</a
+            >
+          </li>
+          <li>
+            「ChromeのセキュリティとSpectre」,
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://gihyo.jp/magazine/SD/archive/2024/202407"
+              >Software Design 2024年7月号</a
+            >
+          </li>
+          <li>
+            「Spectre以降のブラウザベンダーの取り組みとChrome」,
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://gihyo.jp/magazine/SD/archive/2024/202408"
+              >Software Design 2024年8月号</a
+            >
+          </li>
+          <li>
+            「Webページの表示を高速化するSpeculation Rules API」,
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://gihyo.jp/magazine/SD/archive/2024/202409"
+              >Software Design 2024年9月号</a
+            >
+          </li>
+          <li>
+            「サードパーティCookieとPrivacy Sandbox」,
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://gihyo.jp/magazine/SD/archive/2024/202410"
+              >Software Design 2024年10月号</a
+            >
+          </li>
+          <li>
+            「Privacy Sandboxを巡るWebの今後」<a
+              target="_blank"
+              rel="noopener"
+              href="https://gihyo.jp/magazine/SD/archive/2024/202411"
+              >Software Design 2024年11月号</a
+            >
+          </li>
+        </ol>
+        <p id="paragraph-4" class="paragraph">
+          いずれの記事も6-8ページと比較的短いので、ざっとChromeのことを知りたいと思ってくれた人には役に立つ連載になったのではないかと思います。
+          <strong
+            >Webの発展における、Chromeや、Chrome開発者の方々の取り組みのすごさ</strong
+          >が伝わればよいなと思って書いていました。
+          他の人があまりやっていない形でのChrome、Chromiumへのコントリビューションだと思うので、なにかの役に立てていれば良いなと思っています。<a
+            href="#paragraph-4"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="謝辞" href="#謝辞" id="謝辞"> 謝辞 </a>
+        </h2>
+        <p id="paragraph-5" class="paragraph">
+          なお、連載では、技術評論社編集の栗木さん(<a
+            target="_blank"
+            rel="noopener"
+            href="https://twitter.com/g_krk3"
+            >@g_krk3</a
+          >)には本当にお世話になりました。
+          毎月ギリギリまで校正、修正作業をしていただきました。<a
+            href="#paragraph-5"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-6" class="paragraph">
+          栗木さんには、論理的におかしな点や、補足が必要な点などを丁寧に見ていただいたおかげで記事という形に仕上げることができました。
+          連載中は本当に文章のプロの技量に驚かされてばかりで、自分が平易でありきたりな言葉でしか表現できなかった部分を、的確でかっこいい文章表現に変えて修正提案をしてくださいました（言い回しがかっこよいなという文があった場合はだいたい栗木さんに提案いただいたものだと思います）。<a
+            href="#paragraph-6"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-7" class="paragraph">
+          連載企画のスタート時には本当に自分だけで連載を乗り切れるのか不安で仕方ありませんでしたが、栗木さんが併走してくださったおかげでなんとか連載を終えることができました。
+          連載という機会をいただいたこと、一緒に連載を作っていただいたこと、あらためてありがとうございました。<a
+            href="#paragraph-7"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a name="おわりに" href="#おわりに" id="おわりに"> おわりに </a>
+        </h2>
+        <p id="paragraph-8" class="paragraph">
+          一旦、月刊誌への連載はこれで終わりで、また執筆はほそぼそとブログ記事を通してやっていこうとおもっています。
+          加えて、Chromiumへのコードへのコントリビューションを改めてやっていきたいと思っています。
+          よりChrome、ChromiumやWebのことをより深く理解できるように引き続きやっていきます。
+          引き続き
+          <a target="_blank" rel="noopener" href="https://twitter.com/bokken_"
+            >@bokken_</a
+          >
+          をよろしくお願いします。<a
+            href="#paragraph-8"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+
+      <div>
+        Subscribe via <a href="https://blog.bokken.io/feeds/atom.xml">RSS</a>
+      </div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a
+            href="https://blog.bokken.io/articles/2024-03-31/deprecate-chromium-news.html"
+          >
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
