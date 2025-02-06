@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ssh bokken@ssh.bokken.io -o "StrictHostKeyChecking no" "cd bokken.io && git pull -f && ./scripts/build && docker-compose up -f docker-compose.yml -f wiki/docker-compose.yml -d"
+          command: ssh bokken@ssh.bokken.io -o "StrictHostKeyChecking no" "cd bokken.io && git pull -f && ./scripts/build && docker-compose up -f docker-compose.yml -f wiki/docker-compose.yml --env-file=.env -d"
 
 workflows:
   version: 2
