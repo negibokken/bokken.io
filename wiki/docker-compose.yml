@@ -1,0 +1,80 @@
+version: '3'
+
+services:
+  wiki:
+    image: weseek/growi:7
+    ports:
+      - 3000:3000
+    links:
+      - mongo:mongo
+      - elasticsearch:elasticsearch
+    depends_on:
+        mongo:
+          condition: service_healthy
+        elasticsearch:
+          condition: service_healthy
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/growi
+      - ELASTICSEARCH_URI=http://elasticsearch:9200/growi
+      - PASSWORD_SEED=${PASSWORD_SEED}
+      - FILE_UPLOAD=mongodb
+      - FILE_UPLOAD=local
+      - APP_SITE_URL=https://wiki.bokken.io
+      - MATHJAX=1             # activate this line if you want to use MathJax
+      # - PLANTUML_URI=http://  # activate this line and specify if you use your own PlantUML server rather than public plantuml.com
+    entrypoint: "/docker-entrypoint.sh"
+    command: ["npm run migrate && node -r dotenv-flow/config --expose_gc dist/server/app.js"]
+    restart: unless-stopped
+    volumes:
+      - growi_data:/data
+    networks:
+      - shared-net
+
+  mongo:
+    image: mongo:6.0
+    restart: unless-stopped
+    volumes:
+      - mongo_configdb:/data/configdb
+      - mongo_db:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand('ping').ok", "--quiet"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    networks:
+      - shared-net
+
+  elasticsearch:
+    build:
+      context: ./elasticsearch/v8
+      dockerfile: ./Dockerfile
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - LOG4J_FORMAT_MSG_NO_LOOKUPS=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    restart: unless-stopped
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+      - ./elasticsearch/v8/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    networks:
+      - shared-net
+
+volumes:
+  growi_data:
+  mongo_configdb:
+  mongo_db:
+  es_data:
+
+
+networks:
+  shared-net:
+    external: true

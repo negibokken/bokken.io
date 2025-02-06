@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   https-portal:
-    image: steveltn/https-portal:1.12
+    image: steveltn/https-portal:1
     ports:
       - '80:80'
       - '443:443'
@@ -10,16 +10,19 @@ services:
     restart: always
     depends_on:
       - bokken_io
+      - wiki
     environment:
-      DOMAINS: 'bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io, app.bokken.io -> http://bokken_io:3000'
+      DOMAINS: 'bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io, app.bokken.io -> http://bokken_io:3000, wiki.bokken.io -> http://wiki:3000'
       # DOMAINS: 'localhost -> http://bokken_io, www.localhost -> http://bokken_io, blog.localhost -> http://bokken_io, x.localhost -> http://bokken_io, app.localhost -> http://bokken_io:3000'
       STAGE: local
       ERROR_LOG: default
       ACCESS_LOG: default
-    volumes:
-      - type: bind
-        source: /var/log/nginx
-        target: ${PWD}/var/log/nginx
+    # volumes:
+    #   - type: bind
+    #     source: /var/log/nginx
+    #     target: ${PWD}/var/log/nginx
+    networks:
+      - shared-net
 
       
   bokken_io:
@@ -43,8 +46,12 @@ services:
       - type: bind
         source: sites/nginx/.
         target:  /etc/nginx
-
+    networks:
+      - shared-net
           # app.bokken_io:
           #   image: app.bokken.io
           #   ports:
           #     - '3000:3000'
+networks:
+  shared-net:
+    external: true

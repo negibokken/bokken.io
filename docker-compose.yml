@@ -13,17 +13,21 @@ services:
       - bokken.io
       - app.bokken.io
     environment:
-      DOMAINS: 'bokken.io -> http://bokken.io, www.bokken.io -> http://bokken.io, blog.bokken.io -> http://bokken.io, x.bokken.io -> http://bokken.io, app.bokken.io -> http://app.bokken.io:3000'
+      DOMAINS: 'bokken.io -> http://bokken.io, www.bokken.io -> http://bokken.io, blog.bokken.io -> http://bokken.io, x.bokken.io -> http://bokken.io, app.bokken.io -> http://app.bokken.io:3000, wiki.bokken.io -> http://wiki:3000'
       STAGE: production
       ERROR_LOG: default
       ACCESS_LOG: default
     volumes:
       - /var/log/nginx:/var/log/nginx
+    networks:
+      - shared-net
 
   bokken.io:
     image: bokken.io
     volumes:
       - /var/log/nginx:/var/log/nginx
+    networks:
+      - shared-net
 
   app.bokken.io:
     image: app.bokken.io
@@ -31,3 +35,9 @@ services:
       - "3000:3000"
     volumes:
       - /var/log/nginx:/var/log/nginx
+    networks:
+      - shared-net
+
+networks:
+  shared-net:
+    external: true
