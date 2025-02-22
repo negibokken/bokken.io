@@ -8,13 +8,13 @@ import { SITE_TITLE } from '../consts';
     <a href="/">
       <h2 id="site-title">
         <img width="32" height="32" id="header-icon" src="/maru.svg" alt="A tiny blue circle icon character" />
-        {SITE_TITLE}
+        <span id="site-title-text">{SITE_TITLE}</span>
       </h2>
     </a>
 		<div class="internal-links">
-			<HeaderLink href="/about">About</HeaderLink>
+      <HeaderLink href="/about">About</HeaderLink>
       <HeaderLink href="/articles">Blog</HeaderLink>
-			<HeaderLink href="/lab">Lab</HeaderLink>
+      <HeaderLink href="/lab">Lab</HeaderLink>
 		</div>
 		<div class="social-links">
       <a href="https://bsky.app/profile/bokken.bsky.social" target="_blank">
@@ -96,6 +96,22 @@ import { SITE_TITLE } from '../consts';
     gap: 10px;
 	}
 	@media (max-width: 720px) {
+  	header {
+		  margin: 0;
+		  padding: 0 1em;
+    }
+
+    span#site-title-text {
+      display: none;
+    }
+
+    nav {
+	  	display: flex;
+      flex: 1;
+      align-items: start;
+      justify-content: start;
+	  }
+
 		.social-links {
 			display: none;
 		}
