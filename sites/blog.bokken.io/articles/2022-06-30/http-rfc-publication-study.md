@@ -30,7 +30,7 @@
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">HTTP/3 と QPACK、とても早口になるかもしれないので今日の資料を投下しておきます<a href="https://t.co/5ISPlNXggi">https://t.co/5ISPlNXggi</a><a href="https://twitter.com/hashtag/http_rfc_study?src=hash&amp;ref_src=twsrc%5Etfw">#http_rfc_study</a></p>&mdash; bokken✏ (@bokken_) <a href="https://twitter.com/bokken_/status/1534875207579860992?ref_src=twsrc%5Etfw">June 9, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-![](./like_from_oku_san.png)
+![](./img/like_from_oku_san.png)
 
 また、社内でも同様の発表をする機会をもらって HTTP/3 や QPACK について伝えることができたので、そこもとてもよかった。
 
