@@ -6,7 +6,6 @@ updatedDate: 2023-03-31
 tags: ['IETF', 'draft']
 ---
 
-# IETF 116 Yokohama に参加しました
 
 ## はじめに
 

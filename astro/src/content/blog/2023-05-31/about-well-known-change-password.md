@@ -6,7 +6,6 @@ updatedDate: 2023-06-02
 tags: ['well-known', 'appsec']
 ---
 
-# パスワード変更用のURLを明示すためのwell-known URL for Changing Passwordsという仕様について
 
 ## はじめに
 

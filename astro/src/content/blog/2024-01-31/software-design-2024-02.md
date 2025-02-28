@@ -6,7 +6,6 @@ updatedDate: 2024-01-31
 tags: ['blog']
 ---
 
-# Software Design 2024年2月号から「あなたの知らないChromeの世界」の連載を始めました
 
 ## はじめに
 

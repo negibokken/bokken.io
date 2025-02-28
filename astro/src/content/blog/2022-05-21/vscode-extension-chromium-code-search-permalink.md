@@ -6,7 +6,6 @@ updatedDate: 2022-05-21
 tags: ['Chromium', 'Visual Studio Code']
 ---
 
-# Chromium の開発時に便利な Visual Studio Code の機能拡張を作った
 
 ## 概要
 

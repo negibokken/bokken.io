@@ -6,7 +6,6 @@ updatedDate: 2023-04-30
 tags: ['Browser', 'Timing API', 'Performance']
 ---
 
-# Web サイトのパフォーマンスを計測するためのタイミング関係の API について
 
 ## はじめに
 

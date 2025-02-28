@@ -6,7 +6,6 @@ updatedDate: 2022-05-20
 tags: ['Google Summer of Code', 'GSoC']
 ---
 
-# 働いているけど Google Summer of Code (GSoC) に応募した
 
 ## 概要
 

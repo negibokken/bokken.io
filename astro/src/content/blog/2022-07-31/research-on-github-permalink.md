@@ -6,7 +6,6 @@ updatedDate: 2022-07-31
 tags: ['GitHub', 'permalink']
 ---
 
-# GitHub permalink の URL の仕様について
 
 ## はじめに
 

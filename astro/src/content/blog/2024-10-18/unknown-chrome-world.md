@@ -6,7 +6,6 @@ updatedDate: 2024-10-18
 tags: ['chromium', 'Software Design', '執筆']
 ---
 
-# 「あなたの知らないChromeの世界」の連載終了によせて
 
 ![software design雑誌](./img/software_design_magazines.jpg)
 

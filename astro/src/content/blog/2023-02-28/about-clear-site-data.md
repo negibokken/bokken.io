@@ -6,7 +6,6 @@ updatedDate: 2023-02-28
 tags: ['Clear-Site-Data', 'storage', 'Cookie']
 ---
 
-# クライアントの Cookie などのデータを削除する Clear Site Data という仕様について
 
 ## はじめに
 

@@ -6,7 +6,6 @@ updatedDate: 2022-10-11
 tags: ['iframe', 'spec', 'COEP', 'CORP']
 ---
 
-# Anonymous iframe とは
 
 ## はじめに
 

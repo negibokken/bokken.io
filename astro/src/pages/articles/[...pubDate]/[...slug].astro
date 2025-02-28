@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   return posts.map((post) => {
     const pubDate = post.data.pubDate.toISOString().slice(0,10);
     return {
-      params: { pubDate , slug: post.id },
+      params: { slug: post.id },
 		  props: post,
     }
   });

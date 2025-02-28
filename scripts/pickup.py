@@ -79,7 +79,8 @@ if tags_match:
     tags = [tag.strip().strip("'\"") for tag in tags_str.split(",")]
 
 # Replace content @tags and @date tags to empty
-
+# Remove h1 element of markdown
+content = re.sub(r"^#\s+.*\n", r"", content)
 content = re.sub(r"@tags:.*\n\n", r"", content)
 content = re.sub(r"@date:.*\n\n", r"", content)
 

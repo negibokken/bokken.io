@@ -6,7 +6,6 @@ updatedDate: 2022-08-30
 tags: ['Chromium', 'commits']
 ---
 
-# Chromium のコミットを検索できるサイトを作った
 
 ## はじめに
 

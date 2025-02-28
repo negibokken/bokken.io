@@ -6,7 +6,6 @@ updatedDate: 2022-10-24
 tags: ['browser', 'storage']
 ---
 
-# ブラウザのクライアントサイド storage についてまとめる
 
 ## はじめに
 

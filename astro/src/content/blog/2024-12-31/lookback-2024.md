@@ -6,7 +6,6 @@ updatedDate: 2024-12-31
 tags: ['lookback']
 ---
 
-# 2024年の振り返り
 
 ## ふりかえり
 

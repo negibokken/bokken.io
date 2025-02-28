@@ -6,7 +6,6 @@ updatedDate: 2023-07-31
 tags: ['browser', 'storage', 'privacy']
 ---
 
-# ブラウザの Storage Partitioning について
 
 ## はじめに
 

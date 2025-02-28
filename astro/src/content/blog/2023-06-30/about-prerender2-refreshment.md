@@ -6,7 +6,6 @@ updatedDate: 2023-06-30
 tags: ['Prerender2', 'tips']
 ---
 
-# Prerender2 のキャッシュを更新し続けるためのヘルパーと HTTP Cache を合わせて活用する方法
 
 ## はじめに
 

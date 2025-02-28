@@ -6,7 +6,6 @@ updatedDate: 2022-02-28
 tags: ['Chromium', 'Web 標準', 'Fetch']
 ---
 
-# Chromium のバグを直しているときに知った HTTP ヘッダ関連の Web 標準の読み方
 
 ## はじめに
 

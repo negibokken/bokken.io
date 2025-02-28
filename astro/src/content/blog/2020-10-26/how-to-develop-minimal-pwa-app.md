@@ -6,7 +6,6 @@ updatedDate: 2020-10-26
 tags: ['Web', 'PWA', 'App Manifest', 'Service Worker']
 ---
 
-# Progressive Web App 化する最低限の設定
 
 ## 概要
 

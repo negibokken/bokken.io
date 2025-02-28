@@ -6,7 +6,6 @@ updatedDate: 2023-08-31
 tags: ['Web']
 ---
 
-# Web 好きにはたまらない Weaving The Web を読んで
 
 ## はじめに
 

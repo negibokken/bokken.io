@@ -6,7 +6,6 @@ updatedDate: 2024-03-31
 tags: ['chromium']
 ---
 
-# Chromiumのコミットを検索するサービスを停止します
 
 ## はじめに
 

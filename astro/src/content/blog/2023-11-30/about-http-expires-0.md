@@ -6,7 +6,6 @@ updatedDate: 2023-11-30
 tags: ['chromium']
 ---
 
-# Chromium の Expires: 0 の取り扱いを修正したときに学んだこと
 
 ## はじめに
 

@@ -6,7 +6,6 @@ updatedDate: 2023-01-29
 tags: ['Web', 'App', 'Sec']
 ---
 
-# 不正なリクエストを弾くために使える Fetch Metadata という仕様について
 
 ## はじめに
 

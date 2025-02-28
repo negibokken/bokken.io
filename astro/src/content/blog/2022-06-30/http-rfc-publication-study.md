@@ -6,7 +6,6 @@ updatedDate: 2022-06-30
 tags: ['HTTP/3', 'RFC']
 ---
 
-# HTTP RFC Publication Study で HTTP/3 について発表しました
 
 ## はじめに
 

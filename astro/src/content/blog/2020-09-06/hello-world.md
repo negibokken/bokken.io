@@ -6,7 +6,6 @@ updatedDate: 2020-09-06
 tags: ['web', 'blog']
 ---
 
-# Weblog をはじめる
 
 もともと[昔にブログ](https://negi-works.hatenablog.com/)を書いていたが、ブログとしてアウトプットをする時間を取らず更新が滞ってしまっていた。
 

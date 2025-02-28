@@ -6,7 +6,6 @@ updatedDate: 2022-12-30
 tags: ['Web', 'Privacy', 'Security', 'Cookie']
 ---
 
-# サードパーティ Cookie をブロックする制限を緩和する CHIPS という仕様について
 
 ## はじめに
 

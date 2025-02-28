@@ -6,7 +6,6 @@ updatedDate: 2020-10-02
 tags: ['html', 'tag', 'parser', 'Web 仕様']
 ---
 
-# HTML parser を書いてるときに出会った Web 標準仕様の話
 
 ## TL;DR
 

@@ -6,7 +6,6 @@ updatedDate: 2022-11-24
 tags: ['Web', 'browser', 'Prerender2']
 ---
 
-# Prerender2 という機能について
 
 ## はじめに
 

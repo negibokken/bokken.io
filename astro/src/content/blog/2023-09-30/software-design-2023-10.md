@@ -6,7 +6,6 @@ updatedDate: 2023-09-30
 tags: ['article', 'http/3']
 ---
 
-# Software Design 10 月号に HTTP/3 の記事を寄稿しました
 
 ## Software Design 2023 年 10 月号
 

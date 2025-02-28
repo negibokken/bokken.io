@@ -6,7 +6,6 @@ updatedDate: 2023-10-31
 tags: ['privacy', 'cookie']
 ---
 
-# サードパーティ Cookie の制限を緩和する Related Website Sets (First-Party Sets) という仕様について
 
 
 ## 概要
