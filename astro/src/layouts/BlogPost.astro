@@ -7,7 +7,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.props;
 ---
 
 <html lang="ja">
@@ -29,9 +29,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				box-shadow: var(--box-shadow);
 			}
 			.prose {
-				width: 720px;
+				width: 820px;
 				max-width: calc(100% - 2em);
-				margin: auto;
+        margin: auto;
 				padding: 1em;
 				color: rgb(var(--gray-dark));
 			}
@@ -50,14 +50,19 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.last-updated-on {
 				font-style: italic;
-        font-size: 0.8em;
 			}
-      .last-updated-on::before {
-        content: '(';
-			}
-      .last-updated-on::after {
-        content: ')';
-			}
+      hr#title-separator {
+        margin-block: 1em 0;
+      }
+      #tags-container {
+        display: flex;
+        gap: 10px;
+        height: 20px;
+      }
+      .article-tag {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
 		</style>
 	</head>
 
@@ -69,18 +74,36 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
 				</div>
 				<div class="prose">
-          <div class="date">
-				    <FormattedDate date={pubDate} />
-				  	  {
-				  	    updatedDate && (
-				  			  <div class="last-updated-on">
-				  			    Last updated on <FormattedDate date={updatedDate} />
-				  			  </div>
-				  			)
-				  		}
-				  </div>
-          <slot />
-				</div> 
+					<div class="title">
+						<div class="date">
+							<FormattedDate date={pubDate} />
+							{
+								updatedDate && (
+									<div class="last-updated-on">
+										Last updated on <FormattedDate date={updatedDate} />
+									</div>
+								)
+							}
+						</div>
+						<h1>{title}</h1>
+            <div class="tags-container">
+              {
+                tags?.map((tag) => {
+                  return (
+                    <a href={`/articles/tags/${tag}`}>
+                      <span>
+                        <img class="article-tag" src="/tag.webp" width="20px" height="20px" />
+                          {tag}
+                      </span>
+                    </a>
+                  )
+                })
+              }
+            </div>
+						<hr id="title-separator" />
+					</div>
+					<slot />
+				</div>
 			</article>
 		</main>
 		<Footer />

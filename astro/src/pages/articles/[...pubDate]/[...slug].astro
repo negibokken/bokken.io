@@ -9,7 +9,7 @@ export async function getStaticPaths() {
     const pubDate = post.data.pubDate.toISOString().slice(0,10);
     return {
       params: { slug: post.id },
-		  props: post,
+      props: post
     }
   });
 }

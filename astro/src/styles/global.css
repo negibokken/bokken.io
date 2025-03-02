@@ -11,6 +11,7 @@
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
 	--gray-dark: 34, 41, 57;
+  --gray-mid: #717375;
 	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
 	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
 		0 16px 32px rgba(var(--gray), 33%);
@@ -49,7 +50,7 @@ body {
 	line-height: 1.8;
 }
 main {
-	width: 900px;
+	width: 800px;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
@@ -60,9 +61,9 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0 0 1.3rem 0;
+  margin-block-start: 1.8em;
 	color: rgb(var(--black));
-	line-height: 1.2;
+	line-height: 1.4;
 }
 h1 {
 	font-size: 2.4rem;
@@ -90,10 +91,7 @@ a:hover {
 	color: var(--accent);
 }
 p {
-	margin-bottom: 1em;
-}
-.prose p {
-	margin-bottom: 2em;
+	margin-block: 1.2em;
 }
 textarea {
 	width: 100%;
@@ -121,12 +119,16 @@ pre {
 }
 pre > code {
 	all: unset;
+  font-size: 1.15rem;
 }
 blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
+	border-left: 8px solid var(--gray-mid);
+	padding: 0 0 0 1.2em;
+	margin: 2.5em 0;
+	font-size: 1;
+}
+blockquote p {
+  margin-block: 0.5em;
 }
 hr {
 	border: none;
