@@ -5,7 +5,6 @@
     "glob": "^10.3.4",
     "highlightjs": "^9.16.2",
     "marked": "^2.0.0",
-    "prettier": "^2.1.1",
     "uuid": "^8.3.0"
   },
   "scripts": {
@@ -21,6 +20,8 @@
     "build:blog:atom": "node scripts/blog/atom-gen.js ./sites/blog.bokken.io/articles ./sites/blog.bokken.io/atoms.json"
   },
   "devDependencies": {
-    "node-watch": "^0.7.4"
+    "node-watch": "^0.7.4",
+    "prettier": "3.5.3",
+    "prettier-plugin-astro": "0.14.1"
   }
 }
