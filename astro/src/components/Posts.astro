@@ -1,0 +1,67 @@
+---
+import FormattedDate from "./FormattedDate.astro";
+import Tags from "./Tags.astro";
+
+const { posts } = Astro.props;
+
+const postsByYear = Object.groupBy(posts, (post) =>
+  new Date(post.data.pubDate).getFullYear(),
+);
+const years = Object.keys(postsByYear).sort((a, b) => b - a);
+---
+
+<style>
+  @media (max-width: 720px) {
+    ul {
+      gap: 0.5em;
+    }
+    .tags {
+      display: none;
+    }
+  }
+
+  ul li {
+    padding-block-end: 0.3em;
+  }
+
+  ul li * {
+    transition: 0.2s ease;
+    padding-inline-end: 0.5em;
+  }
+
+  ul li a:hover h3 ul li a:hover .date {
+    color: rgb(var(--accent));
+  }
+  ul li a {
+    display: inline;
+  }
+  .date {
+    margin: 0;
+    display: inline;
+  }
+</style>
+
+<ul>
+  {
+    years.map((year) => {
+      return (
+        <li>
+          <h3>{year}</h3>
+          <ul>
+            {postsByYear[year].map((post) => (
+              <li>
+                <p class="date">
+                  <FormattedDate date={post.data.pubDate} />
+                </p>
+                <a href={`/articles/${post.id}`}>{post.data.title}</a>
+                <span class="tags">
+                  <Tags tags={post.data.tags} />
+                </span>
+              </li>
+            ))}
+          </ul>
+        </li>
+      );
+    })
+  }
+</ul>

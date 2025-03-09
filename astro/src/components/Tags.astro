@@ -1,0 +1,38 @@
+---
+interface Props {
+  tags: string[];
+}
+const { tags } = Astro.props;
+
+---
+
+<style>
+  span.tags-container::before{
+    content: "[";
+  }
+  span.tags-container::after {
+    content: "]";
+  }
+  span.tags-container {
+    vertical-align: middle;
+    display: inline-flex;
+    gap: 0.3em;
+  }
+  .tags-container > .tag:not(:last-child)::after {
+    content: ",";
+  }
+</style>
+
+<span class="tags-container">
+  {
+    tags?.map((tag) => {
+      return (
+        <span class="tag">
+          <a href={`/articles/tags/${tag}`}>
+            <span>{tag}</span>
+          </a>
+        </span>
+      )
+    })
+  }
+</span>
