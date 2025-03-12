@@ -203,6 +203,10 @@ hr {
   }
 }
 
+a {
+  text-decoration: none;
+}
+
 .sr-only {
   border: 0;
   padding: 0;

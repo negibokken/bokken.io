@@ -4,11 +4,16 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import Posts from "../../components/Posts.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
-import { getCollection } from "astro:content";
 
-const posts = (await getCollection("lab")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+import fs from "fs";
+
+const posts = fs.globSync("src/content/lab/*/index.html").map((path) => {
+  const title = fs.readFileSync(path, "utf-8").match(/<title>(.*)<\/title>/)[1];
+  return {
+    path: path.replace("src/content/", ""),
+    title,
+  };
+});
 ---
 
 <!doctype html>
@@ -16,72 +21,26 @@ const posts = (await getCollection("lab")).sort(
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
-      main {
-        width: 960px;
+      @media (max-width: 720px) {
+        ul {
+          padding-inline-start: 20px;
+        }
       }
-      ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-      ul li {
-        width: calc(50% - 1rem);
-      }
+
       ul li * {
-        text-decoration: none;
         transition: 0.2s ease;
+        padding-inline-end: 0.5em;
       }
-      ul li:first-child {
-        width: 100%;
-        margin-bottom: 1rem;
-        text-align: center;
-      }
-      ul li:first-child img {
-        width: 100%;
-      }
-      ul li:first-child .title {
-        font-size: 2.369rem;
-      }
-      ul li img {
-        margin-bottom: 0.5rem;
-        border-radius: 12px;
+
+      ul li a:hover h3 ul li a:hover .date {
+        color: rgb(var(--accent));
       }
       ul li a {
-        display: block;
-      }
-      .title {
-        margin: 0;
-        color: rgb(var(--black));
-        line-height: 1;
+        display: inline;
       }
       .date {
         margin: 0;
-        color: rgb(var(--gray));
-      }
-      ul li a:hover h4,
-      ul li a:hover .date {
-        color: rgb(var(--accent));
-      }
-      ul a:hover img {
-        box-shadow: var(--box-shadow);
-      }
-      @media (max-width: 720px) {
-        ul {
-          gap: 0.5em;
-        }
-        ul li {
-          width: 100%;
-          text-align: center;
-        }
-        ul li:first-child {
-          margin-bottom: 0;
-        }
-        ul li:first-child .title {
-          font-size: 1.563em;
-        }
+        display: inline;
       }
     </style>
   </head>
@@ -89,7 +48,19 @@ const posts = (await getCollection("lab")).sort(
     <Header />
     <main>
       <section>
-        <Posts posts={posts} />
+        <ul>
+          {
+            posts.map((post) => {
+              return (
+                <li>
+                  <a href={post.path}>
+                    <span class="title">{post.title}</span>
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
       </section>
     </main>
     <Footer />

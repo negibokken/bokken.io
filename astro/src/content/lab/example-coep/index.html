@@ -19,7 +19,7 @@
       gtag("js", new Date());
       gtag("config", "UA-83287008-4");
     </script>
-    <title>Exp | bokken.io</title>
+    <title>Example COEP</title>
 
     <link rel="shortcut icon" href=/assets/img/favicon.ico />
     <!-- Twitter -->
@@ -39,25 +39,7 @@
     <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
 
     <link rel="preload" href="/assets/img/web.svg" as="image" />
-    <script src="scripts/jquery-3.6.0.js"></script>
-    <script src="scripts/bootstrap.js"></script>
-    <script src="scripts/bootstrap.bundle.js"></script>
-    <link
-        href="styles/bootstrap.css"
-        type="text/css"
-        rel="stylesheet"
-        media="screen,print"
-    />
     <link rel=stylesheet type=text/css href=/assets/css/main.css />
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const output = document.querySelector("#output");
-            const data = performance.getEntries().map(entry => JSON.stringify(entry, null, 2));
-            const span = document.createElement('span');
-            span.innerText = data;
-            output.appendChild(span);
-        });
-    </script>
   </head>
 
   <body>
@@ -77,9 +59,33 @@
     </ul>
 
     <main>
-        <p>This is a heavy web site that has render-blocking resource.</p>
-        <p>After executing lighthouse analysis, we can see the warning "Eliminate render-blocking resources".</p>
-        <img src="img/sample.png" width=900>
+        <h2>Overview</h2>
+        <p>This is example site for Cross-Origin-Embedder-Policy (COEP).</p>
+        <p>The COEP affects external resources such as img, video, popup, iframe and so on.</p>
+        <p>In this example, the img is used.</p>
+        <p>The headers that related to COEP for this page is as below.</p>
+        <pre><code id="output" class="http">
+        Cross-Origin-Embedder-Policy: require-corp
+        Cross-Origin-Resource-Policy: same-origin
+        </code></pre>
+        <h2>Example images</h2>
+        <div style="display: flex;">
+            <div style="width: 30vw">
+                <p>This resource is same-origin resource.</p>
+                <br/>
+                <img alt="normal image" src="img/test.png" />
+            </div>
+            <div style="width: 30vw">
+                <p>This resource is cross-origin resource.</p>
+                <br/>
+                <img alt="cross-origin resource" src="https://www.bokken.io/assets/img/ng_coep.png" />
+            </div>
+            <div style="width: 30vw">
+                <p>This resource is cross-origin resource but crossorigin attribute is specified.</p>
+                <br/>
+                <img alt="cross-origin but cross origin attribute is specified" src="https://www.bokken.io/assets/img/ok.png" crossorigin />
+            </div>
+        </div>
     </main>
 
     <footer>

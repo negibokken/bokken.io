@@ -9,7 +9,6 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: 'viewport',
   },
   experimental: {
     clientPrerender: true,
