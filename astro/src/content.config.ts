@@ -29,4 +29,18 @@ const about = defineCollection({
   }),
 });
 
-export const collections = { blog, about };
+const lab = defineCollection({
+  // Load Markdown and MDX files in the `src/content/blog/` directory.
+  loader: glob({ base: './src/content/lab', pattern: '**/*.{md,mdx}' }),
+  // Type-check frontmatter using a schema
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    heroImage: z.string().optional(),
+    tags: z.array(z.string()),
+  }),
+});
+
+export const collections = { blog, about, lab };

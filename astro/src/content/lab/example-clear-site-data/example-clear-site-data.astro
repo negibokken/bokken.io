@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="bokken.io" />
+    <link rel="author" href="humans.txt" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-83287008-4");
+    </script>
+    <title>Exp | bokken.io</title>
+
+    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta property="og:url" content="https://x.bokken.io" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="x.bokken.io" />
+    <meta property="og:description" content="bokken tech web" />
+    <meta property="og:site_name" content="x.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+
+    <link rel="preload" href="/assets/img/web.svg" as="image" />
+    <link rel=stylesheet type=text/css href=/assets/css/main.css />
+
+    <script>
+        function createTable(data, title) {
+            const wrapper = document.createElement('div');
+            const titleElement = document.createElement('span');
+            titleElement.innerText = title;
+            wrapper.appendChild(titleElement);
+
+            const table = document.createElement('table');
+
+            const trh = document.createElement("tr");
+            const trk = document.createElement("th");
+            trk.innerText = "key"
+            const thv = document.createElement("th");
+            thv.innerText = "value"
+            trh.appendChild(trk);
+            trh.appendChild(thv);
+            table.appendChild(trh);
+
+            for(const [key, value] of data) {
+                const tr = document.createElement("tr");
+                const k = document.createElement("td");
+                k.innerText = key
+                const v = document.createElement("td");
+                v.innerText = value
+                tr.appendChild(k);
+                tr.appendChild(v);
+                table.appendChild(tr);
+            }
+
+            wrapper.appendChild(table);
+            return wrapper;
+        }
+        function render() {
+            const sessionkeys = Object.keys(sessionStorage).filter((key) => key.startsWith('x-')).map((key) => {
+                return [key, sessionStorage.getItem(key)]
+            });
+            const localkeys = Object.keys(localStorage).filter((key) => key.startsWith('x-')).map((key) => {
+                return [key, localStorage.getItem(key)]
+            });
+            const cookies = document.cookie.replaceAll(' ', '').split(';').filter((c) => c.startsWith('x-')).map(c=> c.split("="));
+
+            const sess = document.querySelector("#session-storage")
+            const local = document.querySelector("#local-storage")
+            const cookie = document.querySelector("#cookie")
+
+            sess.removeChild(sess.firstChild);
+            local.removeChild(local.firstChild);
+            cookie.removeChild(cookie.firstChild);
+
+            sess.appendChild(createTable(sessionkeys, "sessionStorage"));
+            local.appendChild(createTable(localkeys, "localStorage"));
+            cookie.appendChild(createTable(cookies, "Cookie"));
+        }
+    </script>
+
+    <script>
+        function clearFunction(str) {
+            fetch(`/clear-site-data/${str}`, { method: 'POST', body: str, mode:"cors",cache:'no-cache', headers: {
+                'Content-Type': 'text/html'
+            } }).then((res) => res.text()).then(() => {
+                setTimeout(() => { render() }, 2000);
+            });
+        }
+    </script>
+    <script>
+        function myInit() {
+            for(const i of [1,2,3,4,5,6,7,8,9,10]) {
+                window.sessionStorage.setItem(`x-sess-key${i}`, `value${i}`);
+                window.localStorage.setItem(`x-local-key${i}`, `value${i}`);
+                document.cookie = `x-cook-key${i}=value${i};` + "SameSite=Lux; Secure;"
+            }
+            render();
+        }
+        document.addEventListener('DOMContentLoaded', () => myInit());
+    </script>
+
+
+  </head>
+
+  <body>
+    <header>
+      <a href="https://bokken.io"><h1>bokken.io</h1></a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://x.bokken.io">Exp</a></li>
+    </ul>
+
+    <main>
+        <h2>Example Clear Site Data</h2>
+        <div style="display: flex;">
+            <output width="30vw" id="session-storage"><div></div></output>
+            <output width="30vw" id="local-storage"><div></div></output>
+            <output width="30vw" id="cookie"><div></div></output>
+        </div>
+        <span>
+            <p>Clear Site Data</p>
+            <button onclick="clearFunction('cache')">Clear cache</button>
+            <button onclick="clearFunction('cookies')">Clear cookies</button>
+            <button onclick="clearFunction('storage')" >Clear storage</button>
+            <button onclick="clearFunction('executionContexts')" >Clear executionContexts</button>
+            <button onclick="clearFunction('*')">Clear *</button>
+        </span>
+        <span>
+            <p>State</p>
+            <button onclick="myInit()">Reset</button>
+        </span>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
