@@ -16,4 +16,10 @@ export default defineConfig({
   redirects: {
     "/feeds/atom.xml": "/rss.xml",
   },
+  compressHTML: true,
+  vite: {
+    build: {
+      minify: true,
+    },
+  },
 });
