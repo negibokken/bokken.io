@@ -3,7 +3,7 @@ title: "HTTP RFC Publication Study で HTTP/3 について発表しました"
 description: "HTTP RFC Publication Study で HTTP/3 について発表しました。はじめに。HTTP RFC Publication Studyに発表者として参加した。その際に使った資料はこちらで公開している。<iframe src=\"https://docs.google.com/presentation/d/e/2PACX-1vQJJG6Yq1HtN0Yq146b-ektkfm..."
 pubDate: 2022-06-30
 updatedDate: 2022-06-30
-tags: ['HTTP/3', 'RFC']
+tags: ['HTTP3', 'RFC']
 ---
 
 
@@ -38,4 +38,3 @@ tags: ['HTTP/3', 'RFC']
 また、社内でも同様の発表をする機会をもらって HTTP/3 や QPACK について伝えることができたので、そこもとてもよかった。
 
 対外的な発表はあまりやってこなかったのだがとても楽しかった。こういう機会があったらまたぜひ発表していきたい。
-

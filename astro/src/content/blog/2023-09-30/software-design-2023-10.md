@@ -3,7 +3,7 @@ title: "Software Design 10 月号に HTTP/3 の記事を寄稿しました"
 description: "Software Design 10 月号に HTTP/3 の記事を寄稿しました。Software Design 2023 年 10 月号。Software Design 2023 年 10 月号の HTTP/3 の特集の第一章に寄稿する機会を頂きました。<img height=\"300px\" alt=\"Software Design 2023 年 10 月号\"  src=\"./img..."
 pubDate: 2023-09-30
 updatedDate: 2023-09-30
-tags: ['article', 'http/3']
+tags: ['article', 'http3']
 ---
 
 
@@ -44,4 +44,3 @@ https://gihyo.jp/magazine/SD/archive/2023/202310
 なにかコメントがあれば、[@bokken_](https://twitter.com/bokken_) までもらえると嬉しいです。
 
 (最近は小ネタが多いので、また技術的なまとめの記事を書いていきたいと思っています。)
-

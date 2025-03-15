@@ -3,7 +3,7 @@ title: "Chromium のバグを直しているときに知った HTTP ヘッダ関
 description: "Chromium のバグを直しているときに知った HTTP ヘッダ関連の Web 標準の読み方。はじめに。最近、Chromium へのコントリビューション活動をしている。直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。TL;DR。HTTP ヘッダの値のパース方法は各ヘッダごとに決められている。具体的には Structured Fiel..."
 pubDate: 2022-02-28
 updatedDate: 2022-02-28
-tags: ['Chromium', 'Web 標準', 'Fetch']
+tags: ['Chromium', 'Web標準', 'Fetch']
 ---
 
 
@@ -96,4 +96,3 @@ tchar          = "!" / "#" / "$" / "%" / "&" / "'" / "*"
 ## 最後に
 
 WPT は必ずしも正しいとは限らないので仕様を読むことは大切。仕様を読む上では大元（今回でいうと CORS 関連ヘッダの定義と ABNF ルール）からたどっていくことが大事だと身にしみて分かった。
-

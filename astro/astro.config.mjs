@@ -5,12 +5,15 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://bokken.io',
+  site: "https://blog.bokken.io",
   integrations: [mdx(), sitemap()],
   prefetch: {
     prefetchAll: true,
   },
   experimental: {
     clientPrerender: true,
+  },
+  redirects: {
+    "/feeds/atom.xml": "/rss.xml",
   },
 });
