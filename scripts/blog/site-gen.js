@@ -20,6 +20,6 @@ const templates = [
 (async () => {
     for (const template of templates) {
         const text = await ejs.renderFile(template.template);
-        fs.writeFileSync(template.path, format(text, { parser: 'html' }));
+        fs.writeFileSync(template.path, await format(text, { parser: 'html' }));
     }
 })();

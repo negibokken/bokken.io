@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="utf-8" />
+    <title>
+      Chromeのプロンプト型サードパーティCookie受け入れ機能撤回の考察 |
+      blog.bokken.io
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="4月22日に発表されたPrivacy Sandboxの再度の方向転換が話題になった（「Next steps for Privacy Sandbox and tracking protections in Chrome」。この発表では、これまでプロンプト型でサードパーティCookieの受け入れをユーザに選択できるようにする機能を撤回したことが発表された。この記事では、なぜChromeがサードパーティCookieを受け入れるプロンプトを検討していたのか、そしてなぜ今回プロンプト型のサードパーティCookie受け入れ機能を撤回したのかをGoogleとCMA（英競争・市場庁）とのやりとりをもとに考察する"
+    />
+    <meta name="author" content="bokken" />
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="author" href="humans.txt" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      href="https://blog.bokken.io/feeds/atom.xml"
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <!-- ogp -->
+    <meta
+      property="og:url"
+      content="https://blog.bokken.io/articles/2025-04-30/consideration-about-3pc-prompt.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Chromeのプロンプト型サードパーティCookie受け入れ機能撤回の考察"
+    />
+    <meta
+      property="og:description"
+      content="4月22日に発表されたPrivacy Sandboxの再度の方向転換が話題になった（「Next steps for Privacy Sandbox and tracking protections in Chrome」。この発表では、これまでプロンプト型でサードパーティCookieの受け入れをユーザに選択できるようにする機能を撤回したことが発表された。この記事では、なぜChromeがサードパーティCookieを受け入れるプロンプトを検討していたのか、そしてなぜ今回プロンプト型のサードパーティCookie受け入れ機能を撤回したのかをGoogleとCMA（英競争・市場庁）とのやりとりをもとに考察する"
+    />
+    <meta property="og:site_name" content="blog.bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+    <script defer src="/assets/js/img-viewer.js"></script>
+
+    <!-- Google -->
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"></script>
+    <!-- prettier-ignore -->
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-83287008-4');
+    </script>
+
+    <!-- Twitter -->
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <!-- prettier-ignore -->
+    <script>
+      !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="http://bokken.io">bokken.io</a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+          <li><a href="https://blog.bokken.io/feeds/atom.xml">RSS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io" bokken.io>bokken.io</a></li>
+      <li><a href="https://blog.bokken.io">blog</a></li>
+      <li>
+        <a
+          href="https://blog.bokken.io/articles/2025-04-30/consideration-about-3pc-prompt.html"
+          >Chromeのプロンプト型サードパーティCookie受け入れ機能撤回の考察</a
+        >
+      </li>
+    </ul>
+
+    <main>
+      <article>
+        <div id="blog-info">
+          <dt>作成日</dt>
+          <dd>2025-04-30</dd>
+          <dt>更新日</dt>
+          <dd>2025-04-30</dd>
+          <dt>author</dt>
+          <dd><a href="https://twitter.com/bokken_">@bokken_</a></dd>
+          <dt>tag</dt>
+          <dd>
+            <img
+              id="article-tag"
+              src="https://blog.bokken.io/assets/img/tag.webp"
+              height="20"
+            />
+            3PC, Chrome
+          </dd>
+        </div>
+        <h1>
+          <a
+            name="chromeのプロンプト型サードパーティcookie受け入れ機能撤回の考察"
+            href="#chromeのプロンプト型サードパーティcookie受け入れ機能撤回の考察"
+            id="chromeのプロンプト型サードパーティcookie受け入れ機能撤回の考察"
+          >
+            Chromeのプロンプト型サードパーティCookie受け入れ機能撤回の考察
+          </a>
+        </h1>
+        <h2>
+          <a name="はじめに" href="#はじめに" id="はじめに"> はじめに </a>
+        </h2>
+        <p id="paragraph-1" class="paragraph">
+          4月22日に発表されたPrivacy Sandboxの再度の方向転換が話題になった（「<a
+            target="_blank"
+            rel="noopener"
+            href="https://privacysandbox.com/news/privacy-sandbox-next-steps/"
+            >Next steps for Privacy Sandbox and tracking protections
+            in Chrome</a
+          >」。この発表では、これまでプロンプト型でサードパーティCookieの受け入れをユーザに選択できるようにする機能を撤回したことが発表された。<a
+            href="#paragraph-1"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-2" class="paragraph">
+          この記事では、なぜChromeがサードパーティCookieを受け入れるプロンプトを検討していたのか、そしてなぜ今回プロンプト型のサードパーティCookie受け入れ機能を撤回したのかをGoogleとCMA（英競争・市場庁）とのやりとりをもとに考察する。<a
+            href="#paragraph-2"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="発表で述べられていたこと"
+            href="#発表で述べられていたこと"
+            id="発表で述べられていたこと"
+          >
+            発表で述べられていたこと
+          </a>
+        </h2>
+        <p id="paragraph-3" class="paragraph">
+          発表の中では、下記のように述べられている。<a
+            href="#paragraph-3"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <blockquote>
+          <p id="paragraph-4" class="paragraph">
+            Taking all of these factors into consideration, we’ve made the
+            decision to maintain our current approach to offering users
+            third-party cookie choice in Chrome, and will not be rolling out a
+            new standalone prompt for third-party cookies. Users can continue to
+            choose the best option for themselves in Chrome’s Privacy and
+            Security Settings.<a href="#paragraph-4" class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="paragraph-5" class="paragraph">
+            これらの要素をすべて考慮し、ChromeでサードパーティCookieの選択をユーザーに提供する現在のアプローチを維持し、サードパーティCookieのための新しい独立したプロンプトを展開しないことを決定しました。ユーザーは引き続き、Chromeのプライバシーとセキュリティの設定で、自分に最適な選択肢を選ぶことができます。<a
+              href="#paragraph-5"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+        </blockquote>
+        <p id="paragraph-6" class="paragraph">
+          つまり、プロンプト型サードパーティCookie受け入れ機能を撤回して、これまで通りChromeのプライバシーとセキュリティの設定でサードパーティCookieをすべて受け入れるか、すべて拒否するかを選択するような方針となった。<a
+            href="#paragraph-6"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="プロンプト型サードパーティcookieの受け入れ機能"
+            href="#プロンプト型サードパーティcookieの受け入れ機能"
+            id="プロンプト型サードパーティcookieの受け入れ機能"
+          >
+            プロンプト型サードパーティCookieの受け入れ機能
+          </a>
+        </h2>
+        <p id="paragraph-7" class="paragraph">
+          まずはじめに、プロンプト型のサードパーティCookie受け入れ機能と従来通りのChromeの設定機能について簡単に紹介する。<a
+            href="#paragraph-7"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-8" class="paragraph">
+          プロンプト型の機能がどういった形になるのかはGoogleからあまり大々的に紹介されてこなかったが、機能とおぼしきものはロールアウトされていたようである。
+          Chromeでは、<a
+            target="_blank"
+            rel="noopener"
+            href="chrome://settings/cookies"
+            >chrome://settings/cookies</a
+          > で下記のCookieに関する設定画面を開くことができる。<a
+            href="#paragraph-8"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-9" class="paragraph">
+          設定画面では、「Allow third-party cookies」と「Block third-party
+          cookies」を選択できる。<a href="#paragraph-9" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-10" class="paragraph">
+          <a href="img/cookie_settings1.png" rel="noopener"
+            ><img src="img/cookie_settings1.png"
+          /></a>
+          <a href="img/cookie_settings2.png" rel="noopener"
+            ><img src="img/cookie_settings2.png"
+          /></a>
+          これだけでは、全サードパーティCookieを受け入れるか、拒否するかしか選べない。<a
+            href="#paragraph-10"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-11" class="paragraph">
+          あるいは、下記のように Block third-party cookies in Incognito
+          modeがデフォルトで設定されるパターンもある。<a
+            href="#paragraph-11"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-12" class="paragraph">
+          <a href="img/cookie_settings_another.png" rel="noopener"
+            ><img src="img/cookie_settings_another.png" /></a
+          ><a href="#paragraph-12" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-13" class="paragraph">
+          これがこれまで通りのChromeの設定画面で選択できるサードパーティCookieの取り扱いである。<a
+            href="#paragraph-13"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-14" class="paragraph">
+          さらにここから「Block third-party
+          cookies」を選択するとサードパーティCookieを利用しているサイトでは次のような表示がURLバーの部分に出てくる。<a
+            href="#paragraph-14"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-15" class="paragraph">
+          <a href="img/third_party_cookie_prompt1.png" rel="noopener"
+            ><img src="img/third_party_cookie_prompt1.png" /></a
+          ><a href="#paragraph-15" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-16" class="paragraph">
+          さらに「See
+          how」をクリックすると訪れているサイトでサードパーティCookieを有効化することができる。<a
+            href="#paragraph-16"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-17" class="paragraph">
+          <a href="img/third_party_cookie_prompt2.png" rel="noopener"
+            ><img src="img/third_party_cookie_prompt2.png" /></a
+          ><a href="#paragraph-17" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-18" class="paragraph">
+          これがおそらくプロンプトベースのユーザ選択のことを言っていたか、ベースになる機能だと思われる。
+          さらに、有効化すると「90日後にもう一度サードパーティCookieをブロックする。閲覧保護機能が働かないが、サイトの機能は期待通りに動く」というようなメッセージが表示される。<a
+            href="#paragraph-18"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-19" class="paragraph">
+          <a href="img/third_party_cookie_prompt3.png" rel="noopener"
+            ><img src="img/third_party_cookie_prompt3.png" /></a
+          ><a href="#paragraph-19" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-20" class="paragraph">
+          最下部には「Send
+          feedback」で「なぜサードパーティCookieを有効化したのか教えてほしい」という表示がある。
+          <a href="img/third_parth_cookie_prompt4.png" rel="noopener"
+            ><img src="img/third_parth_cookie_prompt4.png" /></a
+          ><a href="#paragraph-20" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-21" class="paragraph">
+          プロンプトに表示されるメッセージから察するに、あくまでもサイトの機能が壊れてしまって一時的にサードパーティCookieを有効化するために用意した機能であるようだ。<a
+            href="#paragraph-21"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-22" class="paragraph">
+          つまり、「ユーザがプロンプトでサードパーティCookieを受け入れれば、特定の広告企業でずっとトラッキング広告を可能にする」ために利用できる機能ではないことがうかがえる。
+          メッセージや、90日後にブロックを再開する挙動は、この機能が悪用されないように慎重にデザインされた機能であるように感じられる。<a
+            href="#paragraph-22"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="chromeの設定とプロンプトによる設定の違い"
+            href="#chromeの設定とプロンプトによる設定の違い"
+            id="chromeの設定とプロンプトによる設定の違い"
+          >
+            Chromeの設定とプロンプトによる設定の違い
+          </a>
+        </h2>
+        <p id="paragraph-23" class="paragraph">
+          Chromeの設定画面での選択と、プロンプトによる設定の違いは「サイトごとにサードパーティCookieを受け入れるか選択できる」ということである（もしかしたらサードパーティCookieごとに選択できるようにはなる想定だったのかもしれないが）。<a
+            href="#paragraph-23"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-24" class="paragraph">
+          このことはデフォルトの挙動が変わることを意味する。つまり、Chromeの設定ではデフォルトでサードパーティCookieを受け入れ(Incognito
+          modeでのみBlock)するが、プロンプト型による場合はデフォルトが拒否で、プロンプトで個別に許可する流れだ。イメージとしては次の図のようなイメージになる。<a
+            href="#paragraph-24"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-25" class="paragraph">
+          <a href="img/third_party_cookie_user_image.png" rel="noopener"
+            ><img src="img/third_party_cookie_user_image.png" /></a
+          ><a href="#paragraph-25" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-26" class="paragraph">
+          デフォルトの挙動によって、サードパーティCookieが使われる比率は大きく変わることになる。<a
+            href="#paragraph-26"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-27" class="paragraph">
+          といっても、もともとPrivacy
+          Sandboxが完成すればデフォルトでサードパーティCookieはデフォルト<a
+            href="#paragraph-27"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-28" class="paragraph">
+          で拒否になり次の図のように多数になるので、プロンプト型の模索はPrivacy
+          Sandboxの完成より先にデフォルト設定を変えるような意図もあったのかもしれない。<a
+            href="#paragraph-28"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-29" class="paragraph">
+          <a href="img/third_party_cookie_user_image2.png" rel="noopener"
+            ><img src="img/third_party_cookie_user_image2.png" /></a
+          ><a href="#paragraph-29" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-30" class="paragraph">
+          CMAも<a
+            target="_blank"
+            rel="noopener"
+            href="https://assets.publishing.service.gov.uk/media/6731ffb00d90eee304badaff/CMA_s_Q2_to_Q3_2024_report.pdf"
+            >CMA’s Q2 to Q3 2024 report</a
+          >で次のようにアドテク業界への影響規模を述べている。<a
+            href="#paragraph-30"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <blockquote>
+          <p id="paragraph-31" class="paragraph">
+            Google’s proposal to replace third-party cookie deprecation with a
+            new user choice experience is likely to change the scale of the
+            impact on the ad tech ecosystem in relation to the issues we
+            describe in this report, because third-party cookies will continue
+            to be available for some users depending on their choice.<a
+              href="#paragraph-31"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="paragraph-32" class="paragraph">
+            サードパーティCookieの非推奨を新しいユーザー選択エクスペリエンスに置き換えるというGoogleの提案は、アドテクに与える影響の規模を変える可能性が高い。
+            なぜなら、サードパーティCookieは、ユーザーの選択次第で一部のユーザーにとって引き続き利用可能だからです。<a
+              href="#paragraph-32"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+        </blockquote>
+        <p id="paragraph-33" class="paragraph">
+          Privacy
+          Sandbox完成より前にサードパーティCookieがデフォルトで拒否になることには触れられていないが、プロンプト型によって、「プロンプト受け入れ」部分だけサードパーティCookieが使える人が増えるようになるので影響がどうなるか見定めているようだった。<a
+            href="#paragraph-33"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-34" class="paragraph">
+          また、プロンプト型の場合は将来的にサードパーティCookieが使えるユーザが増えることや、ユーザによってサードパーティCookieが使える/使えないなど挙動が生まれるのでプロンプト型は厄介な負債になりえた。<a
+            href="#paragraph-34"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="もともとどうしてプロンプト型が提案されていたのか"
+            href="#もともとどうしてプロンプト型が提案されていたのか"
+            id="もともとどうしてプロンプト型が提案されていたのか"
+          >
+            もともとどうしてプロンプト型が提案されていたのか
+          </a>
+        </h2>
+        <p id="paragraph-35" class="paragraph">
+          ユーザの選択肢に委ねるべきであるというのは最初のGoogleからのCommitmentに対して、CMAが求めたフィードバックで提出された意見が最初のようだ。<a
+            href="#paragraph-35"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-36" class="paragraph">
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/1036204/211126_FINAL_modification_notice.pdf"
+            >Notice of intention to accept modified commitments offered by
+            Google (PDF, 2.04MB)</a
+          > に下記のようにある。<a href="#paragraph-36" class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <blockquote>
+          <p id="paragraph-37" class="paragraph">
+            50 Four respondents made specific submissions concerning user
+            choice. One     respondent submitted that the Chrome browser should
+            return to its purpose     of being a user-agent, giving consumers
+            simple and easy control over     tracking. Another respondent said
+            that any commitments should require     Google to ask users if they
+            consent to websites using TPCs. Three     respondents said that
+            valid user consent should be obtained for the     processing of
+            personal data. One respondent submitted that users should be    
+            able to say no as easily as they can say yes as regards data
+            processing,     and that Google should provide a clear and easy way
+            for users to opt out     of TPCs blocking in case any user
+            reconsiders a previous decision to opt     in. As user controls
+            including choice architecture and defaults are     already
+            explicitly within the scope of the Initial Commitments, the CMA’s  
+              provisional view is that the commitments need no modification to
+            address     these points.<a
+              href="#paragraph-37"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="paragraph-38" class="paragraph">
+            50
+            4名の回答者は、ユーザーの選択に関する具体的な提案を行った。ある回答者はChromeブラウザをユーザーエージェントとしての目的に戻し、消費者がトラッキングをシンプルかつ簡単にコントロールできるようにすべきだと述べた。また別の回答者は、サードパーティCookieを使用するウェブサイトに同意するかどうかをユーザーに尋ねることをGoogleに義務付けるべきだと述べた。3人の回答者は、個人データの処理について、有効なユーザーの同意を得るべきだと述べた。ある回答者は、ユーザーはデータ処理に関して「はい」と言うのと同じくらい簡単に「いいえ」と言うことができるべきであり、また、Googleは、ユーザーが以前にオプトインすることを決定したことを再考する場合に備えて、ユーザーがTPCのブロッキングをオプトアウトするための明確かつ簡単な方法を提供すべきであると述べた。選択アーキテクチャーやデフォルトを含むユーザーコントロールは、すでに初期コミットメントの範囲内に明確に含まれているため、CMAの暫定的な見解では、コミットメントはこれらの点に対処するための修正を必要としない。<a
+              href="#paragraph-38"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+        </blockquote>
+        <p id="paragraph-39" class="paragraph">
+          他にも下記のように、CMAはGoogleがユーザに実質的に選択させない恐れがあることに懸念を示しているようだ。<a
+            href="#paragraph-39"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <blockquote>
+          <p id="paragraph-40" class="paragraph">
+            Concern 3: imposition of unfair terms on Chrome web users 5.53 As
+            described in Chapter 3 of this Decision and listed at paragraph 7.c.
+            of the Final Commitments, the CMA is also concerned that, in the
+            absence of sufficient regulatory scrutiny and oversight, Google
+            would be able to exploit its likely dominant position by denying
+            Chrome web users any substantial choice in terms of whether and how
+            their personal data is used for the purpose of targeting and
+            delivering advertising to them. 5.54 The CMA considers that the
+            Final Commitments address this competition concern, in particular
+            through the following commitments:<a
+              href="#paragraph-40"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="paragraph-41" class="paragraph">
+            懸念 3：Chrome ウェブユーザーへの不公正な条件の押し付け
+             5.53　本決定書の第 3 章および最終コミットメント 7.c
+            項で述べたとおり、十分な規制当局による監視とチェックが行われない場合、Google
+            は広告のターゲティングと配信を目的にユーザーの個人データを「利用するかどうか」「どのように利用するか」について
+            Chrome
+            ウェブユーザーに実質的な選択肢を与えず、その支配的地位を悪用するおそれがあると
+            CMA は懸念している。   5.54　CMA
+            は、以下に示すコミットメントを通じて、最終コミットメントがこの競争上の懸念に対応していると判断している。<a
+              href="#paragraph-41"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+        </blockquote>
+        <p id="paragraph-42" class="paragraph">
+          つまり、CMAは「新しいプロンプトによるユーザー選択」を導入することを示唆していたわけではなく、「既存の、あるいはコミットメント内で改善されるユーザーコントロール」を通じて、ユーザーがデータ利用について選択できる状態を確保することを重要視していたと言えそうだ。<a
+            href="#paragraph-42"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="なぜユーザ選択型のサードパーティcookie受け入れプロンプトをやめたのか"
+            href="#なぜユーザ選択型のサードパーティcookie受け入れプロンプトをやめたのか"
+            id="なぜユーザ選択型のサードパーティcookie受け入れプロンプトをやめたのか"
+          >
+            なぜユーザ選択型のサードパーティCookie受け入れプロンプトをやめたのか
+          </a>
+        </h2>
+        <p id="paragraph-43" class="paragraph">
+          GoogleはこれまでCMAや関連業界からのフィードバックに答えてプロンプト型を提案し実装を進めてきた。
+          ではなぜ、サードパーティCookieの受け入れプロンプトの道をやめたのだろうか。
+          ここまで、ある程度機能がロールアウトされているのに機能の方針転換をしたのはなぜなのだろうか。<a
+            href="#paragraph-43"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-44" class="paragraph">
+          その答えの一つは <a
+            target="_blank"
+            rel="noopener"
+            href="https://assets.publishing.service.gov.uk/media/6731ffb00d90eee304badaff/CMA_s_Q2_to_Q3_2024_report.pdf"
+            >CMA’s Q2 to Q3 2024</a
+          > にありそうだ。<a href="#paragraph-44" class="paragraph-anchor">¶</a>
+        </p>
+        <p id="paragraph-45" class="paragraph">
+          CMAやはこのレポートで下記のように各種Privacy
+          SandboxのAPIでプロンプトによって許諾を求めるとユーザが理解せずに許諾してしまう危険性について述べている。<a
+            href="#paragraph-45"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <blockquote>
+          <p id="paragraph-46" class="paragraph">
+            The close sequencing of the prompts for Topics, PA API and ARA is
+            impacting user comprehension. Google’s UX research shows that users
+            struggle to identify that the initial prompts for Topics, PA API and
+            ARA are providing information about three different APIs.
+            Particularly in relation to the PA API and ARA, our view is that the
+            highlighting of the ‘Got it’ button on the prompt nudges users to
+            dismiss the notice without reading or comprehending the information
+            presented. This view is informed by the ICO-CMA joint paper on
+            Harmful Design in Digital Markets which describes a ‘harmful nudge’
+            as ’when a firm makes it easy [for] users to make inadvertent or
+            ill-considered decisions’. <a
+              href="#paragraph-46"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+          <p id="paragraph-47" class="paragraph">
+             Topics、PA API、ARA
+            の各プロンプトが立て続けに表示されることで、ユーザーの理解が妨げられています。Google
+            の UX 調査によると、ユーザーは Topics、PA API、ARA
+            の最初のプロンプトが三つの異なる API
+            を説明していることを認識しにくいことが分かりました。特に PA API と
+            ARA
+            については、プロンプト内で青色に強調表示されている「了解」ボタンが、提示された情報を読まずに通知を閉じるようユーザーを誘導していると考えられます。この見解は、ICO
+            と CMA
+            が共同で発表した「デジタル市場における有害なデザイン」論文で定義される「有害なナッジ」――企業がユーザーに不注意または軽率な決定をとらせやすくする設計――に基づいています。<a
+              href="#paragraph-47"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+        </blockquote>
+        <p id="paragraph-48" class="paragraph">
+          また、その他にも<a
+            target="_blank"
+            rel="noopener"
+            href="https://assets.publishing.service.gov.uk/media/679cbbca3bd16ee4b57adf25/google_q4_2024_report.pdf"
+            >Google’s Q4 2024 report</a
+          >で、ユーザが許可したサードパーティCookieを付与するサイトが悪用されていないかをChromeが監査することは現実的ではない、つまりユーザが危険にさらされてしまうと述べている。<a
+            href="#paragraph-48"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <blockquote>
+          <p id="paragraph-49" class="paragraph">
+            Exception Request Request for an exception to access third-party
+            cookies (3PCs) for their consented users.   Consenting to device
+            access and storage or specific data processing purposes doesn’t as
+            such indicate a user wants to override their 3PC setting in Chrome.
+            Allowing site-level override of a user’s 3PC settings would create
+            considerable potential for misuse, and it would be infeasible for
+            Chrome to audit all sites’ behavior that might lead to a request for
+            exception.<a href="#paragraph-49" class="paragraph-anchor">¶</a>
+          </p>
+          <p id="paragraph-50" class="paragraph">
+             デバイスへのアクセスや保存、または特定のデータ処理目的に同意したとしても、それだけでユーザーが
+            Chrome のサードパーティ Cookie
+            設定を上書きしたいと望んでいるとは限りません。サイト単位でユーザーのサードパーティ
+            Cookie
+            設定を上書きできるようにすると悪用の余地が大きくなり、例外を求める可能性のあるすべてのサイトの挙動を
+            Chrome が監査するのは現実的に不可能です。<a
+              href="#paragraph-50"
+              class="paragraph-anchor"
+              >¶</a
+            >
+          </p>
+        </blockquote>
+        <p id="paragraph-51" class="paragraph">
+          このようにサードパーティCookieをプロンプト型で提示する方法ではユーザが危険にさらされてしまうというのがCMAとのレポートのやり取りから見られる大きな理由なようだ。<a
+            href="#paragraph-51"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-52" class="paragraph">
+          ユーザを保護するためにこれまでの方針を急に変える選択を取れるGoogleはやはりまだWebやWebのユーザのことを考えていると思う。これまでのWebの発展を支えてきたというGoogleの矜持を感じた。<a
+            href="#paragraph-52"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <h2>
+          <a
+            name="おわりにこれからサードパーティcookieはどうなるのか"
+            href="#おわりにこれからサードパーティcookieはどうなるのか"
+            id="おわりにこれからサードパーティcookieはどうなるのか"
+          >
+            おわりに―これからサードパーティCookieはどうなるのか―
+          </a>
+        </h2>
+        <p id="paragraph-53" class="paragraph">
+          とはいえ、この選択によってサードパーティCookieを巡る状況が大きく前進したわけではない。<a
+            href="#paragraph-53"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-54" class="paragraph">
+          サードパーティCookieをデフォルトで拒否するようにしたい、というのはGoogleも願うところだろう。ただし、それはPriavacy
+          Sandboxが完成した後だ。仕様の数は膨大で、ブラウザベンダからの反対という逆風もある。どうやって解決していくのかは、自分の立場では全然見えないが、Googleなら、Chromeならなんとかしてくれるんじゃないかとそんな期待をしている。<a
+            href="#paragraph-54"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+        <p id="paragraph-55" class="paragraph">
+          本記事についてなにかコメントがあれば
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://bsky.app/profile/bokken.bsky.social"
+            >Bluesky</a
+          >
+          か
+          <a target="_blank" rel="noopener" href="https://x.com/bokken_">X</a>
+          までいただけると嬉しいです。<a
+            href="#paragraph-55"
+            class="paragraph-anchor"
+            >¶</a
+          >
+        </p>
+      </article>
+
+      <!-- prettier-ignore -->
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <!-- prettier-ignore -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+
+      <!-- prettier-ignore -->
+      <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+      <!-- prettier-ignore -->
+      <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async" ></script>
+
+      <div>
+        Subscribe via <a href="https://blog.bokken.io/feeds/atom.xml">RSS</a>
+      </div>
+
+      <div class="article-pager">
+        <div class="prev-article">
+          <a
+            href="https://blog.bokken.io/articles/2024-12-31/lookback-2024.html"
+          >
+            前の記事へ
+          </a>
+        </div>
+
+        <div class="blog-top">
+          <a href="https://blog.bokken.io">TOP</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>

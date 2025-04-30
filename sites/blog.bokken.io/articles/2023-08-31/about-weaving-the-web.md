@@ -9,7 +9,7 @@
 ずっと読みかけで積んでしまっていた「[Weaving the Web: The Original Design and Ultimate Destiny of the World Wide Web](https://www.amazon.co.jp/dp/006251587X)」(以下、Weaving the Web) を読んだ。読んだ内容を忘れないように備忘録として書き留めておく。
 
 <div style="width:100%">
-    <img style="margin: 0 auto;" height=250 src=./img/weaving_the_web.jpg />
+    <img style="margin: 0 auto;" height="250" src="./img/weaving_the_web.jpg" />
 </div>
 
 ## Weaving the Web とは

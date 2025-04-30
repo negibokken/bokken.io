@@ -523,4 +523,18 @@
     >今年やったことや、よかったことを簡単に振り返る。今年は『「あなたの知らないChromeの世界」の連載終了によせて』でも書いたように、Software Designでの連載をやり切ることができた。その分、ブログを書くのがおろそかになってしまっていた。Web Developer Conference 2024の「1分 de Web標準」でHigh Resolution Timeについて発表したりした。Chromiumへのコントリビューションも同様になかなかできていなかったが、連載が終わってからは毎週一定時間はbugの調査に時間を割けている（ただ、assignしたbugの問題が根深すぎてまだ解決できて</summary>
   </entry>
   
+  <entry>
+    <title
+    >Chromeのプロンプト型サードパーティCookie受け入れ機能撤回の考察</title>
+    <link
+      href="https://blog.bokken.io/articles/2025-04-30/consideration-about-3pc-prompt.html"
+    />
+    <id
+    >https://blog.bokken.io/articles/2025-04-30/consideration-about-3pc-prompt.html</id>
+    <updated />
+    <summary
+      type="html"
+    >4月22日に発表されたPrivacy Sandboxの再度の方向転換が話題になった（「Next steps for Privacy Sandbox and tracking protections in Chrome」。この発表では、これまでプロンプト型でサードパーティCookieの受け入れをユーザに選択できるようにする機能を撤回したことが発表された。この記事では、なぜChromeがサードパーティCookieを受け入れるプロンプトを検討していたのか、そしてなぜ今回プロンプト型のサードパーティCookie受け入れ機能を撤回したのかをGoogleとCMA（英競争・市場庁）とのやりとりをもとに考察する</summary>
+  </entry>
+  
 </feed>
