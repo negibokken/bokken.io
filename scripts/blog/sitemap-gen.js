@@ -40,5 +40,5 @@ const templatePath = `${baseFilePath}/templates/sitemap-template.ejs`;
         lastModified,
         articles: sitemaps,
     });
-    fs.writeFileSync(outputFilePath, format(text, { parser: 'xml' }));
+    fs.writeFileSync(outputFilePath, await format(text, { parser: 'xml' }));
 })();

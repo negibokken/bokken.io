@@ -13,7 +13,7 @@
       content="筆者はブラウザをスクラッチで書いている。そのときに HTML の標準を読みながらブラウザを書いているそのときに仕様の不備のように疑われる挙動に出会った。内容について調査しているうちにWeb は標準を壊さないようにしている動いているものが Webということを再認識できたので、その内容について紹介したい。まず、筆者がどういう背景でどのような挙動に出会ったかを簡単に紹介する。筆者はブラウザに興味があり、ブラウザをフルスクラッチで作っている。その中で HTML の parser を WHATWG の仕様 を読み解きながら実装している。そのときに、attribute (&amp;lt;a href=&amp;quot;h"
     />
     <meta name="author" content="bokken" />
-    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="author" href="humans.txt" />
     <link
       rel="alternate"
@@ -66,7 +66,7 @@
       !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
     </script>
 
-    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"

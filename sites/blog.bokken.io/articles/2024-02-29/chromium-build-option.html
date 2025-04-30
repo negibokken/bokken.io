@@ -11,7 +11,7 @@
       content="以前の記事でChromiumのビルドをする際のコマンドを備忘録のためにまとめた。基本的にはデフォルトの設定を使っているのだが、デバッガと併用して使う場合には別途設定ファイルを変更して利用する必要があるため、その内容についてまとめる。現状、デフォルトビルドの際には次のようなオプションを使用している。これでも最低限、動作確認やテストの実行などはできる。デフォルトの動作の確認以外にもデバッガを使いたいときがある。そういったときに上記の設定だとブレイクポイントが飛び飛びで止まってしまい期待する動作をしてくれない。その際はデバッグビルドの際には次の設定を使用している。差分はis_debugとsymbol_"
     />
     <meta name="author" content="bokken" />
-    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="author" href="humans.txt" />
     <link
       rel="alternate"
@@ -61,7 +61,7 @@
       !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
     </script>
 
-    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"

@@ -51,7 +51,7 @@ function scanFiles(path, ext, ignore = '') {
         const html = await ejs.renderFile(templateFilePath, {
             articles,
         });
-        fs.writeFileSync(outputFile, format(html, { parser: 'html' }));
+        fs.writeFileSync(outputFile, await format(html, { parser: 'html' }));
         process.exit(0);
     } catch (e) {
         console.error(e);

@@ -14,7 +14,7 @@
       content="本記事ではPrerender2で事前描画したページを更新し続けるときに、少しだけ便利なヘルパーを作ったので、Prerender2の挙動とあわせて紹介する。Prerender2 という機能が Chrome/Chromium で実装されている。この Prerender2 という機能は、リンク先のページを事前描画する機能である。リンク先への遷移が一瞬で完了するため、高速な閲覧体験をユーザに提供できる機能だ。Prerender2 によって、例えば非常に重い画像が複数あるページであっても(事前描画が終わっていれば)一瞬で表示される。その簡単なデモが次の例だ。最初のデモでは Prerender2を使わずに重"
     />
     <meta name="author" content="bokken" />
-    <link rel="shortcut icon" href=/assets/img/favicon.ico />
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="author" href="humans.txt" />
     <link
       rel="alternate"
@@ -67,7 +67,7 @@
       !(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } })(document, 'script', 'twitter-wjs');
     </script>
 
-    <link rel=stylesheet type=text/css href=/assets/css/main.css>
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
