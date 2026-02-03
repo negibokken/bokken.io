@@ -7,12 +7,14 @@ services:
       - '443:443'
     links:
       - 'bokken_io'
+      - 'strapi'
     restart: always
     depends_on:
       - bokken_io
+      - strapi
     environment:
-      DOMAINS: 'bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io, app.bokken.io -> http://bokken_io:3000'
-      # DOMAINS: 'localhost -> http://bokken_io, www.localhost -> http://bokken_io, blog.localhost -> http://bokken_io, x.localhost -> http://bokken_io, app.localhost -> http://bokken_io:3000'
+      DOMAINS: 'bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io, app.bokken.io -> http://bokken_io:3000, cms.bokken.io -> http://strapi:1337'
+      # DOMAINS: 'localhost -> http://bokken_io, www.localhost -> http://bokken_io, blog.localhost -> http://bokken_io, x.localhost -> http://bokken_io, app.localhost -> http://bokken_io:3000, cms.localhost -> http://strapi:1337'
       STAGE: local
       ERROR_LOG: default
       ACCESS_LOG: default
@@ -21,7 +23,6 @@ services:
         source: /var/log/nginx
         target: ${PWD}/var/log/nginx
 
-      
   bokken_io:
     image: nginx:alpine
     volumes:
@@ -44,7 +45,50 @@ services:
         source: sites/nginx/.
         target:  /etc/nginx
 
-          # app.bokken_io:
-          #   image: app.bokken.io
-          #   ports:
-          #     - '3000:3000'
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi_dev_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    restart: unless-stopped
+
+  strapi:
+    build:
+      context: ./strapi
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: strapi_dev_password
+      DATABASE_SSL: 'false'
+      APP_KEYS: devkey1,devkey2,devkey3,devkey4
+      API_TOKEN_SALT: dev_api_token_salt_12345
+      ADMIN_JWT_SECRET: dev_admin_jwt_secret_12345
+      TRANSFER_TOKEN_SALT: dev_transfer_token_salt_12345
+      JWT_SECRET: dev_jwt_secret_12345
+      HOST: 0.0.0.0
+      PORT: 1337
+    ports:
+      - '1337:1337'
+    depends_on:
+      - postgres
+    volumes:
+      - strapi_uploads:/opt/app/public/uploads
+    restart: unless-stopped
+
+  # app.bokken_io:
+  #   image: app.bokken.io
+  #   ports:
+  #     - '3000:3000'
+
+volumes:
+  postgres_data:
+  strapi_uploads:
