@@ -1,0 +1,26 @@
+{
+  "name": "strapi-blog",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Strapi CMS for bokken.io blog",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/strapi": "^5.5.0",
+    "@strapi/plugin-users-permissions": "^5.5.0",
+    "@strapi/plugin-cloud": "^5.5.0",
+    "pg": "^8.13.0"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=22.x.x",
+    "npm": ">=10.0.0"
+  },
+  "strapi": {
+    "uuid": "bokken-io-blog-cms"
+  },
+  "license": "MIT"
+}
