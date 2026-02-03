@@ -1,0 +1,47 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArticleCard from '@/components/ArticleCard.astro';
+import { getTags, getArticlesByTag } from '@/lib/strapi';
+
+export async function getStaticPaths() {
+  const tags = await getTags();
+  return tags.map((tag) => ({
+    params: { slug: tag.slug },
+    props: { tag },
+  }));
+}
+
+const { slug } = Astro.params;
+const { tag } = Astro.props;
+const articles = await getArticlesByTag(slug);
+---
+
+<BaseLayout title={`Tag: ${tag.name}`} description={`Articles tagged with ${tag.name}`}>
+  <h1>Tag: {tag.name}</h1>
+  <p class="count">{articles.length} articles</p>
+
+  <div class="article-list">
+    {articles.map((article) => (
+      <ArticleCard article={article} />
+    ))}
+  </div>
+
+  <p class="back-link">
+    <a href="/tags/">&larr; All tags</a>
+  </p>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .count {
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .back-link {
+    margin-top: 2rem;
+  }
+</style>

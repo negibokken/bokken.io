@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArticleCard from '@/components/ArticleCard.astro';
+import { getArticles } from '@/lib/strapi';
+
+const articles = await getArticles();
+---
+
+<BaseLayout title="Articles" description="All blog articles">
+  <h1>All Articles</h1>
+  <p class="count">{articles.length} articles</p>
+
+  <div class="article-list">
+    {articles.map((article) => (
+      <ArticleCard article={article} />
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .count {
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+</style>

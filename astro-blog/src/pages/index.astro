@@ -1,0 +1,58 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArticleCard from '@/components/ArticleCard.astro';
+import { getArticles } from '@/lib/strapi';
+
+const articles = await getArticles();
+const recentArticles = articles.slice(0, 10);
+---
+
+<BaseLayout title="Home" description="bokken.io - A blog about web development and technology">
+  <section class="hero">
+    <h1>Welcome to bokken.io</h1>
+    <p>A blog about web development, browsers, and technology.</p>
+  </section>
+
+  <section class="recent-articles">
+    <h2>Recent Articles</h2>
+    <div class="article-list">
+      {recentArticles.map((article) => (
+        <ArticleCard article={article} />
+      ))}
+    </div>
+    {articles.length > 10 && (
+      <p class="view-all">
+        <a href="/articles/">View all articles</a>
+      </p>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero p {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 0;
+  }
+
+  .recent-articles h2 {
+    margin-bottom: 1rem;
+  }
+
+  .view-all {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+</style>

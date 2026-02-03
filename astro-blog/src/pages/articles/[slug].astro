@@ -1,0 +1,22 @@
+---
+import ArticleLayout from '@/layouts/ArticleLayout.astro';
+import { getArticles, getArticleBySlug } from '@/lib/strapi';
+
+export async function getStaticPaths() {
+  const articles = await getArticles();
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const article = await getArticleBySlug(slug);
+
+if (!article) {
+  return Astro.redirect('/404');
+}
+---
+
+<ArticleLayout article={article}>
+  <Fragment set:html={article.content} />
+</ArticleLayout>
