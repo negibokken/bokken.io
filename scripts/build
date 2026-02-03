@@ -1,3 +1,13 @@
 #!/bin/bash
+set -e
+
+echo "Building bokken.io..."
 docker build -t bokken.io .
+
+echo "Building app.bokken.io..."
 docker build -t app.bokken.io sites/app.bokken.io
+
+echo "Building strapi.bokken.io..."
+docker build -t strapi.bokken.io strapi
+
+echo "Build complete!"

@@ -8,12 +8,14 @@ services:
     links:
       - 'bokken.io'
       - 'app.bokken.io'
+      - 'strapi'
     restart: always
     depends_on:
       - bokken.io
       - app.bokken.io
+      - strapi
     environment:
-      DOMAINS: 'bokken.io -> http://bokken.io, www.bokken.io -> http://bokken.io, blog.bokken.io -> http://bokken.io, x.bokken.io -> http://bokken.io, app.bokken.io -> http://app.bokken.io:3000'
+      DOMAINS: 'bokken.io -> http://bokken.io, www.bokken.io -> http://bokken.io, blog.bokken.io -> http://bokken.io, x.bokken.io -> http://bokken.io, app.bokken.io -> http://app.bokken.io:3000, cms.bokken.io -> http://strapi:1337'
       STAGE: production
       ERROR_LOG: default
       ACCESS_LOG: default
@@ -31,3 +33,41 @@ services:
       - "3000:3000"
     volumes:
       - /var/log/nginx:/var/log/nginx
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: ${STRAPI_DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  strapi:
+    image: strapi.bokken.io
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: ${STRAPI_DB_PASSWORD}
+      DATABASE_SSL: 'false'
+      APP_KEYS: ${STRAPI_APP_KEYS}
+      API_TOKEN_SALT: ${STRAPI_API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
+      TRANSFER_TOKEN_SALT: ${STRAPI_TRANSFER_TOKEN_SALT}
+      JWT_SECRET: ${STRAPI_JWT_SECRET}
+      HOST: 0.0.0.0
+      PORT: 1337
+      PUBLIC_URL: https://cms.bokken.io
+    depends_on:
+      - postgres
+    volumes:
+      - strapi_uploads:/opt/app/public/uploads
+    restart: always
+
+volumes:
+  postgres_data:
+  strapi_uploads:
