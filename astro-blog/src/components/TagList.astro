@@ -1,0 +1,28 @@
+---
+import type { StrapiTag } from '@/lib/strapi';
+
+interface Props {
+  tags: StrapiTag[];
+  linkable?: boolean;
+}
+
+const { tags, linkable = true } = Astro.props;
+---
+
+<div class="tag-list">
+  {tags.map((tag) => (
+    linkable ? (
+      <a href={`/tags/${tag.slug}/`} class="tag">{tag.name}</a>
+    ) : (
+      <span class="tag">{tag.name}</span>
+    )
+  ))}
+</div>
+
+<style>
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+</style>

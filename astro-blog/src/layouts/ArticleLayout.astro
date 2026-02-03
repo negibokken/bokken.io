@@ -1,0 +1,83 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TagList from '@/components/TagList.astro';
+import type { StrapiArticle } from '@/lib/strapi';
+import { formatDate } from '@/lib/strapi';
+
+interface Props {
+  article: StrapiArticle;
+}
+
+const { article } = Astro.props;
+---
+
+<BaseLayout title={article.title} description={article.summary || undefined}>
+  <article class="article">
+    <header class="article-header">
+      <h1 class="article-title">{article.title}</h1>
+      <div class="article-meta">
+        <time class="date" datetime={article.publishedDate}>
+          {formatDate(article.publishedDate)}
+        </time>
+        {article.updatedDate && article.updatedDate !== article.publishedDate && (
+          <span class="updated">
+            (Updated: <time datetime={article.updatedDate}>{formatDate(article.updatedDate)}</time>)
+          </span>
+        )}
+      </div>
+      {article.tags && article.tags.length > 0 && (
+        <div class="article-tags">
+          <TagList tags={article.tags} />
+        </div>
+      )}
+    </header>
+    <div class="article-content">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .article-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .article-meta {
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .updated {
+    margin-left: 0.5rem;
+  }
+
+  .article-tags {
+    margin-top: 0.5rem;
+  }
+
+  .article-content {
+    line-height: 1.8;
+  }
+
+  .article-content :global(h2) {
+    margin-top: 2rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .article-content :global(h3) {
+    margin-top: 1.5rem;
+  }
+
+  .article-content :global(img) {
+    display: block;
+    margin: 1rem auto;
+  }
+</style>

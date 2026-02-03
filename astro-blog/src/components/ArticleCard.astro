@@ -1,0 +1,70 @@
+---
+import type { StrapiArticle } from '@/lib/strapi';
+import { formatDate } from '@/lib/strapi';
+import TagList from './TagList.astro';
+
+interface Props {
+  article: StrapiArticle;
+}
+
+const { article } = Astro.props;
+---
+
+<article class="article-card">
+  <a href={`/articles/${article.slug}/`} class="title-link">
+    <h2 class="title">{article.title}</h2>
+  </a>
+  <div class="meta">
+    <time class="date" datetime={article.publishedDate}>
+      {formatDate(article.publishedDate)}
+    </time>
+    {article.tags && article.tags.length > 0 && (
+      <TagList tags={article.tags} />
+    )}
+  </div>
+  {article.summary && (
+    <p class="summary">{article.summary}</p>
+  )}
+</article>
+
+<style>
+  .article-card {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .article-card:last-child {
+    border-bottom: none;
+  }
+
+  .title-link {
+    color: var(--color-text);
+  }
+
+  .title-link:hover {
+    color: var(--color-link);
+  }
+
+  .title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .date {
+    color: var(--color-text-muted);
+    font-size: 0.9em;
+  }
+
+  .summary {
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+</style>
