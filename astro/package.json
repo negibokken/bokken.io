@@ -3,8 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build && prettier --write --no-error-on-unmatched-pattern dist/**/*.{html,js,css,xml}",
+    "sync-images": "node scripts/sync-images.mjs",
+    "dev": "node scripts/sync-images.mjs && astro dev",
+    "build": "node scripts/sync-images.mjs && astro build && prettier --write --no-error-on-unmatched-pattern dist/**/*.{html,js,css,xml}",
     "preview": "astro preview",
     "astro": "astro"
   }
