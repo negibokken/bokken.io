@@ -117,6 +117,8 @@ const { title, description, pubDate, updatedDate, heroImage, tags } =
         h5,
         h6 {
           position: relative;
+          display: flex;
+          align-items: center;
         }
         h1 a.heading-anchor,
         h2 a.heading-anchor,
@@ -126,10 +128,10 @@ const { title, description, pubDate, updatedDate, heroImage, tags } =
         h6 a.heading-anchor {
           color: inherit;
           opacity: 0;
+          order: -1;
           margin-inline-end: 0.4em;
           text-decoration: none;
           transition: opacity 0.15s ease;
-          vertical-align: middle;
           display: inline-flex;
           align-items: center;
         }
