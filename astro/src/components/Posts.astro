@@ -25,7 +25,7 @@ const years = Object.keys(postsByYear).sort((a, b) => b - a);
 
   ul li {
     display: flex;
-    align-items: center;
+    align-items: baseline;
   }
 
   ul li * {
@@ -37,7 +37,12 @@ const years = Object.keys(postsByYear).sort((a, b) => b - a);
     color: rgb(var(--accent));
   }
   ul li a {
-    display: inline;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .tags {
+    flex-shrink: 0;
   }
   .date {
     margin: 0;

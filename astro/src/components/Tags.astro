@@ -3,11 +3,10 @@ interface Props {
   tags: string[];
 }
 const { tags } = Astro.props;
-
 ---
 
 <style>
-  span.tags-container::before{
+  span.tags-container::before {
     content: "[";
   }
   span.tags-container::after {
@@ -17,6 +16,7 @@ const { tags } = Astro.props;
     vertical-align: middle;
     display: inline-flex;
     gap: 0.3em;
+    white-space: nowrap;
   }
   .tags-container > .tag:not(:last-child)::after {
     content: ",";
@@ -32,7 +32,7 @@ const { tags } = Astro.props;
             <span>{tag}</span>
           </a>
         </span>
-      )
+      );
     })
   }
 </span>
