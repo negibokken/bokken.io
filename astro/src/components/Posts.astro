@@ -23,6 +23,11 @@ const years = Object.keys(postsByYear).sort((a, b) => b - a);
     }
   }
 
+  ul li {
+    display: flex;
+    align-items: center;
+  }
+
   ul li * {
     transition: 0.2s ease;
     padding-inline-end: 0.5em;
