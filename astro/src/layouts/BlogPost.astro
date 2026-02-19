@@ -110,6 +110,41 @@ const { title, description, pubDate, updatedDate, heroImage, tags } =
           margin-inline-end: 0.3em;
           color: rgb(var(--gray-dark));
         }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          position: relative;
+        }
+        h1 a.heading-anchor,
+        h2 a.heading-anchor,
+        h3 a.heading-anchor,
+        h4 a.heading-anchor,
+        h5 a.heading-anchor,
+        h6 a.heading-anchor {
+          color: inherit;
+          opacity: 0;
+          margin-inline-end: 0.4em;
+          text-decoration: none;
+          transition: opacity 0.15s ease;
+          vertical-align: middle;
+          display: inline-flex;
+          align-items: center;
+        }
+        h1:hover a.heading-anchor,
+        h2:hover a.heading-anchor,
+        h3:hover a.heading-anchor,
+        h4:hover a.heading-anchor,
+        h5:hover a.heading-anchor,
+        h6:hover a.heading-anchor {
+          opacity: 1;
+        }
+        .heading-anchor-icon {
+          display: inline-block;
+          vertical-align: middle;
+        }
         ul {
           padding-inline-start: 20px;
         }
@@ -170,18 +205,24 @@ const { title, description, pubDate, updatedDate, heroImage, tags } =
       </article>
       <div class="rss-subscribe">
         <a href="/rss.xml">
-            <span>Subscribe to the RSS feed</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="vertical-align: middle;">
-              <circle cx="6.18" cy="17.82" r="2.18" fill="#000000" />
-              <path
-                fill="#000000"
-                d="M4 4.44v3.08a12.48 12.48 0 0 1 12.48 12.48h3.08A15.56 15.56 0 0 0 4 4.44z"
-              />
-              <path
-                fill="#000000"
-                d="M4 10.32v3.08a6.6 6.6 0 0 1 6.6 6.6h3.08A9.68 9.68 0 0 0 4 10.32z"
-              />
-            </svg>
+          <span>Subscribe to the RSS feed</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            style="vertical-align: middle;"
+          >
+            <circle cx="6.18" cy="17.82" r="2.18" fill="#000000"></circle>
+            <path
+              fill="#000000"
+              d="M4 4.44v3.08a12.48 12.48 0 0 1 12.48 12.48h3.08A15.56 15.56 0 0 0 4 4.44z"
+            ></path>
+            <path
+              fill="#000000"
+              d="M4 10.32v3.08a6.6 6.6 0 0 1 6.6 6.6h3.08A9.68 9.68 0 0 0 4 10.32z"
+            ></path>
+          </svg>
         </a>
       </div>
     </main>
