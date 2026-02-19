@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.bokken.io",
+  outDir: "dist/blog.bokken.io",
   integrations: [mdx(), sitemap()],
   prefetch: {
     prefetchAll: true,
