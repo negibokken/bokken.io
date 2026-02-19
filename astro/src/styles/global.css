@@ -51,14 +51,14 @@ body {
   overflow-wrap: break-word;
   color: rgb(var(--gray-dark));
   font-size: 1.1em;
-  line-height: 1.8;
+  line-height: 1.6;
 }
 
 main {
   width: 780px;
   max-width: calc(100% - 2em);
   margin: auto;
-  padding: 3em 1em;
+  padding: 1.5em 1em;
 }
 
 h1,
@@ -67,7 +67,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin-block-start: 1.6em;
+  margin-block-start: 1.2em;
   color: rgb(var(--black));
   line-height: 1.4;
 }
@@ -106,7 +106,7 @@ a:hover {
 }
 
 p {
-  margin-block: 1.2em;
+  margin-block: 0.8em;
 }
 
 textarea {
@@ -147,7 +147,7 @@ pre>code {
 blockquote {
   border-left: 8px solid var(--gray-mid);
   padding: 0 0 0 1.2em;
-  margin: 2.5em 0;
+  margin: 1.5em 0;
   font-size: 1;
 }
 
