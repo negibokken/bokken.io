@@ -72,19 +72,29 @@ const { title, description, pubDate, updatedDate, heroImage, tags } =
       }
       :global(.prose) {
         h2::before {
+          content: "##";
           margin-inline-end: 0.3em;
+          color: rgb(var(--gray));
         }
         h3::before {
+          content: "###";
           margin-inline-end: 0.3em;
+          color: rgb(var(--gray));
         }
         h4::before {
+          content: "####";
           margin-inline-end: 0.3em;
+          color: rgb(var(--gray));
         }
         h5::before {
+          content: "#####";
           margin-inline-end: 0.3em;
+          color: rgb(var(--gray));
         }
         h6::before {
+          content: "######";
           margin-inline-end: 0.3em;
+          color: rgb(var(--gray));
         }
         ul {
           padding-inline-start: 20px;
