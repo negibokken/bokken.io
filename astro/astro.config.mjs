@@ -46,6 +46,7 @@ const chainIconHast = {
 export default defineConfig({
   site: "https://blog.bokken.io",
   outDir: "dist/blog.bokken.io",
+  trailingSlash: "never",
   integrations: [mdx(), sitemap()],
   markdown: {
     rehypePlugins: [
