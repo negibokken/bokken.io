@@ -71,30 +71,35 @@ const { title, description, pubDate, updatedDate, heroImage, tags } =
         margin-inline-end: 0.5em;
       }
       :global(.prose) {
+        h1::before {
+          content: "#";
+          margin-inline-end: 0.3em;
+          color: rgb(var(--gray-dark));
+        }
         h2::before {
           content: "##";
           margin-inline-end: 0.3em;
-          color: rgb(var(--gray));
+          color: rgb(var(--gray-dark));
         }
         h3::before {
           content: "###";
           margin-inline-end: 0.3em;
-          color: rgb(var(--gray));
+          color: rgb(var(--gray-dark));
         }
         h4::before {
           content: "####";
           margin-inline-end: 0.3em;
-          color: rgb(var(--gray));
+          color: rgb(var(--gray-dark));
         }
         h5::before {
           content: "#####";
           margin-inline-end: 0.3em;
-          color: rgb(var(--gray));
+          color: rgb(var(--gray-dark));
         }
         h6::before {
           content: "######";
           margin-inline-end: 0.3em;
-          color: rgb(var(--gray));
+          color: rgb(var(--gray-dark));
         }
         ul {
           padding-inline-start: 20px;
