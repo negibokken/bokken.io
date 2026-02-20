@@ -1,0 +1,11 @@
+/* TEAM */
+Your title: bokken
+Site: https://bokken.io
+Twitter: @bokken_
+Location: Japan
+Love: Web, Browsers
+Language: Japanese, English
+
+Welcome to my site!
+
+Let's talk, I'm looking forward to mentioning at Twitter :D
