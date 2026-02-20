@@ -1,4 +1,0 @@
-#!/bin/sh
-docker build -t bokken.io .
-docker build -t app.bokken.io app.bokken.io
-docker-compose up -d
