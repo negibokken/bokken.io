@@ -1,0 +1,48 @@
+---
+import LabLayout from "../../../layouts/LabLayout.astro";
+import { labPagesMeta } from "../../../data/labPagesMeta";
+
+const allContent = import.meta.glob("../../../lab-content/*/index.html", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+});
+
+export function getStaticPaths() {
+  const paths = import.meta.glob("../../../lab-content/*/index.html", {
+    query: "?raw",
+    import: "default",
+    eager: true,
+  });
+  return Object.keys(paths).map((path) => {
+    const name = path.split("/").at(-2) ?? "";
+    return { params: { name } };
+  });
+}
+
+const { name } = Astro.params;
+const meta = labPagesMeta[name];
+let content =
+  (allContent[`../../../lab-content/${name}/index.html`] as string) ?? "";
+let headExtra = meta.headExtra;
+if (import.meta.env.DEV) {
+  content = content.replace(/https:\/\/x\.bokken\.io\/assets/g, "/assets");
+  content = content.replace(/https:\/\/x\.bokken\.io/g, "/lab");
+  if (headExtra) {
+    headExtra = headExtra.replace(
+      /https:\/\/x\.bokken\.io\/assets/g,
+      "/assets",
+    );
+    headExtra = headExtra.replace(/https:\/\/x\.bokken\.io/g, "/lab");
+  }
+}
+---
+
+<LabLayout
+  title={meta.title}
+  description={meta.description}
+  lang={meta.lang}
+  noindex={meta.noindex}
+  {headExtra}
+  {content}
+/>

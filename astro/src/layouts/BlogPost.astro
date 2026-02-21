@@ -1,0 +1,248 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Tags from "../components/Tags.astro";
+import PostNavigation from "../components/PostNavigation.astro";
+import LatestPosts from "../components/LatestPosts.astro";
+
+type Props = CollectionEntry<"blog">["data"] & {
+  prevPost?: { title: string; url: string };
+  nextPost?: { title: string; url: string };
+};
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  tags,
+  prevPost,
+  nextPost,
+} = Astro.props;
+---
+
+<html lang="ja">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      image={heroImage}
+      type="article"
+      pubDate={pubDate}
+      updatedDate={updatedDate}
+      tags={tags}
+      author="bokken"
+    />
+    <style>
+      main {
+        width: calc(100% - 2em);
+        max-width: 100%;
+        margin: 0;
+      }
+      .hero-image {
+        width: 100%;
+      }
+      .hero-image img {
+        display: block;
+        margin: 0 auto;
+        border-radius: 12px;
+        box-shadow: var(--box-shadow);
+      }
+      .prose {
+        width: 780px;
+        max-width: calc(100% - 2em);
+        margin: auto;
+        padding: 0 1em 1em 1em;
+        color: rgb(var(--gray-dark));
+      }
+      .title {
+        margin-bottom: 0.5em;
+        padding: 0.5em 0;
+        text-align: left;
+        line-height: 1;
+      }
+      .title h1 {
+        margin: 0 0 0.5em 0;
+      }
+      .meta {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        color: rgb(var(--gray));
+        flex-wrap: wrap;
+        gap: 0.5em 1.5em;
+      }
+      .date {
+        display: flex;
+        gap: 1em;
+      }
+      .last-updated-on {
+        font-style: italic;
+      }
+      hr#title-separator {
+        margin-block: 0.8em 0;
+      }
+      .tags-container {
+        display: flex;
+      }
+      .tags-label {
+        margin-inline-end: 0.5em;
+      }
+      :global(.prose) {
+        h1::before {
+          content: "#";
+          margin-inline-end: 0.3em;
+          color: rgb(var(--gray-dark));
+        }
+        h2::before {
+          content: "##";
+          margin-inline-end: 0.3em;
+          color: rgb(var(--gray-dark));
+        }
+        h3::before {
+          content: "###";
+          margin-inline-end: 0.3em;
+          color: rgb(var(--gray-dark));
+        }
+        h4::before {
+          content: "####";
+          margin-inline-end: 0.3em;
+          color: rgb(var(--gray-dark));
+        }
+        h5::before {
+          content: "#####";
+          margin-inline-end: 0.3em;
+          color: rgb(var(--gray-dark));
+        }
+        h6::before {
+          content: "######";
+          margin-inline-end: 0.3em;
+          color: rgb(var(--gray-dark));
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          position: relative;
+        }
+        h1 a.heading-anchor,
+        h2 a.heading-anchor,
+        h3 a.heading-anchor,
+        h4 a.heading-anchor,
+        h5 a.heading-anchor,
+        h6 a.heading-anchor {
+          color: inherit;
+          opacity: 0;
+          position: absolute;
+          left: calc(-16px - 0.5em);
+          top: 50%;
+          transform: translateY(-50%);
+          text-decoration: none;
+          transition: opacity 0.15s ease;
+          display: inline-flex;
+          align-items: center;
+        }
+        h1:hover a.heading-anchor,
+        h2:hover a.heading-anchor,
+        h3:hover a.heading-anchor,
+        h4:hover a.heading-anchor,
+        h5:hover a.heading-anchor,
+        h6:hover a.heading-anchor {
+          opacity: 1;
+        }
+        .heading-anchor-icon {
+          display: inline-block;
+          vertical-align: middle;
+        }
+        ul {
+          padding-inline-start: 20px;
+        }
+        li {
+          line-height: 1.6;
+          margin-block-end: 0.4em;
+        }
+      }
+      .rss-subscribe {
+        display: flex;
+        justify-content: right;
+        margin-block-start: 0.5em;
+        color: rgb(var(--gray));
+        vertical-align: middle;
+      }
+
+      @media (max-width: 780px) {
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <article>
+        <div class="hero-image">
+          {
+            heroImage && (
+              <img width={1020} height={510} src={heroImage} alt="" />
+            )
+          }
+        </div>
+        <div class="prose">
+          <div class="title">
+            <h1>{title}</h1>
+            <div class="meta">
+              <div class="date">
+                <span>created: <FormattedDate date={pubDate} /></span>
+                {
+                  updatedDate &&
+                    pubDate.toString() !== updatedDate.toString() && (
+                      <span class="last-updated-on">
+                        updated: <FormattedDate date={updatedDate} />
+                      </span>
+                    )
+                }
+              </div>
+              <div class="tags-container">
+                <span class="tags-label">tags: </span>
+                <Tags tags={tags} />
+              </div>
+            </div>
+            <hr id="title-separator" />
+          </div>
+          <slot />
+          <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+          <LatestPosts />
+        </div>
+      </article>
+      <div class="rss-subscribe">
+        <a href="/rss.xml">
+          <span>Subscribe to the RSS feed</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            style="vertical-align: middle;"
+          >
+            <circle cx="6.18" cy="17.82" r="2.18" fill="#000000"></circle>
+            <path
+              fill="#000000"
+              d="M4 4.44v3.08a12.48 12.48 0 0 1 12.48 12.48h3.08A15.56 15.56 0 0 0 4 4.44z"
+            ></path>
+            <path
+              fill="#000000"
+              d="M4 10.32v3.08a6.6 6.6 0 0 1 6.6 6.6h3.08A9.68 9.68 0 0 0 4 10.32z"
+            ></path>
+          </svg>
+        </a>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,25 @@
+version: "3.6"
+services:
+  https-portal:
+    image: steveltn/https-portal:1.12
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - "bokken_io"
+    restart: always
+    depends_on:
+      - bokken_io
+    environment:
+      DOMAINS: "bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io"
+      STAGE: local
+      ERROR_LOG: default
+      ACCESS_LOG: default
+
+  bokken_io:
+    image: nginx:alpine
+    volumes:
+      - ../astro/dist/blog.bokken.io:/usr/share/nginx/html/blog.bokken.io:ro
+      - ../astro/public-www:/usr/share/nginx/html/www.bokken.io:ro
+      - ../astro/public-x:/usr/share/nginx/html/x.bokken.io:ro
+      - ../nginx:/etc/nginx:ro

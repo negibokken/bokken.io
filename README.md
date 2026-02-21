@@ -4,11 +4,7 @@
 
 ### Initial operation
 
-Execute `./scripts/init` to start `nginx` with docker
-
-### Update
-
-Execute `./scripts/update` to update your `www` contents.
+Execute `./scripts/init` to build the Docker images and start the local development environment using `docker-compose`.
 
 ## local development
 
@@ -23,7 +19,6 @@ Execute `./scripts/update` to update your `www` contents.
   127.0.0.1 x.bokken.io
   ```
 
-- Execute `./scripts/start-local`
-- Access to `https://bokken.io`
-  - if you see warning page, then type `thisisunsafe` to proceed accessing to the website
-- Now you can see website
+- Execute `./scripts/start-local` to build the Docker images and start the local development environment using `docker-compose`. This command provides the full multi-site environment.
+- Access `https://bokken.io` in your browser. If a security warning appears (common for self-signed certificates in local development), you can typically bypass it by typing `thisisunsafe` (in Chromium-based browsers) or following equivalent prompts.
+- **Astro Blog Development (Optional)**: If you only need to work on the Astro blog and don't require the full Docker environment, you can navigate to the `astro/` directory and run `pnpm dev`.

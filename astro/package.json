@@ -1,0 +1,22 @@
+{
+  "name": "astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "sync-images": "node scripts/sync-images.mjs",
+    "dev": "node scripts/sync-images.mjs && astro dev",
+    "build": "node scripts/sync-images.mjs && astro build && cp dist/blog.bokken.io/sitemap-index.xml dist/blog.bokken.io/sitemap.xml",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.0.8",
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^5.3.0",
+    "prettier": "^3.5.3",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "sharp": "^0.34.5"
+  }
+}

@@ -1,0 +1,88 @@
+---
+import BaseHead from "../../../components/BaseHead.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import Posts from "../../../components/Posts.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../../consts";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const allArticles = await getCollection("blog");
+
+  const allTags = new Set(allArticles.flatMap((post) => post.data.tags));
+
+  return Array.from(allTags).map((tag) => {
+    return {
+      params: { slug: tag },
+      props: { tag },
+    };
+  });
+}
+
+const { tag } = Astro.props;
+
+const posts = (await getCollection("blog")).filter((post) =>
+  post.data.tags.includes(tag),
+);
+
+const isDev = import.meta.env.DEV;
+const blogHref = isDev ? "/articles" : "https://blog.bokken.io/articles";
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      main {
+        width: 960px;
+      }
+
+      span.tag-span::before {
+        content: "「";
+      }
+      span.tag-span::after {
+        content: "」";
+      }
+
+      .breadcrumbs {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        vertical-align: middle;
+        gap: 0.5em;
+      }
+
+      .breadcrumbs li {
+        display: inline-block;
+      }
+
+      .breadcrumbs li::before {
+        content: ">";
+        margin-inline-end: 0.5em;
+        color: rgb(var(--gray));
+      }
+
+      .breadcrumbs li a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h2><span class="tag-span">{tag}</span>タグの記事一覧</h2>
+      <nav>
+        <ol class="breadcrumbs">
+          <li><a href={blogHref}>Blog</a></li>
+          <li><a href={`/articles/tags/${tag}`}>{tag}</a></li>
+        </ol>
+      </nav>
+      <section>
+        <Posts posts={posts} />
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const output = document.querySelector("#output");
+    const data = performance
+      .getEntries()
+      .map((entry) => JSON.stringify(entry, null, 2));
+    const span = document.createElement("span");
+    span.innerText = data;
+    output.appendChild(span);
+  });
+</script>
+
+<p>This is a heavy web site that has render-blocking resource.</p>
+<p>
+  After executing lighthouse analysis, we can see the warning "Eliminate
+  render-blocking resources".
+</p>
+<img src="img/sample.png" width="900" />
+<pre><code id="output"></code></pre>

@@ -1,0 +1,67 @@
+---
+interface Props {
+  prevPost?: { title: string; url: string };
+  nextPost?: { title: string; url: string };
+}
+
+const { prevPost, nextPost } = Astro.props;
+---
+
+<div class="post-navigation">
+  {
+    prevPost ? (
+      <a href={prevPost.url} class="prev">
+        <span class="label">← Previous</span>
+        <span class="title">{prevPost.title}</span>
+      </a>
+    ) : (
+      <div class="spacer" />
+    )
+  }
+  {
+    nextPost ? (
+      <a href={nextPost.url} class="next">
+        <span class="label">Next →</span>
+        <span class="title">{nextPost.title}</span>
+      </a>
+    ) : (
+      <div class="spacer" />
+    )
+  }
+</div>
+
+<style>
+  .post-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid rgb(var(--gray-light));
+  }
+  .post-navigation a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: rgb(var(--gray-dark));
+    max-width: 50%;
+  }
+  .post-navigation a:hover .title {
+    color: rgb(var(--accent));
+  }
+  .post-navigation .next {
+    text-align: right;
+  }
+  .label {
+    font-size: 0.8em;
+    color: rgb(var(--gray));
+  }
+  .title {
+    font-weight: bold;
+    line-height: 1.2;
+  }
+  .spacer {
+    flex: 1;
+  }
+</style>

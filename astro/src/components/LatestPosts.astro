@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
+---
+
+<aside class="latest-posts">
+  <h2>Latest Posts</h2>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/articles/${post.id}.html`}>
+            <span class="title">{post.data.title}</span>
+            <span class="date">
+              <FormattedDate date={post.data.pubDate} />
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</aside>
+
+<style>
+  .latest-posts {
+    margin-top: 2em;
+    padding: 1em;
+    background-color: rgb(var(--gray-light), 0.1);
+    border-radius: 8px;
+  }
+  .latest-posts h2 {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    margin-bottom: 0.8em;
+  }
+  li a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: rgb(var(--gray-dark));
+  }
+  li a:hover .title {
+    color: rgb(var(--accent));
+  }
+  .title {
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+  .date {
+    font-size: 0.8em;
+    color: rgb(var(--gray));
+  }
+</style>

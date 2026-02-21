@@ -1,0 +1,86 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+const isDev = import.meta.env.DEV;
+const experiments = [
+  {
+    href: isDev
+      ? "/lab/example-pwa"
+      : "https://x.bokken.io/example-pwa/index.html",
+    label: "Example PWA",
+  },
+  {
+    href: isDev
+      ? "/lab/example-render-blocking-site"
+      : "https://x.bokken.io/example-render-blocking-site/index.html",
+    label: "Example of render-blocking web site",
+  },
+  {
+    href: isDev
+      ? "/lab/example-performance-timeline"
+      : "https://x.bokken.io/example-performance-timeline/index.html",
+    label: "Example of performance timeline web site",
+  },
+  {
+    href: isDev
+      ? "/lab/example-coep"
+      : "https://x.bokken.io/example-coep/index.html",
+    label: "Example of COEP web site",
+  },
+  {
+    href: isDev
+      ? "/lab/example-prerender2"
+      : "https://x.bokken.io/example-prerender2/index.html",
+    label: "Example of Prerender2 web site",
+  },
+  {
+    href: isDev
+      ? "/lab/example-chips"
+      : "https://x.bokken.io/example-chips/index.html",
+    label: "Example of CHIPS web site",
+  },
+  {
+    href: isDev
+      ? "/lab/example-clear-site-data"
+      : "https://x.bokken.io/example-clear-site-data/index.html",
+    label: "Example of Clear Site Data",
+  },
+  {
+    href: isDev
+      ? "/lab/example-performance-entry"
+      : "https://x.bokken.io/example-performance-entry/index.html",
+    label: "Example of Performance Entry",
+  },
+];
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <BaseHead
+      title="Lab | bokken.io"
+      description="Web API experiments by bokken"
+    />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>Lab</h1>
+      <p>Web 技術に関する実験ページです。</p>
+      <ul>
+        {
+          experiments.map(({ href, label }) => (
+            <li>
+              <a href={href} target="_blank" rel="noopener">
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+    <Footer />
+  </body>
+</html>
