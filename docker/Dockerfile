@@ -17,5 +17,4 @@ COPY --from=builder /app/astro/dist/blog.bokken.io/. /usr/share/nginx/html/blog.
 # Copy www.bokken.io static files (humans.txt, .well-known/)
 COPY astro/public-www/. /usr/share/nginx/html/www.bokken.io/
 COPY astro/public-x/. /usr/share/nginx/html/x.bokken.io/
-COPY sites/assets/. /usr/share/nginx/html/assets/
-COPY sites/nginx/. /etc/nginx
+COPY nginx/. /etc/nginx

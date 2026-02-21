@@ -2,6 +2,8 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+const isDev = import.meta.env.DEV;
 ---
 
 <html lang="ja">
@@ -90,7 +92,7 @@ import Footer from "../components/Footer.astro";
               </li>
               <li>
                 その際に <a href="https://www.bokken.io">blog</a> や
-                <a href="https://x.bokken.io">exp</a
+                <a href={isDev ? "/lab" : "https://x.bokken.io"}>exp</a
                 >のコンテンツが動かなくなる可能性があるので、そこは適宜 Adblock
                 をオフにするなどして対応してほしい。
               </li>

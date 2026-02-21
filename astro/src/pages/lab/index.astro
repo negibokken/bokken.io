@@ -3,34 +3,54 @@ import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 
+const isDev = import.meta.env.DEV;
 const experiments = [
-  { href: "https://x.bokken.io/example-pwa/index.html", label: "Example PWA" },
   {
-    href: "https://x.bokken.io/example-render-blocking-site/index.html",
+    href: isDev
+      ? "/lab/example-pwa"
+      : "https://x.bokken.io/example-pwa/index.html",
+    label: "Example PWA",
+  },
+  {
+    href: isDev
+      ? "/lab/example-render-blocking-site"
+      : "https://x.bokken.io/example-render-blocking-site/index.html",
     label: "Example of render-blocking web site",
   },
   {
-    href: "https://x.bokken.io/example-performance-timeline/index.html",
+    href: isDev
+      ? "/lab/example-performance-timeline"
+      : "https://x.bokken.io/example-performance-timeline/index.html",
     label: "Example of performance timeline web site",
   },
   {
-    href: "https://x.bokken.io/example-coep/index.html",
+    href: isDev
+      ? "/lab/example-coep"
+      : "https://x.bokken.io/example-coep/index.html",
     label: "Example of COEP web site",
   },
   {
-    href: "https://x.bokken.io/example-prerender2/index.html",
+    href: isDev
+      ? "/lab/example-prerender2"
+      : "https://x.bokken.io/example-prerender2/index.html",
     label: "Example of Prerender2 web site",
   },
   {
-    href: "https://x.bokken.io/example-chips/index.html",
+    href: isDev
+      ? "/lab/example-chips"
+      : "https://x.bokken.io/example-chips/index.html",
     label: "Example of CHIPS web site",
   },
   {
-    href: "https://x.bokken.io/example-clear-site-data/index.html",
+    href: isDev
+      ? "/lab/example-clear-site-data"
+      : "https://x.bokken.io/example-clear-site-data/index.html",
     label: "Example of Clear Site Data",
   },
   {
-    href: "https://x.bokken.io/example-performance-entry/index.html",
+    href: isDev
+      ? "/lab/example-performance-entry"
+      : "https://x.bokken.io/example-performance-entry/index.html",
     label: "Example of Performance Entry",
   },
 ];
