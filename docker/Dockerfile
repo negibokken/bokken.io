@@ -1,7 +1,9 @@
 FROM node:22-bookworm-slim AS builder
 
-RUN wget -qO /usr/local/bin/pnpm https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linux-x64 && \
-    chmod +x /usr/local/bin/pnpm
+RUN apt-get update && apt-get install -y --no-install-recommends curl && \
+    curl -fsSL https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linux-x64 -o /usr/local/bin/pnpm && \
+    chmod +x /usr/local/bin/pnpm && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
