@@ -149,9 +149,9 @@ pre > code {
 }
 
 blockquote {
-  border-left: 8px solid var(--gray-mid);
+  border-left: 3px solid var(--gray-mid);
   padding: 0 0 0 1.8em;
-  margin: 1.5em 0;
+  margin: 1.5em 2em;
   font-size: 0.9em;
   color: rgb(var(--gray));
 }
