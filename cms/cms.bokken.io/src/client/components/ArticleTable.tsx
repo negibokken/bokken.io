@@ -1,14 +1,22 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PublishedArticle, DraftArticle } from "../api/articles.js";
+import {
+  PublishedArticle,
+  DraftArticle,
+  deleteDraft,
+} from "../api/articles.js";
+import { TrashIcon } from "./icons/TrashIcon.js";
 import styles from "./ArticleTable.module.css";
 
 interface Props {
   published: PublishedArticle[];
   drafts: DraftArticle[];
+  onDraftDeleted: () => void;
 }
 
-export const ArticleTable = ({ published, drafts }: Props) => {
+export const ArticleTable = ({ published, drafts, onDraftDeleted }: Props) => {
   const navigate = useNavigate();
+  const [deletingBranch, setDeletingBranch] = useState<string | null>(null);
 
   const handleDraftClick = (branchName: string) => {
     navigate(`/edit/${encodeURIComponent(branchName)}`);
@@ -16,6 +24,20 @@ export const ArticleTable = ({ published, drafts }: Props) => {
 
   const handlePublishedClick = (article: PublishedArticle) => {
     navigate(`/edit?filePath=${encodeURIComponent(article.path)}`);
+  };
+
+  const handleDelete = async (e: React.MouseEvent, branchName: string) => {
+    e.stopPropagation();
+    if (!window.confirm(`Delete draft "${branchName}"?`)) return;
+    setDeletingBranch(branchName);
+    try {
+      await deleteDraft(branchName);
+      onDraftDeleted();
+    } catch {
+      alert("Failed to delete draft");
+    } finally {
+      setDeletingBranch(null);
+    }
   };
 
   return (
@@ -30,6 +52,7 @@ export const ArticleTable = ({ published, drafts }: Props) => {
               <tr>
                 <th>Title</th>
                 <th>Branch</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -41,6 +64,16 @@ export const ArticleTable = ({ published, drafts }: Props) => {
                 >
                   <td>{d.title || "(untitled)"}</td>
                   <td className={styles.branch}>{d.branchName}</td>
+                  <td className={styles.actionCell}>
+                    <button
+                      className={styles.deleteBtn}
+                      onClick={(e) => handleDelete(e, d.branchName)}
+                      disabled={deletingBranch === d.branchName}
+                      title="Delete draft"
+                    >
+                      <TrashIcon size={14} />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

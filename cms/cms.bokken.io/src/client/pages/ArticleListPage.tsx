@@ -28,7 +28,11 @@ export const ArticleListPage = () => {
         {loading && <p className={styles.status}>Loading articles...</p>}
         {error && <p className={styles.error}>{error}</p>}
         {data && (
-          <ArticleTable published={data.published} drafts={data.drafts} />
+          <ArticleTable
+            published={data.published}
+            drafts={data.drafts}
+            onDraftDeleted={refetch}
+          />
         )}
       </main>
     </div>

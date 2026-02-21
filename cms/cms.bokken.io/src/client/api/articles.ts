@@ -93,6 +93,13 @@ export const publishArticle = async (
   if (!res.ok) throw new Error("Failed to publish article");
 };
 
+export const deleteDraft = async (branchName: string): Promise<void> => {
+  const res = await fetch(`/api/articles/${encodeURIComponent(branchName)}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("Failed to delete draft");
+};
+
 export const uploadImage = async (
   branchName: string,
   date: string,
