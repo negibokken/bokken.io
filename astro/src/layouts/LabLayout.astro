@@ -1,0 +1,37 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+  noindex?: boolean;
+  headExtra?: string;
+  content: string;
+}
+
+const {
+  title,
+  description,
+  lang = "ja",
+  noindex = false,
+  headExtra,
+  content,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead {title} {description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {headExtra && <Fragment set:html={headExtra} />}
+  </head>
+  <body>
+    <Header />
+    <main set:html={content}></main>
+    <Footer />
+  </body>
+</html>
