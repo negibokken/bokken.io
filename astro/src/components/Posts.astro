@@ -1,13 +1,20 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 import Tags from "./Tags.astro";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+}
 
 const { posts } = Astro.props;
 
 const postsByYear = Object.groupBy(posts, (post) =>
-  new Date(post.data.pubDate).getFullYear(),
+  new Date(post.data.pubDate).getFullYear().toString(),
 );
-const years = Object.keys(postsByYear).sort((a, b) => b - a);
+const years = Object.keys(postsByYear).sort(
+  (a, b) => parseInt(b) - parseInt(a),
+);
 ---
 
 <style>
@@ -56,7 +63,7 @@ const years = Object.keys(postsByYear).sort((a, b) => b - a);
     <>
       <h2>{year}</h2>
       <ul>
-        {postsByYear[year].map((post) => (
+        {postsByYear[year]?.map((post) => (
           <li>
             <p class="date">
               <FormattedDate date={post.data.pubDate} />

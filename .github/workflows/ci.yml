@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -22,12 +22,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'pnpm'
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
         env:
           HUSKY: 0
+
+      - name: Format Check
+        run: pnpm exec prettier --check .
+
+      - name: Type Check (Astro)
+        run: |
+          pnpm --filter astro exec astro check
+          pnpm --filter astro exec tsc --noEmit
+
+      - name: Type Check (CMS)
+        run: |
+          pnpm --filter cms.bokken.io exec tsc --noEmit
+          pnpm --filter cms.bokken.io exec tsc -p tsconfig.node.json --noEmit
 
       - name: Build Astro
         run: pnpm --filter astro build

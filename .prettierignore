@@ -1,4 +1,5 @@
 dist
+dist-server
 astro/dist
 node_modules
 .astro
