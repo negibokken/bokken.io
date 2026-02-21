@@ -17,4 +17,10 @@ services:
       ACCESS_LOG: default
 
   bokken_io:
-    image: bokken.io
+    image: nginx:alpine
+    volumes:
+      - ./astro/dist/blog.bokken.io:/usr/share/nginx/html/blog.bokken.io:ro
+      - ./astro/public-www:/usr/share/nginx/html/www.bokken.io:ro
+      - ./astro/public-x:/usr/share/nginx/html/x.bokken.io:ro
+      - ./sites/assets:/usr/share/nginx/html/assets:ro
+      - ./sites/nginx:/etc/nginx:ro
