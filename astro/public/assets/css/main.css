@@ -14,8 +14,9 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
 */
 
 html {
-  font-family: 'Helvetica Neue', 'Helvetica', 'Hiragino Sans',
-    'Hiragino Kaku Gothic ProN', 'Arial', 'Yu Gothic', 'Meiryo', sans-serif;
+  font-family:
+    "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Arial", "Yu Gothic", "Meiryo", sans-serif;
   height: 100%;
   max-width: 100vw;
   color: #333;
@@ -78,7 +79,7 @@ ul#bread > li {
 }
 
 ul#bread > li ::before {
-  content: '>';
+  content: ">";
   padding: 5px;
 }
 
@@ -139,28 +140,28 @@ h6 > a {
 }
 
 h1 > a::before {
-  content: '#';
+  content: "#";
   padding-right: 5px;
   text-decoration: none;
 }
 h2 > a::before {
-  content: '##';
+  content: "##";
   padding-right: 5px;
 }
 h3 > a::before {
-  content: '###';
+  content: "###";
   padding-right: 5px;
 }
 h4 > a::before {
-  content: '####';
+  content: "####";
   padding-right: 5px;
 }
 h5 > a::before {
-  content: '#####';
+  content: "#####";
   padding-right: 5px;
 }
 h6 > a::before {
-  content: '######';
+  content: "######";
   padding-right: 5px;
 }
 
@@ -182,19 +183,19 @@ summary.index::-webkit-details-marker {
 }
 
 summary.column {
-    cursor: pointer;
-    outline: 0;
-    padding: 0.7em 0.7em 0.7em 0.9em;
-    border: 1px solid #eeeeee33;
-    border-radius: 5px;
-    background: #fffafa;
+  cursor: pointer;
+  outline: 0;
+  padding: 0.7em 0.7em 0.7em 0.9em;
+  border: 1px solid #eeeeee33;
+  border-radius: 5px;
+  background: #fffafa;
 }
 
 details.column {
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #aaa;
-    cursor: pointer;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  cursor: pointer;
 }
 
 details[open] summary.column {
@@ -211,10 +212,10 @@ summary.column::-webkit-details-marker {
 }
 
 div.column-content {
-    border: 1px solid #5c93bb33;
-    border-radius: 0 0 5px 5px;
-    background: #fff;
-    padding: 0.5em 0.9em;
+  border: 1px solid #5c93bb33;
+  border-radius: 0 0 5px 5px;
+  background: #fff;
+  padding: 0.5em 0.9em;
 }
 
 main {
@@ -222,14 +223,13 @@ main {
 }
 
 @media screen and (max-width: 480px) {
-    main{
-        padding: 0 1rem 8.5em 1rem;
-    }
+  main {
+    padding: 0 1rem 8.5em 1rem;
+  }
 }
 
-
 dt::after {
-  content: ':';
+  content: ":";
 }
 
 dt {
@@ -297,17 +297,17 @@ article > p {
   margin-inline-end: 0px;
 }
 
-.paragraph-anchor  {
-    display: inline;
-    visibility: hidden;
+.paragraph-anchor {
+  display: inline;
+  visibility: hidden;
 }
 .paragraph-anchor:hover {
-    display: inline;
-    visibility: visible;
+  display: inline;
+  visibility: visible;
 }
 
 .paragraph:hover .paragraph-anchor {
-    visibility: visible;
+  visibility: visible;
 }
 
 article code {
@@ -345,14 +345,14 @@ main > article > ul {
 }
 
 @media screen and (max-width: 480px) {
-    main > article > ol,
-    main > article > ul {
-      margin: 20px 0 25px 10px;
-      padding-inline-start: 0rem;
-    }
-    ul {
-      padding-inline-start: 2rem;
-    }
+  main > article > ol,
+  main > article > ul {
+    margin: 20px 0 25px 10px;
+    padding-inline-start: 0rem;
+  }
+  ul {
+    padding-inline-start: 2rem;
+  }
 }
 
 article li {
@@ -410,11 +410,11 @@ div.next-article {
 }
 
 div.prev-article > a::before {
-  content: '<<';
+  content: "<<";
 }
 
 div.next-article > a::after {
-  content: '>>';
+  content: ">>";
 }
 
 footer {

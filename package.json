@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "pnpm --filter astro dev",
     "build": "pnpm --filter astro build",
-    "preview": "pnpm --filter astro preview"
+    "preview": "pnpm --filter astro preview",
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.8",
@@ -16,13 +18,21 @@
   },
   "devDependencies": {
     "@prettier/plugin-xml": "^3.4.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1"
+  },
+  "lint-staged": {
+    "*.{js,ts,astro,md,mdx,json,css,xml}": "prettier --write"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
       "sharp"
-    ]
+    ],
+    "overrides": {
+      "devalue": "5.6.2"
+    }
   }
 }

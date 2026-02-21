@@ -18,12 +18,15 @@ graph TD
 ```
 
 ### 1. Application: `app.bokken.io`
+
 The existing `sites/app.bokken.io` service will be expanded into a full-stack application.
+
 - **Backend**: Node.js with Express.
 - **Frontend**: React (Single Page Application).
 - **Hosting**: Docker container orchestrated via `docker-compose`.
 
 ### 2. Authentication
+
 - **Method**: GitHub OAuth.
 - **Flow**:
   1.  User clicks "Login with GitHub" on CMS.
@@ -38,10 +41,12 @@ The existing `sites/app.bokken.io` service will be expanded into a full-stack ap
 The CMS will treat the `main` branch as the "Published" state.
 
 #### A. Listing Articles
+
 - **Published**: Lists Markdown files from `astro/src/content/blog` on the `main` branch.
 - **Drafts**: Lists branches matching a pattern (e.g., `cms/draft/*`) or checks for open Pull Requests associated with CMS drafts.
 
 #### B. Creating/Editing a Draft
+
 1.  **Create**:
     - User enters title and slug.
     - CMS creates a new branch `cms/draft/<slug>` from `main`.
@@ -51,6 +56,7 @@ The CMS will treat the `main` branch as the "Published" state.
     - "Save" commits changes to the `cms/draft/<slug>` branch.
 
 #### C. Publishing
+
 1.  User clicks "Publish".
 2.  CMS creates a Pull Request from `cms/draft/<slug>` to `main`.
 3.  CMS automatically merges the PR (or leaves it open for review if configured, but "Publish on merge" implies immediate merge).
@@ -72,7 +78,9 @@ The CMS will treat the `main` branch as the "Published" state.
 ## Data Structure
 
 ### Frontmatter Schema
+
 We will adhere to the schema defined in `astro/src/content.config.ts`:
+
 ```typescript
 {
   title: string;
@@ -98,5 +106,6 @@ We will adhere to the schema defined in `astro/src/content.config.ts`:
 5.  **Deployment**: Update `docker/Dockerfile` and `docker/docker-compose.yml` to support the new build process.
 
 ## Open Questions for User
+
 1.  Do you have a preferred Markdown editor library? (e.g., simple textarea, Monaco, or a rich text-like editor).
-2.  Should "Publish" immediately merge to `main`, or just open a PR for you to review and merge manually? (Requirement said "Publish on merge", implying the merge *is* the publish action).
+2.  Should "Publish" immediately merge to `main`, or just open a PR for you to review and merge manually? (Requirement said "Publish on merge", implying the merge _is_ the publish action).

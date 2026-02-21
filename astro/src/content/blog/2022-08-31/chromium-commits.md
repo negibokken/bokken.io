@@ -3,9 +3,8 @@ title: "Chromium のコミットを検索できるサイトを作った"
 description: "Chromium のコミットを検索できるサイトを作った。はじめに。Chromium News というサイトを作りました。現状は Chromium の commit を検索できるだけのサイトだが、今後様々な情報ソースを集約したり、それらをまとめる記事を書ければと思っている。ユースケース。ユースケースとしては、たとえば HTTP/3 や Prerender にまつわる commit ってどんな変更を..."
 pubDate: 2022-08-30
 updatedDate: 2022-08-30
-tags: ['Chromium', 'commits']
+tags: ["Chromium", "commits"]
 ---
-
 
 ## はじめに
 
@@ -20,10 +19,10 @@ tags: ['Chromium', 'commits']
 
 技術的な構成としては下記のサービスやフレームワークを使っている。
 
-* Vercel
-* PlanetScale
-* Next.js + TypeScript
-* Prisma
+- Vercel
+- PlanetScale
+- Next.js + TypeScript
+- Prisma
 
 今回はじめて Vercel や PlanetScale を使ったがとても使いやすかった。
 Vercel については main ブランチにマージされてからデプロイが完了するのが早く開発体験がよいなと感じた。
@@ -38,5 +37,4 @@ Next.js、TypeScript はいわずもがな。 Prisma についても PlanetScale
 ## おわりに
 
 今回 Chromium のコミットを検索するためのサイトについて紹介した。
-今後もコンテンツを増やしていく予定なので、サービス改善要望などは [@bokken_](https://twitter.com/bokken_) までもらえると嬉しい。
-
+今後もコンテンツを増やしていく予定なので、サービス改善要望などは [@bokken\_](https://twitter.com/bokken_) までもらえると嬉しい。

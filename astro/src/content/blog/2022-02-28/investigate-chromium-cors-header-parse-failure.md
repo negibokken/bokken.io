@@ -3,9 +3,8 @@ title: "Chromium のバグを直しているときに知った HTTP ヘッダ関
 description: "Chromium のバグを直しているときに知った HTTP ヘッダ関連の Web 標準の読み方。はじめに。最近、Chromium へのコントリビューション活動をしている。直近で Chromium のバグ fix のために仕様を読んでいて面白いなと思ったことがあったので共有したい。TL;DR。HTTP ヘッダの値のパース方法は各ヘッダごとに決められている。具体的には Structured Fiel..."
 pubDate: 2022-02-28
 updatedDate: 2022-02-28
-tags: ['Chromium', 'Web標準', 'Fetch']
+tags: ["Chromium", "Web標準", "Fetch"]
 ---
-
 
 ## はじめに
 
@@ -19,7 +18,6 @@ tags: ['Chromium', 'Web標準', 'Fetch']
 - Structured Field Values for HTTP は 2021年2月に RFC が出ていて比較的新しいので、こちらを使うのが正しいと思ったが、CORS 関連の仕様を読むと CORS 用の ABNF を参照するのが正しかった
 - Structured Field Values for HTTP のパース方法は厳密だが、ABNF はレガシーシステムへの対応も加味されていて比較的緩い
 - 仕様を注意深く読むことが大事
-
 
 ## 背景
 
@@ -45,7 +43,6 @@ tags: ['Chromium', 'Web標準', 'Fetch']
 こちらの二番目のケースは exposed が true にも関わらず expose されていなかった。
 
 ただし、WPT が誤っているケースもありえる。今回のバグ対応では WPT が間違っているのか、Chromium の実装が間違っているのかを判断する必要があった。
-
 
 ## 調査
 
@@ -83,11 +80,11 @@ tchar          = "!" / "#" / "$" / "%" / "&" / "'" / "*"
                 ; any VCHAR, except delimiters
 ```
 
-これを確認すると、`,` が最初に来るような文字列については、パースが  FAIL し、値が expose されないのが正解であるかのように見える。
+これを確認すると、`,` が最初に来るような文字列については、パースが FAIL し、値が expose されないのが正解であるかのように見える。
 
 だが、実際には [# に関する拡張ルール](https://datatracker.ietf.org/doc/html/rfc7230#section-7)を注意深く読む必要がありる。この仕様を読むと古い list rule との互換性のために、リストにある空白の要素は受領し、無視しなければいけないという記載がある。
 
-> For compatibility with legacy list rules, a recipient MUST parse and  ignore a reasonable number of empty list elements:
+> For compatibility with legacy list rules, a recipient MUST parse and ignore a reasonable number of empty list elements:
 
 今回の問題としては、`Access-Control-Expose-Headers` をパースする際にこの部分を考慮しきれていなかったことが問題だった。こうした仕様による裏付けが取れたため、WPT の修正ではなく Chromium の実装の修正に取り組むことができた。
 

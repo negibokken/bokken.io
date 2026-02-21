@@ -3,9 +3,8 @@ title: "働いているけど Google Summer of Code (GSoC) に応募した"
 description: "働いているけど Google Summer of Code (GSoC) に応募した。概要。今年から Google Summer of Code (GSoC) の応募制限が緩和されて、18 歳以上であれば、。誰でも応募できるようになった。私はフルタイムでエンジニアとして働いているのだが、前述の通り募集条件が緩和され私も条件に当てはまるようになったので、。今年は応募してみたのであった。まだ、結果は..."
 pubDate: 2022-04-30
 updatedDate: 2022-05-20
-tags: ['Google Summer of Code', 'GSoC']
+tags: ["Google Summer of Code", "GSoC"]
 ---
-
 
 ## 概要
 
@@ -96,4 +95,3 @@ tags: ['Google Summer of Code', 'GSoC']
 正式に不採用通知がメールにて届いた。
 
 結構時間をかけて書いたので辛いには辛いが、個人でもコントリビューションできるので切り替えてコントリビューションしていこうと思う。
-

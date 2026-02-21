@@ -6,8 +6,6 @@
 
 Execute `./scripts/init` to build the Docker images and start the local development environment using `docker-compose`.
 
-
-
 ## local development
 
 - Write below configurations into `/etc/hosts`.

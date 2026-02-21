@@ -22,13 +22,17 @@ export function getStaticPaths() {
 
 const { name } = Astro.params;
 const meta = labPagesMeta[name];
-let content = (allContent[`../../../lab-content/${name}/index.html`] as string) ?? "";
+let content =
+  (allContent[`../../../lab-content/${name}/index.html`] as string) ?? "";
 let headExtra = meta.headExtra;
 if (import.meta.env.DEV) {
   content = content.replace(/https:\/\/x\.bokken\.io\/assets/g, "/assets");
   content = content.replace(/https:\/\/x\.bokken\.io/g, "/lab");
   if (headExtra) {
-    headExtra = headExtra.replace(/https:\/\/x\.bokken\.io\/assets/g, "/assets");
+    headExtra = headExtra.replace(
+      /https:\/\/x\.bokken\.io\/assets/g,
+      "/assets",
+    );
     headExtra = headExtra.replace(/https:\/\/x\.bokken\.io/g, "/lab");
   }
 }

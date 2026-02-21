@@ -1,10 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
-import FormattedDate from './FormattedDate.astro';
+import { getCollection } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-).slice(0, 5);
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
 ---
 
 <aside class="latest-posts">
@@ -15,7 +15,9 @@ const posts = (await getCollection('blog')).sort(
         <li>
           <a href={`/articles/${post.id}.html`}>
             <span class="title">{post.data.title}</span>
-            <span class="date"><FormattedDate date={post.data.pubDate} /></span>
+            <span class="date">
+              <FormattedDate date={post.data.pubDate} />
+            </span>
           </a>
         </li>
       ))

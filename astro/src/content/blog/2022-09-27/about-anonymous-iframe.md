@@ -3,9 +3,8 @@ title: "Anonymous iframe とは"
 description: "Anonymous iframe とは。はじめに。Anonymous iframe という仕様がある。この仕様が何を問題としていて、何を解決するための仕様なのかをまとめる。tl;dr。Anonymous iframe は COEP (Cross Origin Embedder Policy) require-corp 環境下で外部リソースの利用が制限された状態あっても、安全な形で iframe ..."
 pubDate: 2022-09-27
 updatedDate: 2022-10-11
-tags: ['iframe', 'spec', 'COEP', 'CORP']
+tags: ["iframe", "spec", "COEP", "CORP"]
 ---
-
 
 ## はじめに
 
@@ -57,7 +56,7 @@ Cross-Origin-Embedder-Policy: unsafe-none | require-corp
 COEP 指定下でリソースが CORP を指定していなくても、 CORS で許可されているリソースであれば、img や script などは下記のように [crossorigin attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin) を指定することで、クロスオリジンのリソースであっても読み込みができるようになっている。
 
 ```html
-<img src="https://third-party.example.com/image.jpg" crossorigin>
+<img src="https://third-party.example.com/image.jpg" crossorigin />
 ```
 
 (※crossorigin 指定は crossorigin="anonymous" と同様)
@@ -84,7 +83,7 @@ COEP 指定下でリソースが CORP を指定していなくても、 CORS で
 Anonymous iframe の指定は先述の crossorigin attribute のように `anonymous` attribute を指定するだけだ。
 
 ```html
-<iframe anonymous src="https://example.com">
+<iframe anonymous src="https://example.com"></iframe>
 ```
 
 `anonymous` attribute の指定はその子孫 iframe にも継承される。仕様に記載されている図がとてもわかり易いので引用する。
@@ -96,7 +95,7 @@ Anonymous iframe の指定は先述の crossorigin attribute のように `anony
 iframe 内のドキュメントは下記の定数を参照することで自身が anonymous 指定された iframe なのかどうかを認識できる。
 
 ```javascript
-widndow.anonymouslyFramed
+widndow.anonymouslyFramed;
 ```
 
 Anonymous iframe では既存のクレデンシャルや shared storage は利用できない。ただし、sandboxed frame と違い blank な状態から storage API を使うことや、Cookie の登録は可能だ。クレデンシャルや storage の共有は同じ Anonymous iframe のページ内に限らるように分離されている。
@@ -127,7 +126,7 @@ COEP ヘッダが送られてきたときに Anonymous iframe を使って入れ
 
 このまとめを通して、安全に分離を実現するためにはどのように考えるべきなのかを知れた。このまとめを通して気になった点も今後まとめていきたい。
 
-もし、何かしら間違いやコメントがあった場合、[issue](https://github.com/negibokken/bokken.io/issues) か [@bokken_](https://twitter.com/bokken_) までもらえると嬉しい。
+もし、何かしら間違いやコメントがあった場合、[issue](https://github.com/negibokken/bokken.io/issues) か [@bokken\_](https://twitter.com/bokken_) までもらえると嬉しい。
 
 ## 参考
 
@@ -137,4 +136,3 @@ COEP ヘッダが送られてきたときに Anonymous iframe を使って入れ
 4. [sandbox attribute | HTML Standard](https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-sandbox)
 5. [Chromium Docs - Post-Spectre Threat Model Re-Think](https://chromium.googlesource.com/chromium/src/+/master/docs/security/side-channel-threat-model.md)
 6. [Cross-Origin Embedder Policy](https://wicg.github.io/cross-origin-embedder-policy/)
-

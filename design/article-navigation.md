@@ -2,10 +2,10 @@
 
 ## 現状の構造
 
-| ファイル | 役割 |
-|---|---|
-| `astro/src/pages/articles/[pubDate]/[slug].html.astro` | getStaticPaths で全記事生成、BlogPost へ props 渡し |
-| `astro/src/layouts/BlogPost.astro` | 記事レイアウト。現 Props = `CollectionEntry<"blog">["data"]` |
+| ファイル                                               | 役割                                                         |
+| ------------------------------------------------------ | ------------------------------------------------------------ |
+| `astro/src/pages/articles/[pubDate]/[slug].html.astro` | getStaticPaths で全記事生成、BlogPost へ props 渡し          |
+| `astro/src/layouts/BlogPost.astro`                     | 記事レイアウト。現 Props = `CollectionEntry<"blog">["data"]` |
 
 - 記事 ID 形式: `YYYY-MM-DD/slug`
 - URL 形式: `/articles/YYYY-MM-DD/slug.html`

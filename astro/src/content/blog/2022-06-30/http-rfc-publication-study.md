@@ -1,11 +1,10 @@
 ---
 title: "HTTP RFC Publication Study で HTTP/3 について発表しました"
-description: "HTTP RFC Publication Study で HTTP/3 について発表しました。はじめに。HTTP RFC Publication Studyに発表者として参加した。その際に使った資料はこちらで公開している。<iframe src=\"https://docs.google.com/presentation/d/e/2PACX-1vQJJG6Yq1HtN0Yq146b-ektkfm..."
+description: 'HTTP RFC Publication Study で HTTP/3 について発表しました。はじめに。HTTP RFC Publication Studyに発表者として参加した。その際に使った資料はこちらで公開している。<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQJJG6Yq1HtN0Yq146b-ektkfm...'
 pubDate: 2022-06-30
 updatedDate: 2022-06-30
-tags: ['HTTP3', 'RFC']
+tags: ["HTTP3", "RFC"]
 ---
-
 
 ## はじめに
 
@@ -29,7 +28,6 @@ tags: ['HTTP3', 'RFC']
 発表が終わるまでは気が気でなかったが、なんとか無事に紹介できた。
 
 個人的に発表してよかった点としては、下記の HTTP/3 と QPACK の資料の投下ツイートにあの [Kazuho Oku さん](https://twitter.com/kazuho) からいいねをもらえたこと。家宝にしたい。
-
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">HTTP/3 と QPACK、とても早口になるかもしれないので今日の資料を投下しておきます<a href="https://t.co/5ISPlNXggi">https://t.co/5ISPlNXggi</a><a href="https://twitter.com/hashtag/http_rfc_study?src=hash&amp;ref_src=twsrc%5Etfw">#http_rfc_study</a></p>&mdash; bokken✏ (@bokken_) <a href="https://twitter.com/bokken_/status/1534875207579860992?ref_src=twsrc%5Etfw">June 9, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 

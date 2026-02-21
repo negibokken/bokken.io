@@ -4,10 +4,10 @@ This is a monorepo project primarily focused on managing the `bokken.io` website
 
 ## Main Technologies
 
-*   **Frontend**: Astro (for `blog.bokken.io`)
-*   **Package Manager**: pnpm
-*   **Containerization**: Docker, Docker Compose
-*   **Web Server/Proxy**: Nginx (orchestrated via the `https-portal` Docker image)
+- **Frontend**: Astro (for `blog.bokken.io`)
+- **Package Manager**: pnpm
+- **Containerization**: Docker, Docker Compose
+- **Web Server/Proxy**: Nginx (orchestrated via the `https-portal` Docker image)
 
 ## Building and Running
 
@@ -27,8 +27,8 @@ This is a monorepo project primarily focused on managing the `bokken.io` website
     ./scripts/init
     ```
     This script will:
-    *   Build Docker images for `bokken.io` and `app.bokken.io`.
-    *   Start the Docker Compose services defined in `docker/docker-compose.dev.yml`, bringing up the local development environment.
+    - Build Docker images for `bokken.io` and `app.bokken.io`.
+    - Start the Docker Compose services defined in `docker/docker-compose.dev.yml`, bringing up the local development environment.
 
 ### Local Development
 
@@ -47,6 +47,7 @@ This is a monorepo project primarily focused on managing the `bokken.io` website
 ### Building Astro Blog
 
 To build the static files for the Astro blog (outputting to `dist/blog.bokken.io`):
+
 ```bash
 pnpm --filter astro build
 ```
@@ -54,12 +55,13 @@ pnpm --filter astro build
 ### Preview Astro Blog
 
 To preview the built Astro blog locally:
+
 ```bash
 pnpm --filter astro preview
 ```
 
 ## Development Conventions
 
-*   **Code Formatting**: The project enforces code formatting using `Prettier`. The `astro/package.json` includes `prettier` and `prettier-plugin-astro`, and formatting is applied during the build process (e.g., `prettier --write --no-error-on-unmatched-pattern dist/**/*.{html,js,css,xml}`).
-*   **Image Synchronization**: Image assets are managed and synchronized as part of the Astro development and build workflows, indicated by the `node scripts/sync-images.mjs` command in Astro's scripts.
-*   **Content Management**: Markdown/MDX is used for content, particularly for the blog. The `astro.config.mjs` shows integration with `rehype-slug` and `rehype-autolink-headings` for advanced markdown processing, including automatic slug generation and heading linking.
+- **Code Formatting**: The project enforces code formatting using `Prettier`. The `astro/package.json` includes `prettier` and `prettier-plugin-astro`, and formatting is applied during the build process (e.g., `prettier --write --no-error-on-unmatched-pattern dist/**/*.{html,js,css,xml}`).
+- **Image Synchronization**: Image assets are managed and synchronized as part of the Astro development and build workflows, indicated by the `node scripts/sync-images.mjs` command in Astro's scripts.
+- **Content Management**: Markdown/MDX is used for content, particularly for the blog. The `astro.config.mjs` shows integration with `rehype-slug` and `rehype-autolink-headings` for advanced markdown processing, including automatic slug generation and heading linking.

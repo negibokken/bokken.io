@@ -3,9 +3,8 @@ title: "「あなたの知らないChromeの世界」の連載終了によせて
 description: "「あなたの知らないChromeの世界」の連載終了によせて。!software design雑誌。はじめに。今月のSoftware Design 2024年11月号で、以前に紹介した「あなたの知らないChromeの世界」の連載が無事に終了しました。至らない点もあったかもしれませんが、無事に連載を終えることができてほっとしています。読んでくださった方がいたら、ありがとうございました。連載中紹介したト..."
 pubDate: 2024-10-18
 updatedDate: 2024-10-18
-tags: ['chromium', 'Software Design', '執筆']
+tags: ["chromium", "Software Design", "執筆"]
 ---
-
 
 ![software design雑誌](./img/software_design_magazines.jpg)
 
@@ -14,7 +13,6 @@ tags: ['chromium', 'Software Design', '執筆']
 今月の[Software Design 2024年11月号](https://gihyo.jp/magazine/SD/archive/2024/202411)で、[以前に紹介した「あなたの知らないChromeの世界」の連載](/articles/2024-01-31/software-design-2024-02.html)が無事に終了しました。
 至らない点もあったかもしれませんが、無事に連載を終えることができてほっとしています。
 読んでくださった方がいたら、ありがとうございました。
-
 
 ## 連載中紹介したトピック
 
@@ -51,5 +49,4 @@ tags: ['chromium', 'Software Design', '執筆']
 一旦、月刊誌への連載はこれで終わりで、また執筆はほそぼそとブログ記事を通してやっていこうとおもっています。
 加えて、Chromiumへのコードへのコントリビューションを改めてやっていきたいと思っています。
 よりChrome、ChromiumやWebのことをより深く理解できるように引き続きやっていきます。
-引き続き [@bokken_](https://twitter.com/bokken_) をよろしくお願いします。
-
+引き続き [@bokken\_](https://twitter.com/bokken_) をよろしくお願いします。

@@ -1,17 +1,17 @@
-version: '3.6'
+version: "3.6"
 services:
   https-portal:
     image: steveltn/https-portal:1.12
     ports:
-      - '80:80'
-      - '443:443'
+      - "80:80"
+      - "443:443"
     links:
-      - 'bokken_io'
+      - "bokken_io"
     restart: always
     depends_on:
       - bokken_io
     environment:
-      DOMAINS: 'bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io'
+      DOMAINS: "bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io"
       STAGE: local
       ERROR_LOG: default
       ACCESS_LOG: default
