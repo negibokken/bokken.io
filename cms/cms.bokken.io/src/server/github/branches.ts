@@ -23,6 +23,19 @@ export const listDraftBranches = async (
     }));
 };
 
+export const deleteBranch = async (
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  branchName: string,
+): Promise<void> => {
+  await octokit.request("DELETE /repos/{owner}/{repo}/git/refs/{ref}", {
+    owner,
+    repo,
+    ref: `heads/${branchName}`,
+  });
+};
+
 export const createBranchFromMain = async (
   octokit: Octokit,
   owner: string,
