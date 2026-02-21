@@ -32,11 +32,10 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile.cms
+    env_file:
+      - ../.env
     environment:
-      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
-      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
       GITHUB_CALLBACK_URL: https://cms.bokken.io/api/auth/github/callback
-      SESSION_SECRET: ${SESSION_SECRET}
       GITHUB_REPO_OWNER: negibokken
       GITHUB_REPO_NAME: bokken.io
       ALLOWED_GITHUB_USER: negibokken
