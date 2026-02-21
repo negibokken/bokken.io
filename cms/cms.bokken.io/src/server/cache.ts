@@ -16,8 +16,12 @@ export function getCache<T>(key: string): T | undefined {
   return entry.value as T;
 }
 
-export function setCache<T>(key: string, value: T): void {
-  store.set(key, { value, expiresAt: Date.now() + TTL_MS });
+export function setCache<T>(
+  key: string,
+  value: T,
+  ttlMs: number = TTL_MS,
+): void {
+  store.set(key, { value, expiresAt: Date.now() + ttlMs });
 }
 
 export function deleteCache(key: string): void {

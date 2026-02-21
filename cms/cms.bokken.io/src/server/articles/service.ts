@@ -22,9 +22,14 @@ import { getCache, setCache, deleteCache } from "../cache.js";
 const BLOG_BASE = "astro/src/content/blog";
 const PUBLISHED_CACHE_KEY = "published-articles";
 const DRAFT_CACHE_KEY = "draft-articles";
+const METADATA_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours for SHA-based cache
 
 const articleCacheKey = (branch: string, fp?: string): string =>
   `article:${branch}:${fp ?? ""}`;
+
+const metadataShaKey = (sha: string): string => `metadata:sha:${sha}`;
+const draftTitleKey = (branch: string, headSha: string): string =>
+  `draft-title:${branch}:${headSha}`;
 
 export const generateBranchName = (): string => {
   const now = new Date();
@@ -74,6 +79,19 @@ export const listPublishedArticles = async (
       const parts = entry.path.split("/");
       const date = parts[parts.length - 2];
       const slug = parts[parts.length - 1].replace(/\.md$/, "");
+
+      // Check SHA-based cache for metadata
+      const shaKey = metadataShaKey(entry.sha);
+      const cachedMetadata = getCache<{ title: string }>(shaKey);
+      if (cachedMetadata) {
+        return {
+          title: cachedMetadata.title,
+          path: entry.path,
+          date,
+          slug,
+        };
+      }
+
       const content = await getFileContent(
         octokit,
         repoOwner,
@@ -83,6 +101,10 @@ export const listPublishedArticles = async (
       );
       if (!content) return null;
       const { frontmatter, body } = parseFrontmatter(content.content);
+
+      const title = frontmatter.title || slug;
+      setCache(shaKey, { title }, METADATA_CACHE_TTL);
+
       // Pre-warm article content cache so the edit page loads instantly
       setCache(articleCacheKey("main", entry.path), {
         frontmatter,
@@ -90,7 +112,7 @@ export const listPublishedArticles = async (
         filePath: content.path,
         fileSha: content.sha,
       });
-      return { title: frontmatter.title || slug, path: entry.path, date, slug };
+      return { title, path: entry.path, date, slug };
     }),
   );
 
@@ -112,17 +134,31 @@ const getTitleFromBranch = async (
   owner: string,
   repo: string,
   branchName: string,
+  headSha: string,
 ): Promise<string> => {
+  const cacheKey = draftTitleKey(branchName, headSha);
+  const cachedTitle = getCache<string>(cacheKey);
+  if (cachedTitle) return cachedTitle;
+
   try {
     const compare = await octokit.request(
       "GET /repos/{owner}/{repo}/compare/{basehead}",
       { owner, repo, basehead: `main...${branchName}` },
     );
     const changedFiles = compare.data.files as
-      | Array<{ filename: string }>
+      | Array<{ filename: string; sha: string }>
       | undefined;
     const mdFile = changedFiles?.find((f) => isBlogMdFile(f.filename));
     if (!mdFile) return branchName;
+
+    // Check if we have this file metadata cached by SHA
+    const shaKey = metadataShaKey(mdFile.sha);
+    const cachedMetadata = getCache<{ title: string }>(shaKey);
+    if (cachedMetadata) {
+      setCache(cacheKey, cachedMetadata.title, METADATA_CACHE_TTL);
+      return cachedMetadata.title;
+    }
+
     const content = await getFileContent(
       octokit,
       owner,
@@ -132,6 +168,11 @@ const getTitleFromBranch = async (
     );
     if (!content) return branchName;
     const { frontmatter, body } = parseFrontmatter(content.content);
+    const title = frontmatter.title || branchName;
+
+    setCache(shaKey, { title }, METADATA_CACHE_TTL);
+    setCache(cacheKey, title, METADATA_CACHE_TTL);
+
     // Pre-warm article content cache so the edit page loads instantly
     setCache(articleCacheKey(branchName), {
       frontmatter,
@@ -139,7 +180,7 @@ const getTitleFromBranch = async (
       filePath: content.path,
       fileSha: content.sha,
     });
-    return frontmatter.title || branchName;
+    return title;
   } catch {
     return branchName;
   }
@@ -163,6 +204,7 @@ export const listDraftArticles = async (
         repoOwner,
         repoName,
         branch.name,
+        branch.sha,
       ),
     })),
   );
