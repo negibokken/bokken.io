@@ -24,6 +24,9 @@ const { tag } = Astro.props;
 const posts = (await getCollection("blog")).filter((post) =>
   post.data.tags.includes(tag),
 );
+
+const isDev = import.meta.env.DEV;
+const blogHref = isDev ? "/articles" : "https://blog.bokken.io/articles";
 ---
 
 <!doctype html>
@@ -72,7 +75,7 @@ const posts = (await getCollection("blog")).filter((post) =>
       <h2><span class="tag-span">{tag}</span>タグの記事一覧</h2>
       <nav>
         <ol class="breadcrumbs">
-          <li><a href="/articles">Blog</a></li>
+          <li><a href={blogHref}>Blog</a></li>
           <li><a href={`/articles/tags/${tag}`}>{tag}</a></li>
         </ol>
       </nav>

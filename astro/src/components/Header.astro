@@ -1,6 +1,10 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
+
+const isDev = import.meta.env.DEV;
+const blogHref = isDev ? "/articles" : "https://blog.bokken.io/articles";
+const labHref = isDev ? "/lab" : "https://x.bokken.io";
 ---
 
 <style>
@@ -89,8 +93,8 @@ import { SITE_TITLE } from "../consts";
     </a>
     <div class="internal-links">
       <HeaderLink href="/">About</HeaderLink>
-      <HeaderLink href="/articles">Blog</HeaderLink>
-      <HeaderLink href="https://x.bokken.io" target="_blank">Lab</HeaderLink>
+      <HeaderLink href={blogHref}>Blog</HeaderLink>
+      <HeaderLink href={labHref} target="_blank">Lab</HeaderLink>
     </div>
     <div class="social-links">
       <a href="/rss.xml">
