@@ -1,0 +1,25 @@
+.dropzone {
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  color: #888;
+  background: #fafafa;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.dropzone:hover {
+  border-color: #5c6bc0;
+  background: #f0f2ff;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.label {
+  font-size: 13px;
+}
