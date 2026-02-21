@@ -11,6 +11,8 @@ RUN pnpm run build
 
 FROM nginx:alpine
 
+EXPOSE 8080
+
 # Copy the built Astro site to the Nginx HTML directory
 COPY --from=builder /app/astro/dist/blog.bokken.io/. /usr/share/nginx/html/blog.bokken.io/
 
