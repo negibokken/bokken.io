@@ -149,15 +149,18 @@ pre > code {
 }
 
 blockquote {
-  border-left: 3px solid var(--gray-mid);
-  padding: 0 0 0 1.8em;
+  border-left: 4px solid var(--accent);
+  background: rgba(0, 163, 175, 0.06);
+  padding: 0.8em 1.5em;
   margin: 1.5em 2em;
   font-size: 0.9em;
   color: rgb(var(--gray));
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
 }
 
 blockquote p {
-  margin-block: 0.5em;
+  margin-block: 0.4em;
 }
 
 hr {
