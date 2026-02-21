@@ -1,14 +1,18 @@
 FROM node:23-alpine AS builder
 
+RUN corepack enable pnpm
+
 WORKDIR /app
-COPY astro ./
-RUN npm install
-RUN npm run build
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY astro/package.json ./astro/
+RUN pnpm install --frozen-lockfile
+COPY astro ./astro/
+RUN pnpm run build
 
 FROM nginx:alpine
 
 # Copy the built Astro site to the Nginx HTML directory
-COPY --from=builder /app/dist/blog.bokken.io/. /usr/share/nginx/html/blog.bokken.io/
+COPY --from=builder /app/astro/dist/blog.bokken.io/. /usr/share/nginx/html/blog.bokken.io/
 
 # Copy www.bokken.io static files (humans.txt, .well-known/)
 COPY astro/public-www/. /usr/share/nginx/html/www.bokken.io/
