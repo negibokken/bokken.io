@@ -1,0 +1,43 @@
+<ul id="bread">
+  <li><a href="https://x.bokken.io">x.bokken.io</a></li>
+  <li><a href="https://x.bokken.io/example-pwa">example-pwa</a></li>
+</ul>
+<article>
+  <p>This is a sample site of PWA.</p>
+  <p>You can install this web site as an Application.</p>
+
+  <code>/assets/js/register-service-worker.js</code>
+
+  <pre>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/assets/js/sw.js', {scope: '.'})
+      .then((registration) => {
+        console.log(
+          'Successfully registered service worker with scope: ',
+          registration.scope
+        );
+      })
+      .catch((err) => {
+        console.error('Failed to register service worker with err: ', err);
+      });
+  });
+}
+</pre>
+
+  <code>/assets/js/sw.js</code>
+
+  <pre>
+self.addEventListener('install', (event) => {
+  console.info('installed');
+});
+
+self.addEventListener('activate', (event) => {
+  console.info('service worker activated');
+});
+
+self.addEventListener('fetch', (event) => {
+  console.info('fetch event occurred');
+});</pre>
+</article>
