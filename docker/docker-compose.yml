@@ -21,11 +21,17 @@ services:
 
   bokken.io:
     image: bokken.io
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     volumes:
       - /var/log/nginx:/var/log/nginx
 
   cms.bokken.io:
     image: cms.bokken.io
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.cms
     environment:
       GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
       GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
