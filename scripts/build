@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t bokken.io -f docker/Dockerfile .
+docker build --ulimit nproc=65536:65536 -t bokken.io -f docker/Dockerfile .
