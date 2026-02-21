@@ -38,8 +38,14 @@ export const createArticle = async (): Promise<{ branchName: string }> => {
 
 export const fetchArticle = async (
   branchName: string,
+  filePath?: string,
 ): Promise<ArticleContent> => {
-  const res = await fetch(`/api/articles/${encodeURIComponent(branchName)}`);
+  const url = new URL(
+    `/api/articles/${encodeURIComponent(branchName)}`,
+    window.location.origin,
+  );
+  if (filePath) url.searchParams.set("filePath", filePath);
+  const res = await fetch(url.toString());
   if (!res.ok) throw new Error("Failed to fetch article");
   return res.json() as Promise<ArticleContent>;
 };

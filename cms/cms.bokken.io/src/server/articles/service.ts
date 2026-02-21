@@ -127,10 +127,13 @@ export interface ArticleContent {
 export const getArticleContent = async (
   octokit: Octokit,
   branchName: string,
+  filePath?: string,
 ): Promise<ArticleContent> => {
   const { repoOwner, repoName } = config;
   const tree = await getRecursiveTree(octokit, repoOwner, repoName, branchName);
-  const mdFile = tree.find((e) => e.type === "blob" && isBlogMdFile(e.path));
+  const mdFile = filePath
+    ? tree.find((e) => e.type === "blob" && e.path === filePath)
+    : tree.find((e) => e.type === "blob" && isBlogMdFile(e.path));
 
   if (!mdFile) {
     return {

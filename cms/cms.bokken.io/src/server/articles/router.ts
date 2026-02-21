@@ -40,8 +40,9 @@ router.post("/", async (req: Request, res: Response) => {
 
 router.get("/*", async (req: Request, res: Response) => {
   const branchName = decodeURIComponent(req.params[0]);
+  const filePath = req.query.filePath as string | undefined;
   const octokit = createOctokit(req.session!.accessToken);
-  const article = await getArticleContent(octokit, branchName);
+  const article = await getArticleContent(octokit, branchName, filePath);
   res.json(article);
 });
 

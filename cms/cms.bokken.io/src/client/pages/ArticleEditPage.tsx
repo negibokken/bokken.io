@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { Header } from "../components/Header.js";
 import { FrontmatterForm } from "../components/FrontmatterForm.js";
 import { MarkdownEditor } from "../components/MarkdownEditor.js";
@@ -15,7 +15,9 @@ export const ArticleEditPage = () => {
   const { "*": branchParam } = useParams<{ "*": string }>();
   const branchName = decodeURIComponent(branchParam ?? "");
   const navigate = useNavigate();
-  const { data, loading, error } = useArticle(branchName);
+  const [searchParams] = useSearchParams();
+  const filePathParam = searchParams.get("filePath") ?? undefined;
+  const { data, loading, error } = useArticle(branchName, filePathParam);
 
   const [frontmatter, setFrontmatter] = useState<Frontmatter>({
     title: "",
