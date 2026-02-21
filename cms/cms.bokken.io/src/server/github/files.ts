@@ -93,3 +93,32 @@ export const listDirectory = async (
     return [];
   }
 };
+
+export interface TreeEntry {
+  path: string;
+  type: string;
+  sha: string;
+}
+
+export const getRecursiveTree = async (
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  branch: string,
+): Promise<TreeEntry[]> => {
+  const ref = await octokit.request("GET /repos/{owner}/{repo}/git/ref/{ref}", {
+    owner,
+    repo,
+    ref: `heads/${branch}`,
+  });
+  const treeSha = ref.data.object.sha;
+  const tree = await octokit.request(
+    "GET /repos/{owner}/{repo}/git/trees/{tree_sha}",
+    { owner, repo, tree_sha: treeSha, recursive: "1" },
+  );
+  return (
+    tree.data.tree as Array<{ path?: string; type?: string; sha?: string }>
+  )
+    .filter((e) => e.path && e.type && e.sha)
+    .map((e) => ({ path: e.path!, type: e.type!, sha: e.sha! }));
+};

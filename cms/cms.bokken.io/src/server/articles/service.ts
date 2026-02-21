@@ -5,7 +5,7 @@ import {
   commitFile,
   deleteFile,
   getFileContent,
-  listDirectory,
+  getRecursiveTree,
 } from "../github/files.js";
 import { createAndMergePR } from "../github/pullRequests.js";
 import {
@@ -35,54 +35,67 @@ const jstDateString = (): string => {
   return `${jst.getUTCFullYear()}-${pad(jst.getUTCMonth() + 1)}-${pad(jst.getUTCDate())}`;
 };
 
+const isBlogMdFile = (path: string): boolean =>
+  path.startsWith(`${BLOG_BASE}/`) &&
+  path.endsWith(".md") &&
+  !path.includes("/img/") &&
+  path.split("/").length === 7;
+
 export const listPublishedArticles = async (
   octokit: Octokit,
 ): Promise<
   Array<{ title: string; path: string; date: string; slug: string }>
 > => {
   const { repoOwner, repoName } = config;
-  const dirs = await listDirectory(
-    octokit,
-    repoOwner,
-    repoName,
-    BLOG_BASE,
-    "main",
-  );
-  const articles: Array<{
-    title: string;
-    path: string;
-    date: string;
-    slug: string;
-  }> = [];
+  const tree = await getRecursiveTree(octokit, repoOwner, repoName, "main");
+  const mdFiles = tree.filter((e) => e.type === "blob" && isBlogMdFile(e.path));
 
-  for (const dir of dirs.filter((d) => d.type === "dir")) {
-    const files = await listDirectory(
-      octokit,
-      repoOwner,
-      repoName,
-      dir.path,
-      "main",
-    );
-    for (const file of files.filter((f) => f.name.endsWith(".md"))) {
+  const results = await Promise.all(
+    mdFiles.map(async (entry) => {
+      const parts = entry.path.split("/");
+      const date = parts[parts.length - 2];
+      const slug = parts[parts.length - 1].replace(/\.md$/, "");
       const content = await getFileContent(
         octokit,
         repoOwner,
         repoName,
-        file.path,
+        entry.path,
         "main",
       );
-      if (!content) continue;
+      if (!content) return null;
       const { frontmatter } = parseFrontmatter(content.content);
-      const slug = file.name.replace(/\.md$/, "");
-      articles.push({
-        title: frontmatter.title || slug,
-        path: file.path,
-        date: dir.name,
-        slug,
-      });
-    }
+      return { title: frontmatter.title || slug, path: entry.path, date, slug };
+    }),
+  );
+  return results.filter(
+    (a): a is { title: string; path: string; date: string; slug: string } =>
+      a !== null,
+  );
+};
+
+const getTitleFromBranch = async (
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  branchName: string,
+): Promise<string> => {
+  try {
+    const tree = await getRecursiveTree(octokit, owner, repo, branchName);
+    const mdFile = tree.find((e) => e.type === "blob" && isBlogMdFile(e.path));
+    if (!mdFile) return branchName;
+    const content = await getFileContent(
+      octokit,
+      owner,
+      repo,
+      mdFile.path,
+      branchName,
+    );
+    if (!content) return branchName;
+    const { frontmatter } = parseFrontmatter(content.content);
+    return frontmatter.title || branchName;
+  } catch {
+    return branchName;
   }
-  return articles;
 };
 
 export const listDraftArticles = async (
@@ -90,42 +103,18 @@ export const listDraftArticles = async (
 ): Promise<Array<{ branchName: string; title: string }>> => {
   const { repoOwner, repoName } = config;
   const branches = await listDraftBranches(octokit, repoOwner, repoName);
-  const drafts: Array<{ branchName: string; title: string }> = [];
 
-  for (const branch of branches) {
-    const dirs = await listDirectory(
-      octokit,
-      repoOwner,
-      repoName,
-      BLOG_BASE,
-      branch.name,
-    );
-    let title = branch.name;
-    for (const dir of dirs.filter((d) => d.type === "dir")) {
-      const files = await listDirectory(
+  return Promise.all(
+    branches.map(async (branch) => ({
+      branchName: branch.name,
+      title: await getTitleFromBranch(
         octokit,
         repoOwner,
         repoName,
-        dir.path,
         branch.name,
-      );
-      for (const file of files.filter((f) => f.name.endsWith(".md"))) {
-        const content = await getFileContent(
-          octokit,
-          repoOwner,
-          repoName,
-          file.path,
-          branch.name,
-        );
-        if (content) {
-          const { frontmatter } = parseFrontmatter(content.content);
-          title = frontmatter.title || title;
-        }
-      }
-    }
-    drafts.push({ branchName: branch.name, title });
-  }
-  return drafts;
+      ),
+    })),
+  );
 };
 
 export interface ArticleContent {
@@ -140,48 +129,36 @@ export const getArticleContent = async (
   branchName: string,
 ): Promise<ArticleContent> => {
   const { repoOwner, repoName } = config;
-  const dirs = await listDirectory(
+  const tree = await getRecursiveTree(octokit, repoOwner, repoName, branchName);
+  const mdFile = tree.find((e) => e.type === "blob" && isBlogMdFile(e.path));
+
+  if (!mdFile) {
+    return {
+      frontmatter: { title: "", description: "", pubDate: "", tags: [] },
+      body: "",
+      filePath: null,
+      fileSha: null,
+    };
+  }
+
+  const content = await getFileContent(
     octokit,
     repoOwner,
     repoName,
-    BLOG_BASE,
+    mdFile.path,
     branchName,
   );
-
-  for (const dir of dirs.filter((d) => d.type === "dir")) {
-    const files = await listDirectory(
-      octokit,
-      repoOwner,
-      repoName,
-      dir.path,
-      branchName,
-    );
-    for (const file of files.filter((f) => f.name.endsWith(".md"))) {
-      const content = await getFileContent(
-        octokit,
-        repoOwner,
-        repoName,
-        file.path,
-        branchName,
-      );
-      if (content) {
-        const { frontmatter, body } = parseFrontmatter(content.content);
-        return {
-          frontmatter,
-          body,
-          filePath: content.path,
-          fileSha: content.sha,
-        };
-      }
-    }
+  if (!content) {
+    return {
+      frontmatter: { title: "", description: "", pubDate: "", tags: [] },
+      body: "",
+      filePath: null,
+      fileSha: null,
+    };
   }
 
-  return {
-    frontmatter: { title: "", description: "", pubDate: "", tags: [] },
-    body: "",
-    filePath: null,
-    fileSha: null,
-  };
+  const { frontmatter, body } = parseFrontmatter(content.content);
+  return { frontmatter, body, filePath: content.path, fileSha: content.sha };
 };
 
 export const saveArticle = async (
