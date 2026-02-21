@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev:server": "tsx watch src/server/index.ts",
+    "dev:server": "tsx --env-file=../../.env watch src/server/index.ts",
     "dev:client": "vite",
     "build:client": "vite build",
     "build:server": "tsc -p tsconfig.node.json",
