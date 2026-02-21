@@ -1,0 +1,134 @@
+---
+const title = "bokken.io";
+---
+
+<!doctype html>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#"
+  >
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="bokken.io" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      href="https://blog.bokken.io/rss.xml"
+    />
+    <link rel="author" href="humans.txt" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-83287008-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-83287008-4");
+    </script>
+    <title>{title}</title>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@bokken_" />
+    <meta name="twitter:creator" content="@bokken_" />
+    <meta
+      name="twitter:image"
+      content="https://bokken.io/assets/img/icon.png"
+    />
+    <meta property="og:url" content="https://bokken.io" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="bokken.io" />
+    <meta property="og:description" content="bokken's home page" />
+    <meta property="og:site_name" content="bokken.io" />
+    <meta property="og:image" content="https://bokken.io/assets/img/icon.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Blog",
+            "item": "https://blog.bokken.io"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Experiments",
+            "item": "https://x.bokken.io"
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="preload" href="/assets/img/web.svg" as="image" />
+  </head>
+
+  <body>
+    <header>
+      <a href="https://bokken.io"><h1>bokken.io</h1></a>
+      <nav>
+        <ul>
+          <li><a href="https://blog.bokken.io">Blog</a></li>
+          <li><a href="https://x.bokken.io">Exp</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul id="bread">
+      <li><a href="https://bokken.io">bokken.io</a></li>
+    </ul>
+
+    <main>
+      <section>
+        <h2 id="about-me">About me</h2>
+
+        <img src="/assets/img/icon.png" width="80" height="80" />
+
+        <dl>
+          <dt>Account name</dt>
+          <dd>bokken</dd>
+          <dt>Profile</dt>
+          <dd>
+            I am a Web developer. I love all of Web technologies, especially
+            browsers♡
+          </dd>
+          <dt>Resume site</dt>
+          <dd>
+            <a
+              rel="noopener"
+              target="_blank"
+              href="https://negibokken.github.io/"
+              >https://negibokken.github.io/</a
+            >
+          </dd>
+          <dt>Accounts</dt>
+          <dd>
+            <a href="https://github.com/negibokken">
+              <img
+                src="/assets/img/github_icon.png"
+                width="36"
+                height="36"
+              />
+            </a>
+            <a href="https://twitter.com/bokken_">
+              <img
+                src="/assets/img/twitter_logo.svg"
+                width="36"
+                height="36"
+              />
+            </a>
+          </dd>
+        </dl>
+      </section>
+    </main>
+
+    <footer>
+      Copyright &copy; 2018 bokken. All Rights Reserved.
+      <a href="https://bokken.io/privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
