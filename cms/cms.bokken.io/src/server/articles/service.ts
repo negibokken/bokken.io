@@ -13,8 +13,13 @@ import {
   serializeFrontmatter,
   Frontmatter,
 } from "./frontmatter.js";
+import { getCache, setCache, deleteCache } from "../cache.js";
 
 const BLOG_BASE = "astro/src/content/blog";
+const PUBLISHED_CACHE_KEY = "published-articles";
+
+const articleCacheKey = (branch: string, fp?: string): string =>
+  `article:${branch}:${fp ?? ""}`;
 
 export const generateBranchName = (): string => {
   const now = new Date();
@@ -43,9 +48,18 @@ const isBlogMdFile = (path: string): boolean =>
 
 export const listPublishedArticles = async (
   octokit: Octokit,
+  refresh = false,
 ): Promise<
   Array<{ title: string; path: string; date: string; slug: string }>
 > => {
+  if (!refresh) {
+    const cached =
+      getCache<
+        Array<{ title: string; path: string; date: string; slug: string }>
+      >(PUBLISHED_CACHE_KEY);
+    if (cached) return cached;
+  }
+
   const { repoOwner, repoName } = config;
   const tree = await getRecursiveTree(octokit, repoOwner, repoName, "main");
   const mdFiles = tree.filter((e) => e.type === "blob" && isBlogMdFile(e.path));
@@ -67,10 +81,14 @@ export const listPublishedArticles = async (
       return { title: frontmatter.title || slug, path: entry.path, date, slug };
     }),
   );
-  return results.filter(
+
+  const filtered = results.filter(
     (a): a is { title: string; path: string; date: string; slug: string } =>
       a !== null,
   );
+
+  setCache(PUBLISHED_CACHE_KEY, filtered);
+  return filtered;
 };
 
 const getTitleFromBranch = async (
@@ -124,25 +142,33 @@ export interface ArticleContent {
   fileSha: string | null;
 }
 
+const emptyArticle = (): ArticleContent => ({
+  frontmatter: { title: "", description: "", pubDate: "", tags: [] },
+  body: "",
+  filePath: null,
+  fileSha: null,
+});
+
 export const getArticleContent = async (
   octokit: Octokit,
   branchName: string,
   filePath?: string,
+  refresh = false,
 ): Promise<ArticleContent> => {
+  const cacheKey = articleCacheKey(branchName, filePath);
+
+  if (!refresh) {
+    const cached = getCache<ArticleContent>(cacheKey);
+    if (cached) return cached;
+  }
+
   const { repoOwner, repoName } = config;
   const tree = await getRecursiveTree(octokit, repoOwner, repoName, branchName);
   const mdFile = filePath
     ? tree.find((e) => e.type === "blob" && e.path === filePath)
     : tree.find((e) => e.type === "blob" && isBlogMdFile(e.path));
 
-  if (!mdFile) {
-    return {
-      frontmatter: { title: "", description: "", pubDate: "", tags: [] },
-      body: "",
-      filePath: null,
-      fileSha: null,
-    };
-  }
+  if (!mdFile) return emptyArticle();
 
   const content = await getFileContent(
     octokit,
@@ -151,17 +177,18 @@ export const getArticleContent = async (
     mdFile.path,
     branchName,
   );
-  if (!content) {
-    return {
-      frontmatter: { title: "", description: "", pubDate: "", tags: [] },
-      body: "",
-      filePath: null,
-      fileSha: null,
-    };
-  }
+  if (!content) return emptyArticle();
 
   const { frontmatter, body } = parseFrontmatter(content.content);
-  return { frontmatter, body, filePath: content.path, fileSha: content.sha };
+  const result: ArticleContent = {
+    frontmatter,
+    body,
+    filePath: content.path,
+    fileSha: content.sha,
+  };
+
+  setCache(cacheKey, result);
+  return result;
 };
 
 export const saveArticle = async (
@@ -219,6 +246,7 @@ export const saveArticle = async (
     );
   }
 
+  deleteCache(articleCacheKey(branchName));
   return newPath;
 };
 
@@ -293,6 +321,9 @@ export const publishArticle = async (
     branchName,
     `Publish: ${updated.title || slug}`,
   );
+
+  deleteCache(PUBLISHED_CACHE_KEY);
+  deleteCache(articleCacheKey(branchName));
 };
 
 export const uploadImage = async (

@@ -18,9 +18,10 @@ const router: Router = Router();
 router.use(requireAuth);
 
 router.get("/", async (req: Request, res: Response) => {
+  const refresh = req.query.refresh === "true";
   const octokit = createOctokit(req.session!.accessToken);
   const [published, drafts] = await Promise.all([
-    listPublishedArticles(octokit),
+    listPublishedArticles(octokit, refresh),
     listDraftArticles(octokit),
   ]);
   res.json({ published, drafts });
@@ -41,8 +42,14 @@ router.post("/", async (req: Request, res: Response) => {
 router.get("/*", async (req: Request, res: Response) => {
   const branchName = decodeURIComponent(req.params[0]);
   const filePath = req.query.filePath as string | undefined;
+  const refresh = req.query.refresh === "true";
   const octokit = createOctokit(req.session!.accessToken);
-  const article = await getArticleContent(octokit, branchName, filePath);
+  const article = await getArticleContent(
+    octokit,
+    branchName,
+    filePath,
+    refresh,
+  );
   res.json(article);
 });
 
