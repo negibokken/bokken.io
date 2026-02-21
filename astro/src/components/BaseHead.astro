@@ -71,7 +71,7 @@ const jsonLd = type === 'article' ? JSON.stringify({
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
-<meta property="og:site_name" content="blog.bokken.io" />
+<meta property="og:site_name" content="www.bokken.io" />
 <meta property="og:locale" content="ja_JP" />
 {type === 'article' && pubDate && <meta property="article:published_time" content={pubDate.toISOString()} />}
 {type === 'article' && updatedDate && <meta property="article:modified_time" content={updatedDate.toISOString()} />}
