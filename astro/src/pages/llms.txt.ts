@@ -1,12 +1,12 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
-const SITE = 'https://blog.bokken.io';
+const SITE = 'https://www.bokken.io';
 const DESCRIPTION =
   'WebやWebブラウザに関する技術について書いているブログ。Chromiumプロジェクトへのコントリビューションや、Web 標準に関する考察を中心に掲載。';
 
 function buildHeader(): string {
-  return `# blog.bokken.io\n\n> ${DESCRIPTION}\n\n## Articles\n\n`;
+  return `# www.bokken.io\n\n> ${DESCRIPTION}\n\n## Articles\n\n`;
 }
 
 function buildArticleLines(
