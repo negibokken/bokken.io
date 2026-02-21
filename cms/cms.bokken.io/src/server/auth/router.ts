@@ -3,7 +3,7 @@ import crypto from "crypto";
 import { config } from "../config.js";
 import { buildAuthUrl, exchangeCodeForToken, getGithubUser } from "./github.js";
 
-const router = Router();
+const router: Router = Router();
 
 router.get("/github", (_req, res) => {
   const state = crypto.randomBytes(16).toString("hex");

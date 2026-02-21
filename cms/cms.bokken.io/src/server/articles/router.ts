@@ -13,7 +13,7 @@ import {
 } from "./service.js";
 import { Frontmatter } from "./frontmatter.js";
 
-const router = Router();
+const router: Router = Router();
 
 router.use(requireAuth);
 

@@ -4,7 +4,7 @@ import { requireAuth } from "../auth/middleware.js";
 import { createOctokit } from "../github/client.js";
 import { uploadImage } from "../articles/service.js";
 
-const router = Router();
+const router: Router = Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 router.post(

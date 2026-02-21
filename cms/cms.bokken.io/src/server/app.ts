@@ -1,4 +1,4 @@
-import express from "express";
+import express, { type Application } from "express";
 import cookieSession from "cookie-session";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -9,18 +9,7 @@ import imagesRouter from "./images/router.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-declare module "express-serve-static-core" {
-  interface Request {
-    session: {
-      accessToken: string;
-      username: string;
-      avatarUrl: string;
-      oauthState?: string;
-    } | null;
-  }
-}
-
-const app = express();
+const app: Application = express();
 
 app.use(
   cookieSession({
