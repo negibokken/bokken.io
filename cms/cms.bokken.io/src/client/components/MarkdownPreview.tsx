@@ -10,25 +10,26 @@ interface Props {
 
 export const MarkdownPreview = ({ frontmatter, body }: Props) => (
   <div className={styles.container}>
-    <div className={styles.meta}>
-      {frontmatter.title && (
-        <h1 className={styles.title}>{frontmatter.title}</h1>
-      )}
-      {frontmatter.pubDate && (
-        <p className={styles.date}>{frontmatter.pubDate}</p>
-      )}
-      {frontmatter.tags.length > 0 && (
-        <div className={styles.tags}>
-          {frontmatter.tags.map((tag) => (
-            <span key={tag} className={styles.tag}>
-              {tag}
-            </span>
-          ))}
+    <div className={styles.prose}>
+      <div className={styles.titleBlock}>
+        {frontmatter.title && <h1>{frontmatter.title}</h1>}
+        <div className={styles.meta}>
+          {frontmatter.pubDate && <span>{frontmatter.pubDate}</span>}
+          {frontmatter.tags.length > 0 && (
+            <div className={styles.tags}>
+              {frontmatter.tags.map((tag) => (
+                <span key={tag} className={styles.tag}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
-      )}
-    </div>
-    <div className={styles.body}>
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
+        <hr className={styles.separator} />
+      </div>
+      <div className={styles.body}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
+      </div>
     </div>
   </div>
 );
