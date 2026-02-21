@@ -1,6 +1,6 @@
 FROM node:22-bookworm-slim AS builder
 
-RUN corepack enable pnpm
+RUN npm install -g pnpm
 
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
