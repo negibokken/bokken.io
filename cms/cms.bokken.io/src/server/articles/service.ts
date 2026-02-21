@@ -82,10 +82,12 @@ export const listPublishedArticles = async (
     }),
   );
 
-  const filtered = results.filter(
-    (a): a is { title: string; path: string; date: string; slug: string } =>
-      a !== null,
-  );
+  const filtered = results
+    .filter(
+      (a): a is { title: string; path: string; date: string; slug: string } =>
+        a !== null,
+    )
+    .sort((a, b) => b.date.localeCompare(a.date));
 
   setCache(PUBLISHED_CACHE_KEY, filtered);
   return filtered;
@@ -122,7 +124,7 @@ export const listDraftArticles = async (
   const { repoOwner, repoName } = config;
   const branches = await listDraftBranches(octokit, repoOwner, repoName);
 
-  return Promise.all(
+  const drafts = await Promise.all(
     branches.map(async (branch) => ({
       branchName: branch.name,
       title: await getTitleFromBranch(
@@ -133,6 +135,8 @@ export const listDraftArticles = async (
       ),
     })),
   );
+
+  return drafts.sort((a, b) => b.branchName.localeCompare(a.branchName));
 };
 
 export interface ArticleContent {
