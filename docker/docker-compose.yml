@@ -1,4 +1,3 @@
-version: "3.6"
 services:
   https-portal:
     image: steveltn/https-portal:1.12
@@ -11,7 +10,7 @@ services:
     depends_on:
       - bokken.io
     environment:
-      DOMAINS: "bokken.io -> http://bokken.io, www.bokken.io -> http://bokken.io, blog.bokken.io -> http://bokken.io, x.bokken.io -> http://bokken.io"
+      DOMAINS: "bokken.io -> http://bokken.io:8080, www.bokken.io -> http://bokken.io:8080, blog.bokken.io -> http://bokken.io:8080, x.bokken.io -> http://bokken.io:8080"
       STAGE: production
       ERROR_LOG: default
       ACCESS_LOG: default
