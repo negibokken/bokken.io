@@ -21,6 +21,7 @@ import { getCache, setCache, deleteCache } from "../cache.js";
 
 const BLOG_BASE = "astro/src/content/blog";
 const PUBLISHED_CACHE_KEY = "published-articles";
+const DRAFT_CACHE_KEY = "draft-articles";
 
 const articleCacheKey = (branch: string, fp?: string): string =>
   `article:${branch}:${fp ?? ""}`;
@@ -97,6 +98,8 @@ export const listPublishedArticles = async (
   return filtered;
 };
 
+// Use the compare API to find files changed vs main — much faster than
+// fetching the full recursive tree for each draft branch.
 const getTitleFromBranch = async (
   octokit: Octokit,
   owner: string,
@@ -104,14 +107,20 @@ const getTitleFromBranch = async (
   branchName: string,
 ): Promise<string> => {
   try {
-    const tree = await getRecursiveTree(octokit, owner, repo, branchName);
-    const mdFile = tree.find((e) => e.type === "blob" && isBlogMdFile(e.path));
+    const compare = await octokit.request(
+      "GET /repos/{owner}/{repo}/compare/{basehead}",
+      { owner, repo, basehead: `main...${branchName}` },
+    );
+    const changedFiles = compare.data.files as
+      | Array<{ filename: string }>
+      | undefined;
+    const mdFile = changedFiles?.find((f) => isBlogMdFile(f.filename));
     if (!mdFile) return branchName;
     const content = await getFileContent(
       octokit,
       owner,
       repo,
-      mdFile.path,
+      mdFile.filename,
       branchName,
     );
     if (!content) return branchName;
@@ -125,6 +134,10 @@ const getTitleFromBranch = async (
 export const listDraftArticles = async (
   octokit: Octokit,
 ): Promise<Array<{ branchName: string; title: string }>> => {
+  const cached =
+    getCache<Array<{ branchName: string; title: string }>>(DRAFT_CACHE_KEY);
+  if (cached) return cached;
+
   const { repoOwner, repoName } = config;
   const branches = await listDraftBranches(octokit, repoOwner, repoName);
 
@@ -140,7 +153,11 @@ export const listDraftArticles = async (
     })),
   );
 
-  return drafts.sort((a, b) => b.branchName.localeCompare(a.branchName));
+  const sorted = drafts.sort((a, b) =>
+    b.branchName.localeCompare(a.branchName),
+  );
+  setCache(DRAFT_CACHE_KEY, sorted);
+  return sorted;
 };
 
 export interface ArticleContent {
@@ -199,6 +216,14 @@ export const getArticleContent = async (
   return result;
 };
 
+export const createDraftArticle = async (octokit: Octokit): Promise<string> => {
+  const { repoOwner, repoName } = config;
+  const branchName = generateBranchName();
+  await createBranchFromMain(octokit, repoOwner, repoName, branchName);
+  deleteCache(DRAFT_CACHE_KEY);
+  return branchName;
+};
+
 export const saveArticle = async (
   octokit: Octokit,
   branchName: string,
@@ -255,6 +280,7 @@ export const saveArticle = async (
   }
 
   deleteCache(articleCacheKey(branchName));
+  deleteCache(DRAFT_CACHE_KEY);
   return newPath;
 };
 
@@ -331,6 +357,7 @@ export const publishArticle = async (
   );
 
   deleteCache(PUBLISHED_CACHE_KEY);
+  deleteCache(DRAFT_CACHE_KEY);
   deleteCache(articleCacheKey(branchName));
 };
 
@@ -341,6 +368,7 @@ export const deleteDraftArticle = async (
   const { repoOwner, repoName } = config;
   await deleteBranch(octokit, repoOwner, repoName, branchName);
   deleteCache(articleCacheKey(branchName));
+  deleteCache(DRAFT_CACHE_KEY);
 };
 
 export const uploadImage = async (

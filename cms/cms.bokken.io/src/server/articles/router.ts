@@ -1,16 +1,14 @@
 import { Router, Request, Response } from "express";
 import { requireAuth } from "../auth/middleware.js";
 import { createOctokit } from "../github/client.js";
-import { createBranchFromMain } from "../github/branches.js";
-import { config } from "../config.js";
 import {
-  generateBranchName,
   listPublishedArticles,
   listDraftArticles,
   getArticleContent,
   saveArticle,
   publishArticle,
   deleteDraftArticle,
+  createDraftArticle,
 } from "./service.js";
 import { Frontmatter } from "./frontmatter.js";
 
@@ -30,13 +28,7 @@ router.get("/", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
   const octokit = createOctokit(req.session!.accessToken);
-  const branchName = generateBranchName();
-  await createBranchFromMain(
-    octokit,
-    config.repoOwner,
-    config.repoName,
-    branchName,
-  );
+  const branchName = await createDraftArticle(octokit);
   res.json({ branchName });
 });
 
