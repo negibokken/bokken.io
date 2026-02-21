@@ -11,9 +11,6 @@ export default defineConfig({
   build: {
     format: "file",
   },
-  redirects: {
-    "/": "https://blog.bokken.io/about",
-  },
   compressHTML: true,
   vite: {
     build: {
