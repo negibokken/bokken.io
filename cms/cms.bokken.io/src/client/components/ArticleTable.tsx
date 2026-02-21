@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { PublishedArticle, DraftArticle, createArticle } from "../api/articles.js";
+import { PublishedArticle, DraftArticle } from "../api/articles.js";
 import styles from "./ArticleTable.module.css";
 
 interface Props {
@@ -14,11 +14,8 @@ export const ArticleTable = ({ published, drafts }: Props) => {
     navigate(`/edit/${encodeURIComponent(branchName)}`);
   };
 
-  const handlePublishedClick = async (article: PublishedArticle) => {
-    const { branchName } = await createArticle();
-    navigate(
-      `/edit/${encodeURIComponent(branchName)}?filePath=${encodeURIComponent(article.path)}`,
-    );
+  const handlePublishedClick = (article: PublishedArticle) => {
+    navigate(`/edit?filePath=${encodeURIComponent(article.path)}`);
   };
 
   return (

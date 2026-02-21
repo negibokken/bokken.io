@@ -3,16 +3,14 @@ import { Header } from "../components/Header.js";
 import { ArticleTable } from "../components/ArticleTable.js";
 import { PlusIcon } from "../components/icons/PlusIcon.js";
 import { useArticles } from "../hooks/useArticles.js";
-import { createArticle } from "../api/articles.js";
 import styles from "./ArticleListPage.module.css";
 
 export const ArticleListPage = () => {
   const navigate = useNavigate();
   const { data, loading, error } = useArticles();
 
-  const handleCreate = async () => {
-    const { branchName } = await createArticle();
-    navigate(`/edit/${encodeURIComponent(branchName)}`);
+  const handleCreate = () => {
+    navigate("/edit");
   };
 
   return (
