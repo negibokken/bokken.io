@@ -11,10 +11,15 @@
   z-index: 100;
 }
 
-.brand {
+.brandLink {
   font-size: 18px;
   font-weight: 700;
   color: #1a1a1a;
+  text-decoration: none;
+}
+
+.brandLink:hover {
+  color: #3949ab;
 }
 
 .userArea {

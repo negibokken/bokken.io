@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth.js";
 import { logout } from "../api/auth.js";
 import styles from "./Header.module.css";
@@ -12,7 +13,9 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.brand}>bokken.io CMS</div>
+      <Link to="/" className={styles.brandLink}>
+        bokken.io CMS
+      </Link>
       {user && (
         <div className={styles.userArea}>
           <img
