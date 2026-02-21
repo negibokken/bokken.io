@@ -30,6 +30,23 @@
   color: #2e7d32;
 }
 
+.refreshBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 13px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+}
+
+.refreshBtn:hover {
+  background: #f5f5f5;
+}
+
 .saveBtn,
 .publishBtn {
   display: flex;
@@ -98,6 +115,40 @@
 }
 
 .editor {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.editorTabs {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+  background: #fafafa;
+}
+
+.tab {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+
+.tab:hover {
+  color: #1a1a1a;
+  background: #f0f0f0;
+}
+
+.activeTab {
+  color: #3949ab;
+  border-bottom-color: #3949ab;
+}
+
+.editorContent {
   flex: 1;
   overflow: hidden;
 }

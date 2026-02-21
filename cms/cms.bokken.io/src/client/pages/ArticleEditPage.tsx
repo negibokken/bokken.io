@@ -1,15 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { Header } from "../components/Header.js";
 import { FrontmatterForm } from "../components/FrontmatterForm.js";
 import { MarkdownEditor } from "../components/MarkdownEditor.js";
+import { MarkdownPreview } from "../components/MarkdownPreview.js";
 import { ImageUploader } from "../components/ImageUploader.js";
 import { SaveIcon } from "../components/icons/SaveIcon.js";
 import { PublishIcon } from "../components/icons/PublishIcon.js";
+import { RefreshIcon } from "../components/icons/RefreshIcon.js";
 import { useArticle } from "../hooks/useArticle.js";
-import { saveArticle, publishArticle } from "../api/articles.js";
+import { createArticle, saveArticle, publishArticle } from "../api/articles.js";
 import type { Frontmatter } from "../../server/articles/frontmatter.js";
 import styles from "./ArticleEditPage.module.css";
+
+type ViewMode = "editor" | "preview";
 
 export const ArticleEditPage = () => {
   const { "*": branchParam } = useParams<{ "*": string }>();
@@ -17,7 +21,26 @@ export const ArticleEditPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const filePathParam = searchParams.get("filePath") ?? undefined;
-  const { data, loading, error } = useArticle(branchName, filePathParam);
+
+  // Branch used for initial fetch: if no branchName but filePath exists, fetch from main
+  const fetchBranch = branchName || (filePathParam ? "main" : "");
+  const fetchFilePath =
+    fetchBranch === "main"
+      ? filePathParam
+      : branchName
+        ? filePathParam
+        : undefined;
+
+  const { data, loading, error, refresh } = useArticle(
+    fetchBranch,
+    fetchFilePath,
+  );
+
+  // Active branch for save/publish — lazily created if empty
+  const activeBranchRef = useRef(branchName);
+  const [displayBranch, setDisplayBranch] = useState(
+    branchName || "New Article",
+  );
 
   const [frontmatter, setFrontmatter] = useState<Frontmatter>({
     title: "",
@@ -32,6 +55,7 @@ export const ArticleEditPage = () => {
   const [saving, setSaving] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<ViewMode>("editor");
 
   useEffect(() => {
     if (!data) return;
@@ -55,6 +79,14 @@ export const ArticleEditPage = () => {
     return new Date().toISOString().split("T")[0];
   };
 
+  const ensureBranch = async (): Promise<string> => {
+    if (activeBranchRef.current) return activeBranchRef.current;
+    const { branchName: newBranch } = await createArticle();
+    activeBranchRef.current = newBranch;
+    setDisplayBranch(newBranch);
+    return newBranch;
+  };
+
   const handleSave = async () => {
     if (!slug) {
       setMessage("Slug is required");
@@ -63,7 +95,8 @@ export const ArticleEditPage = () => {
     setSaving(true);
     setMessage(null);
     try {
-      const result = await saveArticle(branchName, {
+      const branch = await ensureBranch();
+      const result = await saveArticle(branch, {
         frontmatter,
         body,
         slug,
@@ -85,13 +118,14 @@ export const ArticleEditPage = () => {
       return;
     }
     const confirmed = window.confirm(
-      "Publish this article? This will create and merge a PR."
+      "Publish this article? This will create and merge a PR.",
     );
     if (!confirmed) return;
     setPublishing(true);
     setMessage(null);
     try {
-      await publishArticle(branchName, {
+      const branch = await ensureBranch();
+      await publishArticle(branch, {
         frontmatter,
         body,
         slug,
@@ -119,9 +153,17 @@ export const ArticleEditPage = () => {
     <div className={styles.layout}>
       <Header />
       <div className={styles.toolbar}>
-        <span className={styles.branch}>{branchName}</span>
+        <span className={styles.branch}>{displayBranch}</span>
         <div className={styles.actions}>
           {message && <span className={styles.message}>{message}</span>}
+          <button
+            onClick={refresh}
+            disabled={loading}
+            className={styles.refreshBtn}
+            title="Refresh from GitHub (bypass cache)"
+          >
+            <RefreshIcon size={14} />
+          </button>
           <button
             onClick={handleSave}
             disabled={saving}
@@ -152,7 +194,7 @@ export const ArticleEditPage = () => {
           <div className={styles.imageSection}>
             <h3 className={styles.imageSectionTitle}>Upload Image</h3>
             <ImageUploader
-              branchName={branchName}
+              branchName={displayBranch}
               date={getDate()}
               onInsert={handleImageInsert}
             />
@@ -160,7 +202,27 @@ export const ArticleEditPage = () => {
         </aside>
 
         <div className={styles.editor}>
-          <MarkdownEditor value={body} onChange={setBody} />
+          <div className={styles.editorTabs}>
+            <button
+              className={`${styles.tab} ${viewMode === "editor" ? styles.activeTab : ""}`}
+              onClick={() => setViewMode("editor")}
+            >
+              Editor
+            </button>
+            <button
+              className={`${styles.tab} ${viewMode === "preview" ? styles.activeTab : ""}`}
+              onClick={() => setViewMode("preview")}
+            >
+              Preview
+            </button>
+          </div>
+          <div className={styles.editorContent}>
+            {viewMode === "editor" ? (
+              <MarkdownEditor value={body} onChange={setBody} />
+            ) : (
+              <MarkdownPreview frontmatter={frontmatter} body={body} />
+            )}
+          </div>
         </div>
       </div>
     </div>

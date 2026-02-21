@@ -29,6 +29,14 @@ const AppWithAuth = () => {
             }
           />
           <Route
+            path="/edit"
+            element={
+              <ProtectedRoute>
+                <ArticleEditPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/edit/*"
             element={
               <ProtectedRoute>
