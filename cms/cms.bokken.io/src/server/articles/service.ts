@@ -82,7 +82,14 @@ export const listPublishedArticles = async (
         "main",
       );
       if (!content) return null;
-      const { frontmatter } = parseFrontmatter(content.content);
+      const { frontmatter, body } = parseFrontmatter(content.content);
+      // Pre-warm article content cache so the edit page loads instantly
+      setCache(articleCacheKey("main", entry.path), {
+        frontmatter,
+        body,
+        filePath: content.path,
+        fileSha: content.sha,
+      });
       return { title: frontmatter.title || slug, path: entry.path, date, slug };
     }),
   );
@@ -124,7 +131,14 @@ const getTitleFromBranch = async (
       branchName,
     );
     if (!content) return branchName;
-    const { frontmatter } = parseFrontmatter(content.content);
+    const { frontmatter, body } = parseFrontmatter(content.content);
+    // Pre-warm article content cache so the edit page loads instantly
+    setCache(articleCacheKey(branchName), {
+      frontmatter,
+      body,
+      filePath: content.path,
+      fileSha: content.sha,
+    });
     return frontmatter.title || branchName;
   } catch {
     return branchName;
