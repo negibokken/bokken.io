@@ -7,13 +7,13 @@ services:
       - "443:443"
     links:
       - "bokken_io"
-      - "cms.bokken.io"
+      - "cms_server"
     restart: always
     depends_on:
       - bokken_io
-      - cms.bokken.io
+      - cms_server
     environment:
-      DOMAINS: "bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io, cms.bokken.io -> http://cms.bokken.io:3000"
+      DOMAINS: "bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io, cms.bokken.io -> http://cms_server:3000"
       STAGE: local
       ERROR_LOG: default
       ACCESS_LOG: default
@@ -26,7 +26,7 @@ services:
       - ../astro/public-x:/usr/share/nginx/html/x.bokken.io:ro
       - ../nginx:/etc/nginx:ro
 
-  cms.bokken.io:
+  cms_server:
     image: cms.bokken.io
     build:
       context: ..

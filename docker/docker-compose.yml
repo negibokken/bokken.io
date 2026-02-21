@@ -6,13 +6,13 @@ services:
       - "443:443"
     links:
       - "bokken.io"
-      - "cms.bokken.io"
+      - "cms_server"
     restart: always
     depends_on:
       - bokken.io
-      - cms.bokken.io
+      - cms_server
     environment:
-      DOMAINS: "bokken.io -> http://bokken.io:8080, www.bokken.io -> http://bokken.io:8080, blog.bokken.io -> http://bokken.io:8080, x.bokken.io -> http://bokken.io:8080, cms.bokken.io -> http://cms.bokken.io:3000"
+      DOMAINS: "bokken.io -> http://bokken.io:8080, www.bokken.io -> http://bokken.io:8080, blog.bokken.io -> http://bokken.io:8080, x.bokken.io -> http://bokken.io:8080, cms.bokken.io -> http://cms_server:3000"
       STAGE: production
       ERROR_LOG: default
       ACCESS_LOG: default
@@ -27,7 +27,7 @@ services:
     volumes:
       - /var/log/nginx:/var/log/nginx
 
-  cms.bokken.io:
+  cms_server:
     image: cms.bokken.io
     build:
       context: ..
