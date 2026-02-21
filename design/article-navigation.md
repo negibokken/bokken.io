@@ -41,11 +41,13 @@ function postUrl(post: CollectionEntry<"blog">): string {
 
 - Props: `prevPost?: { title: string; url: string }`, `nextPost?: { title: string; url: string }`
 - 前後リンクを左右に並べて表示（片方なければスペースで埋める）
+- ページの最下部に表示
 
 #### `LatestPosts.astro`
 
 - Props なし（内部で `getCollection("blog")` を呼び自己完結）
 - pubDate 降順で上位5件を取得してリスト表示
+- ページの右Aside（サイドバー）に配置
 
 ## タスクリスト
 
