@@ -5,7 +5,7 @@ RUN corepack enable && corepack prepare pnpm@9 --activate
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY cms/cms.bokken.io/package.json ./cms/cms.bokken.io/
-RUN pnpm install --frozen-lockfile
+RUN HUSKY=0 pnpm install --frozen-lockfile
 
 COPY cms/cms.bokken.io ./cms/cms.bokken.io/
 
@@ -19,7 +19,7 @@ RUN corepack enable && corepack prepare pnpm@9 --activate
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY cms/cms.bokken.io/package.json ./cms/cms.bokken.io/
-RUN pnpm install --frozen-lockfile --prod
+RUN HUSKY=0 pnpm install --frozen-lockfile --prod
 
 COPY --from=builder /app/cms/cms.bokken.io/dist ./cms/cms.bokken.io/dist
 COPY --from=builder /app/cms/cms.bokken.io/dist-server ./cms/cms.bokken.io/dist-server
