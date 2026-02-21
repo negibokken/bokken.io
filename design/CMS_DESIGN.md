@@ -95,7 +95,7 @@ We will adhere to the schema defined in `astro/src/content.config.ts`:
     - Dashboard (List of posts).
     - Editor (Markdown + Frontmatter form).
 4.  **Integration**: Connect Frontend to Backend.
-5.  **Deployment**: Update `Dockerfile` and `docker-compose.yml` to support the new build process.
+5.  **Deployment**: Update `docker/Dockerfile` and `docker/docker-compose.yml` to support the new build process.
 
 ## Open Questions for User
 1.  Do you have a preferred Markdown editor library? (e.g., simple textarea, Monaco, or a rich text-like editor).

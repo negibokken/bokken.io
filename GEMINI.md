@@ -28,7 +28,7 @@ This is a monorepo project primarily focused on managing the `bokken.io` website
     ```
     This script will:
     *   Build Docker images for `bokken.io` and `app.bokken.io`.
-    *   Start the Docker Compose services defined in `docker-compose.dev.yml`, bringing up the local development environment.
+    *   Start the Docker Compose services defined in `docker/docker-compose.dev.yml`, bringing up the local development environment.
 
 ### Local Development
 
