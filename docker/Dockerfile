@@ -1,9 +1,6 @@
 FROM node:22-bookworm-slim AS builder
 
-RUN apt-get update && apt-get install -y --no-install-recommends curl && \
-    curl -fsSL https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linux-x64 -o /usr/local/bin/pnpm && \
-    chmod +x /usr/local/bin/pnpm && \
-    rm -rf /var/lib/apt/lists/*
+RUN corepack enable && corepack prepare pnpm@9 --activate
 
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
