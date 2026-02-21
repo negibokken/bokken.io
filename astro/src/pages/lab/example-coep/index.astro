@@ -1,0 +1,45 @@
+---
+import BaseHead from "../../../components/BaseHead.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <BaseHead title="COEP Example | bokken.io" description="Example site for Cross-Origin-Embedder-Policy (COEP)" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h2>Overview</h2>
+      <p>This is example site for Cross-Origin-Embedder-Policy (COEP).</p>
+      <p>The COEP affects external resources such as img, video, popup, iframe and so on.</p>
+      <p>In this example, the img is used.</p>
+      <p>The headers that related to COEP for this page is as below.</p>
+      <pre><code id="output" class="http">
+      Cross-Origin-Embedder-Policy: require-corp
+      Cross-Origin-Resource-Policy: same-origin
+      </code></pre>
+      <h2>Example images</h2>
+      <div style="display: flex;">
+          <div style="width: 30vw">
+              <p>This resource is same-origin resource.</p>
+              <br/>
+              <img alt="normal image" src="img/test.png" />
+          </div>
+          <div style="width: 30vw">
+              <p>This resource is cross-origin resource.</p>
+              <br/>
+              <img alt="cross-origin resource" src="https://www.bokken.io/assets/img/ng_coep.png" />
+          </div>
+          <div style="width: 30vw">
+              <p>This resource is cross-origin resource but crossorigin attribute is specified.</p>
+              <br/>
+              <img alt="cross-origin but cross origin attribute is specified" src="https://www.bokken.io/assets/img/ok.png" crossorigin />
+          </div>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

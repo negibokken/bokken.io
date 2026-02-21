@@ -1,0 +1,41 @@
+---
+import BaseHead from "../../../components/BaseHead.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <BaseHead title="Render-Blocking Site Example | bokken.io" description="Example of a website with render-blocking resources" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <script is:inline src="scripts/jquery-3.6.0.js"></script>
+      <script is:inline src="scripts/bootstrap.js"></script>
+      <script is:inline src="scripts/bootstrap.bundle.js"></script>
+      <link
+          href="styles/bootstrap.css"
+          type="text/css"
+          rel="stylesheet"
+          media="screen,print"
+      />
+      <script is:inline>
+        document.addEventListener('DOMContentLoaded', () => {
+            const output = document.querySelector("#output");
+            const data = performance.getEntries().map(entry => JSON.stringify(entry, null, 2));
+            const span = document.createElement('span');
+            span.innerText = data;
+            output.appendChild(span);
+        });
+      </script>
+
+      <p>This is a heavy web site that has render-blocking resource.</p>
+      <p>After executing lighthouse analysis, we can see the warning "Eliminate render-blocking resources".</p>
+      <img src="img/sample.png" width="900" />
+      <pre><code id="output"></code></pre>
+    </main>
+    <Footer />
+  </body>
+</html>
