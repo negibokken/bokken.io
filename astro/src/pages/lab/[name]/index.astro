@@ -2,7 +2,8 @@
 import LabLayout from "../../../layouts/LabLayout.astro";
 
 const allContent = import.meta.glob("../../../lab-content/*/index.html", {
-  as: "raw",
+  query: "?raw",
+  import: "default",
   eager: true,
 });
 
@@ -65,7 +66,8 @@ const pagesMeta: Record<string, PageMeta> = {
 
 export function getStaticPaths() {
   const paths = import.meta.glob("../../../lab-content/*/index.html", {
-    as: "raw",
+    query: "?raw",
+    import: "default",
     eager: true,
   });
   return Object.keys(paths).map((path) => {
