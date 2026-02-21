@@ -1,4 +1,4 @@
-FROM node:23-alpine AS builder
+FROM node:23 AS builder
 
 RUN corepack enable pnpm
 
