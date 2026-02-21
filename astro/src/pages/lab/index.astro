@@ -1,0 +1,93 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+const experiments = [
+  { href: "https://x.bokken.io/example-pwa/index.html", label: "Example PWA" },
+  {
+    href: "https://x.bokken.io/example-render-blocking-site/index.html",
+    label: "Example of render-blocking web site",
+  },
+  {
+    href: "https://x.bokken.io/example-performance-timeline/index.html",
+    label: "Example of performance timeline web site",
+  },
+  {
+    href: "https://x.bokken.io/example-coep/index.html",
+    label: "Example of COEP web site",
+  },
+  {
+    href: "https://x.bokken.io/example-prerender2/index.html",
+    label: "Example of Prerender2 web site",
+  },
+  {
+    href: "https://x.bokken.io/example-chips/index.html",
+    label: "Example of CHIPS web site",
+  },
+  {
+    href: "https://x.bokken.io/example-clear-site-data/index.html",
+    label: "Example of Clear Site Data",
+  },
+  {
+    href: "https://x.bokken.io/example-performance-entry/index.html",
+    label: "Example of Performance Entry",
+  },
+];
+---
+
+<html lang="ja">
+  <head>
+    <BaseHead title="Lab | bokken.io" description="Web API experiments by bokken" />
+    <style>
+      main {
+        width: calc(100% - 2em);
+        max-width: 100%;
+        margin: 0;
+      }
+      .prose {
+        width: 780px;
+        max-width: calc(100% - 2em);
+        margin: auto;
+        padding: 1em;
+        color: rgb(var(--gray-dark));
+      }
+      .experiments {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+      }
+      .experiments li a {
+        color: rgb(var(--accent));
+        text-decoration: none;
+      }
+      .experiments li a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <div class="prose">
+        <h1>Lab</h1>
+        <p>Web 技術に関する実験ページです。</p>
+        <ul class="experiments">
+          {
+            experiments.map(({ href, label }) => (
+              <li>
+                <a href={href} target="_blank" rel="noopener">
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
