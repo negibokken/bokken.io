@@ -39,7 +39,7 @@ const isBlogMdFile = (path: string): boolean =>
   path.startsWith(`${BLOG_BASE}/`) &&
   path.endsWith(".md") &&
   !path.includes("/img/") &&
-  path.split("/").length === 7;
+  path.split("/").length === 6;
 
 export const listPublishedArticles = async (
   octokit: Octokit,
