@@ -10,6 +10,7 @@ import {
   getArticleContent,
   saveArticle,
   publishArticle,
+  deleteDraftArticle,
 } from "./service.js";
 import { Frontmatter } from "./frontmatter.js";
 
@@ -99,6 +100,13 @@ router.post("/*/publish", async (req: Request, res: Response) => {
     existingSha,
     isNew,
   );
+  res.json({ ok: true });
+});
+
+router.delete("/*", async (req: Request, res: Response) => {
+  const branchName = decodeURIComponent(req.params[0]);
+  const octokit = createOctokit(req.session!.accessToken);
+  await deleteDraftArticle(octokit, branchName);
   res.json({ ok: true });
 });
 

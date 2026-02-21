@@ -1,6 +1,10 @@
 import { Octokit } from "octokit";
 import { config } from "../config.js";
-import { createBranchFromMain, listDraftBranches } from "../github/branches.js";
+import {
+  createBranchFromMain,
+  deleteBranch,
+  listDraftBranches,
+} from "../github/branches.js";
 import {
   commitFile,
   deleteFile,
@@ -327,6 +331,15 @@ export const publishArticle = async (
   );
 
   deleteCache(PUBLISHED_CACHE_KEY);
+  deleteCache(articleCacheKey(branchName));
+};
+
+export const deleteDraftArticle = async (
+  octokit: Octokit,
+  branchName: string,
+): Promise<void> => {
+  const { repoOwner, repoName } = config;
+  await deleteBranch(octokit, repoOwner, repoName, branchName);
   deleteCache(articleCacheKey(branchName));
 };
 
