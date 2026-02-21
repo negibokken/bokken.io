@@ -1,6 +1,7 @@
 FROM node:22-bookworm-slim AS builder
 
-RUN npm install -g pnpm
+RUN wget -qO /usr/local/bin/pnpm https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linux-x64 && \
+    chmod +x /usr/local/bin/pnpm
 
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
