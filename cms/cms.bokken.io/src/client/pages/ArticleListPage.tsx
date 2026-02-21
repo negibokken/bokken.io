@@ -7,7 +7,7 @@ import styles from "./ArticleListPage.module.css";
 
 export const ArticleListPage = () => {
   const navigate = useNavigate();
-  const { data, loading, error } = useArticles();
+  const { data, loading, error, refetch } = useArticles();
 
   const handleCreate = () => {
     navigate("/edit");
