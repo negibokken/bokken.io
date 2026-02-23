@@ -5,6 +5,9 @@ import { SITE_TITLE } from "../consts";
 const isDev = import.meta.env.DEV;
 const blogHref = isDev ? "/articles" : "https://blog.bokken.io/articles";
 const labHref = isDev ? "/lab" : "https://x.bokken.io";
+const currentPath = Astro.url.pathname;
+const isBlogActive = currentPath.startsWith("/articles");
+const isLabActive = currentPath.startsWith("/lab");
 ---
 
 <style>
@@ -93,8 +96,10 @@ const labHref = isDev ? "/lab" : "https://x.bokken.io";
     </a>
     <div class="internal-links">
       <HeaderLink href="/">About</HeaderLink>
-      <HeaderLink href={blogHref}>Blog</HeaderLink>
-      <HeaderLink href={labHref} target="_blank">Lab</HeaderLink>
+      <HeaderLink href={blogHref} isActive={isBlogActive}>Blog</HeaderLink>
+      <HeaderLink href={labHref} isActive={isLabActive} target="_blank"
+        >Lab</HeaderLink
+      >
       <HeaderLink href="https://scrap.bokken.io/" target="_blank"
         >Scrap</HeaderLink
       >
