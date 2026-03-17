@@ -44,7 +44,7 @@ const chainIconHast = {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://www.bokken.io",
+  site: "https://blog.bokken.io",
   outDir: "dist/blog.bokken.io",
   trailingSlash: "never",
   integrations: [mdx(), sitemap()],
