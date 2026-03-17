@@ -71,9 +71,6 @@ export default defineConfig({
   experimental: {
     clientPrerender: true,
   },
-  redirects: {
-    "/feeds/atom.xml": "/rss.xml",
-  },
   compressHTML: true,
   vite: {
     build: {
