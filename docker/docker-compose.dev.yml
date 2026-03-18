@@ -7,13 +7,11 @@ services:
       - "443:443"
     links:
       - "bokken_io"
-      - "cms_server"
     restart: always
     depends_on:
       - bokken_io
-      - cms_server
     environment:
-      DOMAINS: "bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io, cms.bokken.io -> http://cms_server:3000"
+      DOMAINS: "bokken.io -> http://bokken_io, www.bokken.io -> http://bokken_io, blog.bokken.io -> http://bokken_io, x.bokken.io -> http://bokken_io"
       STAGE: local
       ERROR_LOG: default
       ACCESS_LOG: default
@@ -25,18 +23,3 @@ services:
       - ../astro/public-www:/usr/share/nginx/html/www.bokken.io:ro
       - ../astro/public-x:/usr/share/nginx/html/x.bokken.io:ro
       - ../nginx:/etc/nginx:ro
-
-  cms_server:
-    image: cms.bokken.io
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile.cms
-    env_file:
-      - ../.env
-    environment:
-      GITHUB_CALLBACK_URL: https://cms.bokken.io/api/auth/github/callback
-      GITHUB_REPO_OWNER: negibokken
-      GITHUB_REPO_NAME: bokken.io
-      ALLOWED_GITHUB_USER: negibokken
-      PORT: 3000
-    restart: unless-stopped
