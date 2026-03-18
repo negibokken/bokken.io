@@ -14,6 +14,10 @@ WebやWebブラウザに関する技術に興味を持っています。 Chromiu
 
 ## Publications
 
+### Books
+
+1. Pavel Panchekha、Chris Harrelson 著、小河 亮 訳, [『Webブラウザエンジニアリング―Chrome開発者たちから学ぶ、作って理解するブラウザとWebの仕組み』](https://www.oreilly.co.jp/books/9784814401574/), O'Reilly Japan, 2026年3月17日
+
 ### Software Design
 
 - あなたの知らないChromeの世界
