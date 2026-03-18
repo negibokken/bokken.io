@@ -1,5 +1,4 @@
 packages:
   - "astro"
-  - "cms/cms.bokken.io"
 
 minimumReleaseAge: 4320
