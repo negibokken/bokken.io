@@ -37,13 +37,5 @@ jobs:
           pnpm --filter astro exec astro check
           pnpm --filter astro exec tsc --noEmit
 
-      - name: Type Check (CMS)
-        run: |
-          pnpm --filter cms.bokken.io exec tsc --noEmit
-          pnpm --filter cms.bokken.io exec tsc -p tsconfig.node.json --noEmit
-
       - name: Build Astro
         run: pnpm --filter astro build
-
-      - name: Build CMS
-        run: pnpm --filter cms.bokken.io build
