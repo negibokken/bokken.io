@@ -7,3 +7,20 @@ updates:
     cooldown:
       default-days: 3
     open-pull-requests-limit: 5
+    groups:
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+      rehype:
+        patterns:
+          - "rehype-*"
+      prettier:
+        patterns:
+          - "prettier"
+          - "prettier-*"
+          - "@prettier/*"
+      git-hooks:
+        patterns:
+          - "husky"
+          - "lint-staged"
