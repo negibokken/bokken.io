@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+BLOG_DIR="${REPO_ROOT}/astro/src/content/blog"
+TEMPLATE_FILE="${SCRIPT_DIR}/templates/blog.md"
+
+usage() {
+  echo "Usage: $0 <slug>"
+  echo ""
+  echo "  slug  URL-safe name for the blog post (e.g. my-new-post)"
+  echo ""
+  echo "Example:"
+  echo "  $0 my-new-post"
+  exit 1
+}
+
+require_slug() {
+  if [[ $# -lt 1 ]]; then
+    echo "Error: slug is required." >&2
+    usage
+  fi
+}
+
+today() {
+  date +%Y-%m-%d
+}
+
+create_post() {
+  local slug="$1"
+  local date
+  date="$(today)"
+  local dir="${BLOG_DIR}/${date}"
+  local dest="${dir}/${slug}.md"
+
+  if [[ -f "${dest}" ]]; then
+    echo "Error: ${dest} already exists." >&2
+    exit 1
+  fi
+
+  mkdir -p "${dir}/img"
+  sed "s/YYYY-MM-DD/${date}/" "${TEMPLATE_FILE}" > "${dest}"
+
+  echo "Created: ${dest}"
+}
+
+main() {
+  require_slug "$@"
+  create_post "$1"
+}
+
+main "$@"
