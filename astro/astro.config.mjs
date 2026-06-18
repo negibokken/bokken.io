@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
+import { unified } from "@astrojs/markdown-remark";
 import sitemap from "@astrojs/sitemap";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -49,21 +50,23 @@ export default defineConfig({
   trailingSlash: "never",
   integrations: [mdx(), sitemap()],
   markdown: {
-    rehypePlugins: [
-      rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: "prepend",
-          content: chainIconHast,
-          properties: {
-            className: ["heading-anchor"],
-            ariaHidden: "true",
-            tabIndex: -1,
+    processor: unified({
+      rehypePlugins: [
+        rehypeSlug,
+        [
+          rehypeAutolinkHeadings,
+          {
+            behavior: "prepend",
+            content: chainIconHast,
+            properties: {
+              className: ["heading-anchor"],
+              ariaHidden: "true",
+              tabIndex: -1,
+            },
           },
-        },
+        ],
       ],
-    ],
+    }),
   },
   prefetch: {
     prefetchAll: true,

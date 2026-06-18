@@ -21,9 +21,9 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.props;
 
-const posts = (await getCollection("blog")).filter((post) =>
-  post.data.tags.includes(tag),
-);
+const posts = (await getCollection("blog"))
+  .filter((post) => post.data.tags.includes(tag))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const isDev = import.meta.env.DEV;
 const blogHref = isDev ? "/articles" : "https://blog.bokken.io/articles";
