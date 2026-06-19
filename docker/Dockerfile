@@ -1,6 +1,8 @@
 FROM node:26-bookworm-slim AS builder
 
-RUN corepack enable && corepack prepare pnpm@10 --activate
+RUN npm install --global corepack@0.35.0 \
+    && corepack enable \
+    && corepack install --global pnpm@10.26.2
 
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
