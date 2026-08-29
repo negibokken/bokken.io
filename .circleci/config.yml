@@ -1,18 +1,31 @@
 version: 2
 jobs:
-  publish:
+  deploy-cloudflare:
     docker:
       - image: cimg/node:26.3.0
     steps:
       - checkout
       - run:
-          command: ssh -p 2222 bokken@ssh.bokken.io -o "StrictHostKeyChecking no" "cd bokken.io && git pull -f && ./scripts/build && docker compose -f docker/docker-compose.yml up -d"
+          name: Install pnpm and wrangler
+          command: corepack enable && corepack prepare pnpm@latest --activate && npm install -g wrangler
+      - run:
+          name: Build Astro
+          command: pnpm --filter astro run build
+      - run:
+          name: Deploy blog
+          command: wrangler pages deploy astro/dist/blog.bokken.io --project-name=bokken-blog --branch=main
+      - run:
+          name: Deploy www
+          command: wrangler pages deploy astro/public-www --project-name=bokken-www --branch=main
+      - run:
+          name: Deploy x
+          command: wrangler pages deploy astro/public-x --project-name=bokken-x --branch=main
 
 workflows:
   version: 2
   deploy:
     jobs:
-      - publish:
-          filters:
-            branches:
-              only: main
+      - deploy-cloudflare
+        filters:
+          branches:
+            only: main
