@@ -46,9 +46,9 @@ const chainIconHast = {
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
+  output: "server",
   adapter: cloudflare({
-    mode: 'directory',
+    mode: "directory",
   }),
   site: "https://blog.bokken.io",
   outDir: "dist/blog.bokken.io",
