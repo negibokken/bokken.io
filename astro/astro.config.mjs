@@ -1,11 +1,10 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
-import cloudflare from "@astrojs/cloudflare";
 import { unified } from "@astrojs/markdown-remark";
 import sitemap from "@astrojs/sitemap";
 import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeAutolink-headings from "rehype-autolink-headings";
 
 /** @type {import('hast').Element} */
 const chainIconHast = {
@@ -46,20 +45,14 @@ const chainIconHast = {
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
-  adapter: cloudflare({
-    mode: "directory",
-  }),
-  site: "https://blog.bokken.io",
-  outDir: "dist/blog.bokken.io",
-  trailingSlash: "never",
+  output: 'static',
   integrations: [mdx(), sitemap()],
   markdown: {
     processor: unified({
       rehypePlugins: [
         rehypeSlug,
         [
-          rehypeAutolinkHeadings,
+          rehypeAutolink-headings,
           {
             behavior: "prepend",
             content: chainIconHast,
