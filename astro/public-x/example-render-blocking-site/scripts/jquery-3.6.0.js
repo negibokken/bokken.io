@@ -2449,7 +2449,7 @@
                 : argument > length
                   ? length
                   : argument;
-            for (; --i >= 0; ) {
+            for (; --i >= 0;) {
               matchIndexes.push(i);
             }
             return matchIndexes;
@@ -2457,7 +2457,7 @@
 
           gt: createPositionalPseudo(function (matchIndexes, length, argument) {
             var i = argument < 0 ? argument + length : argument;
-            for (; ++i < length; ) {
+            for (; ++i < length;) {
               matchIndexes.push(i);
             }
             return matchIndexes;
@@ -8209,7 +8209,7 @@
           }
         }
 
-        for (index = timers.length; index--; ) {
+        for (index = timers.length; index--;) {
           if (
             timers[index].elem === this &&
             (type == null || timers[index].queue === type)
@@ -8251,7 +8251,7 @@
         }
 
         // Look for any active animations, and finish them
-        for (index = timers.length; index--; ) {
+        for (index = timers.length; index--;) {
           if (timers[index].elem === this && timers[index].queue === type) {
             timers[index].anim.stop(true);
             timers.splice(index, 1);
