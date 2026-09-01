@@ -43,12 +43,10 @@ const chainIconHast = {
 };
 
 const rehypeSlugPlugin =
-  /** @type {import("@astrojs/internal-helpers/markdown").RehypePlugin} */ (
-    rehypeSlug
-  );
+  /** @type {import("@astrojs/markdown-remark").RehypePlugin} */ (rehypeSlug);
 
 const rehypeAutolinkHeadingsPlugin =
-  /** @type {[import("@astrojs/internal-helpers/markdown").RehypePlugin, import("rehype-autolink-headings").Options]} */ ([
+  /** @type {[import("@astrojs/markdown-remark").RehypePlugin, import("rehype-autolink-headings").Options]} */ ([
     rehypeAutolinkHeadings,
     {
       behavior: "prepend",
