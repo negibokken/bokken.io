@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
-import { unified } from "@astrojs/markdown-remark";
 import sitemap from "@astrojs/sitemap";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -43,6 +42,23 @@ const chainIconHast = {
   ],
 };
 
+const rehypeSlugPlugin =
+  /** @type {import("@astrojs/markdown-remark").RehypePlugin} */ (rehypeSlug);
+
+const rehypeAutolinkHeadingsPlugin =
+  /** @type {[import("@astrojs/markdown-remark").RehypePlugin, import("rehype-autolink-headings").Options]} */ ([
+    rehypeAutolinkHeadings,
+    {
+      behavior: "prepend",
+      content: chainIconHast,
+      properties: {
+        className: ["heading-anchor"],
+        ariaHidden: "true",
+        tabIndex: -1,
+      },
+    },
+  ]);
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.bokken.io",
@@ -50,23 +66,7 @@ export default defineConfig({
   trailingSlash: "never",
   integrations: [mdx(), sitemap()],
   markdown: {
-    processor: unified({
-      rehypePlugins: [
-        rehypeSlug,
-        [
-          rehypeAutolinkHeadings,
-          {
-            behavior: "prepend",
-            content: chainIconHast,
-            properties: {
-              className: ["heading-anchor"],
-              ariaHidden: "true",
-              tabIndex: -1,
-            },
-          },
-        ],
-      ],
-    }),
+    rehypePlugins: [rehypeSlugPlugin, rehypeAutolinkHeadingsPlugin],
   },
   prefetch: {
     prefetchAll: true,
