@@ -4,7 +4,7 @@ import mdx from "@astrojs/mdx";
 import { unified } from "@astrojs/markdown-remark";
 import sitemap from "@astrojs/sitemap";
 import rehypeSlug from "rehype-slug";
-import rehypeAutolink-headings from "rehype-autolink-headings";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 /** @type {import('hast').Element} */
 const chainIconHast = {
@@ -45,14 +45,16 @@ const chainIconHast = {
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'static',
+  site: "https://blog.bokken.io",
+  outDir: "dist/blog.bokken.io",
+  trailingSlash: "never",
   integrations: [mdx(), sitemap()],
   markdown: {
     processor: unified({
       rehypePlugins: [
         rehypeSlug,
         [
-          rehypeAutolink-headings,
+          rehypeAutolinkHeadings,
           {
             behavior: "prepend",
             content: chainIconHast,

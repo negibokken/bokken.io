@@ -31,19 +31,19 @@ jobs:
         run: pnpm --filter astro build
 
       - name: Deploy blog
-        run: npx wrangler deploy -c astro/wrangler.toml
+        run: pnpm exec wrangler deploy --config astro/wrangler.toml
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy www
-        run: npx wrangler deploy -c astro/public-www/wrangler.toml
+        run: pnpm exec wrangler deploy --config astro/wrangler.www.toml
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy x
-        run: npx wrangler deploy -c astro/public-x/wrangler.toml
+        run: pnpm exec wrangler deploy --config astro/wrangler.x.toml
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
