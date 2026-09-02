@@ -6,4 +6,4 @@
 - [x] Workers Static Assets 設定と CI dry-run を追加する
 - [x] 依存関係を更新してローカル検証する
 - [x] 3 Worker へデプロイして `workers.dev` を確認する
-- [ ] 知見を記録し、commit・push・Draft PR を更新する
+- [x] 知見を記録し、commit・push・Draft PR を更新する
