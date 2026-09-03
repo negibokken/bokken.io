@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Deploy to Cloudflare Workers
 
 on:
   push:
@@ -31,19 +31,19 @@ jobs:
         run: pnpm --filter astro build
 
       - name: Deploy blog
-        run: npx wrangler pages deploy astro/dist/blog.bokken.io --project-name=bokken-blog --branch=main
+        run: pnpm exec wrangler deploy --config astro/wrangler.toml
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy www
-        run: npx wrangler pages deploy astro/public-www --project-name=bokken-www --branch=main
+        run: pnpm exec wrangler deploy --config astro/wrangler.www.toml
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy x
-        run: npx wrangler pages deploy astro/public-x --project-name=bokken-x --branch=main
+        run: pnpm exec wrangler deploy --config astro/wrangler.x.toml
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

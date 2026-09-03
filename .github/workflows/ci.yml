@@ -39,3 +39,9 @@ jobs:
 
       - name: Build Astro
         run: pnpm --filter astro build
+
+      - name: Validate Workers configurations
+        run: |
+          pnpm exec wrangler deploy --dry-run --config astro/wrangler.toml
+          pnpm exec wrangler deploy --dry-run --config astro/wrangler.www.toml
+          pnpm exec wrangler deploy --dry-run --config astro/wrangler.x.toml

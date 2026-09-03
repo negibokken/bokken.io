@@ -1,0 +1,7 @@
+name = "bokken-x"
+compatibility_date = "2026-08-29"
+workers_dev = true
+preview_urls = false
+
+[assets]
+directory = "./public-x"
