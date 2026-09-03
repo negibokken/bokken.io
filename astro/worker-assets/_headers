@@ -1,0 +1,62 @@
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+/assets/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Content-Security-Policy: sandbox
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: cross-origin
+  Timing-Allow-Origin: *
+
+/.well-known/*
+  Content-Security-Policy: sandbox
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: cross-origin
+  Timing-Allow-Origin: *
+
+/robots.txt
+  Content-Security-Policy: sandbox
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: cross-origin
+  Timing-Allow-Origin: *
+
+/humans.txt
+  Content-Security-Policy: sandbox
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: cross-origin
+  Timing-Allow-Origin: *
+
+/favicon.ico
+  Content-Security-Policy: sandbox
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: cross-origin
+  Timing-Allow-Origin: *
+
+/sw.js
+  Content-Security-Policy: sandbox
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: cross-origin
+  Timing-Allow-Origin: *
+  Service-Worker-Allowed: /
+
+/assets/js/sw.js
+  Service-Worker-Allowed: /
+
+/example-coep
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Resource-Policy: same-origin
+  X-Test-Foo: same-origin
+
+/example-coep/
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Resource-Policy: same-origin
+  X-Test-Foo: same-origin
+
+/example-coep/index.html
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Resource-Policy: same-origin
+  X-Test-Foo: same-origin

@@ -1,7 +1,28 @@
 name = "bokken-www"
+main = "./workers/site-router.mjs"
 compatibility_date = "2026-08-29"
 workers_dev = true
 preview_urls = false
 
+[[routes]]
+pattern = "bokken.io"
+custom_domain = true
+
+[[routes]]
+pattern = "www.bokken.io"
+custom_domain = true
+
+[vars]
+SITE_KIND = "www"
+
 [assets]
-directory = "./public-www"
+directory = "./dist/workers/www"
+binding = "ASSETS"
+run_worker_first = [
+  "/articles",
+  "/articles/*",
+  "/assets/*",
+  "/privacy-policy.html",
+]
+html_handling = "drop-trailing-slash"
+not_found_handling = "404-page"

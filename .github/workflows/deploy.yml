@@ -36,14 +36,46 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      - name: Deploy www
-        run: pnpm exec wrangler deploy --config astro/wrangler.www.toml
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Verify blog
+        run: |
+          for attempt in {1..18}; do
+            EXPECT_CLOUDFLARE=1 node astro/scripts/smoke-worker.mjs blog https://blog.bokken.io && exit 0
+            sleep 10
+          done
+          exit 1
 
       - name: Deploy x
         run: pnpm exec wrangler deploy --config astro/wrangler.x.toml
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verify x
+        run: |
+          for attempt in {1..18}; do
+            EXPECT_CLOUDFLARE=1 node astro/scripts/smoke-worker.mjs x https://x.bokken.io && exit 0
+            sleep 10
+          done
+          exit 1
+
+      - name: Deploy www
+        run: pnpm exec wrangler deploy --config astro/wrangler.www.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verify apex
+        run: |
+          for attempt in {1..18}; do
+            EXPECT_CLOUDFLARE=1 node astro/scripts/smoke-worker.mjs www https://bokken.io && exit 0
+            sleep 10
+          done
+          exit 1
+
+      - name: Verify www
+        run: |
+          for attempt in {1..18}; do
+            EXPECT_CLOUDFLARE=1 node astro/scripts/smoke-worker.mjs www https://www.bokken.io && exit 0
+            sleep 10
+          done
+          exit 1
