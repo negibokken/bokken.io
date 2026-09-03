@@ -40,6 +40,12 @@ jobs:
       - name: Build Astro
         run: pnpm --filter astro build
 
+      - name: Test Workers routing
+        run: pnpm --filter astro test:workers
+
+      - name: Verify Workers asset layouts
+        run: pnpm --filter astro verify:worker-assets
+
       - name: Validate Workers configurations
         run: |
           pnpm exec wrangler deploy --dry-run --config astro/wrangler.toml

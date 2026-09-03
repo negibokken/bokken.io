@@ -4,6 +4,14 @@ compatibility_date = "2026-08-29"
 workers_dev = true
 preview_urls = false
 
+[[routes]]
+pattern = "bokken.io"
+custom_domain = true
+
+[[routes]]
+pattern = "www.bokken.io"
+custom_domain = true
+
 [vars]
 SITE_KIND = "www"
 

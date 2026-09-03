@@ -3,6 +3,7 @@
 import assert from "node:assert/strict";
 
 const [siteKind, baseUrl] = process.argv.slice(2);
+const expectCloudflare = process.env.EXPECT_CLOUDFLARE === "1";
 
 if (!siteKind || !baseUrl || !["blog", "www", "x"].includes(siteKind)) {
   console.error("Usage: node scripts/smoke-worker.mjs <blog|www|x> <base-url>");
@@ -33,6 +34,13 @@ async function expectHtml(path, marker) {
     `${path} did not return HTML`,
   );
   assert.match(await response.text(), marker, `${path} is missing ${marker}`);
+
+  if (expectCloudflare) {
+    assert.ok(
+      response.headers.get("cf-ray"),
+      `${path} was not served through Cloudflare`,
+    );
+  }
 }
 
 async function expectSharedAssets() {

@@ -37,7 +37,7 @@ async function fetchPrivacyPolicy(request, env) {
   );
 }
 
-function clearSiteDataResponse(request, url) {
+function clearSiteDataResponse(url) {
   const encodedDirective = url.pathname.slice("/clear-site-data/".length);
   let directive;
 
@@ -97,7 +97,7 @@ export async function routeRequest(request, env) {
   }
 
   if (env.SITE_KIND === "x" && url.pathname.startsWith("/clear-site-data/")) {
-    return clearSiteDataResponse(request, url);
+    return clearSiteDataResponse(url);
   }
 
   if (url.pathname.startsWith("/assets/")) {
