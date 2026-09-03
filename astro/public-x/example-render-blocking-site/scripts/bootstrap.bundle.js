@@ -6655,7 +6655,7 @@
             return;
           }
 
-          for (var i = this._offsets.length; i--; ) {
+          for (var i = this._offsets.length; i--;) {
             var isActiveTarget =
               this._activeTarget !== this._targets[i] &&
               scrollTop >= this._offsets[i] &&
@@ -6766,7 +6766,7 @@
     $$$1(window).on(Event.LOAD_DATA_API, function () {
       var scrollSpys = $$$1.makeArray($$$1(Selector.DATA_SPY));
 
-      for (var i = scrollSpys.length; i--; ) {
+      for (var i = scrollSpys.length; i--;) {
         var $spy = $$$1(scrollSpys[i]);
 
         ScrollSpy._jQueryInterface.call($spy, $spy.data());
