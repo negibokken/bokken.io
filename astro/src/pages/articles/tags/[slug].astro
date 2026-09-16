@@ -72,11 +72,17 @@ const blogHref = isDev ? "/articles" : "https://blog.bokken.io/articles";
   <body>
     <Header />
     <main>
-      <h2><span class="tag-span">{tag}</span>タグの記事一覧</h2>
+      <h2>
+        <span class="tag-span">{tag}</span>タグの記事一覧
+      </h2>
       <nav>
         <ol class="breadcrumbs">
-          <li><a href={blogHref}>Blog</a></li>
-          <li><a href={`/articles/tags/${tag}`}>{tag}</a></li>
+          <li>
+            <a href={blogHref}>Blog</a>
+          </li>
+          <li>
+            <a href={`/articles/tags/${tag}`}>{tag}</a>
+          </li>
         </ol>
       </nav>
       <section>

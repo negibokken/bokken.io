@@ -188,26 +188,24 @@ const {
     <main>
       <article>
         <div class="hero-image">
-          {
-            heroImage && (
-              <Image width={1020} height={510} src={heroImage} alt="" />
-            )
-          }
+          {heroImage && (
+            <Image width={1020} height={510} src={heroImage} alt="" />
+          )}
         </div>
         <div class="prose">
           <div class="title">
             <h1>{title}</h1>
             <div class="meta">
               <div class="date">
-                <span>created: <FormattedDate date={pubDate} /></span>
-                {
-                  updatedDate &&
-                    pubDate.toString() !== updatedDate.toString() && (
-                      <span class="last-updated-on">
-                        updated: <FormattedDate date={updatedDate} />
-                      </span>
-                    )
-                }
+                <span>
+                  created: <FormattedDate date={pubDate} />
+                </span>
+                {updatedDate &&
+                  pubDate.toString() !== updatedDate.toString() && (
+                    <span class="last-updated-on">
+                      updated: <FormattedDate date={updatedDate} />
+                    </span>
+                  )}
               </div>
               <div class="tags-container">
                 <span class="tags-label">tags: </span>

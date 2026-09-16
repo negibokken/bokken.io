@@ -24,15 +24,13 @@ const { tags } = Astro.props;
 </style>
 
 <span class="tags-container">
-  {
-    tags?.map((tag) => {
-      return (
-        <span class="tag">
-          <a href={`/articles/tags/${tag}`}>
-            <span>{tag}</span>
-          </a>
-        </span>
-      );
-    })
-  }
+  {tags?.map((tag) => {
+    return (
+      <span class="tag">
+        <a href={`/articles/tags/${tag}`}>
+          <span>{tag}</span>
+        </a>
+      </span>
+    );
+  })}
 </span>

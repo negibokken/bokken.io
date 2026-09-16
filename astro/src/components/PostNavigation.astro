@@ -8,26 +8,22 @@ const { prevPost, nextPost } = Astro.props;
 ---
 
 <div class="post-navigation">
-  {
-    prevPost ? (
-      <a href={prevPost.url} class="prev">
-        <span class="label">← Previous</span>
-        <span class="title">{prevPost.title}</span>
-      </a>
-    ) : (
-      <div class="spacer" />
-    )
-  }
-  {
-    nextPost ? (
-      <a href={nextPost.url} class="next">
-        <span class="label">Next →</span>
-        <span class="title">{nextPost.title}</span>
-      </a>
-    ) : (
-      <div class="spacer" />
-    )
-  }
+  {prevPost ? (
+    <a href={prevPost.url} class="prev">
+      <span class="label">← Previous</span>
+      <span class="title">{prevPost.title}</span>
+    </a>
+  ) : (
+    <div class="spacer" />
+  )}
+  {nextPost ? (
+    <a href={nextPost.url} class="next">
+      <span class="label">Next →</span>
+      <span class="title">{nextPost.title}</span>
+    </a>
+  ) : (
+    <div class="spacer" />
+  )}
 </div>
 
 <style>
