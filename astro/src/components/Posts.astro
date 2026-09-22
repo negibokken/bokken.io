@@ -58,23 +58,21 @@ const years = Object.keys(postsByYear).sort(
   }
 </style>
 
-{
-  years.map((year) => (
-    <>
-      <h2>{year}</h2>
-      <ul>
-        {postsByYear[year]?.map((post) => (
-          <li>
-            <p class="date">
-              <FormattedDate date={post.data.pubDate} />
-            </p>
-            <a href={`/articles/${post.id}.html`}>{post.data.title}</a>
-            <span class="tags">
-              <Tags tags={post.data.tags} />
-            </span>
-          </li>
-        ))}
-      </ul>
-    </>
-  ))
-}
+{years.map((year) => (
+  <>
+    <h2>{year}</h2>
+    <ul>
+      {postsByYear[year]?.map((post) => (
+        <li>
+          <p class="date">
+            <FormattedDate date={post.data.pubDate} />
+          </p>
+          <a href={`/articles/${post.id}.html`}>{post.data.title}</a>
+          <span class="tags">
+            <Tags tags={post.data.tags} />
+          </span>
+        </li>
+      ))}
+    </ul>
+  </>
+))}
