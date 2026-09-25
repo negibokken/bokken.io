@@ -10,18 +10,16 @@ const posts = (await getCollection("blog"))
 <aside class="latest-posts">
   <h2>Latest Posts</h2>
   <ul>
-    {
-      posts.map((post) => (
-        <li>
-          <a href={`/articles/${post.id}.html`}>
-            <span class="title">{post.data.title}</span>
-            <span class="date">
-              <FormattedDate date={post.data.pubDate} />
-            </span>
-          </a>
-        </li>
-      ))
-    }
+    {posts.map((post) => (
+      <li>
+        <a href={`/articles/${post.id}.html`}>
+          <span class="title">{post.data.title}</span>
+          <span class="date">
+            <FormattedDate date={post.data.pubDate} />
+          </span>
+        </a>
+      </li>
+    ))}
   </ul>
 </aside>
 
